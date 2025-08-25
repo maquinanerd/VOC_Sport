@@ -30,12 +30,12 @@ def test_feed_processing():
     
     feed_reader = FeedReader("RSS-to-WordPress-Bot/1.0")
     
-    # Test with ScreenRant feed
-    test_url = "https://screenrant.com/feed/"
-    entries = feed_reader.read_single_feed(test_url, "screenrant")
+    # Test with G1 Economia feed
+    test_url = "https://g1.globo.com/rss/g1/economia/"
+    entries = feed_reader.read_single_feed(test_url, "g1_economia")
     
     if entries:
-        print(f"✓ Successfully retrieved {len(entries)} entries from ScreenRant")
+        print(f"✓ Successfully retrieved {len(entries)} entries from G1 Economia")
         if len(entries) > 0:
             print(f"  First entry: {entries[0].get('title', 'No title')}")
         return True

@@ -5,40 +5,37 @@ from typing import Dict, List, Any
 # Carrega variáveis de ambiente de um arquivo .env
 load_dotenv()
 
-PIPELINE_ORDER = [
-    # Ordem de processamento dos feeds
-    'screenrant_movies',
-    'screenrant_tv',
-    'collider_movies',
-    'collider_tv',
-    'movieweb_movies',
-    'cbr_movies',
-    'cbr_tv',
-    'gamerant_games',
-    'thegamer_games',
+PIPELINE_ORDER: List[str] = [
+    # Ordem de processamento dos feeds de economia e política
+    'g1_economia',
+    'valor_investe',
+    'infomoney_mercados',
+    'exame_economia',
+    'uol_economia',
+    'poder360',
 ]
 
-RSS_FEEDS = {
-    'screenrant_movies': {'urls': ['https://screenrant.com/feed/movies/'], 'category': 'movies'},
-    'screenrant_tv':     {'urls': ['https://screenrant.com/feed/tv/'],    'category': 'series'},
-    'movieweb_movies':   {'urls': ['https://movieweb.com/feed/'],               'category': 'movies'},
-    'collider_movies':   {'urls': ['https://collider.com/feed/category/movie-news/'], 'category': 'movies'},
-    'collider_tv':       {'urls': ['https://collider.com/feed/category/tv-news/'],    'category': 'series'},
-    'cbr_movies':        {'urls': ['https://comicbook.com/category/movies/feed/'], 'category': 'movies'},
-    'cbr_tv':            {'urls': ['https://comicbook.com/category/tv-shows/feed/'],         'category': 'series'},
-    'gamerant_games':    {'urls': ['https://gamerant.com/feed/gaming/'],        'category': 'games'},
-    'thegamer_games':    {'urls': ['https://www.thegamer.com/feed/category/game-news/'], 'category': 'games'}
+RSS_FEEDS: Dict[str, Dict[str, Any]] = {
+    'g1_economia':        {'urls': ['https://g1.globo.com/rss/g1/economia/'], 'category': 'economia'},
+    'valor_investe':      {'urls': ['https://valorinveste.globo.com/rss/valor-investe'], 'category': 'investimentos'},
+    'infomoney_mercados': {'urls': ['https://www.infomoney.com.br/mercados/feed/'], 'category': 'investimentos'},
+    'exame_economia':     {'urls': ['https://exame.com/economia/feed/'], 'category': 'economia'},
+    'uol_economia':       {'urls': ['http://rss.uol.com.br/feed/economia.xml'], 'category': 'economia'},
+    'poder360':           {'urls': ['https://www.poder360.com.br/feed/'], 'category': 'politica'},
 }
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 
 # --- Configuração da IA ---
 def _load_ai_keys() -> Dict[str, List[str]]:
-    """Helper to load Gemini API keys from environment variables."""
-    keys_by_category: Dict[str, List[str]] = {'movies': [], 'series': [], 'games': []}
+    """
+    Helper to load Gemini API keys from environment variables.
+    Categories are discovered dynamically from key names (e.g., GEMINI_ECONOMIA_1).
+    """
+    keys_by_category: Dict[str, List[str]] = {}
     for key, value in os.environ.items():
         if value and key.startswith('GEMINI_'):
-            # e.g., GEMINI_MOVIES_1 -> movies
+            # e.g., GEMINI_ECONOMIA_1 -> economia
             parts = key.split('_')
             if len(parts) >= 2:
                 category = parts[1].lower()
@@ -69,8 +66,8 @@ WORDPRESS_CONFIG = {
     'password': os.getenv('WORDPRESS_PASSWORD')
 }
 
-WORDPRESS_CATEGORIES = {
-    'Notícias': 20, 'Filmes': 24, 'Séries': 21, 'Games': 73,
+WORDPRESS_CATEGORIES: Dict[str, int] = {
+    'Notícias': 1, 'Economia': 10, 'Política': 11, 'Investimentos': 12, 'Dinheiro': 13,
 }
 
 # --- Configuração do Agendador e Pipeline ---
@@ -84,7 +81,7 @@ SCHEDULE_CONFIG = {
 
 PIPELINE_CONFIG = {
     'images_mode': os.getenv('IMAGES_MODE', 'hotlink'),  # 'hotlink' ou 'download_upload'
-    'attribution_policy': 'Via {domain}',
-    'publisher_name': 'Máquina Nerd',
-    'publisher_logo_url': 'https://www.maquinanerd.com.br/wp-content/uploads/2023/11/logo-maquina-nerd-400px.png'   
+    'attribution_policy': 'Fonte: {domain}',
+    'publisher_name': 'VocMoney',
+    'publisher_logo_url': os.getenv('PUBLISHER_LOGO_URL', 'https://exemplo.com/logo.png') # TODO: Atualizar com a URL real do logo
 }

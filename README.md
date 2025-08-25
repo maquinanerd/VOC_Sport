@@ -1,6 +1,6 @@
-# RSS AI Content Pipeline
+# RSS AI Content Pipeline para Notícias de Economia e Política
 
-Este é um aplicativo de produção em Python que automatiza o processo de leitura de feeds RSS, reescrita de conteúdo com IA e publicação no WordPress.
+Este é um aplicativo de produção em Python que automatiza o processo de leitura de feeds RSS de notícias sobre economia, política e investimentos, reescrevendo o conteúdo com IA e publicando no WordPress.
 
 ## Funcionalidades
 
