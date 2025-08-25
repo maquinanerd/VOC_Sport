@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - RSS to WordPress{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">RSS to WordPress Dashboard</h1>
+            <div class="flex space-x-4">
+                <a href="/" class="px-3 py-2 rounded bg-blue-700">Dashboard</a>
+                <a href="/feeds" class="px-3 py-2 rounded hover:bg-blue-700">Feeds</a>
+                <a href="/settings" class="px-3 py-2 rounded hover:bg-blue-700">Configurações</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        <!-- Status Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <i class="fas fa-newspaper text-blue-500 text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-600">Artigos Vistos</p>
+                        <p class="text-2xl font-bold">{{ stats.seen_articles }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-500 text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-600">Posts Publicados</p>
+                        <p class="text-2xl font-bold">{{ stats.published_posts }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-600">Falhas</p>
+                        <p class="text-2xl font-bold">{{ stats.failures }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <i class="fas fa-robot text-purple-500 text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-600">Status do Sistema</p>
+                        <p class="text-lg font-bold 
+                           {% if system_status == 'Running' %}text-green-600{% else %}text-red-600{% endif %}">
+                            {{ system_status }}
+                        </p>
+                        {% if stats.next_cycle != 'N/A' %}
+                        <p class="text-xs text-gray-500 mt-1">Próximo ciclo: {{ stats.next_cycle }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Controls -->
+        <div class="bg-white rounded-lg shadow mb-8">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-bold">Controle do Sistema</h2>
+            </div>
+            <div class="p-6">
+                <div class="flex space-x-4">
+                    <button id="startBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                        <i class="fas fa-play mr-2"></i>Iniciar Sistema
+                    </button>
+                    <button id="stopBtn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        <i class="fas fa-stop mr-2"></i>Parar Sistema
+                    </button>
+                    <button id="runNowBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                        <i class="fas fa-sync mr-2"></i>Executar Agora
+                    </button>
+                </div>
+                <div id="systemMessage" class="mt-4 p-3 rounded hidden"></div>
+            </div>
+        </div>
+
+        <!-- Recent Posts and API Usage -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Recent Posts -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6 border-b">
+                    <h2 class="text-xl font-bold">Posts Recentes</h2>
+                </div>
+                <div class="p-6">
+                    {% if stats.recent_posts %}
+                        <div class="space-y-3">
+                            {% for post in stats.recent_posts %}
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <p class="font-medium">{{ post[0] }}</p>
+                                <p class="text-sm text-gray-600">{{ post[1] }} • {{ post[3] }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500">Nenhum post recente encontrado.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- API Usage -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6 border-b">
+                    <h2 class="text-xl font-bold">Uso da API (24h)</h2>
+                </div>
+                <div class="p-6">
+                    {% if stats.api_usage %}
+                        <div class="space-y-3">
+                            {% for api_type, count in stats.api_usage.items() %}
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium">{{ api_type }}</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">{{ count }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-gray-500">Nenhum uso de API nas últimas 24 horas.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Logs -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-bold">Logs Recentes</h2>
+            </div>
+            <div class="p-6">
+                {% if logs %}
+                    <div class="space-y-2 max-h-96 overflow-y-auto">
+                        {% for log in logs %}
+                        <div class="text-sm p-2 rounded
+                                   {% if log.level == 'ERROR' %}bg-red-50 text-red-800{% elif log.level == 'WARNING' %}bg-yellow-50 text-yellow-800{% else %}bg-gray-50{% endif %}">
+                            <span class="font-mono text-xs text-gray-500">{{ log.timestamp }}</span>
+                            <span class="font-medium ml-2">[{{ log.level }}]</span>
+                            <span class="ml-2">{{ log.message }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-gray-500">Nenhum log encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// System control handlers
+document.getElementById('startBtn').addEventListener('click', function() {
+    controlSystem('/api/system/start', 'POST');
+});
+
+document.getElementById('stopBtn').addEventListener('click', function() {
+    controlSystem('/api/system/stop', 'POST');
+});
+
+document.getElementById('runNowBtn').addEventListener('click', function() {
+    controlSystem('/api/system/run-now', 'POST');
+});
+
+function controlSystem(url, method) {
+    fetch(url, { method: method })
+        .then(response => response.json())
+        .then(data => {
+            const messageDiv = document.getElementById('systemMessage');
+            messageDiv.textContent = data.message;
+            messageDiv.className = `mt-4 p-3 rounded ${data.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+            messageDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                messageDiv.classList.add('hidden');
+                if (data.success) {
+                    // Recarrega para refletir o novo status
+                    location.reload();
+                }
+            }, 5000);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const messageDiv = document.getElementById('systemMessage');
+            messageDiv.textContent = 'Erro de comunicação com o servidor.';
+            messageDiv.className = 'mt-4 p-3 rounded bg-red-100 text-red-800';
+            messageDiv.classList.remove('hidden');
+        });
+}
+
+// Auto-refresh stats every 30 seconds
+setInterval(function() {
+    location.reload();
+}, 30000);
+</script>
+{% endblock %}

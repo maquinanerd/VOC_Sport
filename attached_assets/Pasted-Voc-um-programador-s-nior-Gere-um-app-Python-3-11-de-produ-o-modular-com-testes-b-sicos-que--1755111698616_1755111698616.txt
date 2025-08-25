@@ -1,0 +1,272 @@
+Você é um programador sênior. Gere um app Python 3.11 de produção, modular, com testes básicos, que:
+
+1) Objetivo
+Ler feeds RSS na ordem definida, extrair a matéria completa (título, resumo, conteúdo integral, todas as imagens e vídeos/YouTube incorporados, categorias e tags).
+
+Reescrever o conteúdo com IA usando um prompt externo (universal_prompt.txt) exatamente no formato enviado abaixo (Título/Resumo/Conteúdo), sem perder informação, apenas reestruturando e otimizando para SEO.
+
+Publicar automaticamente no WordPress via REST, preenchendo: título, conteúdo HTML reestruturado, excerpt (resumo), categoria correta, tags, imagem destacada (quando aplicável) e status publish.
+
+Rodar em ciclo com APScheduler, respeitando limites (chave de API, cadência e rate limit).
+
+Aplicar práticas de SEO para Google News/Discover, deixando o Yoast SEO trabalhar automaticamente a partir de título, excerpt e conteúdo. (Se a API permitir, setar também meta description e focus keyword via post meta; caso o endpoint não suporte, ignore silenciosamente.)
+
+2) Configuração (use ENV; não hardcode segredos)
+Reproduza as constantes abaixo (já existentes) e faça o app ler as chaves e credenciais de os.getenv. Se alguma variável faltar, log crítico e seguir para a próxima feed/task sem quebrar o processo.
+
+python
+Copiar
+Editar
+PIPELINE_ORDER = [
+    'screenrant_movies','screenrant_tv',
+    'movieweb_movies',
+    'collider_movies','collider_tv',
+    'cbr_movies','cbr_tv',
+    'gamerant_games','thegamer_games',
+]
+
+RSS_FEEDS = {
+    'screenrant_movies': {'urls': ['https://screenrant.com/feed/movie-news/'], 'category': 'movies'},
+    'screenrant_tv':     {'urls': ['https://screenrant.com/feed/tv-news/'],    'category': 'series'},
+    'movieweb_movies':   {'urls': ['https://movieweb.com/feed/'],               'category': 'movies'},
+    'collider_movies':   {'urls': ['https://collider.com/feed/category/movie-news/'], 'category': 'movies'},
+    'collider_tv':       {'urls': ['https://collider.com/feed/category/tv-news/'],    'category': 'series'},
+    'cbr_movies':        {'urls': ['https://www.cbr.com/feed/category/movies/news-movies/'], 'category': 'movies'},
+    'cbr_tv':            {'urls': ['https://www.cbr.com/feed/category/tv/news-tv/'],         'category': 'series'},
+    'gamerant_games':    {'urls': ['https://gamerant.com/feed/gaming/'],        'category': 'games'},
+    'thegamer_games':    {'urls': ['https://www.thegamer.com/feed/category/game-news/'], 'category': 'games'}
+}
+
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+
+AI_CONFIG = {
+    'movies': [os.getenv('GEMINI_MOVIES_1'), os.getenv('GEMINI_MOVIES_2'), os.getenv('GEMINI_MOVIES_3'),
+               os.getenv('GEMINI_MOVIES_4'), os.getenv('GEMINI_BACKUP_1'), os.getenv('GEMINI_BACKUP_2')],
+    'series': [os.getenv('GEMINI_SERIES_1'), os.getenv('GEMINI_SERIES_2'), os.getenv('GEMINI_SERIES_3'),
+               os.getenv('GEMINI_BACKUP_3'), os.getenv('GEMINI_BACKUP_4')],
+    'games':  [os.getenv('GEMINI_GAMES_1'), os.getenv('GEMINI_GAMES_2'), os.getenv('GEMINI_BACKUP_5')],
+}
+
+WORDPRESS_CONFIG = {
+    'url': os.getenv('WORDPRESS_URL'),      # ex: https://maquinanerd.com.br/wp-json/wp/v2/
+    'user': os.getenv('WORDPRESS_USER'),
+    'password': os.getenv('WORDPRESS_PASSWORD')
+}
+
+WORDPRESS_CATEGORIES = {
+    'Notícias': 20, 'Filmes': 24, 'Séries': 21, 'Games': 73,
+}
+
+SCHEDULE_CONFIG = {
+    'check_interval': 15,          # minutos
+    'max_articles_per_feed': 3,    # por ciclo
+    'api_call_delay': 30,          # segundos entre chamadas à IA
+    'cleanup_after_hours': 12
+}
+
+PIPELINE_CONFIG = {
+    'images_mode': os.getenv('IMAGES_MODE', 'hotlink'),  # 'hotlink' | 'download_upload'
+    'attribution_policy': 'Via {domain}',
+    'publisher_name': 'Máquina Nerd',
+    'publisher_logo_url': 'https://www.maquinanerd.com.br/wp-content/uploads/2023/11/logo-maquina-nerd-400px.png'
+}
+3) Arquitetura e módulos
+Crie um pacote app/ com:
+
+main.py: inicia scheduler, registra jobs de pipeline e cleanup.
+
+feeds.py: leitura de RSS com feedparser, normalização (GUID, link, título, data), dedupe por (source_id, guid|link).
+
+extractor.py: baixar HTML do artigo com requests (USER_AGENT), extrair conteúdo completo (título, resumo se houver, corpo, imagens, iframes/YouTube) usando trafilatura (preferencial) com fallback para readability-lxml + BeautifulSoup4. Preservar iframes do YouTube e imagens do corpo; capturar imagem principal (og:image ou primeira imagem do conteúdo).
+
+ai_processor.py: seleção de chave ativa por categoria com failover (tentar próxima chave se 4xx/429/5xx), backoff exponencial e api_call_delay. Carrega universal_prompt.txt do diretório raiz. Monta o payload substituindo {title}, {excerpt}, {tags_text}, {content} e pede saída somente no formato exigido (Novo Título/Resumo/Conteúdo).
+
+rewriter.py: valida e sana a saída da IA:
+
+Garante que o título seja texto puro (sem HTML).
+
+Resumo: texto curto objetivo.
+
+Conteúdo: cada parágrafo envolto em <p>...</p>, sem <br>, e apenas com <b> e <a> quando necessário.
+
+Mantém todas as mídias do original: imagens, <figure>, <img>, <iframe> do YouTube.
+
+Links internos: com base nas tags extraídas do artigo (ver tags.py), insere <a href="{domain}/tag/slug"> com opção de <b> combinado. Não inventar tags; usar somente as detectadas.
+
+Negrito apenas para termos relevantes (títulos de obras, personagens, plataformas, datas/eventos).
+
+tags.py: extrai tags do conteúdo original (nomes de franquias, atores, plataformas) via heurísticas + listas de apoio; devolve lista/slug. Não crie tags genéricas vazias. tags_text é a junção/legenda usada no prompt.
+
+categorizer.py: mapeia feed → categoria WP (Filmes, Séries, Games). Se o feed “_movies” → Filmes; “_tv” → Séries; “*_games” → Games.
+
+media.py: política de imagens:
+
+hotlink: manter src original.
+
+download_upload: baixar imagens principais e relevantes, subir para /wp/v2/media (REST), setar featured_media.
+
+Sempre que possível, definir imagem destacada a partir da imagem principal.
+
+wordpress.py: autenticação básica (user/password), criação de post (/wp/v2/posts), set de categories, tags (criar tag se não existir via /wp/v2/tags), excerpt, featured_media e status. Se permitido, tentar setar metadados Yoast (_yoast_wpseo_metadesc, _yoast_wpseo_focuskw) — tentar e ignorar erros se a API não expuser esses campos. Montar domínio base a partir de WORDPRESS_CONFIG['url'] para links internos (ex.: https://www.maquinanerd.com.br).
+
+store.py: SQLite (data/app.db) para:
+
+seen_articles(source_id, external_id, published_at, inserted_at)
+
+failures(log...) e posts(post_id, source_id, external_id, wp_post_id).
+
+logging_conf.py: logging em arquivo rotativo e console (nível INFO, DEBUG opcional).
+
+cleanup.py: remove registros e arquivos temporários antigos (> cleanup_after_hours).
+
+4) Fluxo do pipeline
+Para cada source_id em PIPELINE_ORDER:
+
+Ler RSS; para cada item novo (respeitar max_articles_per_feed por ciclo):
+
+Resolver URL final (follow redirects), baixar HTML.
+
+Extrair: título original, resumo/lead se houver, conteúdo integral + mídias, imagem principal, data/hora.
+
+Derivar tags e tags_text.
+
+Montar prompt carregado de universal_prompt.txt (ver abaixo) e chamar IA (categoria certa: movies/series/games).
+
+Validar/normalizar a saída da IA.
+
+Inserir links internos conforme tags e domínio WP.
+
+Tratar imagens segundo PIPELINE_CONFIG['images_mode']. Se download_upload, subir mídia e definir featured_media.
+
+Mapear categoria WP (ID em WORDPRESS_CATEGORIES).
+
+Publicar via REST. Salvar wp_post_id. Marcar item como processado no SQLite.
+
+Pausar SCHEDULE_CONFIG['api_call_delay'] antes da próxima chamada de IA.
+
+Repetir a cada check_interval minutos com APScheduler.
+
+5) Resiliência
+Retries com backoff em: rede, 429, 5xx e erros transitórios na IA/WordPress.
+
+Failover de chave IA: iterar lista em AI_CONFIG[category].
+
+Dedupe por (source_id, guid/link canonizado).
+
+Sanitização de HTML final (permitir apenas <p>, <b>, <a>, <figure>, <img>, <iframe> do YouTube).
+
+Timeouts razoáveis (requests 15s) e validação de tamanho (não publicar posts vazios).
+
+6) Dependências
+feedparser, trafilatura, readability-lxml, beautifulsoup4, lxml, requests, python-dateutil, apscheduler, python-slugify, urllib3, pillow (se download_upload), sqlite3 (padrão).
+
+7) Prompt externo (salvar como universal_prompt.txt na raiz do projeto)
+Você é um jornalista digital especializado em cultura pop, cinema e séries, com experiência em otimização para Google News e SEO técnico. Sua tarefa é revisar e otimizar o conteúdo abaixo sem alterar o sentido original, aprimorando sua estrutura, legibilidade e potencial de ranqueamento.
+
+✅ Diretrizes obrigatórias para otimização:
+
+Título:
+
+Reescreva o título original tornando-o mais atrativo e claro.
+
+Inclua palavras-chave relevantes para melhorar o SEO.
+
+Mantenha foco no tema, sem clickbait exagerado.
+
+⚠️ IMPORTANTE: O título deve ser APENAS TEXTO PURO, sem HTML, tags ou formatação.
+
+Não use <b>, <a>, <i>, <span> ou qualquer tag HTML no título.
+
+Resumo (Excerpt):
+
+Reescreva o resumo para ser mais chamativo e informativo.
+
+Foque em engajamento e performance nos resultados do Google News.
+
+Conteúdo:
+
+Reestruture os parágrafos longos em blocos mais curtos e escaneáveis.
+
+Não resuma ou encurte o texto. O objetivo é reestruturar e otimizar, mantendo toda a informação original. Apenas melhore a fluidez e a formatação.
+
+⚠️ IMPORTANTE: Envolva cada parágrafo individualmente com a tag HTML <p>. Exemplo: <p>Primeiro parágrafo.</p><p>Segundo parágrafo.</p>
+
+Não use <br> para criar parágrafos.
+
+Mantenha o tom jornalístico e objetivo.
+
+Não altere o sentido da informação.
+
+Negrito:
+
+Destaque os termos mais relevantes usando apenas a tag HTML <b>.
+
+Ex: nomes de filmes, personagens, diretores, plataformas, datas, eventos.
+
+Links internos:
+
+Baseando-se nas tags fornecidas, insira links internos usando a estrutura:
+<a href="{domain}/tag/NOME-DA-TAG">Texto âncora</a>
+
+Quando possível, aplique negrito combinado com link:
+<b><a href="{domain}/tag/stranger-things">Stranger Things</a></b>
+
+⚠️ Regras Técnicas:
+
+Use somente HTML puro: <b>, <a>.
+
+Não utilize Markdown (texto ou link).
+
+Não adicione informações novas que não estejam no texto original ou na mídia fornecida.
+
+Utilize o conteúdo do campo Tags para decidir onde inserir links internos relevantes.
+
+🔽 DADOS DISPONÍVEIS PARA OTIMIZAÇÃO
+
+Título: {title}
+
+Resumo: {excerpt}
+
+Tags disponíveis: {tags_text}
+
+Conteúdo:
+{content}
+
+📤 FORMATO DA RESPOSTA (obrigatório)
+
+Novo Título:
+(título otimizado)
+
+Novo Resumo:
+(resumo otimizado)
+
+Novo Conteúdo:
+(conteúdo reestruturado com parágrafos curtos, <b>negrito</b> e <a href="">links internos</a>)
+
+8) Regras de publicação/SEO
+Título: usar exatamente o campo “Novo Título”.
+
+Excerpt: usar “Novo Resumo”.
+
+Conteúdo: usar “Novo Conteúdo” já com <p>...</p>, <b> e <a> aplicados.
+
+Categorias: mapear pelo feed para IDs em WORDPRESS_CATEGORIES.
+
+Tags: criar/associar conforme tags.py. Slug em minúsculas, hífen, sem acentos.
+
+Yoast: deixe o plugin gerar meta a partir de título/excerpt/primeiro parágrafo. Se a REST permitir, enviar também:
+
+_yoast_wpseo_metadesc = excerpt (ou primeira frase do resumo).
+
+_yoast_wpseo_focuskw = 1–2 palavras-chave principais do título.
+
+Google News: garantir consistência entre título, excerpt e conteúdo; evitar HTML no título; manter imagens acessíveis (se download_upload, usar media_source_url).
+
+9) Testes e utilitários
+Função CLI python -m app.main --once para rodar um ciclo único (sem scheduler).
+
+Testes unitários mínimos para categorizer, tags, rewriter (validação estrutural do HTML), e wordpress (mock de REST).
+
+Makefile/requirements.txt e instruções de execução no README.md.
+
+Implemente tudo com código limpo, tipado, docstrings, logs claros e tratamento de erros robusto. Ao finalizar, gere os arquivos, incluindo universal_prompt.txt exatamente como acima, prontos para execução.
