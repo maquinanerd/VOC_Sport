@@ -26,6 +26,7 @@ from .html_utils import (
     remove_broken_image_placeholders,
     strip_naked_internal_links,
 )
+from .ai_processor import AIProcessor
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
@@ -38,7 +39,6 @@ def run_pipeline_cycle():
     db = Database()
     feed_reader = FeedReader(user_agent=PIPELINE_CONFIG.get('publisher_name', 'Bot'))
     extractor = ContentExtractor()
-    categorizer = Categorizer()
     wp_client = WordPressClient(config=WORDPRESS_CONFIG, categories_map=WORDPRESS_CATEGORIES)
 
     processed_articles_in_cycle = 0
@@ -150,7 +150,7 @@ def run_pipeline_cycle():
                         content_html = strip_credits_and_normalize_youtube(content_html)
                         
                         # Step 4: Prepare payload for WordPress
-                        wp_category_id = categorizer.map_category(source_id, WORDPRESS_CATEGORIES)
+                        wp_category_id = WORDPRESS_CATEGORIES.get(category)
 
                         # 4.1: Determine featured media ID to avoid re-upload
                         featured_media_id = None

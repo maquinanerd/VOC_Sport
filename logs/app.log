@@ -18719,3 +18719,24 @@ message: "API key not valid. Please pass a valid API key."
 2025-08-25 09:17:56 - app.wordpress - INFO - Downloading image for upload: https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/10/SteamCompanyTagPageHeader.png
 2025-08-25 09:17:56 - httpx - INFO - HTTP Request: GET https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/10/SteamCompanyTagPageHeader.png "HTTP/1.1 200 OK"
 2025-08-25 09:17:57 - app.wordpress - INFO - Uploading image 'SteamCompanyTagPageHeader.png' to WordPress.
+2025-08-26 18:10:47 - app.store - INFO - Initializing database tables if they don't exist...
+2025-08-26 18:10:47 - app.store - INFO - Database initialized successfully.
+2025-08-26 18:10:47 - app.store - INFO - Database connection closed.
+2025-08-26 18:10:47 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-08-26 18:10:47 - __main__ - INFO - Executando um único ciclo do pipeline (--once).
+2025-08-26 18:10:47 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-08-26 18:10:49 - httpx - INFO - HTTP Request: HEAD https://www.maquinanerd.com.br/wp-json/wp/v2 "HTTP/1.1 200 OK"
+2025-08-26 18:10:49 - app.pipeline - INFO - Processing feed: valor_politica (Category: politica)
+2025-08-26 18:10:49 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 18:10:49 - app.store - INFO - Database connection closed.
+2025-08-26 18:10:49 - app.wordpress - INFO - WordPress client connection closed.
+2025-08-26 18:10:49 - __main__ - CRITICAL - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'politica'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 41, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 64, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
+    raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
+app.exceptions.AIProcessorError: Invalid AI category specified: 'politica'. No configuration found.
