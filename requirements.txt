@@ -1,13 +1,17 @@
-# Core application
-python-dotenv==1.0.1
-APScheduler==3.10.4
-feedparser==6.0.11
-requests==2.32.3
-trafilatura==1.9.0
-beautifulsoup4==4.12.3
-lxml==5.2.2
-readability-lxml==0.8.1
-python-slugify==8.0.4
-google-generativeai==0.7.2
-tenacity==8.5.0
-Pillow==10.4.0
+# Core application dependencies
+apscheduler
+beautifulsoup4
+feedparser
+google-generativeai
+httpx[http2]
+lxml
+Pillow
+python-dateutil
+python-dotenv
+python-slugify
+requests
+trafilatura
+
+# Dashboard dependencies
+Flask
+psutil
