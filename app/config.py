@@ -7,33 +7,37 @@ load_dotenv()
 
 PIPELINE_ORDER: List[str] = [
     # Ordem de processamento dos feeds de notícias
-    'valor_politica',
+    'estadao_politica',
     'infomoney_politica',
+    'estadao_economia',
     'infomoney_economia',
-    'valor_financas',
-    'valor_legislacao',
+    'estadao_brasil',
     'infomoney_mercados',
-    'valor_empresas',
-    'valor_agro',
     'infomoney_investir',
-    'valor_internacional',
     'infomoney_mundo',
-    'valor_tecnologia',
 ]
 
 RSS_FEEDS: Dict[str, Dict[str, Any]] = {
-    'valor_politica':       {'urls': ['http://www.valor.com.br/politica/rss'], 'category': 'politica'},
-    'infomoney_politica':   {'urls': ['https://www.infomoney.com.br/politica/feed/'], 'category': 'politica'},
-    'infomoney_economia':   {'urls': ['https://www.infomoney.com.br/economia/feed/'], 'category': 'economia'},
-    'valor_financas':       {'urls': ['http://www.valor.com.br/financas/rss'], 'category': 'financas'},
-    'valor_legislacao':     {'urls': ['http://www.valor.com.br/legislacao/rss'], 'category': 'legislacao'},
-    'infomoney_mercados':   {'urls': ['https://www.infomoney.com.br/mercados/feed/'], 'category': 'mercados'},
-    'valor_empresas':       {'urls': ['http://www.valor.com.br/empresas/rss'], 'category': 'empresas'},
-    'valor_agro':           {'urls': ['http://www.valor.com.br/agro/rss'], 'category': 'agronegocio'},
-    'infomoney_investir':   {'urls': ['https://www.infomoney.com.br/onde-investir/feed/'], 'category': 'onde-investir'},
-    'valor_internacional':  {'urls': ['http://www.valor.com.br/internacional/rss'], 'category': 'internacional'},
-    'infomoney_mundo':      {'urls': ['https://www.infomoney.com.br/mundo/feed/'], 'category': 'internacional'},
-    'valor_tecnologia':     {'urls': ['http://www.valor.com.br/tecnologia/rss'], 'category': 'tecnologia'},
+    'estadao_politica': {
+        'urls': ['https://www.estadao.com.br/rss/politica.xml'],
+        'category': 'politica',
+        'source_name': 'Estadão'
+    },
+    'infomoney_politica':   {'urls': ['https://www.infomoney.com.br/politica/feed/'], 'category': 'politica', 'source_name': 'InfoMoney'},
+    'estadao_economia': {
+        'urls': ['https://www.estadao.com.br/rss/economia.xml'],
+        'category': 'economia',
+        'source_name': 'Estadão'
+    },
+    'infomoney_economia':   {'urls': ['https://www.infomoney.com.br/economia/feed/'], 'category': 'economia', 'source_name': 'InfoMoney'},
+    'estadao_brasil': {
+        'urls': ['https://www.estadao.com.br/rss/brasil.xml'],
+        'category': 'politica',
+        'source_name': 'Estadão'
+    },
+    'infomoney_mercados':   {'urls': ['https://www.infomoney.com.br/mercados/feed/'], 'category': 'mercados', 'source_name': 'InfoMoney'},
+    'infomoney_investir':   {'urls': ['https://www.infomoney.com.br/onde-investir/feed/'], 'category': 'onde-investir', 'source_name': 'InfoMoney'},
+    'infomoney_mundo':      {'urls': ['https://www.infomoney.com.br/mundo/feed/'], 'category': 'internacional', 'source_name': 'InfoMoney'},
 }
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -85,14 +89,9 @@ WORDPRESS_CATEGORIES: Dict[str, int] = {
     # Mapeamento de categorias para IDs do WordPress
     'politica': 21,
     'economia': 22,
-    'financas': 23,
-    'legislacao': 24,
     'mercados': 26,
-    'empresas': 27,
-    'agronegocio': 28,
     'onde-investir': 29,
     'internacional': 30,
-    'tecnologia': 31,
     # Categorias genéricas
     'Notícias': 1, 'Dinheiro': 13,
 }
