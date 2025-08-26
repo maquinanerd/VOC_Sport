@@ -16,6 +16,11 @@ from .exceptions import AIProcessorError, AllKeysFailedError
 
 logger = logging.getLogger(__name__)
 
+CATEGORY_ALIASES = {
+    'mercados': 'economia',
+    'brasil': 'politica',
+}
+
 AI_SYSTEM_RULES = """
 [REGRAS OBRIGATÓRIAS — CUMPRIR 100%]
 
@@ -49,18 +54,28 @@ class AIProcessor:
         Initializes the AI processor for a specific content category.
 
         Args:
-            category: The content category (e.g., 'movies', 'series').
+            category: The content category (e.g., 'politica', 'mercados').
 
         Raises:
             AIProcessorError: If the category is invalid or has no API keys.
         """
-        if category not in AI_CONFIG:
-            raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
+        resolved_category = CATEGORY_ALIASES.get(category, category)
 
-        self.category = category
-        self.api_keys: List[str] = [key for key in AI_CONFIG.get(category, []) if key]
+        if resolved_category not in AI_CONFIG:
+            if category != resolved_category:
+                msg = f"Invalid AI category specified: '{category}' (resolved to '{resolved_category}'). No configuration found for resolved category."
+            else:
+                msg = f"Invalid AI category specified: '{category}'. No configuration found."
+            raise AIProcessorError(msg)
+
+        self.category = resolved_category
+        self.api_keys: List[str] = [key for key in AI_CONFIG.get(self.category, []) if key]
         if not self.api_keys:
-            raise AIProcessorError(f"No valid API keys found for category '{category}'.")
+            if category != self.category:
+                msg = f"No valid API keys found for category '{category}' (resolved to '{self.category}')."
+            else:
+                msg = f"No valid API keys found for category '{category}'."
+            raise AIProcessorError(msg)
 
         self.current_key_index = 0
         self.model = None

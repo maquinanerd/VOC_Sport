@@ -6,11 +6,12 @@ import logging
 import hashlib
 from datetime import datetime
 from typing import List, Dict, Any, Optional
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 import feedparser
 import requests
 from dateutil import parser as date_parser
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
@@ -70,43 +71,97 @@ class FeedReader:
             logger.error(f"Error normalizing feed entry: {str(e)}")
             return {}
     
-    def read_single_feed(self, url: str, source_id: str) -> List[Dict[str, Any]]:
+    def _generate_synthetic_feed(self, config: Dict[str, Any], source_id: str) -> List[Dict[str, Any]]:
+        """Generates a feed-like list by scraping a listing page."""
+        list_url = config.get('list_url')
+        selectors = config.get('selectors', [])
+        limit = config.get('limit', 15)
+
+        if not list_url or not selectors:
+            logger.error(f"Synthetic feed configuration is incomplete for {source_id}.")
+            return []
+
+        try:
+            logger.info(f"Fetching listing page for synthetic feed: {list_url}")
+            response = self.session.get(list_url, timeout=20)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.content, 'lxml')
+
+            links = []
+            for selector in selectors:
+                links = soup.select(selector)
+                if links:
+                    logger.debug(f"Found {len(links)} links using selector '{selector}'.")
+                    break
+            
+            if not links:
+                logger.warning(f"No links found on {list_url} using any of the provided selectors.")
+                return []
+
+            items = []
+            for link_tag in links[:limit]:
+                href = link_tag.get('href')
+                if not href:
+                    continue
+                
+                absolute_url = urljoin(list_url, href)
+                title = link_tag.get_text(strip=True)
+
+                if not title:
+                    continue
+
+                item_id = hashlib.md5(absolute_url.encode()).hexdigest()
+                normalized_item = {
+                    'id': item_id,
+                    'title': title,
+                    'link': absolute_url,
+                    'summary': '',
+                    'published_at': datetime.now(),
+                    'source_id': source_id
+                }
+                items.append(normalized_item)
+            
+            logger.info(f"Generated {len(items)} items from synthetic feed for {source_id}.")
+            return items
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to fetch or process synthetic feed source {list_url}: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"An unexpected error occurred during synthetic feed generation for {source_id}: {e}", exc_info=True)
+            return []
+
+    def read_single_feed(self, url: str, source_id: str, feed_config: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Read a single RSS feed and return normalized items"""
         try:
-            logger.debug(f"Reading feed: {url}")
-            
-            # Use requests session for better control
+            logger.debug(f"Attempting to read feed: {url}")
             response = self.session.get(url, timeout=15)
             response.raise_for_status()
             
-            # Parse feed
             feed = feedparser.parse(response.content)
-            
             if feed.bozo and feed.bozo_exception:
                 logger.warning(f"Feed parse warning for {url}: {feed.bozo_exception}")
             
-            items = []
-            for entry in feed.entries:
-                normalized = self.normalize_item(entry, source_id)
-                if normalized and normalized['title'] and normalized['link']:
-                    items.append(normalized)
-            
+            items = [self.normalize_item(e, source_id) for e in feed.entries if e.get('title') and e.get('link')]
             logger.info(f"Read {len(items)} items from {url}")
             return items
             
         except requests.exceptions.RequestException as e:
-            logger.error(f"Network error reading feed {url}: {str(e)}")
-            return []
-        except Exception as e:
-            logger.error(f"Error reading feed {url}: {str(e)}")
-            return []
+            logger.warning(f"Failed to fetch RSS feed from {url} ({e}). Checking for synthetic fallback.")
+            synthetic_config = feed_config.get('synthetic_from')
+            if synthetic_config:
+                logger.info(f"Attempting to generate synthetic feed for {source_id} from {synthetic_config.get('list_url')}")
+                return self._generate_synthetic_feed(synthetic_config, source_id)
+            else:
+                logger.error(f"Error reading feed {url} and no synthetic fallback is configured.")
+                return []
     
-    def read_feeds(self, urls: List[str], source_id: str) -> List[Dict[str, Any]]:
+    def read_feeds(self, feed_config: Dict[str, Any], source_id: str) -> List[Dict[str, Any]]:
         """Read multiple RSS feeds and return combined normalized items"""
         all_items = []
-        
+        urls = feed_config.get('urls', [])
         for url in urls:
-            items = self.read_single_feed(url, source_id)
+            items = self.read_single_feed(url, source_id, feed_config)
             all_items.extend(items)
         
         # Deduplicate by link

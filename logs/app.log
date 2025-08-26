@@ -20088,3 +20088,49 @@ Traceback (most recent call last):
     raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
 app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
 2025-08-26 20:14:47 - INFO - main - Ciclo único finalizado.
+2025-08-26 20:29:13 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 20:29:13 - INFO - store - Database connection closed.
+2025-08-26 20:29:13 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 20:29:13 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 20:29:13 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 20:29:14 - INFO - _client - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 200 OK"
+2025-08-26 20:29:14 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 20:29:14 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:29:15 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/politica.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/politica.xml
+2025-08-26 20:29:15 - INFO - feeds - Total unique items for estadao_politica: 0
+2025-08-26 20:29:15 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 20:29:15 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 20:29:15 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:29:16 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/politica/feed/
+2025-08-26 20:29:16 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 20:29:16 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 20:29:16 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 20:29:16 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:29:17 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/economia.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/economia.xml
+2025-08-26 20:29:17 - INFO - feeds - Total unique items for estadao_economia: 0
+2025-08-26 20:29:17 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 20:29:17 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 20:29:17 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:29:18 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/economia/feed/
+2025-08-26 20:29:18 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 20:29:18 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 20:29:18 - INFO - pipeline - Processing feed: estadao_brasil (Category: politica)
+2025-08-26 20:29:18 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:29:19 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/brasil.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/brasil.xml
+2025-08-26 20:29:19 - INFO - feeds - Total unique items for estadao_brasil: 0
+2025-08-26 20:29:19 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 20:29:19 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 20:29:19 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 20:29:19 - INFO - store - Database connection closed.
+2025-08-26 20:29:19 - INFO - wordpress - WordPress client connection closed.
+2025-08-26 20:29:19 - CRITICAL - main - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'mercados'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 50, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 64, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
+    raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
+app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
+2025-08-26 20:29:19 - INFO - main - Ciclo único finalizado.

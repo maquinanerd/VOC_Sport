@@ -21,19 +21,34 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
     'estadao_politica': {
         'urls': ['https://www.estadao.com.br/rss/politica.xml'],
         'category': 'politica',
-        'source_name': 'Estadão'
+        'source_name': 'Estadão',
+        'synthetic_from': {
+            'list_url': 'https://www.estadao.com.br/politica/',
+            'selectors': ['article h3 a', 'h3 a', 'article a'],
+            'limit': 12,
+        }
     },
     'infomoney_politica':   {'urls': ['https://www.infomoney.com.br/politica/feed/'], 'category': 'politica', 'source_name': 'InfoMoney'},
     'estadao_economia': {
         'urls': ['https://www.estadao.com.br/rss/economia.xml'],
         'category': 'economia',
-        'source_name': 'Estadão'
+        'source_name': 'Estadão',
+        'synthetic_from': {
+            'list_url': 'https://www.estadao.com.br/economia/',
+            'selectors': ['article h3 a', 'h3 a', 'article a'],
+            'limit': 12,
+        }
     },
     'infomoney_economia':   {'urls': ['https://www.infomoney.com.br/economia/feed/'], 'category': 'economia', 'source_name': 'InfoMoney'},
     'estadao_brasil': {
         'urls': ['https://www.estadao.com.br/rss/brasil.xml'],
         'category': 'politica',
-        'source_name': 'Estadão'
+        'source_name': 'Estadão',
+        'synthetic_from': {
+            'list_url': 'https://www.estadao.com.br/brasil/',
+            'selectors': ['article h3 a', 'h3 a', 'article a'],
+            'limit': 12,
+        }
     },
     'infomoney_mercados':   {'urls': ['https://www.infomoney.com.br/mercados/feed/'], 'category': 'mercados', 'source_name': 'InfoMoney'},
     'infomoney_investir':   {'urls': ['https://www.infomoney.com.br/onde-investir/feed/'], 'category': 'onde-investir', 'source_name': 'InfoMoney'},

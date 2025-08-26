@@ -64,7 +64,7 @@ def run_pipeline_cycle():
             ai_processor = AIProcessor(category)
 
             try:
-                feed_items = feed_reader.read_feeds(feed_config['urls'], source_id)
+                feed_items = feed_reader.read_feeds(feed_config, source_id)
                 new_articles = db.filter_new_articles(source_id, feed_items)
 
                 if not new_articles:
