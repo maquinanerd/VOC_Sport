@@ -149,6 +149,11 @@ def run_pipeline_cycle():
                         # Só player do YouTube (oEmbed) e sem “Crédito: …”
                         content_html = strip_credits_and_normalize_youtube(content_html)
                         
+                        # Adicionar crédito da fonte no final do post
+                        source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                        credit_line = f'<p><strong>Fonte:</strong> <a href="{article_data["link"]}" target="_blank" rel="noopener noreferrer">{source_name}</a></p>'
+                        content_html += f"\n{credit_line}"
+
                         # Step 4: Prepare payload for WordPress
                         wp_category_id = WORDPRESS_CATEGORIES.get(category)
 

@@ -1,17 +1,7 @@
-# Core application dependencies
-apscheduler
-beautifulsoup4
-feedparser
-google-generativeai
-httpx[http2]
-lxml
-Pillow
-python-dateutil
-python-dotenv
-python-slugify
 requests
-trafilatura
-
-# Dashboard dependencies
-Flask
-psutil
+beautifulsoup4
+feedgen
+python-dateutil
+lxml
+pytz
+python-slugify

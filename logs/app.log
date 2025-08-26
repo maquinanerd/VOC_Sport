@@ -18740,3 +18740,1180 @@ Traceback (most recent call last):
   File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
     raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
 app.exceptions.AIProcessorError: Invalid AI category specified: 'politica'. No configuration found.
+2025-08-26 18:23:45 - app.store - INFO - Initializing database tables if they don't exist...
+2025-08-26 18:23:45 - app.store - INFO - Database initialized successfully.
+2025-08-26 18:23:45 - app.store - INFO - Database connection closed.
+2025-08-26 18:23:45 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-08-26 18:23:45 - __main__ - INFO - Executando um único ciclo do pipeline (--once).
+2025-08-26 18:23:45 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-08-26 18:23:46 - httpx - INFO - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 404 Not Found"
+2025-08-26 18:23:46 - app.pipeline - INFO - Processing feed: valor_politica (Category: politica)
+2025-08-26 18:23:46 - app.ai_processor - INFO - Using API key index 0 for category 'politica'.
+2025-08-26 18:23:47 - app.feeds - INFO - Read 100 items from http://www.valor.com.br/politica/rss
+2025-08-26 18:23:47 - app.feeds - INFO - Total unique items for valor_politica: 100
+2025-08-26 18:23:47 - app.pipeline - INFO - Found 100 new articles for valor_politica
+2025-08-26 18:23:47 - app.pipeline - INFO - Processing article: Alcolumbre coloca na pauta desta quarta-feira projeto sobre proteção de crianças nas redes sociais (DB ID: 2485) from valor_politica
+2025-08-26 18:23:48 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:23:48 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:23:48 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:23:48 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/politica/noticia/2025/08/26/alcolumbre-coloca-na-pauta-desta-quarta-feira-projeto-sobre-protecao-de-criancas-nas-redes-sociais.ghtml. Title: Alcolumbre coloca na pauta desta quarta-feira proj...
+2025-08-26 18:23:48 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:23:48 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:23:55 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:46:58 - app.store - INFO - Initializing database tables if they don't exist...
+2025-08-26 18:46:58 - app.store - INFO - Database initialized successfully.
+2025-08-26 18:46:58 - app.store - INFO - Database connection closed.
+2025-08-26 18:46:58 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-08-26 18:46:58 - __main__ - INFO - Executando um único ciclo do pipeline (--once).
+2025-08-26 18:46:58 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-08-26 18:47:01 - httpx - INFO - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:01 - app.pipeline - INFO - Processing feed: valor_politica (Category: politica)
+2025-08-26 18:47:01 - app.ai_processor - INFO - Using API key index 0 for category 'politica'.
+2025-08-26 18:47:02 - app.feeds - INFO - Read 100 items from http://www.valor.com.br/politica/rss
+2025-08-26 18:47:02 - app.feeds - INFO - Total unique items for valor_politica: 100
+2025-08-26 18:47:02 - app.pipeline - INFO - Found 3 new articles for valor_politica
+2025-08-26 18:47:02 - app.pipeline - INFO - Processing article: Live do Valor: Mudanças climáticas e primeira infância (DB ID: 2585) from valor_politica
+2025-08-26 18:47:03 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:47:03 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:47:04 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:47:04 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/live-do-valor-mudancas-climaticas-e-primeira-infancia.ghtml. Title: Live do Valor: Mudanças climáticas e primeira infâ...
+2025-08-26 18:47:04 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:47:04 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:47:11 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:47:41 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 18:47:41 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg
+2025-08-26 18:47:41 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg "HTTP/1.1 200 OK"
+2025-08-26 18:47:41 - app.wordpress - INFO - Uploading image 'abre-4-.jpg' to WordPress.
+2025-08-26 18:47:42 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:42 - app.wordpress - ERROR - Failed to upload image 'abre-4-.jpg' to WordPress: Client error '404 Not Found' for url 'https://maquinamoney.com/wp-json/wp/v2/media'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-08-26 18:47:42 - app.wordpress - ERROR - Response body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:42 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 18:47:42 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif "HTTP/1.1 200 OK"
+2025-08-26 18:47:42 - app.wordpress - INFO - Uploading image '888x364px.gif' to WordPress.
+2025-08-26 18:47:42 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:42 - app.wordpress - ERROR - Failed to upload image '888x364px.gif' to WordPress: Client error '404 Not Found' for url 'https://maquinamoney.com/wp-json/wp/v2/media'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-08-26 18:47:42 - app.wordpress - ERROR - Response body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:42 - app.wordpress - WARNING - Post 'Mudanças Climáticas e Primeira Infância: Impactos e Desafios' will be created without a featured image.
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mudancas-climaticas "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - app.wordpress - ERROR - Failed to create tag 'Mudanças Climáticas': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=primeira-infancia "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - app.wordpress - ERROR - Failed to create tag 'Primeira Infância': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=saude-infantil "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:43 - app.wordpress - ERROR - Failed to create tag 'Saúde Infantil': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:44 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=eventos-climaticos-extremos "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:44 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:44 - app.wordpress - ERROR - Failed to create tag 'Eventos Climáticos Extremos': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:44 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politicas-publicas "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:44 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:44 - app.wordpress - ERROR - Failed to create tag 'Políticas Públicas': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:44 - app.wordpress - INFO - Creating WordPress post: Mudanças Climáticas e Primeira Infância: Impactos e Desafios
+2025-08-26 18:47:44 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 404 Not Found"
+2025-08-26 18:47:44 - app.wordpress - ERROR - Failed to create post 'Mudanças Climáticas e Primeira Infância: Impactos e Desafios': Client error '404 Not Found' for url 'https://maquinamoney.com/wp-json/wp/v2/posts'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-08-26 18:47:44 - app.wordpress - ERROR - Response body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:47:44 - app.pipeline - ERROR - Failed to publish post for https://valor.globo.com/brasil/noticia/2025/08/26/live-do-valor-mudancas-climaticas-e-primeira-infancia.ghtml
+2025-08-26 18:47:44 - app.pipeline - INFO - Sleeping for 9.2s (per-article delay).
+2025-08-26 18:47:53 - app.pipeline - INFO - Processing article: Governo brasileiro tem buscado contato 'racional' com Departamento do Tesouro dos EUA, diz Durigan (DB ID: 2586) from valor_politica
+2025-08-26 18:47:54 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:47:54 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:47:54 - app.extractor - INFO - Collected 0 images from article (pre+post).
+2025-08-26 18:47:54 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/governo-brasileiro-tem-buscado-contato-racional-com-o-departamento-do-tesouro-dos-eua-diz-durigan.ghtml. Title: Governo brasileiro tem buscado contato 'racional' ...
+2025-08-26 18:47:54 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:47:54 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:48:01 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:48:31 - app.pipeline - INFO - Attempting to upload up to 1 images.
+2025-08-26 18:48:31 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg
+2025-08-26 18:48:31 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg "HTTP/1.1 200 OK"
+2025-08-26 18:48:31 - app.wordpress - INFO - Uploading image '53769478878-ac1cec0b12-o.jpg' to WordPress.
+2025-08-26 18:48:32 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:32 - app.wordpress - ERROR - Failed to upload image '53769478878-ac1cec0b12-o.jpg' to WordPress: Client error '404 Not Found' for url 'https://maquinamoney.com/wp-json/wp/v2/media'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-08-26 18:48:32 - app.wordpress - ERROR - Response body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:32 - app.wordpress - WARNING - Post 'Durigan: Governo busca diálogo com Tesouro dos EUA' will be created without a featured image.
+2025-08-26 18:48:32 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=governo-brasileiro "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:32 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:32 - app.wordpress - ERROR - Failed to create tag 'Governo Brasileiro': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=tesouro-dos-eua "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - app.wordpress - ERROR - Failed to create tag 'Tesouro dos EUA': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=durigan "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - app.wordpress - ERROR - Failed to create tag 'Durigan': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politica-externa "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:33 - app.wordpress - ERROR - Failed to create tag 'Política Externa': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:33 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=relacoes-economicas "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - app.wordpress - ERROR - Failed to create tag 'Relações Econômicas': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=investimento-estrangeiro "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - app.wordpress - ERROR - Failed to create tag 'Investimento Estrangeiro': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=divida-publica "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - app.wordpress - ERROR - Failed to create tag 'Dívida Pública': 404 - <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:34 - app.wordpress - INFO - Creating WordPress post: Durigan: Governo busca diálogo com Tesouro dos EUA
+2025-08-26 18:48:34 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 404 Not Found"
+2025-08-26 18:48:34 - app.wordpress - ERROR - Failed to create post 'Durigan: Governo busca diálogo com Tesouro dos EUA': Client error '404 Not Found' for url 'https://maquinamoney.com/wp-json/wp/v2/posts'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2025-08-26 18:48:34 - app.wordpress - ERROR - Response body: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>404 Not Found</title>
+  <link rel="stylesheet" href="/error_docs/styles.css">
+</head>
+<body>
+<div class="page">
+  <div class="main">
+    <h1>Server Error</h1>
+    <div class="error-code">404</div>
+    <h2>Page Not Found</h2>
+    <p class="lead">This page either doesn't exist, or it moved somewhere else.</p>
+    <hr/>
+    <p>That's what you can do</p>
+    <div class="help-actions">
+      <a href="javascript:location.reload();">Reload Page</a>
+      <a href="javascript:history.back();">Back to Previous Page</a>
+      <a href="/">Home Page</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+2025-08-26 18:48:34 - app.pipeline - ERROR - Failed to publish post for https://valor.globo.com/brasil/noticia/2025/08/26/governo-brasileiro-tem-buscado-contato-racional-com-o-departamento-do-tesouro-dos-eua-diz-durigan.ghtml
+2025-08-26 18:48:34 - app.pipeline - INFO - Sleeping for 8.4s (per-article delay).
+2025-08-26 18:48:43 - app.pipeline - INFO - Processing article: Juros futuros sobem com IPCA-15 cima do esperado e tensão entre Trump e Fed (DB ID: 2587) from valor_politica
+2025-08-26 18:48:43 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:48:43 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:48:43 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:48:43 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/financas/noticia/2025/08/26/juros-futuros-sobem-com-ipca-15-cima-do-esperado-e-tensao-entre-trump-e-fed.ghtml. Title: Juros futuros sobem com IPCA-15 cima do esperado e...
+2025-08-26 18:48:43 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:48:43 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:48:46 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 18:48:46 - app.store - INFO - Database connection closed.
+2025-08-26 18:48:46 - app.wordpress - INFO - WordPress client connection closed.
+2025-08-26 18:52:01 - app.store - INFO - Initializing database tables if they don't exist...
+2025-08-26 18:52:01 - app.store - INFO - Database initialized successfully.
+2025-08-26 18:52:01 - app.store - INFO - Database connection closed.
+2025-08-26 18:52:01 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-08-26 18:52:01 - __main__ - INFO - Executando um único ciclo do pipeline (--once).
+2025-08-26 18:52:01 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-08-26 18:52:02 - httpx - INFO - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 200 OK"
+2025-08-26 18:52:02 - app.pipeline - INFO - Processing feed: valor_politica (Category: politica)
+2025-08-26 18:52:02 - app.ai_processor - INFO - Using API key index 0 for category 'politica'.
+2025-08-26 18:52:02 - app.feeds - INFO - Read 100 items from http://www.valor.com.br/politica/rss
+2025-08-26 18:52:02 - app.feeds - INFO - Total unique items for valor_politica: 100
+2025-08-26 18:52:02 - app.pipeline - INFO - No new articles found for valor_politica.
+2025-08-26 18:52:02 - app.pipeline - INFO - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 18:52:02 - app.ai_processor - INFO - Using API key index 0 for category 'politica'.
+2025-08-26 18:52:04 - app.feeds - INFO - Read 10 items from https://www.infomoney.com.br/politica/feed/
+2025-08-26 18:52:04 - app.feeds - INFO - Total unique items for infomoney_politica: 10
+2025-08-26 18:52:04 - app.pipeline - INFO - Found 10 new articles for infomoney_politica
+2025-08-26 18:52:04 - app.pipeline - INFO - Processing article: Planalto lança novo slogan e Lula quer ministros defendendo governo (DB ID: 2588) from infomoney_politica
+2025-08-26 18:52:04 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:52:04 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:52:04 - app.extractor - INFO - Collected 2 images from article (pre+post).
+2025-08-26 18:52:04 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/planalto-lanca-novo-slogan-e-lula-quer-ministros-defendendo-governo/. Title: Planalto lança novo slogan e Lula quer ministros d...
+2025-08-26 18:52:04 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:52:04 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:52:11 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:52:41 - app.pipeline - INFO - Attempting to upload up to 3 images.
+2025-08-26 18:52:41 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg?quality=70
+2025-08-26 18:52:41 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 18:52:41 - app.wordpress - INFO - Uploading image '2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg' to WordPress.
+2025-08-26 18:52:47 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:52:47 - app.wordpress - INFO - Uploaded media 3227 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg?quality=70
+2025-08-26 18:52:47 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3227 "HTTP/1.1 200 OK"
+2025-08-26 18:52:47 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-13T161751Z_1355094333_RC2G6GANB5CX_RTRMADP_3_USA-TRUMP-TARIFFS-BRAZIL.jpg?quality=70&strip=all
+2025-08-26 18:52:47 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-13T161751Z_1355094333_RC2G6GANB5CX_RTRMADP_3_USA-TRUMP-TARIFFS-BRAZIL.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:52:47 - app.wordpress - INFO - Uploading image '2025-08-13T161751Z_1355094333_RC2G6GANB5CX_RTRMADP_3_USA-TRUMP-TARIFFS-BRAZIL.jpg' to WordPress.
+2025-08-26 18:52:50 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:52:50 - app.wordpress - INFO - Uploaded media 3228 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-13T161751Z_1355094333_RC2G6GANB5CX_RTRMADP_3_USA-TRUMP-TARIFFS-BRAZIL.jpg?quality=70&strip=all
+2025-08-26 18:52:50 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3228 "HTTP/1.1 200 OK"
+2025-08-26 18:52:50 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 18:52:50 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:52:50 - app.wordpress - INFO - Uploading image 'Screenshot_9afba6.png' to WordPress.
+2025-08-26 18:52:55 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:52:55 - app.wordpress - INFO - Uploaded media 3229 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 18:52:55 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3229 "HTTP/1.1 200 OK"
+2025-08-26 18:52:55 - app.wordpress - INFO - Post will be created with featured_media 3227.
+2025-08-26 18:52:55 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=governo-lula "HTTP/1.1 200 OK"
+2025-08-26 18:52:56 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:56 - app.wordpress - INFO - Successfully created tag 'Governo Lula'
+2025-08-26 18:52:56 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=lula "HTTP/1.1 200 OK"
+2025-08-26 18:52:56 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:56 - app.wordpress - INFO - Successfully created tag 'Lula'
+2025-08-26 18:52:56 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=ministros "HTTP/1.1 200 OK"
+2025-08-26 18:52:56 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:56 - app.wordpress - INFO - Successfully created tag 'ministros'
+2025-08-26 18:52:57 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=campanha-publicitaria "HTTP/1.1 200 OK"
+2025-08-26 18:52:57 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:57 - app.wordpress - INFO - Successfully created tag 'campanha publicitária'
+2025-08-26 18:52:57 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politica-economica "HTTP/1.1 200 OK"
+2025-08-26 18:52:57 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:57 - app.wordpress - INFO - Successfully created tag 'política econômica'
+2025-08-26 18:52:58 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=banco-central "HTTP/1.1 200 OK"
+2025-08-26 18:52:58 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:58 - app.wordpress - INFO - Successfully created tag 'Banco Central'
+2025-08-26 18:52:58 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=inflacao "HTTP/1.1 200 OK"
+2025-08-26 18:52:58 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:52:58 - app.wordpress - INFO - Successfully created tag 'inflação'
+2025-08-26 18:52:58 - app.wordpress - INFO - Creating WordPress post: Governo Lula Lança Nova Campanha e Busca Ministros Ativos
+2025-08-26 18:52:59 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:52:59 - app.wordpress - INFO - Successfully created post 'Governo Lula Lança Nova Campanha e Busca Ministros Ativos' with ID: 3230
+2025-08-26 18:52:59 - app.store - INFO - Successfully recorded published post for article DB ID 2588 (WP Post ID: 3230).
+2025-08-26 18:52:59 - app.pipeline - INFO - Successfully published post 3230 for article DB ID 2588
+2025-08-26 18:52:59 - app.pipeline - INFO - Sleeping for 6.7s (per-article delay).
+2025-08-26 18:53:05 - app.pipeline - INFO - Processing article: COP30: parlamentares debatem o papel do legislativo no combate às mudanças climáticas (DB ID: 2589) from infomoney_politica
+2025-08-26 18:53:06 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:53:06 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:53:06 - app.extractor - INFO - Collected 0 images from article (pre+post).
+2025-08-26 18:53:06 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/cop30-parlamentares-debatem-o-papel-do-legislativo-no-combate-as-mudancas-climaticas/. Title: COP30: parlamentares debatem o papel do legislativ...
+2025-08-26 18:53:06 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:53:06 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:53:12 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:53:42 - app.pipeline - INFO - Attempting to upload up to 1 images.
+2025-08-26 18:53:42 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_4dfea1.png?quality=70
+2025-08-26 18:53:42 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_4dfea1.png?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 18:53:42 - app.wordpress - INFO - Uploading image 'Screenshot_4dfea1.png' to WordPress.
+2025-08-26 18:53:52 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:53:52 - app.wordpress - INFO - Uploaded media 3231 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_4dfea1.png?quality=70
+2025-08-26 18:53:52 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3231 "HTTP/1.1 200 OK"
+2025-08-26 18:53:52 - app.wordpress - INFO - Post will be created with featured_media 3231.
+2025-08-26 18:53:52 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=cop30 "HTTP/1.1 200 OK"
+2025-08-26 18:53:52 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:53:52 - app.wordpress - INFO - Successfully created tag 'COP30'
+2025-08-26 18:53:53 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mudancas-climaticas "HTTP/1.1 200 OK"
+2025-08-26 18:53:53 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:53:53 - app.wordpress - INFO - Successfully created tag 'Mudanças Climáticas'
+2025-08-26 18:53:53 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=legislativo "HTTP/1.1 200 OK"
+2025-08-26 18:53:53 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:53:53 - app.wordpress - INFO - Successfully created tag 'Legislativo'
+2025-08-26 18:53:54 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=energia-renovavel "HTTP/1.1 200 OK"
+2025-08-26 18:53:54 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:53:54 - app.wordpress - INFO - Successfully created tag 'Energia Renovável'
+2025-08-26 18:53:54 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=acordo-de-paris "HTTP/1.1 200 OK"
+2025-08-26 18:53:54 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:53:54 - app.wordpress - INFO - Successfully created tag 'Acordo de Paris'
+2025-08-26 18:53:54 - app.wordpress - INFO - Creating WordPress post: COP30: Legislativo e o Combate às Mudanças Climáticas
+2025-08-26 18:53:55 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:53:55 - app.wordpress - INFO - Successfully created post 'COP30: Legislativo e o Combate às Mudanças Climáticas' with ID: 3232
+2025-08-26 18:53:55 - app.store - INFO - Successfully recorded published post for article DB ID 2589 (WP Post ID: 3232).
+2025-08-26 18:53:55 - app.pipeline - INFO - Successfully published post 3232 for article DB ID 2589
+2025-08-26 18:53:55 - app.pipeline - INFO - Sleeping for 7.4s (per-article delay).
+2025-08-26 18:54:02 - app.pipeline - INFO - Processing article: Moraes determina à polícia do DF que monitore Bolsonaro em tempo integral (DB ID: 2590) from infomoney_politica
+2025-08-26 18:54:03 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:54:03 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:54:03 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:54:03 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/moraes-determina-a-policia-do-df-que-monitore-bolsonaro-em-tempo-integral/. Title: Moraes determina à polícia do DF que monitore Bols...
+2025-08-26 18:54:03 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:54:03 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:54:08 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:54:38 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 18:54:38 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T013128Z_1_LYNXMPEL7D00Z_RTROPTP_4_BRAZIL-BOLSONARO.jpg
+2025-08-26 18:54:38 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T013128Z_1_LYNXMPEL7D00Z_RTROPTP_4_BRAZIL-BOLSONARO.jpg "HTTP/1.1 200 OK"
+2025-08-26 18:54:38 - app.wordpress - INFO - Uploading image '2025-08-14T013128Z_1_LYNXMPEL7D00Z_RTROPTP_4_BRAZIL-BOLSONARO.jpg' to WordPress.
+2025-08-26 18:54:55 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:54:55 - app.wordpress - INFO - Uploaded media 3233 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T013128Z_1_LYNXMPEL7D00Z_RTROPTP_4_BRAZIL-BOLSONARO.jpg
+2025-08-26 18:54:55 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3233 "HTTP/1.1 200 OK"
+2025-08-26 18:54:55 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 18:54:55 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:54:55 - app.wordpress - INFO - Uploading image '900-x-300-com-texto-na-imagem-1.png' to WordPress.
+2025-08-26 18:54:59 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:54:59 - app.wordpress - INFO - Uploaded media 3234 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 18:55:00 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3234 "HTTP/1.1 200 OK"
+2025-08-26 18:55:00 - app.wordpress - INFO - Post will be created with featured_media 3233.
+2025-08-26 18:55:00 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=alexandre-de-moraes "HTTP/1.1 200 OK"
+2025-08-26 18:55:00 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:00 - app.wordpress - INFO - Successfully created tag 'Alexandre de Moraes'
+2025-08-26 18:55:00 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=stf "HTTP/1.1 200 OK"
+2025-08-26 18:55:01 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:01 - app.wordpress - INFO - Successfully created tag 'STF'
+2025-08-26 18:55:01 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=jair-bolsonaro "HTTP/1.1 200 OK"
+2025-08-26 18:55:01 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:01 - app.wordpress - INFO - Successfully created tag 'Jair Bolsonaro'
+2025-08-26 18:55:01 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=policia-do-df "HTTP/1.1 200 OK"
+2025-08-26 18:55:01 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:01 - app.wordpress - INFO - Successfully created tag 'Polícia do DF'
+2025-08-26 18:55:02 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=monitoramento "HTTP/1.1 200 OK"
+2025-08-26 18:55:02 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:02 - app.wordpress - INFO - Successfully created tag 'Monitoramento'
+2025-08-26 18:55:02 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=seguranca-publica "HTTP/1.1 200 OK"
+2025-08-26 18:55:02 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:02 - app.wordpress - INFO - Successfully created tag 'Segurança Pública'
+2025-08-26 18:55:03 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=atos-antidemocraticos "HTTP/1.1 200 OK"
+2025-08-26 18:55:03 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:55:03 - app.wordpress - INFO - Successfully created tag 'Atos Antidemocráticos'
+2025-08-26 18:55:03 - app.wordpress - INFO - Creating WordPress post: STF: Moraes ordena monitoramento integral de Bolsonaro
+2025-08-26 18:55:03 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:55:03 - app.wordpress - INFO - Successfully created post 'STF: Moraes ordena monitoramento integral de Bolsonaro' with ID: 3235
+2025-08-26 18:55:03 - app.store - INFO - Successfully recorded published post for article DB ID 2590 (WP Post ID: 3235).
+2025-08-26 18:55:03 - app.pipeline - INFO - Successfully published post 3235 for article DB ID 2590
+2025-08-26 18:55:03 - app.pipeline - INFO - Sleeping for 8.2s (per-article delay).
+2025-08-26 18:55:11 - app.pipeline - INFO - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-26 18:55:26 - app.pipeline - INFO - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 18:55:26 - app.ai_processor - INFO - Using API key index 0 for category 'economia'.
+2025-08-26 18:55:27 - app.feeds - INFO - Read 10 items from https://www.infomoney.com.br/economia/feed/
+2025-08-26 18:55:27 - app.feeds - INFO - Total unique items for infomoney_economia: 10
+2025-08-26 18:55:28 - app.pipeline - INFO - Found 10 new articles for infomoney_economia
+2025-08-26 18:55:28 - app.pipeline - INFO - Processing article: Trump considera dois nomes para substituir Lisa Cook na diretoria do Fed, informa WSJ (DB ID: 2598) from infomoney_economia
+2025-08-26 18:55:29 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:55:29 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:55:29 - app.extractor - INFO - Collected 2 images from article (pre+post).
+2025-08-26 18:55:29 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/trump-considera-dois-nomes-para-substituir-lisa-cook-na-diretoria-do-fed-informa-wsj/. Title: Trump considera dois nomes para substituir Lisa Co...
+2025-08-26 18:55:29 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:55:29 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:55:37 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:56:07 - app.pipeline - INFO - Attempting to upload up to 3 images.
+2025-08-26 18:56:07 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg
+2025-08-26 18:56:07 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg "HTTP/1.1 200 OK"
+2025-08-26 18:56:07 - app.wordpress - INFO - Uploading image '2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg' to WordPress.
+2025-08-26 18:56:17 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:56:17 - app.wordpress - INFO - Uploaded media 3236 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg
+2025-08-26 18:56:17 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3236 "HTTP/1.1 200 OK"
+2025-08-26 18:56:17 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 18:56:17 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:56:17 - app.wordpress - INFO - Uploading image '420207198.jpg' to WordPress.
+2025-08-26 18:56:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:56:18 - app.wordpress - INFO - Uploaded media 3237 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 18:56:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3237 "HTTP/1.1 200 OK"
+2025-08-26 18:56:18 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all
+2025-08-26 18:56:18 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:56:18 - app.wordpress - INFO - Uploading image '438505845.jpg' to WordPress.
+2025-08-26 18:56:20 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:56:20 - app.wordpress - INFO - Uploaded media 3238 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all
+2025-08-26 18:56:21 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3238 "HTTP/1.1 200 OK"
+2025-08-26 18:56:21 - app.wordpress - INFO - Post will be created with featured_media 3236.
+2025-08-26 18:56:21 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=donald-trump "HTTP/1.1 200 OK"
+2025-08-26 18:56:21 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:21 - app.wordpress - INFO - Successfully created tag 'Donald Trump'
+2025-08-26 18:56:21 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=lisa-cook "HTTP/1.1 200 OK"
+2025-08-26 18:56:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:22 - app.wordpress - INFO - Successfully created tag 'Lisa Cook'
+2025-08-26 18:56:22 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=federal-reserve "HTTP/1.1 200 OK"
+2025-08-26 18:56:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:22 - app.wordpress - INFO - Successfully created tag 'Federal Reserve'
+2025-08-26 18:56:22 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politica-monetaria "HTTP/1.1 200 OK"
+2025-08-26 18:56:23 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:23 - app.wordpress - INFO - Successfully created tag 'Política Monetária'
+2025-08-26 18:56:23 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=inflacao "HTTP/1.1 200 OK"
+2025-08-26 18:56:23 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=joe-biden "HTTP/1.1 200 OK"
+2025-08-26 18:56:23 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:23 - app.wordpress - INFO - Successfully created tag 'Joe Biden'
+2025-08-26 18:56:23 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=wall-street-journal "HTTP/1.1 200 OK"
+2025-08-26 18:56:24 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:56:24 - app.wordpress - INFO - Successfully created tag 'Wall Street Journal'
+2025-08-26 18:56:24 - app.wordpress - INFO - Creating WordPress post: Trump e a escolha para o Fed: dois nomes para substituir Lisa Cook
+2025-08-26 18:56:24 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:56:24 - app.wordpress - INFO - Successfully created post 'Trump e a escolha para o Fed: dois nomes para substituir Lisa Cook' with ID: 3239
+2025-08-26 18:56:24 - app.store - INFO - Successfully recorded published post for article DB ID 2598 (WP Post ID: 3239).
+2025-08-26 18:56:24 - app.pipeline - INFO - Successfully published post 3239 for article DB ID 2598
+2025-08-26 18:56:24 - app.pipeline - INFO - Sleeping for 6.9s (per-article delay).
+2025-08-26 18:56:31 - app.pipeline - INFO - Processing article: Prevalece a complementariedade no comércio entre Brasil e EUA, diz secretária do MDIC (DB ID: 2599) from infomoney_economia
+2025-08-26 18:56:31 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:56:31 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:56:31 - app.extractor - INFO - Collected 0 images from article (pre+post).
+2025-08-26 18:56:31 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/prevalece-a-complementariedade-no-comercio-entre-brasil-e-eua-diz-secretaria-do-mdic/. Title: Prevalece a complementariedade no comércio entre B...
+2025-08-26 18:56:31 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:56:31 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:56:38 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:57:08 - app.pipeline - INFO - Attempting to upload up to 1 images.
+2025-08-26 18:57:08 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/06/daniel-dan-hshfCysx-wg-unsplash.jpg?quality=70
+2025-08-26 18:57:09 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/06/daniel-dan-hshfCysx-wg-unsplash.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 18:57:09 - app.wordpress - INFO - Uploading image 'daniel-dan-hshfCysx-wg-unsplash.jpg' to WordPress.
+2025-08-26 18:57:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:57:10 - app.wordpress - INFO - Uploaded media 3240 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/06/daniel-dan-hshfCysx-wg-unsplash.jpg?quality=70
+2025-08-26 18:57:12 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3240 "HTTP/1.1 200 OK"
+2025-08-26 18:57:12 - app.wordpress - INFO - Post will be created with featured_media 3240.
+2025-08-26 18:57:12 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mdic "HTTP/1.1 200 OK"
+2025-08-26 18:57:12 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:12 - app.wordpress - INFO - Successfully created tag 'MDIC'
+2025-08-26 18:57:12 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=brasil "HTTP/1.1 200 OK"
+2025-08-26 18:57:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:13 - app.wordpress - INFO - Successfully created tag 'Brasil'
+2025-08-26 18:57:13 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=eua "HTTP/1.1 200 OK"
+2025-08-26 18:57:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:13 - app.wordpress - INFO - Successfully created tag 'EUA'
+2025-08-26 18:57:13 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=comercio-bilateral "HTTP/1.1 200 OK"
+2025-08-26 18:57:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:13 - app.wordpress - INFO - Successfully created tag 'Comércio Bilateral'
+2025-08-26 18:57:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=complementariedade "HTTP/1.1 200 OK"
+2025-08-26 18:57:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:14 - app.wordpress - INFO - Successfully created tag 'Complementariedade'
+2025-08-26 18:57:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=relacoes-comerciais "HTTP/1.1 200 OK"
+2025-08-26 18:57:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:14 - app.wordpress - INFO - Successfully created tag 'Relações Comerciais'
+2025-08-26 18:57:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=crescimento-economico "HTTP/1.1 200 OK"
+2025-08-26 18:57:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:57:15 - app.wordpress - INFO - Successfully created tag 'Crescimento Econômico'
+2025-08-26 18:57:15 - app.wordpress - INFO - Creating WordPress post: Brasil e EUA: Comércio Bilateral Apresenta Complementariedade, Afirma MDIC
+2025-08-26 18:57:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:57:15 - app.wordpress - INFO - Successfully created post 'Brasil e EUA: Comércio Bilateral Apresenta Complementariedade, Afirma MDIC' with ID: 3241
+2025-08-26 18:57:15 - app.store - INFO - Successfully recorded published post for article DB ID 2599 (WP Post ID: 3241).
+2025-08-26 18:57:15 - app.pipeline - INFO - Successfully published post 3241 for article DB ID 2599
+2025-08-26 18:57:15 - app.pipeline - INFO - Sleeping for 6.4s (per-article delay).
+2025-08-26 18:57:22 - app.pipeline - INFO - Processing article: Krugman: tentativa de Trump de demitir Cook é ilegal e pode causar dano além do Fed (DB ID: 2600) from infomoney_economia
+2025-08-26 18:57:22 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:57:22 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:57:22 - app.extractor - INFO - Collected 5 images from article (pre+post).
+2025-08-26 18:57:22 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/krugman-tentativa-de-trump-de-demitir-cook-e-ilegal-e-pode-causar-dano-alem-do-fed/. Title: Krugman: tentativa de Trump de demitir Cook é ileg...
+2025-08-26 18:57:22 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:57:22 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:57:28 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:57:58 - app.pipeline - INFO - Attempting to upload up to 6 images.
+2025-08-26 18:57:58 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70
+2025-08-26 18:57:58 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 18:57:58 - app.wordpress - INFO - Uploading image '2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg' to WordPress.
+2025-08-26 18:57:59 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:57:59 - app.wordpress - INFO - Uploaded media 3243 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70
+2025-08-26 18:57:59 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3243 "HTTP/1.1 200 OK"
+2025-08-26 18:57:59 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 18:57:59 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:57:59 - app.wordpress - INFO - Uploading image '420207198.jpg' to WordPress.
+2025-08-26 18:58:00 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:58:00 - app.wordpress - INFO - Uploaded media 3244 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 18:58:00 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3244 "HTTP/1.1 200 OK"
+2025-08-26 18:58:00 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-02T141055Z_1_LYNXMPEL410MY_RTROPTP_4_MACRO-FED-JUROS.jpg?quality=70&strip=all
+2025-08-26 18:58:00 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-02T141055Z_1_LYNXMPEL410MY_RTROPTP_4_MACRO-FED-JUROS.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:58:00 - app.wordpress - INFO - Uploading image '2025-05-02T141055Z_1_LYNXMPEL410MY_RTROPTP_4_MACRO-FED-JUROS.jpg' to WordPress.
+2025-08-26 18:58:02 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:58:02 - app.wordpress - INFO - Uploaded media 3245 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-02T141055Z_1_LYNXMPEL410MY_RTROPTP_4_MACRO-FED-JUROS.jpg?quality=70&strip=all
+2025-08-26 18:58:02 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3245 "HTTP/1.1 200 OK"
+2025-08-26 18:58:02 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 18:58:02 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:58:02 - app.wordpress - INFO - Uploading image '900-x-300-com-texto-na-imagem-1.png' to WordPress.
+2025-08-26 18:58:07 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:58:07 - app.wordpress - INFO - Uploaded media 3247 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 18:58:07 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3247 "HTTP/1.1 200 OK"
+2025-08-26 18:58:07 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all
+2025-08-26 18:58:07 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:58:07 - app.wordpress - INFO - Uploading image '2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg' to WordPress.
+2025-08-26 18:58:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:58:10 - app.wordpress - INFO - Uploaded media 3248 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all
+2025-08-26 18:58:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3248 "HTTP/1.1 200 OK"
+2025-08-26 18:58:10 - app.wordpress - INFO - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all
+2025-08-26 18:58:10 - httpx - INFO - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 18:58:10 - app.wordpress - INFO - Uploading image '438505845.jpg' to WordPress.
+2025-08-26 18:58:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:58:13 - app.wordpress - INFO - Uploaded media 3249 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all
+2025-08-26 18:58:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3249 "HTTP/1.1 200 OK"
+2025-08-26 18:58:13 - app.wordpress - INFO - Post will be created with featured_media 3243.
+2025-08-26 18:58:13 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=trump "HTTP/1.1 200 OK"
+2025-08-26 18:58:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:13 - app.wordpress - INFO - Successfully created tag 'Trump'
+2025-08-26 18:58:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=apple "HTTP/1.1 200 OK"
+2025-08-26 18:58:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:14 - app.wordpress - INFO - Successfully created tag 'Apple'
+2025-08-26 18:58:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=tim-cook "HTTP/1.1 200 OK"
+2025-08-26 18:58:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:14 - app.wordpress - INFO - Successfully created tag 'Tim Cook'
+2025-08-26 18:58:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=federal-reserve "HTTP/1.1 200 OK"
+2025-08-26 18:58:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=economia-americana "HTTP/1.1 200 OK"
+2025-08-26 18:58:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:15 - app.wordpress - INFO - Successfully created tag 'Economia Americana'
+2025-08-26 18:58:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mercado-acionario "HTTP/1.1 200 OK"
+2025-08-26 18:58:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:15 - app.wordpress - INFO - Successfully created tag 'Mercado Acionário'
+2025-08-26 18:58:16 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=paul-krugman "HTTP/1.1 200 OK"
+2025-08-26 18:58:16 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:58:16 - app.wordpress - INFO - Successfully created tag 'Paul Krugman'
+2025-08-26 18:58:16 - app.wordpress - INFO - Creating WordPress post: Trump e Cook: Tentativa de Demissão Ilegal? Impacto além do Fed
+2025-08-26 18:58:16 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:58:16 - app.wordpress - INFO - Successfully created post 'Trump e Cook: Tentativa de Demissão Ilegal? Impacto além do Fed' with ID: 3250
+2025-08-26 18:58:16 - app.store - INFO - Successfully recorded published post for article DB ID 2600 (WP Post ID: 3250).
+2025-08-26 18:58:16 - app.pipeline - INFO - Successfully published post 3250 for article DB ID 2600
+2025-08-26 18:58:16 - app.pipeline - INFO - Sleeping for 9.4s (per-article delay).
+2025-08-26 18:58:26 - app.pipeline - INFO - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: valor_financas
+2025-08-26 18:58:41 - app.pipeline - INFO - Processing feed: valor_financas (Category: financas)
+2025-08-26 18:58:41 - app.ai_processor - INFO - Using API key index 0 for category 'financas'.
+2025-08-26 18:58:41 - app.feeds - INFO - Read 100 items from http://www.valor.com.br/financas/rss
+2025-08-26 18:58:41 - app.feeds - INFO - Total unique items for valor_financas: 100
+2025-08-26 18:58:42 - app.pipeline - INFO - Found 100 new articles for valor_financas
+2025-08-26 18:58:42 - app.pipeline - INFO - Processing article: Visa Conecta recebe aprovação do BC para operar como instituição de pagamento (DB ID: 2608) from valor_financas
+2025-08-26 18:58:43 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:58:43 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:58:43 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:58:43 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/financas/noticia/2025/08/26/visa-conecta-recebe-aprovao-do-bc-para-operar-como-instituio-de-pagamento.ghtml. Title: Visa Conecta recebe aprovação do BC para operar co...
+2025-08-26 18:58:43 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:58:43 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:58:50 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 18:59:20 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 18:59:20 - app.wordpress - INFO - Downloading image for upload: https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png
+2025-08-26 18:59:20 - httpx - INFO - HTTP Request: GET https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png "HTTP/1.1 200 OK"
+2025-08-26 18:59:20 - app.wordpress - INFO - Uploading image 'fb_marca.png' to WordPress.
+2025-08-26 18:59:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:59:22 - app.wordpress - INFO - Uploaded media 3254 from URL: https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png
+2025-08-26 18:59:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3254 "HTTP/1.1 200 OK"
+2025-08-26 18:59:22 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 18:59:22 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif "HTTP/1.1 200 OK"
+2025-08-26 18:59:22 - app.wordpress - INFO - Uploading image '888x364px.gif' to WordPress.
+2025-08-26 18:59:23 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 18:59:23 - app.wordpress - INFO - Uploaded media 3255 from URL: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 18:59:23 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3255 "HTTP/1.1 200 OK"
+2025-08-26 18:59:23 - app.wordpress - INFO - Post will be created with featured_media 3254.
+2025-08-26 18:59:23 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=visa-conecta "HTTP/1.1 200 OK"
+2025-08-26 18:59:24 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:24 - app.wordpress - INFO - Successfully created tag 'Visa Conecta'
+2025-08-26 18:59:24 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=banco-central "HTTP/1.1 200 OK"
+2025-08-26 18:59:24 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=visa "HTTP/1.1 200 OK"
+2025-08-26 18:59:24 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:24 - app.wordpress - INFO - Successfully created tag 'Visa'
+2025-08-26 18:59:25 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=instituicao-de-pagamento "HTTP/1.1 200 OK"
+2025-08-26 18:59:25 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:25 - app.wordpress - INFO - Successfully created tag 'instituição de pagamento'
+2025-08-26 18:59:25 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=financas "HTTP/1.1 200 OK"
+2025-08-26 18:59:25 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:25 - app.wordpress - INFO - Successfully created tag 'finanças'
+2025-08-26 18:59:26 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mercado-financeiro "HTTP/1.1 200 OK"
+2025-08-26 18:59:26 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:26 - app.wordpress - INFO - Successfully created tag 'mercado financeiro'
+2025-08-26 18:59:26 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=pagamentos-digitais "HTTP/1.1 200 OK"
+2025-08-26 18:59:26 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 18:59:26 - app.wordpress - INFO - Successfully created tag 'pagamentos digitais'
+2025-08-26 18:59:26 - app.wordpress - INFO - Creating WordPress post: Visa Conecta: BC aprova operação como instituição de pagamento
+2025-08-26 18:59:27 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 18:59:27 - app.wordpress - INFO - Successfully created post 'Visa Conecta: BC aprova operação como instituição de pagamento' with ID: 3256
+2025-08-26 18:59:27 - app.store - INFO - Successfully recorded published post for article DB ID 2608 (WP Post ID: 3256).
+2025-08-26 18:59:27 - app.pipeline - INFO - Successfully published post 3256 for article DB ID 2608
+2025-08-26 18:59:27 - app.pipeline - INFO - Sleeping for 6.4s (per-article delay).
+2025-08-26 18:59:33 - app.pipeline - INFO - Processing article: Live do Valor: Mudanças climáticas e primeira infância (DB ID: 2609) from valor_financas
+2025-08-26 18:59:34 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 18:59:34 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 18:59:34 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 18:59:34 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/live-do-valor-mudancas-climaticas-e-primeira-infancia.ghtml. Title: Live do Valor: Mudanças climáticas e primeira infâ...
+2025-08-26 18:59:34 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 18:59:34 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 18:59:41 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 19:00:11 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 19:00:11 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg
+2025-08-26 19:00:11 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg "HTTP/1.1 200 OK"
+2025-08-26 19:00:11 - app.wordpress - INFO - Uploading image 'abre-4-.jpg' to WordPress.
+2025-08-26 19:00:16 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:00:16 - app.wordpress - INFO - Uploaded media 3258 from URL: https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg
+2025-08-26 19:00:17 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3258 "HTTP/1.1 200 OK"
+2025-08-26 19:00:17 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:00:17 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif "HTTP/1.1 200 OK"
+2025-08-26 19:00:17 - app.wordpress - INFO - Uploading image '888x364px.gif' to WordPress.
+2025-08-26 19:00:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:00:18 - app.wordpress - INFO - Uploaded media 3259 from URL: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:00:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3259 "HTTP/1.1 200 OK"
+2025-08-26 19:00:18 - app.wordpress - INFO - Post will be created with featured_media 3258.
+2025-08-26 19:00:19 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mudancas-climaticas "HTTP/1.1 200 OK"
+2025-08-26 19:00:19 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=primeira-infancia "HTTP/1.1 200 OK"
+2025-08-26 19:00:19 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:00:19 - app.wordpress - INFO - Successfully created tag 'Primeira Infância'
+2025-08-26 19:00:20 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=impactos-economicos "HTTP/1.1 200 OK"
+2025-08-26 19:00:20 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:00:20 - app.wordpress - INFO - Successfully created tag 'Impactos Econômicos'
+2025-08-26 19:00:20 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=onu "HTTP/1.1 200 OK"
+2025-08-26 19:00:20 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:00:20 - app.wordpress - INFO - Successfully created tag 'ONU'
+2025-08-26 19:00:21 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=saude-infantil "HTTP/1.1 200 OK"
+2025-08-26 19:00:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:00:22 - app.wordpress - INFO - Successfully created tag 'Saúde Infantil'
+2025-08-26 19:00:22 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=desenvolvimento-sustentavel "HTTP/1.1 200 OK"
+2025-08-26 19:00:22 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:00:22 - app.wordpress - INFO - Successfully created tag 'Desenvolvimento Sustentável'
+2025-08-26 19:00:23 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=energia-renovavel "HTTP/1.1 200 OK"
+2025-08-26 19:00:23 - app.wordpress - INFO - Creating WordPress post: Mudanças Climáticas e Primeira Infância: Impactos Econômicos
+2025-08-26 19:00:23 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 19:00:23 - app.wordpress - INFO - Successfully created post 'Mudanças Climáticas e Primeira Infância: Impactos Econômicos' with ID: 3260
+2025-08-26 19:00:23 - app.store - INFO - Successfully recorded published post for article DB ID 2609 (WP Post ID: 3260).
+2025-08-26 19:00:23 - app.pipeline - INFO - Successfully published post 3260 for article DB ID 2609
+2025-08-26 19:00:23 - app.pipeline - INFO - Sleeping for 6.7s (per-article delay).
+2025-08-26 19:00:30 - app.pipeline - INFO - Processing article: Governo brasileiro tem buscado contato 'racional' com Departamento do Tesouro dos EUA, diz Durigan (DB ID: 2610) from valor_financas
+2025-08-26 19:00:30 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 19:00:30 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 19:00:31 - app.extractor - INFO - Collected 0 images from article (pre+post).
+2025-08-26 19:00:31 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/governo-brasileiro-tem-buscado-contato-racional-com-o-departamento-do-tesouro-dos-eua-diz-durigan.ghtml. Title: Governo brasileiro tem buscado contato 'racional' ...
+2025-08-26 19:00:31 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 19:00:31 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 19:00:37 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 19:01:07 - app.pipeline - INFO - Attempting to upload up to 1 images.
+2025-08-26 19:01:07 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg
+2025-08-26 19:01:07 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg "HTTP/1.1 200 OK"
+2025-08-26 19:01:07 - app.wordpress - INFO - Uploading image '53769478878-ac1cec0b12-o.jpg' to WordPress.
+2025-08-26 19:01:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:01:10 - app.wordpress - INFO - Uploaded media 3268 from URL: https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg
+2025-08-26 19:01:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3268 "HTTP/1.1 200 OK"
+2025-08-26 19:01:10 - app.wordpress - INFO - Post will be created with featured_media 3268.
+2025-08-26 19:01:10 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=fernando-haddad "HTTP/1.1 200 OK"
+2025-08-26 19:01:10 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:01:10 - app.wordpress - INFO - Successfully created tag 'Fernando Haddad'
+2025-08-26 19:01:11 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=tesouro-dos-eua "HTTP/1.1 200 OK"
+2025-08-26 19:01:11 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:01:11 - app.wordpress - INFO - Successfully created tag 'Tesouro dos EUA'
+2025-08-26 19:01:11 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politica-economica "HTTP/1.1 200 OK"
+2025-08-26 19:01:12 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=investimentos-estrangeiros "HTTP/1.1 200 OK"
+2025-08-26 19:01:12 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:01:12 - app.wordpress - INFO - Successfully created tag 'investimentos estrangeiros'
+2025-08-26 19:01:12 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=dialogo-brasil-eua "HTTP/1.1 200 OK"
+2025-08-26 19:01:12 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:01:12 - app.wordpress - INFO - Successfully created tag 'diálogo Brasil-EUA'
+2025-08-26 19:01:13 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=financas "HTTP/1.1 200 OK"
+2025-08-26 19:01:13 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=economia-brasileira "HTTP/1.1 200 OK"
+2025-08-26 19:01:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:01:13 - app.wordpress - INFO - Successfully created tag 'economia brasileira'
+2025-08-26 19:01:13 - app.wordpress - INFO - Creating WordPress post: Durigan: Governo busca diálogo com Tesouro dos EUA
+2025-08-26 19:01:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 19:01:14 - app.wordpress - INFO - Successfully created post 'Durigan: Governo busca diálogo com Tesouro dos EUA' with ID: 3269
+2025-08-26 19:01:14 - app.store - INFO - Successfully recorded published post for article DB ID 2610 (WP Post ID: 3269).
+2025-08-26 19:01:14 - app.pipeline - INFO - Successfully published post 3269 for article DB ID 2610
+2025-08-26 19:01:14 - app.pipeline - INFO - Sleeping for 9.1s (per-article delay).
+2025-08-26 19:01:23 - app.pipeline - INFO - Finished feed 'valor_financas'. Sleeping for 15s before next feed: valor_legislacao
+2025-08-26 19:01:38 - app.pipeline - INFO - Processing feed: valor_legislacao (Category: legislacao)
+2025-08-26 19:01:38 - app.ai_processor - INFO - Using API key index 0 for category 'legislacao'.
+2025-08-26 19:01:39 - app.feeds - INFO - Read 100 items from http://www.valor.com.br/legislacao/rss
+2025-08-26 19:01:39 - app.feeds - INFO - Total unique items for valor_legislacao: 100
+2025-08-26 19:01:39 - app.pipeline - INFO - Found 100 new articles for valor_legislacao
+2025-08-26 19:01:39 - app.pipeline - INFO - Processing article: Visa Conecta recebe aprovação do BC para operar como instituição de pagamento (DB ID: 2708) from valor_legislacao
+2025-08-26 19:01:40 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 19:01:40 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 19:01:40 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 19:01:40 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/financas/noticia/2025/08/26/visa-conecta-recebe-aprovao-do-bc-para-operar-como-instituio-de-pagamento.ghtml. Title: Visa Conecta recebe aprovação do BC para operar co...
+2025-08-26 19:01:40 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 19:01:40 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 19:01:46 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 19:02:16 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 19:02:16 - app.wordpress - INFO - Downloading image for upload: https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png
+2025-08-26 19:02:16 - httpx - INFO - HTTP Request: GET https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png "HTTP/1.1 200 OK"
+2025-08-26 19:02:16 - app.wordpress - INFO - Uploading image 'fb_marca.png' to WordPress.
+2025-08-26 19:02:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:02:18 - app.wordpress - INFO - Uploaded media 3271 from URL: https://s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/public/fb_marca.png
+2025-08-26 19:02:18 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3271 "HTTP/1.1 200 OK"
+2025-08-26 19:02:18 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:02:18 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif "HTTP/1.1 200 OK"
+2025-08-26 19:02:18 - app.wordpress - INFO - Uploading image '888x364px.gif' to WordPress.
+2025-08-26 19:02:19 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:02:19 - app.wordpress - INFO - Uploaded media 3272 from URL: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:02:19 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3272 "HTTP/1.1 200 OK"
+2025-08-26 19:02:19 - app.wordpress - INFO - Post will be created with featured_media 3271.
+2025-08-26 19:02:19 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=visa-conecta "HTTP/1.1 200 OK"
+2025-08-26 19:02:20 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=banco-central "HTTP/1.1 200 OK"
+2025-08-26 19:02:20 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=instituicao-de-pagamento "HTTP/1.1 200 OK"
+2025-08-26 19:02:20 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=meios-de-pagamento "HTTP/1.1 200 OK"
+2025-08-26 19:02:20 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:02:20 - app.wordpress - INFO - Successfully created tag 'meios de pagamento'
+2025-08-26 19:02:21 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mercado-financeiro "HTTP/1.1 200 OK"
+2025-08-26 19:02:21 - app.wordpress - INFO - Creating WordPress post: Visa Conecta aprovada pelo BC: nova instituição de pagamento no Brasil
+2025-08-26 19:02:21 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 19:02:21 - app.wordpress - INFO - Successfully created post 'Visa Conecta aprovada pelo BC: nova instituição de pagamento no Brasil' with ID: 3273
+2025-08-26 19:02:21 - app.store - INFO - Successfully recorded published post for article DB ID 2708 (WP Post ID: 3273).
+2025-08-26 19:02:21 - app.pipeline - INFO - Successfully published post 3273 for article DB ID 2708
+2025-08-26 19:02:21 - app.pipeline - INFO - Sleeping for 9.8s (per-article delay).
+2025-08-26 19:02:31 - app.pipeline - INFO - Processing article: Live do Valor: Mudanças climáticas e primeira infância (DB ID: 2709) from valor_legislacao
+2025-08-26 19:02:31 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 19:02:31 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 19:02:32 - app.extractor - INFO - Collected 1 images from article (pre+post).
+2025-08-26 19:02:32 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/live-do-valor-mudancas-climaticas-e-primeira-infancia.ghtml. Title: Live do Valor: Mudanças climáticas e primeira infâ...
+2025-08-26 19:02:32 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 19:02:32 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 19:02:40 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 19:03:10 - app.pipeline - INFO - Attempting to upload up to 2 images.
+2025-08-26 19:03:10 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg
+2025-08-26 19:03:10 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg "HTTP/1.1 200 OK"
+2025-08-26 19:03:10 - app.wordpress - INFO - Uploading image 'abre-4-.jpg' to WordPress.
+2025-08-26 19:03:12 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:03:12 - app.wordpress - INFO - Uploaded media 3274 from URL: https://s2-valor.glbimg.com/U-Xj2f9Yyp1lzmOOa357RBzwBaE=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/c/L/60nyb7QS6ykDzBfT548Q/abre-4-.jpg
+2025-08-26 19:03:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3274 "HTTP/1.1 200 OK"
+2025-08-26 19:03:13 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:03:13 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif "HTTP/1.1 200 OK"
+2025-08-26 19:03:13 - app.wordpress - INFO - Uploading image '888x364px.gif' to WordPress.
+2025-08-26 19:03:13 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:03:13 - app.wordpress - INFO - Uploaded media 3275 from URL: https://s2-valor.glbimg.com/vBpZaD6jVlHaYGrlPPuA0gf3dDg=/600x0/filters:quality(50)/https://i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2025/s/v/XLUybATHufsFaVEsqsDQ/888x364px.gif
+2025-08-26 19:03:14 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3275 "HTTP/1.1 200 OK"
+2025-08-26 19:03:14 - app.wordpress - INFO - Post will be created with featured_media 3274.
+2025-08-26 19:03:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=mudancas-climaticas "HTTP/1.1 200 OK"
+2025-08-26 19:03:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=primeira-infancia "HTTP/1.1 200 OK"
+2025-08-26 19:03:14 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=saude-infantil "HTTP/1.1 200 OK"
+2025-08-26 19:03:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=desenvolvimento-sustentavel "HTTP/1.1 200 OK"
+2025-08-26 19:03:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=politicas-publicas "HTTP/1.1 200 OK"
+2025-08-26 19:03:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:03:15 - app.wordpress - INFO - Successfully created tag 'Políticas Públicas'
+2025-08-26 19:03:15 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=meio-ambiente "HTTP/1.1 200 OK"
+2025-08-26 19:03:15 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:03:15 - app.wordpress - INFO - Successfully created tag 'Meio Ambiente'
+2025-08-26 19:03:16 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=riscos-climaticos "HTTP/1.1 200 OK"
+2025-08-26 19:03:16 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:03:16 - app.wordpress - INFO - Successfully created tag 'Riscos Climáticos'
+2025-08-26 19:03:16 - app.wordpress - INFO - Creating WordPress post: Mudanças Climáticas e Primeira Infância: Impactos e Desafios
+2025-08-26 19:03:16 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 19:03:16 - app.wordpress - INFO - Successfully created post 'Mudanças Climáticas e Primeira Infância: Impactos e Desafios' with ID: 3276
+2025-08-26 19:03:16 - app.store - INFO - Successfully recorded published post for article DB ID 2709 (WP Post ID: 3276).
+2025-08-26 19:03:16 - app.pipeline - INFO - Successfully published post 3276 for article DB ID 2709
+2025-08-26 19:03:16 - app.pipeline - INFO - Sleeping for 7.8s (per-article delay).
+2025-08-26 19:03:24 - app.pipeline - INFO - Processing article: Governo brasileiro tem buscado contato 'racional' com Departamento do Tesouro dos EUA, diz Durigan (DB ID: 2710) from valor_legislacao
+2025-08-26 19:03:25 - app.extractor - INFO - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 19:03:25 - app.extractor - INFO - Found featured image via 'og:image'.
+2025-08-26 19:03:25 - app.extractor - INFO - Collected 0 images from article (pre+post).
+2025-08-26 19:03:25 - app.extractor - INFO - Successfully extracted and cleaned content from https://valor.globo.com/brasil/noticia/2025/08/26/governo-brasileiro-tem-buscado-contato-racional-com-o-departamento-do-tesouro-dos-eua-diz-durigan.ghtml. Title: Governo brasileiro tem buscado contato 'racional' ...
+2025-08-26 19:03:25 - app.ai_processor - WARNING - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 19:03:25 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 19:03:31 - app.ai_processor - INFO - Successfully parsed and validated AI response.
+2025-08-26 19:04:01 - app.pipeline - INFO - Attempting to upload up to 1 images.
+2025-08-26 19:04:01 - app.wordpress - INFO - Downloading image for upload: https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg
+2025-08-26 19:04:01 - httpx - INFO - HTTP Request: GET https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg "HTTP/1.1 200 OK"
+2025-08-26 19:04:01 - app.wordpress - INFO - Uploading image '53769478878-ac1cec0b12-o.jpg' to WordPress.
+2025-08-26 19:04:03 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 19:04:03 - app.wordpress - INFO - Uploaded media 3277 from URL: https://s2-valor.glbimg.com/MIdAoJYRR1a4owKUWzGBERaNbDs=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/d/f/XHNkDWR8KyMlkX14t0Rg/53769478878-ac1cec0b12-o.jpg
+2025-08-26 19:04:03 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3277 "HTTP/1.1 200 OK"
+2025-08-26 19:04:03 - app.wordpress - INFO - Post will be created with featured_media 3277.
+2025-08-26 19:04:04 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=durigan "HTTP/1.1 200 OK"
+2025-08-26 19:04:04 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:04:04 - app.wordpress - INFO - Successfully created tag 'Durigan'
+2025-08-26 19:04:04 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=tesouro-dos-eua "HTTP/1.1 200 OK"
+2025-08-26 19:04:04 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=investimentos-estrangeiros "HTTP/1.1 200 OK"
+2025-08-26 19:04:05 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=relacoes-internacionais "HTTP/1.1 200 OK"
+2025-08-26 19:04:05 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:04:05 - app.wordpress - INFO - Successfully created tag 'relações internacionais'
+2025-08-26 19:04:05 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=economia-brasileira "HTTP/1.1 200 OK"
+2025-08-26 19:04:05 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=ipca "HTTP/1.1 200 OK"
+2025-08-26 19:04:05 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:04:05 - app.wordpress - INFO - Successfully created tag 'IPCA'
+2025-08-26 19:04:06 - httpx - INFO - HTTP Request: GET https://maquinamoney.com/wp-json/wp/v2/tags?slug=selic "HTTP/1.1 200 OK"
+2025-08-26 19:04:06 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/tags "HTTP/1.1 201 Created"
+2025-08-26 19:04:06 - app.wordpress - INFO - Successfully created tag 'Selic'
+2025-08-26 19:04:06 - app.wordpress - INFO - Creating WordPress post: Durigan: Brasil busca diálogo com Tesouro dos EUA
+2025-08-26 19:04:06 - httpx - INFO - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/posts "HTTP/1.1 201 Created"
+2025-08-26 19:04:06 - app.wordpress - INFO - Successfully created post 'Durigan: Brasil busca diálogo com Tesouro dos EUA' with ID: 3278
+2025-08-26 19:04:06 - app.store - INFO - Successfully recorded published post for article DB ID 2710 (WP Post ID: 3278).
+2025-08-26 19:04:06 - app.pipeline - INFO - Successfully published post 3278 for article DB ID 2710
+2025-08-26 19:04:06 - app.pipeline - INFO - Sleeping for 6.2s (per-article delay).
+2025-08-26 19:04:12 - app.pipeline - INFO - Finished feed 'valor_legislacao'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-26 19:04:27 - app.pipeline - INFO - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 19:04:27 - app.pipeline - INFO - Pipeline cycle completed. Processed 12 articles.
+2025-08-26 19:04:27 - app.store - INFO - Database connection closed.
+2025-08-26 19:04:27 - app.wordpress - INFO - WordPress client connection closed.
+2025-08-26 19:04:27 - __main__ - CRITICAL - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'mercados'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 41, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 64, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
+    raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
+app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
