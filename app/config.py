@@ -46,16 +46,18 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 def _load_ai_keys() -> Dict[str, List[str]]:
     """
     Helper to load Gemini API keys from environment variables.
-    Categories are discovered dynamically from key names (e.g., GEMINI_ECONOMIA_1).
-    As categorias devem corresponder às definidas em RSS_FEEDS (ex: 'politica', 'financas').
+    Categories are discovered dynamically from key names (e.g., GEMINI_ECONOMIA_1, GEMINI_ONDE_INVESTIR_1).
+    As categorias devem corresponder às definidas em RSS_FEEDS (ex: 'politica', 'onde-investir').
     """
     keys_by_category: Dict[str, List[str]] = {}
     for key, value in os.environ.items():
         if value and key.startswith('GEMINI_'):
-            # e.g., GEMINI_ECONOMIA_1 -> economia
+            # e.g., GEMINI_ONDE_INVESTIR_1 -> onde-investir
             parts = key.split('_')
-            if len(parts) >= 2:
-                category = parts[1].lower()
+            if len(parts) >= 3:  # Must have at least GEMINI, CATEGORY..., NUMBER
+                # The category is everything between GEMINI_ and the last part (_1, _2, etc.)
+                category_parts = parts[1:-1]
+                category = "-".join(category_parts).lower().replace('__', '_') # Joins with hyphen, allows single underscore
                 if category in keys_by_category:
                     keys_by_category[category].append(value)
                 else:
