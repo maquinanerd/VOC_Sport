@@ -1,7 +1,11 @@
+python-dotenv
 requests
+httpx
 beautifulsoup4
-feedgen
+feedparser
 python-dateutil
 lxml
 pytz
 python-slugify
+google-generativeai
+schedule
