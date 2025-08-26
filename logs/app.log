@@ -19917,3 +19917,174 @@ Traceback (most recent call last):
   File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
     raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
 app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
+2025-08-26 20:11:19 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 20:11:19 - INFO - store - Database connection closed.
+2025-08-26 20:11:19 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 20:11:19 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 20:11:19 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 20:11:21 - INFO - _client - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 200 OK"
+2025-08-26 20:11:21 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 20:11:21 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:11:22 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/politica.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/politica.xml
+2025-08-26 20:11:22 - INFO - feeds - Total unique items for estadao_politica: 0
+2025-08-26 20:11:22 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 20:11:22 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 20:11:22 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:11:23 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/politica/feed/
+2025-08-26 20:11:23 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 20:11:23 - INFO - pipeline - Found 2 new articles for infomoney_politica
+2025-08-26 20:11:23 - INFO - pipeline - Processing article: Escândalo de corrupção implica irmã de Milei e atinge governo a semanas de eleições (DB ID: 2808) from infomoney_politica
+2025-08-26 20:11:23 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:11:23 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:11:23 - INFO - extractor - Collected 3 images from article (pre+post).
+2025-08-26 20:11:23 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/escandalo-de-corrupcao-implica-irma-de-milei-e-atinge-governo-a-semanas-de-eleicoes/. Title: Escândalo de corrupção implica irmã de Milei e ati...
+2025-08-26 20:11:23 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:11:23 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:11:30 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:12:00 - INFO - pipeline - Attempting to upload up to 4 images.
+2025-08-26 20:12:00 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg?quality=70
+2025-08-26 20:12:00 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:12:00 - INFO - wordpress - Uploading image '2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg' to WordPress.
+2025-08-26 20:12:03 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:12:03 - INFO - wordpress - Uploaded media 3302 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg?quality=70
+2025-08-26 20:12:05 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3302 "HTTP/1.1 200 OK"
+2025-08-26 20:12:05 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/12/cta-sts-2-900x300-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 20:12:05 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/12/cta-sts-2-900x300-1.png?fit=900%2C300&quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:12:05 - INFO - wordpress - Uploading image 'cta-sts-2-900x300-1.png' to WordPress.
+2025-08-26 20:12:08 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:12:08 - INFO - wordpress - Uploaded media 3303 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/12/cta-sts-2-900x300-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 20:12:09 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3303 "HTTP/1.1 200 OK"
+2025-08-26 20:12:09 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 20:12:09 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:12:09 - INFO - wordpress - Uploading image '2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg' to WordPress.
+2025-08-26 20:12:11 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:12:11 - INFO - wordpress - Uploaded media 3304 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 20:12:12 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3304 "HTTP/1.1 200 OK"
+2025-08-26 20:12:12 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 20:12:12 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:12:12 - INFO - wordpress - Uploading image 'Screenshot_9afba6.png' to WordPress.
+2025-08-26 20:12:16 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:12:16 - INFO - wordpress - Uploaded media 3305 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 20:12:17 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3305 "HTTP/1.1 200 OK"
+2025-08-26 20:12:17 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/politica/escandalo-de-corrupcao-implica-irma-de-milei-e-atinge-governo-a-semanas-de-eleicoes/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:12:17 - INFO - pipeline - Processing article: Tarcísio recebe elogios de Temer e Kassab em evento de prefeitos de São Paulo (DB ID: 2809) from infomoney_politica
+2025-08-26 20:12:17 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:12:17 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:12:17 - INFO - extractor - Collected 2 images from article (pre+post).
+2025-08-26 20:12:17 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/tarcisio-recebe-elogios-de-temer-e-kassab-em-evento-de-prefeitos-de-sao-paulo/. Title: Tarcísio recebe elogios de Temer e Kassab em event...
+2025-08-26 20:12:17 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:12:17 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:12:24 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:12:54 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 20:12:54 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/tarcisio-de-freitas.png?quality=70
+2025-08-26 20:12:54 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/tarcisio-de-freitas.png?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:12:54 - INFO - wordpress - Uploading image 'tarcisio-de-freitas.png' to WordPress.
+2025-08-26 20:13:00 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:13:00 - INFO - wordpress - Uploaded media 3306 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/tarcisio-de-freitas.png?quality=70
+2025-08-26 20:13:00 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3306 "HTTP/1.1 200 OK"
+2025-08-26 20:13:00 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 20:13:00 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:13:00 - INFO - wordpress - Uploading image '2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg' to WordPress.
+2025-08-26 20:13:04 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:13:04 - INFO - wordpress - Uploaded media 3307 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 20:13:04 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3307 "HTTP/1.1 200 OK"
+2025-08-26 20:13:04 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Plantacao-de-cafe-e1756233248394.jpg?quality=70&strip=all
+2025-08-26 20:13:04 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/Plantacao-de-cafe-e1756233248394.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:13:04 - INFO - wordpress - Uploading image 'Plantacao-de-cafe-e1756233248394.jpg' to WordPress.
+2025-08-26 20:13:06 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:13:06 - INFO - wordpress - Uploaded media 3308 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/Plantacao-de-cafe-e1756233248394.jpg?quality=70&strip=all
+2025-08-26 20:13:07 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3308 "HTTP/1.1 200 OK"
+2025-08-26 20:13:07 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/politica/tarcisio-recebe-elogios-de-temer-e-kassab-em-evento-de-prefeitos-de-sao-paulo/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:13:07 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: estadao_economia
+2025-08-26 20:13:22 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 20:13:22 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:13:23 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/economia.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/economia.xml
+2025-08-26 20:13:23 - INFO - feeds - Total unique items for estadao_economia: 0
+2025-08-26 20:13:23 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 20:13:23 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 20:13:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:13:23 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/economia/feed/
+2025-08-26 20:13:23 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 20:13:23 - INFO - pipeline - Found 1 new articles for infomoney_economia
+2025-08-26 20:13:23 - INFO - pipeline - Processing article: Quem é o proeminente advogado a quem Lisa Cook recorreu para enfrentar Donald Trump (DB ID: 2810) from infomoney_economia
+2025-08-26 20:13:23 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:13:23 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:13:24 - INFO - extractor - Collected 5 images from article (pre+post).
+2025-08-26 20:13:24 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/quem-e-o-proeminente-advogado-a-quem-lisa-cook-recorreu-para-enfrentar-donald-trump/. Title: Quem é o proeminente advogado a quem Lisa Cook rec...
+2025-08-26 20:13:24 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:13:24 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:13:30 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:14:00 - INFO - pipeline - Attempting to upload up to 6 images.
+2025-08-26 20:14:00 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Captura-de-tela-2025-08-26-194854.png?quality=70
+2025-08-26 20:14:00 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/Captura-de-tela-2025-08-26-194854.png?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:14:00 - INFO - wordpress - Uploading image 'Captura-de-tela-2025-08-26-194854.png' to WordPress.
+2025-08-26 20:14:04 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:04 - INFO - wordpress - Uploaded media 3309 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/Captura-de-tela-2025-08-26-194854.png?quality=70
+2025-08-26 20:14:04 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3309 "HTTP/1.1 200 OK"
+2025-08-26 20:14:04 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 20:14:04 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:14:04 - INFO - wordpress - Uploading image '420207198.jpg' to WordPress.
+2025-08-26 20:14:06 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:06 - INFO - wordpress - Uploaded media 3310 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 20:14:06 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3310 "HTTP/1.1 200 OK"
+2025-08-26 20:14:06 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 20:14:06 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:14:06 - INFO - wordpress - Uploading image '900-x-300-com-texto-na-imagem-1.png' to WordPress.
+2025-08-26 20:14:11 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:11 - INFO - wordpress - Uploaded media 3311 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 20:14:12 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3311 "HTTP/1.1 200 OK"
+2025-08-26 20:14:12 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all
+2025-08-26 20:14:12 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:14:12 - INFO - wordpress - Uploading image '2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg' to WordPress.
+2025-08-26 20:14:13 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:13 - INFO - wordpress - Uploaded media 3312 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all
+2025-08-26 20:14:14 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3312 "HTTP/1.1 200 OK"
+2025-08-26 20:14:14 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all
+2025-08-26 20:14:14 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:14:14 - INFO - wordpress - Uploading image '2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg' to WordPress.
+2025-08-26 20:14:24 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:24 - INFO - wordpress - Uploaded media 3313 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all
+2025-08-26 20:14:25 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3313 "HTTP/1.1 200 OK"
+2025-08-26 20:14:25 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all
+2025-08-26 20:14:25 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:14:25 - INFO - wordpress - Uploading image '2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg' to WordPress.
+2025-08-26 20:14:29 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:14:29 - INFO - wordpress - Uploaded media 3314 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all
+2025-08-26 20:14:30 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3314 "HTTP/1.1 200 OK"
+2025-08-26 20:14:30 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/economia/quem-e-o-proeminente-advogado-a-quem-lisa-cook-recorreu-para-enfrentar-donald-trump/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:14:30 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-26 20:14:45 - INFO - pipeline - Processing feed: estadao_brasil (Category: politica)
+2025-08-26 20:14:45 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:14:47 - ERROR - feeds - Network error reading feed https://www.estadao.com.br/rss/brasil.xml: 404 Client Error: Not Found for url: https://www.estadao.com.br/rss/brasil.xml
+2025-08-26 20:14:47 - INFO - feeds - Total unique items for estadao_brasil: 0
+2025-08-26 20:14:47 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 20:14:47 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 20:14:47 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 20:14:47 - INFO - store - Database connection closed.
+2025-08-26 20:14:47 - INFO - wordpress - WordPress client connection closed.
+2025-08-26 20:14:47 - CRITICAL - main - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'mercados'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 50, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 64, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 58, in __init__
+    raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
+app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
+2025-08-26 20:14:47 - INFO - main - Ciclo único finalizado.
