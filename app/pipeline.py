@@ -100,13 +100,29 @@ def run_pipeline_cycle():
 
             try:
                 feed_items = feed_reader.read_feeds(feed_config, source_id)
-                new_articles = db.filter_new_articles(source_id, feed_items)
+                new_article_stubs = db.filter_new_articles(source_id, feed_items)
 
-                if not new_articles:
+                if not new_article_stubs:
                     logger.info(f"No new articles found for {source_id}.")
                     continue
 
-                logger.info(f"Found {len(new_articles)} new articles for {source_id}")
+                logger.info(f"Found {len(new_article_stubs)} new articles for {source_id}")
+
+                # Create a lookup map for the original feed items by their GUID.
+                # This is a workaround for db.filter_new_articles not returning all fields.
+                feed_items_map = {item.get('id'): item for item in feed_items if item.get('id')}
+
+                new_articles = []
+                for stub in new_article_stubs:
+                    # The key from the feed is 'id' (guid). The key in the DB is 'external_id'.
+                    # Let's assume the stub from the DB at least contains the original guid.
+                    guid = stub.get('external_id') or stub.get('id')
+                    if guid and guid in feed_items_map:
+                        full_article_data = feed_items_map[guid].copy()
+                        full_article_data.update(stub)  # Add db_id and other fields from stub
+                        new_articles.append(full_article_data)
+                    else:
+                        logger.warning(f"Could not find original feed item for stub: {stub.get('title')}. Skipping.")
 
                 for article_data in new_articles[:SCHEDULE_CONFIG.get('max_articles_per_feed', 3)]:
                     article_db_id = article_data['db_id']

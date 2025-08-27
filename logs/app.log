@@ -25558,3 +25558,66 @@ Traceback (most recent call last):
     raise AIProcessorError(msg)
 app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
 2025-08-27 03:15:01 - INFO - main - Ciclo único finalizado.
+2025-08-27 12:00:46 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-27 12:00:46 - INFO - store - Initializing database tables if they don't exist...
+2025-08-27 12:00:46 - INFO - store - Database initialized successfully.
+2025-08-27 12:00:46 - INFO - store - Database connection closed.
+2025-08-27 12:00:46 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-27 12:00:46 - INFO - main - Executando o primeiro ciclo do pipeline imediatamente.
+2025-08-27 12:00:46 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 12:00:46 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 12:00:46 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 12:00:46 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 12:00:47 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 12:00:47 - INFO - pipeline - Found 13 new articles for estadao_politica
+2025-08-27 12:00:47 - INFO - pipeline - Processing article: O lar como extensão do cárcere (DB ID: 131) from estadao_politica
+2025-08-27 12:00:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:00:47 - INFO - pipeline - Processing article: Deputado Eduardo Suplicy é internado no RJ com arritmia cardíaca (DB ID: 132) from estadao_politica
+2025-08-27 12:00:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:00:47 - INFO - pipeline - Processing article: O privilégio de estar acima - ou abaixo - da lei (DB ID: 133) from estadao_politica
+2025-08-27 12:00:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:00:48 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-27 12:01:03 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 12:01:03 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 12:01:03 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 12:01:03 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 12:01:03 - INFO - pipeline - Found 10 new articles for infomoney_politica
+2025-08-27 12:01:03 - INFO - pipeline - Processing article: Gilmar Mendes fala em “casuísmo” e pede “juízo” na votação da PEC do foro (DB ID: 144) from infomoney_politica
+2025-08-27 12:01:03 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:01:03 - INFO - pipeline - Processing article: Veja quem são os ministros do STF que julgam Bolsonaro e mais 7 por trama golpista (DB ID: 145) from infomoney_politica
+2025-08-27 12:01:03 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:01:04 - INFO - pipeline - Processing article: Suplicy é internado às pressas em Niterói após passar mal com arritmia cardíaca (DB ID: 146) from infomoney_politica
+2025-08-27 12:01:04 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 117, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:01:04 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: exame_brasil
+2025-08-27 12:01:08 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 12:01:08 - INFO - store - Database connection closed.
