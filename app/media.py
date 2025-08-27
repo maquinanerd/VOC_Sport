@@ -47,6 +47,34 @@ class MediaHandler:
         
         return True
     
+    def _head_is_image(self, url: str, timeout: int = 8) -> bool:
+        """
+        Performs a HEAD request to check if the URL points to a real image
+        and meets minimum size requirements.
+        """
+        if not url:
+            return False
+        try:
+            # Use the class's session for consistent headers
+            response = self.session.head(url, allow_redirects=True, timeout=timeout)
+            response.raise_for_status()  # Will raise for 4xx/5xx responses
+            
+            content_type = response.headers.get('Content-Type', '')
+            content_length = int(response.headers.get('Content-Length', '0') or 0)
+            
+            if content_type.startswith('image/') and content_length > 5 * 1024:  # 5KB
+                logger.debug(f"HEAD check passed for {url} (Type: {content_type}, Size: {content_length})")
+                return True
+            else:
+                logger.warning(f"HEAD check failed for {url}. Content-Type: '{content_type}', Size: {content_length} bytes.")
+                return False
+        except requests.exceptions.RequestException as e:
+            logger.warning(f"HEAD request for image failed: {url} ({e})")
+            return False
+        except Exception as e:
+            logger.error(f"Unexpected error during image HEAD check for {url}: {e}", exc_info=True)
+            return False
+
     def _download_image(self, url: str) -> Optional[bytes]:
         """Download image from URL"""
         try:
@@ -129,10 +157,15 @@ class MediaHandler:
         images_mode = self.config.get('images_mode', 'hotlink')
         
         if images_mode == 'hotlink':
-            logger.debug("Using hotlink mode for main image")
+            logger.debug("Using hotlink mode for main image. No upload needed.")
             return None  # WordPress will use the URL directly
         
         elif images_mode == 'download_upload':
+            # Perform HEAD check before attempting to download and upload
+            if not self._head_is_image(image_url):
+                logger.info(f"Featured image candidate failed HEAD check, skipping upload: {image_url}")
+                return None
+
             logger.info(f"Downloading and uploading main image: {image_url}")
             
             # Download image

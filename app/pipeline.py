@@ -1,6 +1,7 @@
 import logging
 import time
 import random
+import re
 from collections import OrderedDict
 from urllib.parse import urlparse
 from typing import Dict, Any
@@ -31,6 +32,40 @@ from .ai_processor import AIProcessor
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
+
+BAD_HOSTS = {"sb.scorecardresearch.com", "securepubads.g.doubleclick.net"}
+IMG_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
+
+def is_valid_upload_candidate(url: str) -> bool:
+    """
+    Validates if a URL is a good candidate for uploading.
+    Filters out trackers, avatars, and tiny images.
+    """
+    if not url:
+        return False
+    try:
+        lower_url = url.lower()
+        p = urlparse(lower_url)
+        
+        if not p.scheme.startswith("http"):
+            return False
+        if p.netloc in BAD_HOSTS:
+            return False
+        if not p.path.endswith(IMG_EXTS):
+            return False
+        
+        # descarta imagens de avatar/author
+        if "author" in lower_url or "avatar" in lower_url:
+            return False
+            
+        # descarta imagens minúsculas (largura/altura <= 100 no querystring)
+        dims = re.findall(r'[?&](?:w|width|h|height)=(\d+)', lower_url)
+        if any(int(d) <= 100 for d in dims):
+            return False
+            
+        return True
+    except Exception:
+        return False
 
 
 def run_pipeline_cycle():
@@ -107,10 +142,17 @@ def run_pipeline_cycle():
                             db.update_article_status(article_db_id, 'FAILED', reason=reason)
                             continue
 
-                        # Step 3: HTML Processing and Cleanup
-                        # 3.1: Defensive cleanup of common AI errors (e.g., leftover placeholders)
-                        # These functions only act if specific error patterns are found.
-                        content_html = rewritten_data['conteudo_final']
+                        # Step 3: Validate AI output and prepare content
+                        title = rewritten_data.get("titulo_final", "").strip()
+                        content_html = rewritten_data.get("conteudo_final", "").strip()
+
+                        if not title or not content_html:
+                            logger.error(f"AI output for {article_data['link']} missing required fields (titulo_final/conteudo_final).")
+                            db.update_article_status(article_db_id, 'FAILED', reason="AI output missing required fields")
+                            continue
+
+                        # Step 3.1: HTML Processing and Cleanup
+                        # Defensive cleanup of common AI errors (e.g., leftover placeholders)
                         content_html = remove_broken_image_placeholders(content_html)
                         content_html = strip_naked_internal_links(content_html)
 
@@ -120,21 +162,27 @@ def run_pipeline_cycle():
                             extracted_data.get('images', [])
                         )
                         
-                        # 3.3: Collect and upload up to 8 priority images
+                        # 3.3: Collect, filter, and upload up to 8 priority images
+                        all_image_candidates = []
+                        if og_image := extracted_data.get('featured_image_url'):
+                            all_image_candidates.append(og_image)
+                        all_image_candidates.extend(extracted_data.get('images', []))
+
+                        # Deduplicate, filter, and limit
+                        seen_urls = set()
                         urls_to_upload = []
-                        if featured_url := extracted_data.get('featured_image_url'):
-                            urls_to_upload.append(featured_url)
-                        for img_url in extracted_data.get('images', []):
-                            if img_url not in urls_to_upload:
-                                urls_to_upload.append(img_url)
-                        
+                        for u in all_image_candidates:
+                            if u not in seen_urls:
+                                seen_urls.add(u)
+                                if is_valid_upload_candidate(u):
+                                    urls_to_upload.append(u)
                         urls_to_upload = urls_to_upload[:8]
 
                         uploaded_src_map = {}
                         uploaded_id_map = {}
                         logger.info(f"Attempting to upload up to {len(urls_to_upload)} images.")
                         for url in urls_to_upload:
-                            media = wp_client.upload_media_from_url(url, rewritten_data['titulo_final'])
+                            media = wp_client.upload_media_from_url(url, title)
                             if media and media.get("source_url") and media.get("id"):
                                 # Normalize URL to handle potential trailing slashes as keys
                                 k = url.rstrip('/')
@@ -169,9 +217,9 @@ def run_pipeline_cycle():
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
                         post_payload = {
-                            'title': rewritten_data['titulo_final'],
+                            'title': title,
                             'content': content_html,
-                            'excerpt': rewritten_data['meta_description'],
+                            'excerpt': rewritten_data.get('meta_description', ''),
                             'categories': [wp_category_id] if wp_category_id else [],
                             'tags': rewritten_data.get('tags', []),
                             'featured_media': featured_media_id,

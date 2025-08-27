@@ -71,7 +71,10 @@ BAD_IMAGE_KEYWORDS = {
 
 BAD_IMAGE_DOMAINS = {
     'gravatar.com', 'twimg.com', 'facebook.com', 'fbcdn.net',
-    'gstatic.com', 'googleusercontent.com'
+    'gstatic.com', 'googleusercontent.com',
+    # Adicionados conforme sugestão para bloquear trackers e placeholders
+    "schema.org", "scorecardresearch.com", "doubleclick.net",
+    "quantserve.com", "chartbeat.com", "google-analytics.com"
 }
 
 # aceita query ?width=1200&height=630 e sufixos -1200x630.jpg
@@ -427,7 +430,47 @@ class ContentExtractor:
         if converted:
             logger.info(f"Converted {converted} 'data-img-url' divs to <figure> tags.")
 
-    def _extract_featured_image_candidates(self, soup: BeautifulSoup, base_url: str) -> list[str]:
+    def _pick_featured_image(self, soup: BeautifulSoup, base_url: str) -> Optional[str]:
+        """
+        Picks the featured image with a clear priority:
+        1. og:image / og:image:secure_url
+        2. twitter:image
+        3. First valid <img> inside <article> or <figure>
+        It also filters out known tracker/placeholder domains.
+        """
+        # Helper to check domain and basic validity
+        def is_valid_source_url(url: Optional[str]) -> bool:
+            if not url or not url.strip().startswith(("http://", "https")):
+                return False
+            try:
+                host = urlparse(url).netloc.lower()
+                if not host or any(bad_domain in host for bad_domain in BAD_IMAGE_DOMAINS):
+                    return False
+            except Exception:
+                return False
+            return True
+
+        # 1) og:image / og:image:secure_url
+        for prop in ("og:image", "og:image:secure_url"):
+            tag = soup.find("meta", property=prop)
+            if tag and is_valid_source_url(tag.get("content")):
+                return urljoin(base_url, tag["content"])
+
+        # 2) twitter:image
+        tag = soup.find("meta", attrs={"name": "twitter:image"})
+        if tag and is_valid_source_url(tag.get("content")):
+            return urljoin(base_url, tag["content"])
+
+        # 3) First <figure><img> or <article><img>
+        for img in soup.select("article img, .content img, figure img"):
+            src = img.get("data-src") or img.get("src")
+            if is_valid_source_url(src):
+                return urljoin(base_url, src)
+        
+        logger.warning(f"Could not find a valid featured image for {base_url}")
+        return None
+
+    def _extract_youtube_id(self, src: str) -> Optional[str]:
         """
         Extracts a list of candidate URLs for the featured image from various sources.
         (og:image, twitter:image, json-ld, first <img> in <article>)
@@ -440,36 +483,6 @@ class ContentExtractor:
         if tw := soup.find('meta', attrs={'name': 'twitter:image'}):
             if tw.get('content'):
                 candidates.append(urljoin(base_url, tw['content']))
-
-        for script in soup.find_all('script', type='application/ld+json'):
-            try:
-                if not script.string:
-                    continue
-                data = json.loads(script.string)
-                candidates = data if isinstance(data, list) else [data]
-                for item in candidates:
-                    if not isinstance(item, dict):
-                        continue
-                    if item.get('@type') in ('NewsArticle', 'Article') and 'image' in item:
-                        image_info = item['image']
-                        if isinstance(image_info, dict) and image_info.get('url'):
-                            candidates.append(urljoin(base_url, image_info['url']))
-                        if isinstance(image_info, list) and image_info:
-                            first = image_info[0]
-                            url = first.get('url') if isinstance(first, dict) else first
-                            candidates.append(urljoin(base_url, url))
-                        if isinstance(image_info, str):
-                            candidates.append(urljoin(base_url, image_info))
-            except (json.JSONDecodeError, TypeError, AttributeError):
-                continue
-
-        if article_tag := soup.find('article'):
-            first_img = article_tag.find('img')
-            if first_img and first_img.get('src'):
-                candidates.append(urljoin(base_url, first_img['src']))
-        return candidates
-
-    def _extract_youtube_id(self, src: str) -> Optional[str]:
         if not src:
             return None
         try:
@@ -522,8 +535,8 @@ class ContentExtractor:
             # 2) normaliza data-img-url -> <figure>
             self._convert_data_img_to_figure(soup)
 
-            # 3) Extrai candidatos a imagem destacada (og, twitter, etc)
-            featured_image_candidates = self._extract_featured_image_candidates(soup, url)
+            # 3) Extrai imagem destacada com a nova lógica de priorização
+            featured_image_url = self._pick_featured_image(soup, url)
 
             # 4) Extrai imagens do corpo do artigo
             body_images = collect_images_from_article(soup, base_url=url)
@@ -560,27 +573,10 @@ class ContentExtractor:
             article_soup = BeautifulSoup(content_html, 'lxml')
             self._remove_forbidden_blocks(article_soup)
 
-            # 9) Normaliza, deduplica e seleciona imagens
-            candidates_raw = featured_image_candidates + body_images
-
-            # Normaliza todos os candidatos para URLs (string), absolutiza e filtra Nones/vazios
-            all_image_urls: List[str] = []
-            for item in candidates_raw:
-                u = _coerce_url(item)
-                if u:
-                    abs_u = _abs(u, url)
-                    if abs_u:
-                        all_image_urls.append(abs_u)
-
-            # Deduplica preservando a ordem
-            unique_candidates = _dedupe_preserve(all_image_urls)
-
-            # A função pick_featured_image já aplica o filtro is_valid_article_image
-            featured_image_url = pick_featured_image(unique_candidates)
-
-            # As imagens do corpo são todas as válidas, exceto a destacada
+            # 9) Seleciona imagens do corpo (excluindo a destacada)
+            # A `collect_images_from_article` já aplica `is_valid_article_image`
             other_valid_images = [
-                u for u in unique_candidates if is_valid_article_image(u) and u != featured_image_url
+                u for u in body_images if u != featured_image_url
             ]
 
             logger.info(f"Selected featured image: {featured_image_url}. Found {len(other_valid_images)} other valid images.")

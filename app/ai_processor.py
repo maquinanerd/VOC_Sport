@@ -200,12 +200,6 @@ class AIProcessor:
             "focus_keyword": "",
         }
 
-        # Log placeholders in the template that are not in the fields dict for debugging
-        placeholders = re.findall(r"{(\w+)}", prompt_template)
-        for p in placeholders:
-            if p not in fields:
-                logger.warning(f"Prompt template placeholder '{{{p}}}' is not in the provided fields dictionary.")
-
         prompt = prompt_template.format_map(_SafeDict(fields))
 
         last_error = "Unknown error"

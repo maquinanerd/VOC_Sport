@@ -20848,3 +20848,118 @@ TypeError: unhashable type: 'dict'
 2025-08-26 22:42:48 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-26 22:42:48 - INFO - store - Database connection closed.
 2025-08-26 22:42:48 - INFO - main - Ciclo único finalizado.
+2025-08-26 22:52:31 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 22:52:31 - INFO - store - Initializing database tables if they don't exist...
+2025-08-26 22:52:31 - INFO - store - Database initialized successfully.
+2025-08-26 22:52:31 - INFO - store - Database connection closed.
+2025-08-26 22:52:31 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 22:52:31 - INFO - main - Executando o primeiro ciclo do pipeline imediatamente.
+2025-08-26 22:52:31 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 22:52:31 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 22:52:31 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:52:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 22:52:32 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 22:52:32 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 22:52:32 - INFO - pipeline - Found 20 new articles for estadao_politica
+2025-08-26 22:52:32 - INFO - pipeline - Processing article: Em meio à crise com EUA, Tarcísio discute tarifaço com governador da Geórgia e fala em ‘diplomacia’ (DB ID: 1) from estadao_politica
+2025-08-26 22:52:34 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:52:34 - INFO - extractor - Selected featured image: http://schema.org. Found 1 other valid images.
+2025-08-26 22:52:34 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/em-meio-a-crise-com-eua-tarcisio-discute-tarifaco-com-governador-da-georgia-e-fala-em-diplomacia/. Title: Em meio à crise com EUA, Tarcísio discute tarifaço...
+2025-08-26 22:52:34 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:52:42 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:53:12 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:53:13 - ERROR - wordpress - Upload of 'http://schema.org' failed with non-retriable error: 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 22:53:13 - ERROR - wordpress - Final failure to upload image 'http://schema.org' after 1 attempt(s): 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 22:53:14 - ERROR - wordpress - Upload of 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' failed with non-retriable error: 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 22:53:14 - ERROR - wordpress - Final failure to upload image 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' after 1 attempt(s): 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 22:53:15 - INFO - wordpress - Created new tag 'Tarcísio de Freitas' with ID 163.
+2025-08-26 22:53:15 - INFO - wordpress - Created new tag 'Brian Kemp' with ID 164.
+2025-08-26 22:53:16 - INFO - wordpress - Created new tag 'Geórgia' with ID 165.
+2025-08-26 22:53:17 - INFO - wordpress - Created new tag 'Diplomacia' with ID 166.
+2025-08-26 22:53:17 - INFO - wordpress - Resolved tags ['Tarcísio de Freitas', 'Brian Kemp', 'Geórgia', 'Estados Unidos', 'Tarifas', 'Diplomacia', 'Comércio Bilateral'] to IDs: [163, 164, 165, 152, 154, 166, 60]
+2025-08-26 22:53:17 - INFO - store - Successfully recorded published post for article DB ID 1 (WP Post ID: 3380).
+2025-08-26 22:53:17 - INFO - pipeline - Successfully published post 3380 for article DB ID 1
+2025-08-26 22:53:17 - INFO - pipeline - Sleeping for 6.7s (per-article delay).
+2025-08-26 22:53:24 - INFO - pipeline - Processing article: Moraes aumenta prazo para que a PGR se manifeste sobre descumprimento de cautelares de Bolsonaro (DB ID: 2) from estadao_politica
+2025-08-26 22:53:26 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:26 - INFO - extractor - Selected featured image: http://schema.org. Found 1 other valid images.
+2025-08-26 22:53:26 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/moraes-aumenta-prazo-pgr-manifeste-descumprimento-cautelares-bolsonaro-nprp/. Title: Moraes aumenta prazo para que a PGR se manifeste s...
+2025-08-26 22:53:26 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:53:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:53:38 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 22:53:38 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 22:53:38 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:53:39 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 22:53:39 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 22:53:39 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 22:53:39 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 22:53:39 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 22:53:39 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:53:39 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 22:53:39 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 22:53:39 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 22:53:39 - INFO - pipeline - Found 10 new articles for infomoney_politica
+2025-08-26 22:53:39 - INFO - pipeline - Processing article: Escândalo de corrupção implica irmã de Milei e atinge governo a semanas de eleições (DB ID: 21) from infomoney_politica
+2025-08-26 22:53:40 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:40 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/politica/escandalo-de-corrupcao-implica-irma-de-milei-e-atinge-governo-a-semanas-de-eleicoes/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:40 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/politica/escandalo-de-corrupcao-implica-irma-de-milei-e-atinge-governo-a-semanas-de-eleicoes/
+2025-08-26 22:53:40 - INFO - pipeline - Processing article: Tarcísio recebe elogios de Temer e Kassab em evento de prefeitos de São Paulo (DB ID: 22) from infomoney_politica
+2025-08-26 22:53:40 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:40 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/politica/tarcisio-recebe-elogios-de-temer-e-kassab-em-evento-de-prefeitos-de-sao-paulo/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:40 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/politica/tarcisio-recebe-elogios-de-temer-e-kassab-em-evento-de-prefeitos-de-sao-paulo/
+2025-08-26 22:53:40 - INFO - pipeline - Processing article: Planalto lança novo slogan e Lula quer ministros defendendo governo (DB ID: 23) from infomoney_politica
+2025-08-26 22:53:40 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:40 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/politica/planalto-lanca-novo-slogan-e-lula-quer-ministros-defendendo-governo/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:40 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/politica/planalto-lanca-novo-slogan-e-lula-quer-ministros-defendendo-governo/
+2025-08-26 22:53:41 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: estadao_economia
+2025-08-26 22:53:56 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 22:53:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:53:56 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 22:53:56 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 22:53:56 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 22:53:56 - INFO - pipeline - Found 20 new articles for estadao_economia
+2025-08-26 22:53:56 - INFO - pipeline - Processing article: Governo deve criar teto para taxa do vale-refeição cobrada de comerciantes (DB ID: 31) from estadao_economia
+2025-08-26 22:53:57 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:57 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/coluna-do-broad/governo-deve-criar-teto-para-taxa-do-vale-refeicao-cobrada-de-comerciantes/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:57 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/coluna-do-broad/governo-deve-criar-teto-para-taxa-do-vale-refeicao-cobrada-de-comerciantes/
+2025-08-26 22:53:57 - INFO - pipeline - Processing article: Por que a aposta de corte dos juros nos EUA pode tornar o real a moeda mais atrativa dos emergentes (DB ID: 32) from estadao_economia
+2025-08-26 22:53:58 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:58 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/fabio-alves/aposta-juros-eua-real-moeda-mais-atrativa-emergentes/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:58 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/fabio-alves/aposta-juros-eua-real-moeda-mais-atrativa-emergentes/
+2025-08-26 22:53:58 - INFO - pipeline - Processing article: Brasil corre sério risco de permanecer preso a juros reais de 7% a 8%, sem ajuste fiscal efetivo (DB ID: 33) from estadao_economia
+2025-08-26 22:53:59 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:53:59 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/sufocados-pelos-juros/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:53:59 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/sufocados-pelos-juros/
+2025-08-26 22:53:59 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-26 22:54:01 - INFO - pipeline - Pipeline cycle completed. Processed 1 articles.
+2025-08-26 22:54:01 - INFO - store - Database connection closed.

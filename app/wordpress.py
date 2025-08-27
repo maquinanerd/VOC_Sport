@@ -164,20 +164,30 @@ class WordPressClient:
             posts_endpoint = f"{self.api_url}/posts"
             payload.setdefault('status', 'publish')
 
-            # Log the payload for debugging. Set logging level to DEBUG to see this.
+            # Log a summary of the payload to avoid overly long logs
             try:
-                log_payload = json.dumps(payload, indent=2, ensure_ascii=False)
-                logger.debug(f"Sending payload to WordPress:\n{log_payload}")
+                logger.info(
+                    "WP payload: title_len=%d content_len=%d cat=%s tags=%s",
+                    len(payload.get('title', '')),
+                    len(payload.get('content', '')),
+                    payload.get('categories'),
+                    payload.get('tags')
+                )
+                if logger.isEnabledFor(logging.DEBUG):
+                    log_payload = json.dumps(payload, indent=2, ensure_ascii=False)
+                    logger.debug(f"Sending full payload to WordPress:\n{log_payload}")
             except Exception as log_e:
                 logger.warning(f"Could not serialize payload for logging: {log_e}")
 
             response = self.session.post(posts_endpoint, json=payload, timeout=60)
-            response.raise_for_status()
+            
+            if not response.ok:
+                logger.error(f"WordPress post creation failed with status {response.status_code}: {response.text}")
+                response.raise_for_status()
+
             return response.json().get('id')
         except requests.RequestException as e:
-            logger.error(f"Failed to create WordPress post: {e}", exc_info=True)
-            if e.response is not None:
-                logger.error(f"WordPress response body on error: {e.response.text}")
+            logger.error(f"Failed to create WordPress post: {e}", exc_info=False)
             return None
 
     def close(self):
