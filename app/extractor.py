@@ -2,11 +2,10 @@ import logging
 import trafilatura
 from bs4 import BeautifulSoup
 import requests
-from typing import Dict, Optional, Any, Set
+from typing import Dict, Optional, Any, Set, List, Tuple
 from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import re
-from typing import Tuple
 import os
 
 from .config import USER_AGENT
@@ -134,7 +133,7 @@ def is_valid_article_image(url: str) -> bool:
         return False
     return True
 
-def pick_featured_image(candidates: List[str]) -> Optional[str]:
+def pick_featured_image(candidates: list[str]) -> Optional[str]:
     """Retorna a primeira imagem que passa no filtro."""
     for u in candidates:
         if is_valid_article_image(u):
@@ -377,7 +376,7 @@ class ContentExtractor:
         if converted:
             logger.info(f"Converted {converted} 'data-img-url' divs to <figure> tags.")
 
-    def _extract_featured_image_candidates(self, soup: BeautifulSoup, base_url: str) -> List[str]:
+    def _extract_featured_image_candidates(self, soup: BeautifulSoup, base_url: str) -> list[str]:
         """
         Extracts a list of candidate URLs for the featured image from various sources.
         (og:image, twitter:image, json-ld, first <img> in <article>)
