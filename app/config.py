@@ -10,6 +10,7 @@ PIPELINE_ORDER: List[str] = [
     'estadao_politica',
     'infomoney_politica',
     'estadao_economia',
+    'exame_brasil',
     'infomoney_economia',
     'estadao_brasil',
     'infomoney_mercados',
@@ -60,6 +61,11 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
         'urls': ['https://www.infomoney.com.br/mundo/feed/'],
         'category': 'internacional',
         'source_name': 'InfoMoney',
+    },
+    'exame_brasil': {
+        'urls': ['https://morss.it/:proxy:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/brasil/'],
+        'category': 'brasil',
+        'source_name': 'Exame',
     },
 }
 
