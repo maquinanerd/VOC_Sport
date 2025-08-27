@@ -129,6 +129,24 @@ class AIProcessor:
                 raise AIProcessorError("Prompt template file not found.")
         return cls._prompt_template
 
+    @staticmethod
+    def _safe_format_prompt(template: str, fields: Dict[str, Any]) -> str:
+        """
+        Safely formats a string template that may contain literal curly braces
+        by escaping all braces and then un-escaping only the valid placeholders.
+        This prevents `ValueError: Invalid format specifier` when the prompt
+        contains examples of JSON objects.
+        """
+        class _SafeDict(dict):
+            def __missing__(self, key: str) -> str:
+                return ""
+
+        s = template.replace('{', '{{').replace('}', '}}')
+        for key in fields:
+            s = s.replace('{{' + key + '}}', '{' + key + '}')
+        
+        return s.format_map(_SafeDict(fields))
+
     def rewrite_content(
         self,
         title: Optional[str] = None,
@@ -162,10 +180,6 @@ class AIProcessor:
             A tuple containing a dictionary with the rewritten text and a failure
             reason (or None if successful).
         """
-        class _SafeDict(dict):
-            def __missing__(self, key: str) -> str:
-                return ""
-
         prompt_template = self._load_prompt_template()
 
         # Handle defaults and backward compatibility
@@ -200,7 +214,7 @@ class AIProcessor:
             "focus_keyword": "",
         }
 
-        prompt = prompt_template.format_map(_SafeDict(fields))
+        prompt = self._safe_format_prompt(prompt_template, fields)
 
         last_error = "Unknown error"
         for _ in range(len(self.api_keys)):

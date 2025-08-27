@@ -9,14 +9,14 @@ load_dotenv()
 PIPELINE_ORDER: List[str] = [
     'estadao_politica',
     'infomoney_politica',
+    'exame_brasil',
     'estadao_economia',
     'infomoney_economia',
     'exame_economia',
     'infomoney_business',
-    'estadao_brasil',
-    'exame_brasil',
-    'infomoney_mercados',
     'exame_invest',
+    'estadao_brasil',
+    'infomoney_mercados',
     'infomoney_investir',
     'infomoney_mundo',
     'exame_carreira',
@@ -73,28 +73,31 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
         'source_name': 'InfoMoney',
     },
     'exame_brasil': {
-        'urls': ['https://morss.it/:proxy:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/brasil/'],
-        'category': 'brasil',
+        'urls': ['https://exame.com/categorias/brasil/sitemap.xml'],
+        'type': 'sitemap',
+        'category': 'politica',
         'source_name': 'Exame',
     },
     'exame_economia': {
-        'urls': ['https://morss.it/:proxy:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/economia/'],
+        'urls': ['https://exame.com/categorias/economia/sitemap.xml'],
+        'type': 'sitemap',
         'category': 'economia',
         'source_name': 'Exame',
     },
     'exame_invest': {
-        'urls': ['https://morss.it/:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/invest/'],
-        'category': 'mercados',
+        'urls': ['https://exame.com/categorias/invest/sitemap.xml'],
+        'type': 'sitemap',
+        'category': 'economia',
         'source_name': 'Exame',
     },
     'exame_carreira': {
         'urls': ['https://morss.it/:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/carreira/'],
-        'category': 'carreiras',
+        'category': 'carreira',
         'source_name': 'Exame',
     },
     'infomoney_carreira': {
         'urls': ['https://www.infomoney.com.br/carreira/feed/'],
-        'category': 'carreiras',
+        'category': 'carreira',
         'source_name': 'InfoMoney',
     },
 }
@@ -154,11 +157,11 @@ WORDPRESS_CONFIG = {
 WORDPRESS_CATEGORIES: Dict[str, int] = {
     'politica': 21,
     'economia': 22,
-    'brasil': 25,          # TODO: substituir pelo ID real da sua categoria "Brasil"
+    'brasil': 22,          # TODO: substituir pelo ID real da sua categoria "Brasil"
     'mercados': 26,
     'onde-investir': 29,
     'internacional': 30,
-    'carreiras': 202,
+    'carreira': 202,
     # Categorias genéricas
     'Notícias': 1,
     'Dinheiro': 13,

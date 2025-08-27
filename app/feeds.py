@@ -1,135 +1,83 @@
-"""
-RSS feed reading and normalization module
-"""
-
-import logging
-import hashlib
-from datetime import datetime
-from typing import List, Dict, Any, Optional
-from urllib.parse import urlparse, urljoin
-
 import feedparser
+import logging
 import requests
-from dateutil import parser as date_parser
-from . import synthetic_rss
+import xml.etree.ElementTree as ET
+from typing import List, Dict, Any, Optional
 
 logger = logging.getLogger(__name__)
 
+def _parse_sitemap(xml_bytes: bytes) -> List[Dict[str, Any]]:
+    """
+    Parses a sitemap.xml and returns a list of article-like dicts.
+    Based on user suggestion.
+    """
+    try:
+        root = ET.fromstring(xml_bytes)
+        ns = {'news': 'http://www.google.com/schemas/sitemap-news/0.9'}
+        items = []
+        # Use a namespace-agnostic way to find url tags
+        for url_element in root.findall('.//{*}url'):
+            loc = url_element.findtext('{*}loc')
+            if not loc:
+                continue
+
+            lastmod = url_element.findtext('{*}lastmod')
+            
+            # Try to find the title in the <news:news> block
+            news_block = url_element.find('{http://www.google.com/schemas/sitemap-news/0.9}news')
+            title = None
+            if news_block is not None:
+                title = news_block.findtext('news:title', ns)
+
+            items.append({
+                "link": loc,
+                "title": title or loc,
+                "published": lastmod,
+            })
+
+        # Sort by lastmod date (string comparison is fine for ISO 8601), descending.
+        items.sort(key=lambda x: x.get("published") or "", reverse=True)
+        
+        logger.info(f"Parsed {len(items)} items from sitemap.")
+        return items[:50] # Limit to 50 most recent
+    except ET.ParseError as e:
+        logger.error(f"Failed to parse XML sitemap: {e}")
+        return []
 
 class FeedReader:
-    """RSS feed reader with normalization and deduplication"""
-    
     def __init__(self, user_agent: str):
-        self.user_agent = user_agent
         self.session = requests.Session()
         self.session.headers.update({'User-Agent': user_agent})
-        
-    def normalize_item(self, entry: Any, source_id: str) -> Dict[str, Any]:
-        """Normalize a feed entry to a standard format"""
+
+    def _fetch_content(self, url: str) -> Optional[bytes]:
         try:
-            # Get unique identifier (prefer GUID, fallback to link)
-            item_id = getattr(entry, 'guid', None) or getattr(entry, 'link', '')
-            if not item_id:
-                # Generate ID from title + source
-                title = getattr(entry, 'title', '')
-                item_id = hashlib.md5(f"{source_id}:{title}".encode()).hexdigest()
-            
-            # Parse publication date
-            published_at = None
-            if hasattr(entry, 'published_parsed') and entry.published_parsed:
-                published_at = datetime(*entry.published_parsed[:6])
-            elif hasattr(entry, 'published'):
-                try:
-                    published_at = date_parser.parse(entry.published)
-                except:
-                    pass
-            
-            if not published_at:
-                published_at = datetime.now()
-            
-            # Extract basic information
-            title = getattr(entry, 'title', '').strip()
-            link = getattr(entry, 'link', '').strip()
-            summary = getattr(entry, 'summary', '').strip()
-            
-            # Clean up summary HTML
-            if summary:
-                import re
-                summary = re.sub(r'<[^>]+>', '', summary)
-                summary = summary.replace('&nbsp;', ' ').strip()
-            
-            return {
-                'id': item_id,
-                'title': title,
-                'link': link,
-                'summary': summary,
-                'published_at': published_at,
-                'source_id': source_id
-            }
-            
-        except Exception as e:
-            logger.error(f"Error normalizing feed entry: {str(e)}")
-            return {}
-    
-    def read_single_feed(self, url: str, source_id: str, feed_config: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Read a single RSS feed and return normalized items"""
-        feed_content = None
-        try:
-            logger.debug(f"Attempting to read feed: {url}")
-            response = self.session.get(url, timeout=15)
+            response = self.session.get(url, timeout=20)
             response.raise_for_status()
-            feed_content = response.content
-            logger.info(f"Successfully fetched official RSS feed from {url}")
-
-        except requests.exceptions.RequestException as e:
-            logger.warning(f"Failed to fetch RSS feed from {url} ({e}). Checking for synthetic fallback.")
-            synthetic_config = feed_config.get('synthetic_from')
-            if synthetic_config:
-                list_url = synthetic_config.get('list_url')
-                logger.info(f"Attempting to generate synthetic feed for {source_id} from {list_url}")
-                try:
-                    feed_content = synthetic_rss.build_synthetic_feed(
-                        list_url=list_url,
-                        selectors=synthetic_config.get('selectors'),
-                        limit=synthetic_config.get('limit', 12)
-                    )
-                    logger.info(f"Successfully generated synthetic feed for {source_id}.")
-                except Exception as synth_e:
-                    logger.error(f"Synthetic feed generation for {source_id} failed: {synth_e}", exc_info=True)
-                    return []
-            else:
-                logger.error(f"Error reading feed {url} and no synthetic fallback is configured.")
-                return []
-
-        if not feed_content:
-            return []
-
-        feed = feedparser.parse(feed_content)
-        if feed.bozo and feed.bozo_exception:
-            logger.warning(f"Feed parse warning for {url}: {feed.bozo_exception}")
-
-        items = [self.normalize_item(e, source_id) for e in feed.entries if e.get('title') and e.get('link')]
-        logger.info(f"Parsed {len(items)} items from feed content for {source_id}.")
-        return items
+            return response.content
+        except requests.RequestException as e:
+            logger.error(f"Failed to fetch feed/sitemap from {url}: {e}")
+            return None
 
     def read_feeds(self, feed_config: Dict[str, Any], source_id: str) -> List[Dict[str, Any]]:
-        """Read multiple RSS feeds and return combined normalized items"""
         all_items = []
-        urls = feed_config.get('urls', [])
-        for url in urls:
-            items = self.read_single_feed(url, source_id, feed_config)
-            all_items.extend(items)
+        feed_type = feed_config.get('type', 'rss')
+
+        for url in feed_config.get('urls', []):
+            logger.info(f"Reading {feed_type} feed from {url} for source '{source_id}'")
+            content = self._fetch_content(url)
+            if not content:
+                continue
+
+            if feed_type == 'sitemap':
+                parsed_items = _parse_sitemap(content)
+                all_items.extend(parsed_items)
+            else: # Default to 'rss'
+                feed = feedparser.parse(content)
+                if feed.bozo:
+                    logger.warning(f"Feed from {url} is not well-formed: {feed.bozo_exception}")
+                all_items.extend(feed.entries)
         
-        # Deduplicate by link
         seen_links = set()
-        unique_items = []
-        for item in all_items:
-            if item['link'] not in seen_links:
-                seen_links.add(item['link'])
-                unique_items.append(item)
-        
-        # Sort by published date (newest first)
-        unique_items.sort(key=lambda x: x['published_at'], reverse=True)
-        
-        logger.info(f"Total unique items for {source_id}: {len(unique_items)}")
+        unique_items = [item for item in all_items if item.get('link') and (item['link'] not in seen_links and not seen_links.add(item['link']))]
+        logger.info(f"Found {len(unique_items)} total unique items for {source_id}.")
         return unique_items
