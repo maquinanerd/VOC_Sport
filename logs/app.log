@@ -20134,3 +20134,165 @@ Traceback (most recent call last):
     raise AIProcessorError(f"Invalid AI category specified: '{category}'. No configuration found.")
 app.exceptions.AIProcessorError: Invalid AI category specified: 'mercados'. No configuration found.
 2025-08-26 20:29:19 - INFO - main - Ciclo único finalizado.
+2025-08-26 20:45:00 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 20:45:00 - INFO - store - Database connection closed.
+2025-08-26 20:45:00 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 20:45:00 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 20:45:00 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 20:45:02 - INFO - _client - HTTP Request: HEAD https://maquinamoney.com/wp-json/wp/v2 "HTTP/1.1 200 OK"
+2025-08-26 20:45:02 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 20:45:02 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:45:05 - WARNING - feeds - Failed to fetch RSS feed from https://www.estadao.com.br/rss/politica.xml (404 Client Error: Not Found for url: https://www.estadao.com.br/rss/politica.xml). Checking for synthetic fallback.
+2025-08-26 20:45:05 - INFO - feeds - Attempting to generate synthetic feed for estadao_politica from https://www.estadao.com.br/politica/
+2025-08-26 20:45:05 - INFO - feeds - Fetching listing page for synthetic feed: https://www.estadao.com.br/politica/
+2025-08-26 20:45:05 - WARNING - feeds - No links found on https://www.estadao.com.br/politica/ using any of the provided selectors.
+2025-08-26 20:45:05 - INFO - feeds - Total unique items for estadao_politica: 0
+2025-08-26 20:45:05 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 20:45:05 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 20:45:05 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:45:06 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/politica/feed/
+2025-08-26 20:45:06 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 20:45:06 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 20:45:06 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 20:45:06 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:45:07 - WARNING - feeds - Failed to fetch RSS feed from https://www.estadao.com.br/rss/economia.xml (404 Client Error: Not Found for url: https://www.estadao.com.br/rss/economia.xml). Checking for synthetic fallback.
+2025-08-26 20:45:07 - INFO - feeds - Attempting to generate synthetic feed for estadao_economia from https://www.estadao.com.br/economia/
+2025-08-26 20:45:07 - INFO - feeds - Fetching listing page for synthetic feed: https://www.estadao.com.br/economia/
+2025-08-26 20:45:07 - WARNING - feeds - No links found on https://www.estadao.com.br/economia/ using any of the provided selectors.
+2025-08-26 20:45:07 - INFO - feeds - Total unique items for estadao_economia: 0
+2025-08-26 20:45:07 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 20:45:07 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 20:45:07 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:45:08 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/economia/feed/
+2025-08-26 20:45:08 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 20:45:08 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 20:45:08 - INFO - pipeline - Processing feed: estadao_brasil (Category: politica)
+2025-08-26 20:45:08 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 20:45:08 - WARNING - feeds - Failed to fetch RSS feed from https://www.estadao.com.br/rss/brasil.xml (404 Client Error: Not Found for url: https://www.estadao.com.br/rss/brasil.xml). Checking for synthetic fallback.
+2025-08-26 20:45:08 - INFO - feeds - Attempting to generate synthetic feed for estadao_brasil from https://www.estadao.com.br/brasil/
+2025-08-26 20:45:08 - INFO - feeds - Fetching listing page for synthetic feed: https://www.estadao.com.br/brasil/
+2025-08-26 20:45:08 - WARNING - feeds - No links found on https://www.estadao.com.br/brasil/ using any of the provided selectors.
+2025-08-26 20:45:08 - INFO - feeds - Total unique items for estadao_brasil: 0
+2025-08-26 20:45:08 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 20:45:08 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 20:45:08 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 20:45:09 - INFO - feeds - Read 10 items from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 20:45:09 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 20:45:09 - INFO - pipeline - Found 10 new articles for infomoney_mercados
+2025-08-26 20:45:09 - INFO - pipeline - Processing article: B3 compra 62% da Shipay por R$ 37 mi, com opção de aquisição remanescente até 2030 (DB ID: 2811) from infomoney_mercados
+2025-08-26 20:45:09 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:45:09 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:45:09 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 20:45:09 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/b3-compra-62-da-shipay-por-r-37-mi-com-opcao-de-aquisicao-remanescente-ate-2030/. Title: B3 compra 62% da Shipay por R$ 37 mi, com opção de...
+2025-08-26 20:45:09 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:45:09 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:45:16 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:45:46 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 20:45:46 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/07/b3-bolsa-valores-ibovespa-mercado-sp01.webp?quality=70
+2025-08-26 20:45:46 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/07/b3-bolsa-valores-ibovespa-mercado-sp01.webp?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:45:46 - INFO - wordpress - Uploading image 'b3-bolsa-valores-ibovespa-mercado-sp01.webp' to WordPress.
+2025-08-26 20:45:54 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:45:54 - INFO - wordpress - Uploaded media 3315 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/07/b3-bolsa-valores-ibovespa-mercado-sp01.webp?quality=70
+2025-08-26 20:45:55 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3315 "HTTP/1.1 200 OK"
+2025-08-26 20:45:55 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/09/Captura-de-tela-2024-09-06-100616.png?quality=70&strip=all
+2025-08-26 20:45:55 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/09/Captura-de-tela-2024-09-06-100616.png?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:45:55 - INFO - wordpress - Uploading image 'Captura-de-tela-2024-09-06-100616.png' to WordPress.
+2025-08-26 20:46:55 - ERROR - wordpress - Failed to upload image 'Captura-de-tela-2024-09-06-100616.png' to WordPress: The read operation timed out
+2025-08-26 20:46:55 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/mercados/b3-compra-62-da-shipay-por-r-37-mi-com-opcao-de-aquisicao-remanescente-ate-2030/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:46:55 - INFO - pipeline - Processing article: Calmaria nos mercados está praticamente no fim, apontam Goldman e Deutsche Bank (DB ID: 2812) from infomoney_mercados
+2025-08-26 20:46:56 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:46:56 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:46:56 - INFO - extractor - Collected 6 images from article (pre+post).
+2025-08-26 20:46:56 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/calmaria-nos-mercados-esta-praticamente-no-fim-apontam-goldman-e-deutsche-bank/. Title: Calmaria nos mercados está praticamente no fim, ap...
+2025-08-26 20:46:56 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:46:56 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:47:03 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:47:33 - INFO - pipeline - Attempting to upload up to 7 images.
+2025-08-26 20:47:33 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-14T174906Z_1_LYNXMPEL4D0WB_RTROPTP_3_BOLSAEUROPA-FECHA.jpg?quality=70
+2025-08-26 20:47:33 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-14T174906Z_1_LYNXMPEL4D0WB_RTROPTP_3_BOLSAEUROPA-FECHA.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:47:33 - INFO - wordpress - Uploading image '2025-05-14T174906Z_1_LYNXMPEL4D0WB_RTROPTP_3_BOLSAEUROPA-FECHA.jpg' to WordPress.
+2025-08-26 20:47:36 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:47:36 - INFO - wordpress - Uploaded media 3317 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/05/2025-05-14T174906Z_1_LYNXMPEL4D0WB_RTROPTP_3_BOLSAEUROPA-FECHA.jpg?quality=70
+2025-08-26 20:47:36 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3317 "HTTP/1.1 200 OK"
+2025-08-26 20:47:36 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/06/wall-street.jpg?quality=70&strip=all
+2025-08-26 20:47:36 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/06/wall-street.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:47:36 - INFO - wordpress - Uploading image 'wall-street.jpg' to WordPress.
+2025-08-26 20:47:46 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:47:46 - INFO - wordpress - Uploaded media 3318 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/06/wall-street.jpg?quality=70&strip=all
+2025-08-26 20:47:47 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3318 "HTTP/1.1 200 OK"
+2025-08-26 20:47:47 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/09/Captura-de-tela-2024-09-06-100616.png?quality=70&strip=all
+2025-08-26 20:47:47 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/09/Captura-de-tela-2024-09-06-100616.png?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:47:47 - INFO - wordpress - Uploading image 'Captura-de-tela-2024-09-06-100616.png' to WordPress.
+2025-08-26 20:48:47 - ERROR - wordpress - Failed to upload image 'Captura-de-tela-2024-09-06-100616.png' to WordPress: The read operation timed out
+2025-08-26 20:48:47 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-28T122454Z_1_LYNXMPEL6R0LE_RTROPTP_4_EUA-TRUMP-ACORDO-BAYROU.jpg?quality=70&strip=all
+2025-08-26 20:48:47 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-28T122454Z_1_LYNXMPEL6R0LE_RTROPTP_4_EUA-TRUMP-ACORDO-BAYROU.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:48:47 - INFO - wordpress - Uploading image '2025-07-28T122454Z_1_LYNXMPEL6R0LE_RTROPTP_4_EUA-TRUMP-ACORDO-BAYROU.jpg' to WordPress.
+2025-08-26 20:48:55 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:48:55 - INFO - wordpress - Uploaded media 3320 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-28T122454Z_1_LYNXMPEL6R0LE_RTROPTP_4_EUA-TRUMP-ACORDO-BAYROU.jpg?quality=70&strip=all
+2025-08-26 20:48:56 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3320 "HTTP/1.1 200 OK"
+2025-08-26 20:48:56 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all
+2025-08-26 20:48:56 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:48:56 - INFO - wordpress - Uploading image '2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg' to WordPress.
+2025-08-26 20:48:57 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:48:57 - INFO - wordpress - Uploaded media 3321 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all
+2025-08-26 20:48:57 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3321 "HTTP/1.1 200 OK"
+2025-08-26 20:48:57 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all
+2025-08-26 20:48:58 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:48:58 - INFO - wordpress - Uploading image '2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg' to WordPress.
+2025-08-26 20:49:06 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:49:06 - INFO - wordpress - Uploaded media 3322 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all
+2025-08-26 20:49:07 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3322 "HTTP/1.1 200 OK"
+2025-08-26 20:49:07 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/960px-Eric_Lombard_46824286954_cropped.jpg?quality=70&strip=all
+2025-08-26 20:49:07 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2025/08/960px-Eric_Lombard_46824286954_cropped.jpg?quality=70&strip=all "HTTP/1.1 200 OK"
+2025-08-26 20:49:07 - INFO - wordpress - Uploading image '960px-Eric_Lombard_46824286954_cropped.jpg' to WordPress.
+2025-08-26 20:49:08 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:49:08 - INFO - wordpress - Uploaded media 3323 from URL: https://www.infomoney.com.br/wp-content/uploads/2025/08/960px-Eric_Lombard_46824286954_cropped.jpg?quality=70&strip=all
+2025-08-26 20:49:09 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3323 "HTTP/1.1 200 OK"
+2025-08-26 20:49:09 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/mercados/calmaria-nos-mercados-esta-praticamente-no-fim-apontam-goldman-e-deutsche-bank/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:49:09 - INFO - pipeline - Processing article: BNDES lança Floresta Viva 2, que prevê R$ 100 mi para preservação de biomas (DB ID: 2813) from infomoney_mercados
+2025-08-26 20:49:09 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 20:49:09 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 20:49:09 - INFO - extractor - Collected 0 images from article (pre+post).
+2025-08-26 20:49:09 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/bndes-lanca-floresta-viva-2-que-preve-r-100-mi-para-preservacao-de-biomas/. Title: BNDES lança Floresta Viva 2, que prevê R$ 100 mi p...
+2025-08-26 20:49:09 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 20:49:09 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 20:49:16 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 20:49:46 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 20:49:46 - INFO - wordpress - Downloading image for upload: https://www.infomoney.com.br/wp-content/uploads/2024/08/2024-08-30T142517Z_1_LYNXMPEK7T0IT_RTROPTP_4_BRAZIL-POLITICS-BNDES.jpg?quality=70
+2025-08-26 20:49:46 - INFO - _client - HTTP Request: GET https://www.infomoney.com.br/wp-content/uploads/2024/08/2024-08-30T142517Z_1_LYNXMPEK7T0IT_RTROPTP_4_BRAZIL-POLITICS-BNDES.jpg?quality=70 "HTTP/1.1 200 OK"
+2025-08-26 20:49:46 - INFO - wordpress - Uploading image '2024-08-30T142517Z_1_LYNXMPEK7T0IT_RTROPTP_4_BRAZIL-POLITICS-BNDES.jpg' to WordPress.
+2025-08-26 20:49:48 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media "HTTP/1.1 201 Created"
+2025-08-26 20:49:48 - INFO - wordpress - Uploaded media 3324 from URL: https://www.infomoney.com.br/wp-content/uploads/2024/08/2024-08-30T142517Z_1_LYNXMPEK7T0IT_RTROPTP_4_BRAZIL-POLITICS-BNDES.jpg?quality=70
+2025-08-26 20:49:48 - INFO - _client - HTTP Request: POST https://maquinamoney.com/wp-json/wp/v2/media/3324 "HTTP/1.1 200 OK"
+2025-08-26 20:49:48 - ERROR - pipeline - Error processing article https://www.infomoney.com.br/mercados/bndes-lanca-floresta-viva-2-que-preve-r-100-mi-para-preservacao-de-biomas/: name 'urlparse' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 153, in run_pipeline_cycle
+    source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
+                                                                  ^^^^^^^^
+NameError: name 'urlparse' is not defined
+2025-08-26 20:49:48 - INFO - pipeline - Finished feed 'infomoney_mercados'. Sleeping for 15s before next feed: infomoney_investir
+2025-08-26 20:50:03 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 20:50:03 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 20:50:03 - INFO - store - Database connection closed.
+2025-08-26 20:50:03 - INFO - wordpress - WordPress client connection closed.
+2025-08-26 20:50:03 - CRITICAL - main - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'onde-investir'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 50, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 64, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 69, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'onde-investir'. No configuration found.
+2025-08-26 20:50:03 - INFO - main - Ciclo único finalizado.

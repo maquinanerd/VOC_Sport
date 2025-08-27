@@ -2,6 +2,7 @@ import logging
 import time
 import random
 from collections import OrderedDict
+from urllib.parse import urlparse
 from typing import Dict, Any
 
 from .config import (

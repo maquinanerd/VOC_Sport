@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 CATEGORY_ALIASES = {
     'mercados': 'economia',
     'brasil': 'politica',
+    'onde-investir': 'economia',
+    'internacional': 'politica',
 }
 
 AI_SYSTEM_RULES = """
