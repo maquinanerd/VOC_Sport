@@ -19,6 +19,7 @@ from .extractor import ContentExtractor
 from .ai_processor import AIProcessor
 from .categorizer import Categorizer
 from .wordpress import WordPressClient
+from .store import Database # Ensure Database is imported
 from .html_utils import (
     merge_images_into_content,
     add_credit_to_figures,
@@ -31,6 +32,21 @@ from .ai_processor import AIProcessor
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
+
+def _get_article_url(article_data: Dict[str, Any]) -> Optional[str]:
+    """
+    Extracts a valid URL from article data, prioritizing 'url', then 'link', then 'id' (guid).
+    """
+    url = article_data.get("url") or article_data.get("link") or article_data.get("id")
+    if not url:
+        return None
+    try:
+        p = urlparse(url)
+        if p.scheme in ("http", "https"):
+            return url
+    except Exception:
+        return None
+    return None
 
 BAD_HOSTS = {"sb.scorecardresearch.com", "securepubads.g.doubleclick.net"}
 IMG_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
@@ -100,46 +116,36 @@ def run_pipeline_cycle():
 
             try:
                 feed_items = feed_reader.read_feeds(feed_config, source_id)
-                new_article_stubs = db.filter_new_articles(source_id, feed_items)
+                new_articles = db.filter_new_articles(source_id, feed_items)
 
-                if not new_article_stubs:
+                if not new_articles:
                     logger.info(f"No new articles found for {source_id}.")
                     continue
 
-                logger.info(f"Found {len(new_article_stubs)} new articles for {source_id}")
-
-                # Create a lookup map for the original feed items by their GUID.
-                # This is a workaround for db.filter_new_articles not returning all fields.
-                feed_items_map = {item.get('id'): item for item in feed_items if item.get('id')}
-
-                new_articles = []
-                for stub in new_article_stubs:
-                    # The key from the feed is 'id' (guid). The key in the DB is 'external_id'.
-                    # Let's assume the stub from the DB at least contains the original guid.
-                    guid = stub.get('external_id') or stub.get('id')
-                    if guid and guid in feed_items_map:
-                        full_article_data = feed_items_map[guid].copy()
-                        full_article_data.update(stub)  # Add db_id and other fields from stub
-                        new_articles.append(full_article_data)
-                    else:
-                        logger.warning(f"Could not find original feed item for stub: {stub.get('title')}. Skipping.")
+                logger.info(f"Found {len(new_articles)} new articles for {source_id}")
 
                 for article_data in new_articles[:SCHEDULE_CONFIG.get('max_articles_per_feed', 3)]:
                     article_db_id = article_data['db_id']
                     try:
-                        logger.info(f"Processing article: {article_data['title']} (DB ID: {article_db_id}) from {source_id}")
-                        db.update_article_status(article_db_id, 'PROCESSING')
+                        article_url_to_process = _get_article_url(article_data)
+                        if not article_url_to_process:
+                            logger.warning(f"Skipping article {article_data.get('id')} - missing/invalid URL.")
+                            db.update_article_status(article_db_id, 'FAILED', reason="Missing/invalid URL")
+                            continue
 
-                        extracted_data = extractor.extract(article_data['link'])
+                        logger.info(f"Processing article: {article_data.get('title', 'N/A')} (DB ID: {article_db_id}) from {source_id}")
+                        db.update_article_status(article_db_id, 'PROCESSING')
+                        
+                        extracted_data = extractor.extract(article_url_to_process)
                         if not extracted_data or not extracted_data.get('content'):
-                            logger.warning(f"Failed to extract content from {article_data['link']}")
+                            logger.warning(f"Failed to extract content from {article_data['url']}")
                             db.update_article_status(article_db_id, 'FAILED', reason="Extraction failed")
                             continue
 
                         # Step 2: Rewrite content with AI
                         rewritten_data, failure_reason = ai_processor.rewrite_content(
-                            title=extracted_data['title'],
-                            url=article_data['link'],
+                            title=extracted_data.get('title'),
+                            url=article_url_to_process,
                             content=extracted_data['content'],
                             domain=wp_client.get_domain(),
                             videos=extracted_data.get('videos', [])
@@ -153,7 +159,7 @@ def run_pipeline_cycle():
                                     f"{feed_config['category']} pool exhausted → marking article FAILED → moving on."
                                 )
                             else:
-                                logger.warning(f"Article '{article_data['title']}' marked as FAILED (Reason: {reason}). Continuing to next article.")
+                                logger.warning(f"Article '{article_data.get('title', 'N/A')}' marked as FAILED (Reason: {reason}). Continuing to next article.")
                             db.update_article_status(article_db_id, 'FAILED', reason=reason)
                             continue
 
@@ -162,7 +168,7 @@ def run_pipeline_cycle():
                         content_html = rewritten_data.get("conteudo_final", "").strip()
 
                         if not title or not content_html:
-                            logger.error(f"AI output for {article_data['link']} missing required fields (titulo_final/conteudo_final).")
+                            logger.error(f"AI output for {article_url_to_process} missing required fields (titulo_final/conteudo_final).")
                             db.update_article_status(article_db_id, 'FAILED', reason="AI output missing required fields")
                             continue
 
@@ -207,8 +213,8 @@ def run_pipeline_cycle():
                         content_html = strip_credits_and_normalize_youtube(content_html)
                         
                         # Adicionar crédito da fonte no final do post
-                        source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_data['link']).netloc)
-                        credit_line = f'<p><strong>Fonte:</strong> <a href="{article_data["link"]}" target="_blank" rel="noopener noreferrer">{source_name}</a></p>'
+                        source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_url_to_process).netloc)
+                        credit_line = f'<p><strong>Fonte:</strong> <a href="{article_url_to_process}" target="_blank" rel="noopener noreferrer">{source_name}</a></p>'
                         content_html += f"\n{credit_line}"
 
                         # Step 4: Prepare payload for WordPress
@@ -226,7 +232,7 @@ def run_pipeline_cycle():
 
                         # Prepare Yoast meta, including canonical URL to original source
                         yoast_meta = rewritten_data.get('yoast_meta', {})
-                        yoast_meta['_yoast_wpseo_canonical'] = article_data['link']
+                        yoast_meta['_yoast_wpseo_canonical'] = article_url_to_process
 
                         post_payload = {
                             'title': title,
@@ -245,7 +251,7 @@ def run_pipeline_cycle():
                             logger.info(f"Successfully published post {wp_post_id} for article DB ID {article_db_id}")
                             processed_articles_in_cycle += 1
                         else:
-                            logger.error(f"Failed to publish post for {article_data['link']}")
+                            logger.error(f"Failed to publish post for {article_url_to_process}")
                             db.update_article_status(article_db_id, 'FAILED', reason="WordPress publishing failed")
 
                         # Per-article delay to respect API rate limits and avoid being predictable
@@ -256,7 +262,7 @@ def run_pipeline_cycle():
                         time.sleep(delay)
 
                     except Exception as e:
-                        logger.error(f"Error processing article {article_data.get('link', 'N/A')}: {e}", exc_info=True)
+                        logger.error(f"Error processing article {article_url_to_process or article_data.get('title', 'N/A')}: {e}", exc_info=True)
                         db.update_article_status(article_db_id, 'FAILED', reason=str(e))
 
                 # If we reach here without a feed-level exception, the processing was successful

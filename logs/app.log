@@ -25621,3 +25621,50 @@ KeyError: 'link'
 2025-08-27 12:01:04 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: exame_brasil
 2025-08-27 12:01:08 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-27 12:01:08 - INFO - store - Database connection closed.
+2025-08-27 12:05:40 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-27 12:05:40 - INFO - store - Initializing database tables if they don't exist...
+2025-08-27 12:05:40 - INFO - store - Database initialized successfully.
+2025-08-27 12:05:40 - INFO - store - Database connection closed.
+2025-08-27 12:05:40 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-27 12:05:40 - INFO - main - Executando o primeiro ciclo do pipeline imediatamente.
+2025-08-27 12:05:40 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 12:05:40 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 12:05:40 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 12:05:40 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 12:05:41 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 12:05:41 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 12:05:41 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 12:05:41 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 12:05:41 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 12:05:42 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 12:05:42 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 12:05:42 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 12:05:42 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 12:05:42 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 12:05:47 - INFO - feeds - Parsed 601 items from sitemap.
+2025-08-27 12:05:47 - INFO - feeds - Found 50 total unique items for exame_brasil.
+2025-08-27 12:05:47 - INFO - pipeline - Found 50 new articles for exame_brasil
+2025-08-27 12:05:47 - INFO - pipeline - Processing article: https://exame.com/brasil/ (DB ID: 154) from exame_brasil
+2025-08-27 12:05:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 133, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:05:47 - INFO - pipeline - Processing article: 'Eu creio que esse compromisso vai ser honrado', diz Haddad sobre compensação da isenção do IR (DB ID: 155) from exame_brasil
+2025-08-27 12:05:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 133, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:05:47 - INFO - pipeline - Processing article: Hugo Motta defende aprovação do projeto de isenção do IR para quem ganha até R$ 5 mil (DB ID: 156) from exame_brasil
+2025-08-27 12:05:47 - ERROR - pipeline - Error processing article N/A: 'link'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 133, in run_pipeline_cycle
+    extracted_data = extractor.extract(article_data['link'])
+                                       ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'link'
+2025-08-27 12:05:47 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 12:06:02 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 12:06:02 - INFO - store - Database connection closed.

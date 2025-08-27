@@ -2,13 +2,15 @@ import logging
 import trafilatura
 from bs4 import BeautifulSoup
 import requests
-from typing import Dict, Optional, Any, Set, List, Tuple
+import html # New import for html.unescape
+from typing import Dict, Optional, Any, Set, List, Tuple, Union
 from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import re
 import os
 
 from .config import USER_AGENT
+from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
 logger = logging.getLogger(__name__)
 
@@ -337,6 +339,139 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
     ordered = sorted(dedup.items(), key=lambda kv: (kv[1], kv[0]))
     return [u for u, _ in ordered]
 
+# --- New helper functions from user prompt ---
+def _get(url, timeout=25, tries=2):
+    last_err = None
+    for _ in range(tries):
+        try:
+            r = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=timeout, allow_redirects=True)
+            if 200 <= r.status_code < 300 and "text/html" in r.headers.get("Content-Type",""):
+                return r
+        except Exception as e:
+            last_err = e
+        time.sleep(0.6)
+    if last_err:
+        raise last_err
+    raise RuntimeError(f"HTTP error fetching {url}")
+
+def _clean_text(s):
+    if not s: return ""
+    return re.sub(r"[ \t]+", " ", html.unescape(s)).strip()
+
+def _trafilatura_extract_core(url, html_text): # Renamed to avoid conflict with class method
+    downloaded = trafilatura.extract(
+        filecontent=html_text,
+        url=url,
+        include_images=False,
+        include_links=False,
+        with_metadata=True,
+    )
+    if not downloaded:
+        return None
+    meta = trafilatura_extract_metadata(html_text, url) # Use the imported metadata extractor
+    return {
+        "title": (meta.title if meta and meta.title else None),
+        "text": downloaded.strip(),
+        "author": (", ".join(meta.author) if meta and meta.author else None),
+        "date": (meta.date if meta and meta.date else None),
+        "top_image": None, # This will be filled by _pick_featured_image later
+    }
+
+def _wp_fallback(soup):
+    # WordPress common selectors: title, content, author, date, image
+    title = soup.select_one("h1.asset-title, h1.entry-title, h1.post-title, header h1") # Added asset-title for infomoney
+    content = soup.select_one("div.article-content, div.entry-content, .single-post-content, .post-content, article .content")
+    author = soup.select_one('[rel="author"], .author-name, .byline .author a, .byline a[rel="author"]')
+    date = soup.select_one("time[datetime], .post-date, .entry-date")
+    img = soup.select_one("article figure img, .wp-block-image img, .post-thumbnail img")
+    return {
+        "title": _clean_text(title.get_text()) if title else None,
+        "text": _clean_text("\n".join([p.get_text(" ", strip=True) for p in content.select("p")])) if content else None,
+        "author": _clean_text(author.get_text()) if author else None,
+        "date": (date.get("datetime") if date and date.has_attr("datetime") else _clean_text(date.get_text()) if date else None),
+        "top_image": (img.get("src") if img and img.has_attr("src") else None),
+    }
+
+def _estadao_arc_fallback(soup):
+    # Estadão (Arc): title and body are often in <article> with specific blocks
+    title = soup.select_one("h1.n--noticia__title, h1, header h1") # Added n--noticia__title for estadao
+    paras = soup.select("[data-qa='body-text']") or soup.select("article p")
+    text = _clean_text("\n".join(p.get_text(" ", strip=True) for p in paras)) if paras else None
+    author = soup.select_one("[data-qa='author-name'], .author-name, a[rel='author']")
+    date = soup.select_one("time[datetime]")
+    img = soup.select_one("figure img, .lead-media img")
+    return {
+        "title": _clean_text(title.get_text()) if title else None,
+        "text": text,
+        "author": _clean_text(author.get_text()) if author else None,
+        "date": date.get("datetime") if date and date.has_attr("datetime") else None,
+        "top_image": img.get("src") if img and img.has_attr("src") else None,
+    }
+
+def _choose_best(a, b):
+    # Fills empty fields in A with values from B
+    if not a: return b
+    if not b: return a
+    out = {}
+    for k in {"title","text","author","date","top_image"}:
+        out[k] = a.get(k) or b.get(k)
+    return out
+
+def _extract_site_specific(soup: BeautifulSoup, url: str, selectors: Dict[str, Union[str, List[str]]]) -> Optional[Dict[str, Any]]:
+    """
+    Helper for site-specific extraction using a dictionary of CSS selectors.
+    Falls back gracefully by returning None if key elements are not found.
+    """
+    try:
+        # Find title
+        title_tag = soup.select_one(str(selectors['title']))
+        title = title_tag.get_text(strip=True) if title_tag else None
+
+        # Find content body
+        content_tag = soup.select_one(str(selectors['content']))
+
+        if not title or not content_tag:
+            logger.warning(f"Specific extractor failed to find title/content for {url}. Will fall back to generic.")
+            return None
+
+        # Basic cleanup inside content
+        for junk_selector in selectors.get('junk', []):
+            for junk_tag in content_tag.select(str(junk_selector)):
+                junk_tag.decompose()
+        
+        content_html = str(content_tag)
+
+        # Use existing helpers for media and metadata
+        # Note: These helpers operate on the *original* soup object to find meta tags, etc.
+        extractor = ContentExtractor() # Temporary instance to access helpers
+        featured_image_url = extractor._pick_featured_image(soup, url)
+        images = collect_images_from_article(soup, url) # This also uses its own logic to find the body
+        videos = extractor._extract_youtube_videos(soup)
+        
+        excerpt_tag = soup.select_one('meta[name="description"], meta[property="og:description"]')
+        excerpt = excerpt_tag['content'].strip() if excerpt_tag and excerpt_tag.get('content') else ''
+
+        # Ensure the featured image isn't duplicated in the body images list
+        other_images = [img for img in images if img != featured_image_url]
+
+        result = {
+            "title": title,
+            "content": content_html,
+            "excerpt": excerpt,
+            "featured_image_url": featured_image_url,
+            "images": other_images,
+            "videos": videos,
+            "source_url": url,
+        }
+        
+        logger.info(f"Successfully extracted content using specific extractor for {url}. Title: {result['title'][:50]}...")
+        return result
+
+    except Exception as e:
+        # Log with exc_info=False to avoid a huge traceback for a common fallback case
+        logger.error(f"Error in site-specific extractor for {url}: {e}. Falling back to generic.", exc_info=False)
+        return None
+
 
 class ContentExtractor:
     """Extrai e limpa conteúdo para o pipeline."""
@@ -557,12 +692,12 @@ class ContentExtractor:
         return [{"id": v, "embed_url": f"https://www.youtube.com/embed/{v}",
                  "watch_url": f"https://www.youtube.com/watch?v={v}"} for v in ordered]
 
-    def extract(self, url: str) -> Optional[Dict[str, Any]]:
-        """Fluxo principal: busca, limpa, extrai conteúdo + imagens/vídeos."""
-        html = self._fetch_html(url)
-        if not html:
-            return None
-
+    def _extract_with_trafilatura(self, html: str, url: str) -> Optional[Dict[str, Any]]:
+        """
+        Generic extraction method using Trafilatura as the core engine.
+        This was the original `extract` method.
+        """
+        logger.debug(f"Using generic (trafilatura) extractor for {url}")
         try:
             soup = BeautifulSoup(html, 'lxml')
 
@@ -638,3 +773,49 @@ class ContentExtractor:
         except Exception as e:
             logger.error(f"An unexpected error occurred during extraction for {url}: {e}", exc_info=True)
             return None
+
+    def extract(self, url: str) -> Optional[Dict[str, Any]]:
+        """
+        Main extraction flow: fetches HTML, tries a site-specific extractor if available,
+        and falls back to the generic trafilatura-based extractor.
+        """
+        html = self._fetch_html(url)
+        if not html:
+            return None
+
+        domain = urlparse(url).netloc.lower()
+        soup = BeautifulSoup(html, 'lxml')
+        
+        extracted_data = None
+
+        # Router for site-specific extractors
+        if 'infomoney.com.br' in domain:
+            selectors = {
+                'title': 'h1.asset-title, h1.entry-title',
+                'content': 'div.article-content, div.entry-content',
+                'junk': ['.advertisement', '.leia-mais', '.box-leia-mais', '.box-newsletter', '.article-related-box']
+            }
+            extracted_data = _extract_site_specific(soup, url, selectors)
+        
+        elif 'estadao.com.br' in domain:
+            selectors = {
+                'title': 'h1.n--noticia__title, h1.entry-title',
+                'content': 'div.n--noticia__content.content, div.entry-content',
+                'junk': ['.veja-tambem', '.publicidade', '.box-relacionadas', '.posts-relacionados']
+            }
+            extracted_data = _extract_site_specific(soup, url, selectors)
+
+        elif 'exame.com' in domain:
+            selectors = {
+                'title': 'h1.single-title, h1.title',
+                'content': 'div.single-content, div.article-body',
+                'junk': ['.cta-middle', '.related-posts', '.ads-box', '.wp-block-related-posts-by-taxonomy']
+            }
+            extracted_data = _extract_site_specific(soup, url, selectors)
+
+        # If a specific extractor ran and succeeded, return its data.
+        if extracted_data:
+            return extracted_data
+        
+        # Otherwise, fall back to the generic method.
+        return self._extract_with_trafilatura(html, url)

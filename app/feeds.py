@@ -1,6 +1,7 @@
 import feedparser
 import logging
 import requests
+import re
 import xml.etree.ElementTree as ET
 from typing import List, Dict, Any, Optional
 import gzip
@@ -9,6 +10,9 @@ import hashlib
 from datetime import datetime
 
 logger = logging.getLogger(__name__)
+
+NS = {"ns":"http://www.sitemaps.org/schemas/sitemap/0.9",
+      "news":"http://www.google.com/schemas/sitemap-news/0.9"}
 
 def _stable_id_from(text: str) -> str:
     return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
@@ -91,7 +95,13 @@ class FeedReader:
             logger.error(f"Failed to fetch feed/sitemap from {url}: {e}")
             return None
 
-    def _parse_sitemap(self, xml_bytes: bytes, limit: int = 50) -> List[Dict[str, Any]]:
+    def _parse_sitemap(
+        self,
+        xml_bytes: bytes,
+        limit: int = 50,
+        allow_regex: Optional[str] = None,
+        deny_regex: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
         """
         Parses a sitemap.xml (or sitemapindex.xml) and returns a list of article-like dicts.
         Handles nested sitemap indexes by fetching them.
@@ -102,15 +112,17 @@ class FeedReader:
             logger.error(f"Failed to parse XML sitemap: {e}")
             return []
 
+        allow = re.compile(allow_regex) if allow_regex else None
+        deny  = re.compile(deny_regex)  if deny_regex  else None
         items = []
 
         # Handle sitemap index by fetching and parsing child sitemaps
         if root.tag.endswith("sitemapindex"):
             logger.info("Detected sitemap index. Fetching child sitemaps.")
             child_sitemap_urls = [
-                sm.findtext("{*}loc")
-                for sm in root.findall(".//{*}sitemap")
-                if sm.findtext("{*}loc")
+                sm.findtext("ns:loc", NS)
+                for sm in root.findall(".//ns:sitemap", NS)
+                if sm.findtext("ns:loc", NS)
             ]
 
             for url in child_sitemap_urls:
@@ -119,33 +131,43 @@ class FeedReader:
                 logger.debug(f"Fetching child sitemap from {url}")
                 child_bytes = self._fetch_content(url)
                 if child_bytes:
-                    # Recursive call to parse the child sitemap
-                    items.extend(self._parse_sitemap(child_bytes, limit=limit))
+                    # Recursive call to parse the child sitemap, passing regexes
+                    items.extend(self._parse_sitemap(
+                        child_bytes, limit=limit, allow_regex=allow_regex, deny_regex=deny_regex
+                    ))
                     time.sleep(0.2)  # Be polite
             
             # Sort and limit at the very end of processing the index
             items.sort(key=lambda x: x.get("published") or "", reverse=True)
             logger.info(f"Parsed {len(items)} total items from sitemap index.")
             return items[:limit]
-
+        
         # Handle regular sitemap (urlset)
-        ns_news = "{http://www.google.com/schemas/sitemap-news/0.9}"
-        for url_element in root.findall(".//{*}url"):
-            loc = url_element.findtext("{*}loc")
-            if not loc:
+        for url_element in root.findall(".//ns:url", NS):
+            loc_el = url_element.find("ns:loc", NS)
+            if loc_el is None or not (loc := (loc_el.text or "").strip()):
                 continue
 
-            lastmod = url_element.findtext("{*}lastmod")
+            if deny and deny.search(loc):
+                continue
+            if allow and not allow.search(loc):
+                continue
+
+            lastmod = url_element.findtext("ns:lastmod", NS)
             
             title = None
-            news_block = url_element.find(ns_news + "news")
+            news_block = url_element.find("news:news", NS)
             if news_block is not None:
-                title_element = news_block.find(ns_news + "title")
+                title_element = news_block.find("news:title", NS)
                 if title_element is not None and title_element.text:
                     title = title_element.text.strip()
 
+            if not loc:
+                continue
+
             items.append({
                 "link": loc,
+                "guid": loc,
                 "title": title or loc,
                 "published": lastmod,
             })
@@ -166,7 +188,11 @@ class FeedReader:
                 continue
 
             if feed_type == 'sitemap':
-                raw_items.extend(self._parse_sitemap(content, limit=50))
+                raw_items.extend(self._parse_sitemap(
+                    content, limit=50,
+                    allow_regex=feed_config.get('allow_regex'),
+                    deny_regex=feed_config.get('deny_regex')
+                ))
             else: # Default to 'rss'
                 feed = feedparser.parse(content)
                 if feed.bozo:
