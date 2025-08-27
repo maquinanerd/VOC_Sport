@@ -12,6 +12,57 @@ from .config import USER_AGENT
 
 logger = logging.getLogger(__name__)
 
+def _coerce_url(candidate: Any) -> Optional[str]:
+    """
+    Aceita str, dict (ex.: {'url': ...} / {'src': ...} / {'href': ...} / {'content': ...})
+    e listas (pega o primeiro válido). Retorna URL (str) ou None.
+    """
+    if not candidate:
+        return None
+
+    # já é string?
+    if isinstance(candidate, str):
+        u = candidate.strip()
+        return u or None
+
+    # lista/tupla: pega o primeiro válido
+    if isinstance(candidate, (list, tuple)):
+        for item in candidate:
+            u = _coerce_url(item)
+            if u:
+                return u
+        return None
+
+    # dict: tenta chaves comuns
+    if isinstance(candidate, dict):
+        for k in ('url', 'src', 'href', 'content'):
+            v = candidate.get(k)
+            if isinstance(v, str) and v.strip():
+                return v.strip()
+            # às vezes vem lista dentro do dict
+            if isinstance(v, (list, tuple)):
+                u = _coerce_url(v)
+                if u:
+                    return u
+        # às vezes o dict tem só uma key com a URL
+        for v in candidate.values():
+            u = _coerce_url(v)
+            if u:
+                return u
+        return None
+
+    # desconhecido
+    return None
+
+def _dedupe_preserve(urls: List[str]) -> List[str]:
+    seen = set()
+    out: List[str] = []
+    for u in urls:
+        if u not in seen:
+            seen.add(u)
+            out.append(u)
+    return out
+
 BAD_IMAGE_KEYWORDS = {
     'author', 'autor', 'avatar', 'byline', 'perfil', 'profile',
     'placeholder', 'logo', 'logomarca', 'brand', 'marca',
@@ -509,12 +560,24 @@ class ContentExtractor:
             article_soup = BeautifulSoup(content_html, 'lxml')
             self._remove_forbidden_blocks(article_soup)
 
-            # 9) Seleciona a imagem destacada e as imagens do corpo a partir dos candidatos
-            all_image_candidates = featured_image_candidates + body_images
-            unique_candidates = list(dict.fromkeys(all_image_candidates)) # Dedupe preserving order
+            # 9) Normaliza, deduplica e seleciona imagens
+            candidates_raw = featured_image_candidates + body_images
 
+            # Normaliza todos os candidatos para URLs (string), absolutiza e filtra Nones/vazios
+            all_image_urls: List[str] = []
+            for item in candidates_raw:
+                u = _coerce_url(item)
+                if u:
+                    abs_u = _abs(u, url)
+                    if abs_u:
+                        all_image_urls.append(abs_u)
+
+            # Deduplica preservando a ordem
+            unique_candidates = _dedupe_preserve(all_image_urls)
+
+            # A função pick_featured_image já aplica o filtro is_valid_article_image
             featured_image_url = pick_featured_image(unique_candidates)
-            
+
             # As imagens do corpo são todas as válidas, exceto a destacada
             other_valid_images = [
                 u for u in unique_candidates if is_valid_article_image(u) and u != featured_image_url

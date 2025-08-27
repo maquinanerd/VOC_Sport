@@ -26,6 +26,7 @@ def initialize_database():
     logger.info("Verificando o esquema do banco de dados...")
     try:
         db = Database()
+        db.initialize()  # Garante que as tabelas sejam criadas
         db.close()
         logger.info("Verificação do banco de dados concluída com sucesso.")
     except Exception as e:
