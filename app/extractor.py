@@ -134,7 +134,7 @@ FORBIDDEN_LABELS: Set[str] = {
 JUNK_IMAGE_PATTERNS = (
     "placeholder", "sprite", "icon", "emoji", ".svg",
     # From user suggestion to filter out non-content images
-    "cta", "read-more", "share", "logo"
+    "cta", "read-more", "share", "logo", "banner"
 )
 
 # Blocos a ignorar (relacionados/sidebars/galerias etc.)

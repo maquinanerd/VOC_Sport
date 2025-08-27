@@ -162,25 +162,18 @@ def run_pipeline_cycle():
                             extracted_data.get('images', [])
                         )
                         
-                        # 3.3: Collect, filter, and upload up to 8 priority images
-                        all_image_candidates = []
-                        if og_image := extracted_data.get('featured_image_url'):
-                            all_image_candidates.append(og_image)
-                        all_image_candidates.extend(extracted_data.get('images', []))
-
-                        # Deduplicate, filter, and limit
-                        seen_urls = set()
+                        # 3.3: Upload ONLY the featured image if it's valid
                         urls_to_upload = []
-                        for u in all_image_candidates:
-                            if u not in seen_urls:
-                                seen_urls.add(u)
-                                if is_valid_upload_candidate(u):
-                                    urls_to_upload.append(u)
-                        urls_to_upload = urls_to_upload[:8]
+                        featured_image_url = extracted_data.get('featured_image_url')
+                        if featured_image_url and is_valid_upload_candidate(featured_image_url):
+                            urls_to_upload.append(featured_image_url)
+                            logger.info(f"Valid featured image found, preparing for upload: {featured_image_url}")
+                        else:
+                            logger.info("No valid featured image to upload. The post will not have a highlight.")
 
                         uploaded_src_map = {}
                         uploaded_id_map = {}
-                        logger.info(f"Attempting to upload up to {len(urls_to_upload)} images.")
+                        logger.info(f"Attempting to upload {len(urls_to_upload)} image(s).")
                         for url in urls_to_upload:
                             media = wp_client.upload_media_from_url(url, title)
                             if media and media.get("source_url") and media.get("id"):
