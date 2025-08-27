@@ -1,9 +1,10 @@
 import logging
 import time
 import random
+import re
 from collections import OrderedDict
 from urllib.parse import urlparse
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 from .config import (
     PIPELINE_ORDER,
