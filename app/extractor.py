@@ -6,11 +6,49 @@ from typing import Dict, Optional, Any, Set
 from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import re
+from typing import Tuple
 import os
 
 from .config import USER_AGENT
 
 logger = logging.getLogger(__name__)
+
+BAD_IMAGE_KEYWORDS = {
+    'author', 'autor', 'avatar', 'byline', 'perfil', 'profile',
+    'placeholder', 'logo', 'logomarca', 'brand', 'marca',
+    'icon', 'favicon', 'sprite', 'comment', 'user', 'usuario', 'usuário'
+}
+
+BAD_IMAGE_DOMAINS = {
+    'gravatar.com', 'twimg.com', 'facebook.com', 'fbcdn.net',
+    'gstatic.com', 'googleusercontent.com'
+}
+
+# aceita query ?width=1200&height=630 e sufixos -1200x630.jpg
+DIM_SUFFIX_RE = re.compile(r'-(\d{2,5})x(\d{2,5})(?=\.[a-z]{3,4})(?:\?.*)?$', re.IGNORECASE)
+
+def _guess_dimensions_from_url(url: str) -> Tuple[Optional[int], Optional[int]]:
+    try:
+        p = urlparse(url)
+        q = parse_qs(p.query or '')
+        w = q.get('width') or q.get('w')
+        h = q.get('height') or q.get('h')
+        if w and h:
+            return int(w[0]), int(h[0])
+        m = DIM_SUFFIX_RE.search(p.path)
+        if m:
+            return int(m.group(1)), int(m.group(2))
+    except Exception:
+        pass
+    return None, None
+
+def _is_bad_domain(url: str) -> bool:
+    try:
+        host = urlparse(url).hostname or ''
+        return any(host.endswith(d) for d in BAD_IMAGE_DOMAINS)
+    except Exception:
+        return False
+
 
 YOUTUBE_DOMAINS = (
     "youtube.com", "www.youtube.com", "m.youtube.com",
@@ -70,46 +108,38 @@ def _parse_srcset(srcset: str):
     return best
 
 
-def is_small(u: str) -> bool:
-    """Heurística para descartar thumbs, tracking pixels e imagens irrelevantes."""
-    if not u:
+def _has_bad_keyword(url: str) -> bool:
+    u = url.lower()
+    return any(k in u for k in BAD_IMAGE_KEYWORDS)
+
+def _passes_min_size(url: str, min_w: int = 600, min_h: int = 315) -> bool:
+    w, h = _guess_dimensions_from_url(url)
+    if w is None or h is None:
+        # Sem dimensão explícita: aceita provisoriamente (muitos sites não expõem)
         return True
+    if w < min_w or h < min_h:
+        return False
+    # evita quase-quadradas/estranhas como avatar 150x150
+    ar = w / h if h else 0
+    return 0.6 <= ar <= 2.2
 
-    # 1. Must have a valid image extension. This filters out tracking pixels.
-    try:
-        path = urlparse(u).path
-        # Path can be empty for tracking pixels like scorecardresearch.com/p?c1=...
-        if not path or path == '/':
-            return True
-        ext = os.path.splitext(path)[1].lower()
-        if ext not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}:
-            return True
-    except Exception:
-        return True # Malformed URL, discard.
+def is_valid_article_image(url: str) -> bool:
+    if not url or url.startswith('data:'):
+        return False
+    if _is_bad_domain(url):
+        return False
+    if _has_bad_keyword(url):
+        return False
+    if not _passes_min_size(url):
+        return False
+    return True
 
-    low = u.lower()
-
-    # lixo comum (SVG already filtered by extension)
-    if any(pat in low for pat in ("placeholder", "sprite", "icon", "emoji")):
-        return True
-
-    # posters/avatares genéricos do Collider
-    if "colliderimages.com" in low and ("/sharedimages/" in low or "poster" in low):
-        return True
-
-    # thumbs de card (fit=crop 420x300 etc.)
-    try:
-        params = parse_qs(urlparse(u).query)
-        w = int((params.get("w", ["0"])[0] or "0"))
-        h = int((params.get("h", ["0"])[0] or "0"))
-        fit = (params.get("fit", [""])[0] or "").lower()
-        if fit == "crop" and ((w and w <= 600) or (h and h <= 400)):
-            return True
-        if (w and w < 320) or (h and h < 200):
-            return True
-    except Exception:
-        pass
-    return False
+def pick_featured_image(candidates: List[str]) -> Optional[str]:
+    """Retorna a primeira imagem que passa no filtro."""
+    for u in candidates:
+        if is_valid_article_image(u):
+            return u
+    return None
 
 
 def _abs(u: str, base: str) -> Optional[str]:
@@ -176,7 +206,7 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
         abs_u = _abs(candidate, base_url)
         if not abs_u:
             return
-        if is_small(abs_u):
+        if not is_valid_article_image(abs_u):
             return
         urls.append(abs_u.rstrip("/"))
 
@@ -263,8 +293,11 @@ class ContentExtractor:
             '[class*="most-popular"]','[id*="most-popular"]',
             '[class*="popular"]','[id*="popular"]',
             '[class*="newsletter"]','[id*="newsletter"]',
-            '[class*="ad-"]','[id*="ad-"]','[class*="advert"]','[id*="advert"]',
-            '.comments', '#comments'
+            '[class*="ad-"]','[id*="ad-"]','[class*="advert"]','[id*="advert"]', '.comments', '#comments',
+            # Author/byline selectors
+            '.author', '.author-box', '.post-author', '.byline', '.entry-author',
+            '.avatar', '.author__image', '.author-profile', '.wp-block-embed',
+            '.related', '.newsletter', '.subscribe', 'header .author', 'aside .author'
         ]
         for sel in selectors_to_remove:
             for el in soup.select(sel):
@@ -344,17 +377,19 @@ class ContentExtractor:
         if converted:
             logger.info(f"Converted {converted} 'data-img-url' divs to <figure> tags.")
 
-    def _extract_featured_image(self, soup: BeautifulSoup, base_url: str) -> Optional[str]:
-        """Extrai imagem destacada (og/twitter/json-ld/primeira <img> de article)."""
+    def _extract_featured_image_candidates(self, soup: BeautifulSoup, base_url: str) -> List[str]:
+        """
+        Extracts a list of candidate URLs for the featured image from various sources.
+        (og:image, twitter:image, json-ld, first <img> in <article>)
+        """
+        candidates = []
         if og := soup.find('meta', property='og:image'):
             if og.get('content'):
-                logger.info("Found featured image via 'og:image'.")
-                return urljoin(base_url, og['content'])
+                candidates.append(urljoin(base_url, og['content']))
 
         if tw := soup.find('meta', attrs={'name': 'twitter:image'}):
             if tw.get('content'):
-                logger.info("Found featured image via 'twitter:image'.")
-                return urljoin(base_url, tw['content'])
+                candidates.append(urljoin(base_url, tw['content']))
 
         for script in soup.find_all('script', type='application/ld+json'):
             try:
@@ -368,23 +403,21 @@ class ContentExtractor:
                     if item.get('@type') in ('NewsArticle', 'Article') and 'image' in item:
                         image_info = item['image']
                         if isinstance(image_info, dict) and image_info.get('url'):
-                            return urljoin(base_url, image_info['url'])
+                            candidates.append(urljoin(base_url, image_info['url']))
                         if isinstance(image_info, list) and image_info:
                             first = image_info[0]
-                            return urljoin(base_url, first.get('url') if isinstance(first, dict) else first)
+                            url = first.get('url') if isinstance(first, dict) else first
+                            candidates.append(urljoin(base_url, url))
                         if isinstance(image_info, str):
-                            return urljoin(base_url, image_info)
+                            candidates.append(urljoin(base_url, image_info))
             except (json.JSONDecodeError, TypeError, AttributeError):
                 continue
 
         if article_tag := soup.find('article'):
             first_img = article_tag.find('img')
             if first_img and first_img.get('src'):
-                logger.info("Using first <img> in <article> as featured image.")
-                return urljoin(base_url, first_img['src'])
-
-        logger.warning("Could not find a suitable featured image.")
-        return None
+                candidates.append(urljoin(base_url, first_img['src']))
+        return candidates
 
     def _extract_youtube_id(self, src: str) -> Optional[str]:
         if not src:
@@ -439,11 +472,11 @@ class ContentExtractor:
             # 2) normaliza data-img-url -> <figure>
             self._convert_data_img_to_figure(soup)
 
-            # 3) imagens do HTML limpo (somente corpo)
-            pre_images = collect_images_from_article(soup, base_url=url)
+            # 3) Extrai candidatos a imagem destacada (og, twitter, etc)
+            featured_image_candidates = self._extract_featured_image_candidates(soup, url)
 
-            # 4) destacada
-            featured_image_url = self._extract_featured_image(soup, url)
+            # 4) Extrai imagens do corpo do artigo
+            body_images = collect_images_from_article(soup, base_url=url)
 
             # 5) vídeos
             videos = self._extract_youtube_videos(soup)
@@ -477,30 +510,30 @@ class ContentExtractor:
             article_soup = BeautifulSoup(content_html, 'lxml')
             self._remove_forbidden_blocks(article_soup)
 
-            # 9) imagens pós-trafilatura (ainda restritas ao corpo retornado)
-            post_images = collect_images_from_article(article_soup, base_url=url)
+            # 9) Seleciona a imagem destacada e as imagens do corpo a partir dos candidatos
+            all_image_candidates = featured_image_candidates + body_images
+            unique_candidates = list(dict.fromkeys(all_image_candidates)) # Dedupe preserving order
 
-            # 10) merge dedup
-            seen, all_image_urls = set(), []
-            for u in pre_images + post_images:
-                if u not in seen:
-                    seen.add(u)
-                    all_image_urls.append(u)
+            featured_image_url = pick_featured_image(unique_candidates)
+            
+            # As imagens do corpo são todas as válidas, exceto a destacada
+            other_valid_images = [
+                u for u in unique_candidates if is_valid_article_image(u) and u != featured_image_url
+            ]
 
-            logger.info(f"Collected {len(all_image_urls)} images from article (pre+post).")
+            logger.info(f"Selected featured image: {featured_image_url}. Found {len(other_valid_images)} other valid images.")
 
             # Conteúdo final: só o conteúdo interno do <body>, se existir
             if article_soup.body:
                 final_content_html = article_soup.body.decode_contents()
             else:
                 final_content_html = str(article_soup)
-
             result = {
                 "title": title.strip(),
                 "content": final_content_html,
                 "excerpt": (excerpt or "").strip(),
                 "featured_image_url": featured_image_url,
-                "images": all_image_urls,
+                "images": other_valid_images,
                 "videos": videos,
                 "source_url": url,
             }

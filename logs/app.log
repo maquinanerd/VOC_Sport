@@ -20410,3 +20410,314 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ma
 2025-08-26 21:58:38 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-26 21:58:38 - INFO - store - Database connection closed.
 2025-08-26 21:58:38 - INFO - main - Ciclo único finalizado.
+2025-08-26 22:09:28 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 22:09:28 - INFO - store - Database connection closed.
+2025-08-26 22:09:28 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 22:09:28 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 22:09:28 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 22:09:28 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 22:09:28 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:09:28 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 22:09:28 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 22:09:28 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 22:09:28 - INFO - pipeline - Found 1 new articles for estadao_politica
+2025-08-26 22:09:28 - INFO - pipeline - Processing article: Moraes aumenta prazo para que a PGR se manifeste sobre descumprimento de cautelares de Bolsonaro (DB ID: 2861) from estadao_politica
+2025-08-26 22:09:29 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:09:29 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:09:29 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:09:29 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/moraes-aumenta-prazo-pgr-manifeste-descumprimento-cautelares-bolsonaro-nprp/. Title: Moraes aumenta prazo para que a PGR se manifeste s...
+2025-08-26 22:09:29 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:09:36 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:10:06 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:10:11 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/6SV3PHB2VRD5JLVCLBVDP3XV3E.jpg?quality=80&auth=e382ebd259b46b29e84eff9ef6e9a94958767b003f91f7af96713b666250745a&width=1200&height=630&smart=true
+2025-08-26 22:10:12 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fauthor-service-images-prod-us-east-1.publishing.aws.arc.pub%2Festadao%2F7f614b0c-6bd0-4d80-a91f-2ef961106071.png?quality=80&auth=d70a9fb5a6cc7be5a23e2e85393ffac1905b11dd17380c50433baaa901c0668a&width=60&height=60&smart=true
+2025-08-26 22:10:13 - INFO - wordpress - Created new tag 'PGR' with ID 95.
+2025-08-26 22:10:13 - INFO - wordpress - Created new tag 'Medidas Cautelares' with ID 96.
+2025-08-26 22:10:14 - INFO - wordpress - Created new tag 'Política Brasileira' with ID 97.
+2025-08-26 22:10:14 - INFO - wordpress - Created new tag 'Investigação' with ID 98.
+2025-08-26 22:10:14 - INFO - wordpress - Resolved tags ['STF', 'Alexandre de Moraes', 'PGR', 'Jair Bolsonaro', 'Medidas Cautelares', 'Política Brasileira', 'Investigação'] to IDs: [45, 44, 95, 46, 96, 97, 98]
+2025-08-26 22:10:15 - INFO - store - Successfully recorded published post for article DB ID 2861 (WP Post ID: 3332).
+2025-08-26 22:10:15 - INFO - pipeline - Successfully published post 3332 for article DB ID 2861
+2025-08-26 22:10:15 - INFO - pipeline - Sleeping for 7.6s (per-article delay).
+2025-08-26 22:10:22 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-26 22:10:37 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 22:10:37 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:10:38 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 22:10:38 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 22:10:38 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 22:10:38 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 22:10:38 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 22:10:38 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:10:38 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 22:10:38 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 22:10:38 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 22:10:38 - INFO - pipeline - Found 4 new articles for estadao_economia
+2025-08-26 22:10:38 - INFO - pipeline - Processing article: Governo deve criar teto para taxa do vale-refeição cobrada de comerciantes (DB ID: 2862) from estadao_economia
+2025-08-26 22:10:39 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:10:39 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:10:39 - INFO - extractor - Collected 2 images from article (pre+post).
+2025-08-26 22:10:39 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/coluna-do-broad/governo-deve-criar-teto-para-taxa-do-vale-refeicao-cobrada-de-comerciantes/. Title: Governo deve criar teto para taxa do vale-refeição...
+2025-08-26 22:10:39 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:10:46 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:11:16 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 22:11:18 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/DAWEKHM2ZNADRLNKLZNRZWGTZU.jpg?quality=80&auth=8d798c07cdeec880fcd3b3b7a7594084ea9dea9d4c56748d7555f0723c8c7e1c&width=1200&height=630&focal=1291,1717
+2025-08-26 22:11:19 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fauthor-service-images-prod-us-east-1.publishing.aws.arc.pub%2Festadao%2F321961c7-24de-4181-9998-3cca3fe8039b.png?quality=80&auth=2d3a14491126407dd1b59b4af435b4aa74527bdfebd36abe8579c9fe75f3554e&width=60&height=60&smart=true
+2025-08-26 22:11:20 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fauthor-service-images-prod-us-east-1.publishing.aws.arc.pub%2Festadao%2Fa2ae1b62-e2f8-4108-981a-af98a186b078.png?quality=80&auth=17b6a60a9bea6500e4da988d402b8af1b2907771a528d6de839642e3823700b2&width=60&height=60&smart=true
+2025-08-26 22:11:20 - INFO - wordpress - Created new tag 'Vale-refeição' with ID 99.
+2025-08-26 22:11:21 - INFO - wordpress - Created new tag 'Governo' with ID 100.
+2025-08-26 22:11:21 - INFO - wordpress - Created new tag 'Comerciantes' with ID 101.
+2025-08-26 22:11:22 - INFO - wordpress - Created new tag 'Taxas' with ID 102.
+2025-08-26 22:11:22 - INFO - wordpress - Created new tag 'Regulamentação' with ID 103.
+2025-08-26 22:11:23 - INFO - wordpress - Created new tag 'Economia' with ID 104.
+2025-08-26 22:11:23 - INFO - wordpress - Created new tag 'Congresso Nacional' with ID 105.
+2025-08-26 22:11:23 - INFO - wordpress - Resolved tags ['Vale-refeição', 'Governo', 'Comerciantes', 'Taxas', 'Regulamentação', 'Economia', 'Congresso Nacional'] to IDs: [99, 100, 101, 102, 103, 104, 105]
+2025-08-26 22:11:24 - INFO - store - Successfully recorded published post for article DB ID 2862 (WP Post ID: 3336).
+2025-08-26 22:11:24 - INFO - pipeline - Successfully published post 3336 for article DB ID 2862
+2025-08-26 22:11:24 - INFO - pipeline - Sleeping for 8.8s (per-article delay).
+2025-08-26 22:11:32 - INFO - pipeline - Processing article: Por que a aposta de corte dos juros nos EUA pode tornar o real a moeda mais atrativa dos emergentes (DB ID: 2863) from estadao_economia
+2025-08-26 22:11:33 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:11:33 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:11:33 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:11:33 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/fabio-alves/aposta-juros-eua-real-moeda-mais-atrativa-emergentes/. Title: Opinião | Por que a aposta de corte dos juros nos ...
+2025-08-26 22:11:33 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:11:39 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:12:09 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:12:12 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/SDYW2M3XKJNDHDSCJCENAOBYEQ.jpg?quality=80&auth=21de02d7435c4306bd71626b9f7bce5f066308f96043bb93916aac4f671e05c0&width=1200&height=630&focal=0,0
+2025-08-26 22:12:13 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fs3.amazonaws.com%2Farc-authors%2Festadao%2F6f00e3dc-f0d7-417a-bdf6-773dfcd529b0.png?quality=80&auth=9e4671605f6eef9899b537868fb5bbc2ce617e9c72f1f35ad484853447e25435&width=60&height=60&smart=true
+2025-08-26 22:12:13 - INFO - wordpress - Created new tag 'real' with ID 106.
+2025-08-26 22:12:14 - INFO - wordpress - Created new tag 'taxa Selic' with ID 107.
+2025-08-26 22:12:15 - INFO - wordpress - Resolved tags ['real', 'EUA', 'Federal Reserve', 'economia brasileira', 'taxa Selic', 'inflação', 'investimentos estrangeiros'] to IDs: [106, 59, 53, 86, 107, 38, 84]
+2025-08-26 22:12:15 - INFO - store - Successfully recorded published post for article DB ID 2863 (WP Post ID: 3339).
+2025-08-26 22:12:15 - INFO - pipeline - Successfully published post 3339 for article DB ID 2863
+2025-08-26 22:12:15 - INFO - pipeline - Sleeping for 9.5s (per-article delay).
+2025-08-26 22:12:25 - INFO - pipeline - Processing article: Brasil corre sério risco de permanecer preso a juros reais de 7% a 8%, sem ajuste fiscal efetivo (DB ID: 2864) from estadao_economia
+2025-08-26 22:12:25 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:12:25 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:12:25 - INFO - extractor - Collected 0 images from article (pre+post).
+2025-08-26 22:12:25 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/sufocados-pelos-juros/. Title: Opinião | Brasil corre sério risco de permanecer p...
+2025-08-26 22:12:25 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:12:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:13:02 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 22:13:05 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/ZYYXJ72TSFBYZJALDJ7DM43A3Y.JPG?quality=80&auth=39a0c8e0ebde774fbdbb1583ee5471304d86154eafb8dd5857c07ddd88c2afcc&width=1200&height=630&smart=true
+2025-08-26 22:13:06 - INFO - wordpress - Created new tag 'Ajuste Fiscal' with ID 108.
+2025-08-26 22:13:06 - INFO - wordpress - Created new tag 'Reforma Tributária' with ID 109.
+2025-08-26 22:13:07 - INFO - wordpress - Created new tag 'PIB' with ID 110.
+2025-08-26 22:13:08 - INFO - wordpress - Created new tag 'Ministério da Fazenda' with ID 111.
+2025-08-26 22:13:08 - INFO - wordpress - Resolved tags ['Taxa Selic', 'Fernando Haddad', 'Ajuste Fiscal', 'Reforma Tributária', 'Inflação', 'PIB', 'Ministério da Fazenda'] to IDs: [107, 82, 108, 109, 38, 110, 111]
+2025-08-26 22:13:08 - INFO - store - Successfully recorded published post for article DB ID 2864 (WP Post ID: 3341).
+2025-08-26 22:13:08 - INFO - pipeline - Successfully published post 3341 for article DB ID 2864
+2025-08-26 22:13:08 - INFO - pipeline - Sleeping for 7.5s (per-article delay).
+2025-08-26 22:13:16 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-26 22:13:31 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 22:13:31 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:13:31 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 22:13:32 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 22:13:32 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 22:13:32 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 22:13:32 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 22:13:32 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:13:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 22:13:32 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 22:13:32 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 22:13:32 - INFO - pipeline - Found 20 new articles for estadao_brasil
+2025-08-26 22:13:32 - INFO - pipeline - Processing article: Quem é o brasileiro encontrado morto em piscina de hotel na Grécia; amigo estava desacordado (DB ID: 2866) from estadao_brasil
+2025-08-26 22:13:32 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:13:32 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:13:32 - INFO - extractor - Collected 0 images from article (pre+post).
+2025-08-26 22:13:32 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/quem-e-o-brasileiro-encontrado-morto-em-piscina-de-hotel-na-grecia-amigo-estava-desacordado-nprm/. Title: Quem é o brasileiro encontrado morto em piscina de...
+2025-08-26 22:13:32 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:13:38 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:14:08 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 22:14:10 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/Z4PCFIQVVFFNLEIN6RPWPAND74.jpg?quality=80&auth=c4f9f0bb3328d3b134d972518daf88796fd21a4e478dbe803bba6ea214a0f9ef&width=1200&height=630&focal=364,418
+2025-08-26 22:14:10 - INFO - wordpress - Created new tag 'Grécia' with ID 112.
+2025-08-26 22:14:11 - INFO - wordpress - Created new tag 'Morte de Brasileiro' with ID 113.
+2025-08-26 22:14:11 - INFO - wordpress - Created new tag 'Investigação Policial' with ID 114.
+2025-08-26 22:14:12 - INFO - wordpress - Created new tag 'Turismo' with ID 115.
+2025-08-26 22:14:13 - INFO - wordpress - Created new tag 'Embaixada Brasileira' with ID 116.
+2025-08-26 22:14:13 - INFO - wordpress - Created new tag 'Segurança de Turistas' with ID 117.
+2025-08-26 22:14:14 - INFO - wordpress - Created new tag 'Tragédia' with ID 118.
+2025-08-26 22:14:14 - INFO - wordpress - Resolved tags ['Grécia', 'Morte de Brasileiro', 'Investigação Policial', 'Turismo', 'Embaixada Brasileira', 'Segurança de Turistas', 'Tragédia'] to IDs: [112, 113, 114, 115, 116, 117, 118]
+2025-08-26 22:14:14 - INFO - store - Successfully recorded published post for article DB ID 2866 (WP Post ID: 3343).
+2025-08-26 22:14:14 - INFO - pipeline - Successfully published post 3343 for article DB ID 2866
+2025-08-26 22:14:14 - INFO - pipeline - Sleeping for 7.0s (per-article delay).
+2025-08-26 22:14:21 - INFO - pipeline - Processing article: Alcolumbre anuncia votação do projeto de lei da adultização nesta quarta-feira (DB ID: 2867) from estadao_brasil
+2025-08-26 22:14:23 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:14:23 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:14:23 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:14:23 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/alcolumbre-anuncia-votacao-do-projeto-de-lei-da-adultizacao-nesta-quarta-feira/. Title: Alcolumbre anuncia votação do projeto de lei da ad...
+2025-08-26 22:14:23 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:15:17 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:15:47 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:15:52 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/2NBBHVKAABENFKA5PFZIUDDGBM.jpg?quality=80&auth=b4dd67a561326407fbd5239e2702a7f5c6d0ef9938c6372afe8c5ad99a13cf71&width=1200&height=630&smart=true
+2025-08-26 22:15:52 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fs3.amazonaws.com%2Farc-authors%2Festadao%2F9143e36d-d61d-40e9-b87a-ec1fa595a2af.JPG?quality=80&auth=bd43ceb7d02c34587be9c4c4eb562311ab733ee3ea59858d284854310a4ad515&width=60&height=60&smart=true
+2025-08-26 22:15:53 - INFO - wordpress - Created new tag 'Davi Alcolumbre' with ID 119.
+2025-08-26 22:15:53 - INFO - wordpress - Created new tag 'Senado Federal' with ID 120.
+2025-08-26 22:15:54 - INFO - wordpress - Created new tag 'maioridade penal' with ID 121.
+2025-08-26 22:15:54 - INFO - wordpress - Created new tag 'Código Penal Brasileiro' with ID 122.
+2025-08-26 22:15:55 - INFO - wordpress - Created new tag 'redução da idade penal' with ID 123.
+2025-08-26 22:15:55 - INFO - wordpress - Resolved tags ['Davi Alcolumbre', 'Senado Federal', 'maioridade penal', 'Código Penal Brasileiro', 'redução da idade penal'] to IDs: [119, 120, 121, 122, 123]
+2025-08-26 22:15:55 - INFO - store - Successfully recorded published post for article DB ID 2867 (WP Post ID: 3346).
+2025-08-26 22:15:55 - INFO - pipeline - Successfully published post 3346 for article DB ID 2867
+2025-08-26 22:15:55 - INFO - pipeline - Sleeping for 8.4s (per-article delay).
+2025-08-26 22:16:04 - INFO - pipeline - Processing article: Homem preso por fazer ameaças de morte a Felca é investigado por outros crimes; veja quais (DB ID: 2868) from estadao_brasil
+2025-08-26 22:16:04 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:16:04 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:16:04 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:16:04 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/homem-preso-por-ameacar-felca-de-morte-e-investigado-por-outros-crimes-veja-quais-nprm/. Title: Homem preso por fazer ameaças de morte a Felca é i...
+2025-08-26 22:16:04 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:16:10 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:16:40 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:16:43 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/ELXYAQUIHBAQNB2WFKAIPEZVAQ.jpg?quality=80&auth=404d0f70b17bd8b55751450a8dba1936c5871794447cf94468e180cfd4ea87cd&width=1200&height=630&smart=true
+2025-08-26 22:16:43 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fs3.amazonaws.com%2Farc-authors%2Festadao%2F0df97b49-314a-4200-a8d5-7aa8bdf6c715.png?quality=80&auth=8967e4048fee74d3d9584c40c0cf6b5716848dc52e548a87becf7a4de8d418e0&width=60&height=60&smart=true
+2025-08-26 22:16:44 - INFO - wordpress - Created new tag 'Felca' with ID 124.
+2025-08-26 22:16:44 - INFO - wordpress - Created new tag 'Ameaças' with ID 125.
+2025-08-26 22:16:45 - INFO - wordpress - Created new tag 'Prisão' with ID 126.
+2025-08-26 22:16:46 - INFO - wordpress - Created new tag 'Crimes' with ID 127.
+2025-08-26 22:16:46 - INFO - wordpress - Created new tag 'Redes Sociais' with ID 128.
+2025-08-26 22:16:47 - INFO - wordpress - Created new tag 'Violência Online' with ID 129.
+2025-08-26 22:16:47 - INFO - wordpress - Resolved tags ['Felca', 'Ameaças', 'Prisão', 'Investigação', 'Crimes', 'Redes Sociais', 'Violência Online'] to IDs: [124, 125, 126, 98, 127, 128, 129]
+2025-08-26 22:16:47 - INFO - store - Successfully recorded published post for article DB ID 2868 (WP Post ID: 3349).
+2025-08-26 22:16:47 - INFO - pipeline - Successfully published post 3349 for article DB ID 2868
+2025-08-26 22:16:47 - INFO - pipeline - Sleeping for 7.9s (per-article delay).
+2025-08-26 22:16:55 - INFO - pipeline - Finished feed 'estadao_brasil'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-26 22:17:10 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 22:17:10 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:17:13 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 22:17:14 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 22:17:14 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 22:17:14 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 22:17:14 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 22:17:14 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:17:14 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 22:17:14 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 22:17:14 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 22:17:14 - INFO - pipeline - Found 10 new articles for infomoney_investir
+2025-08-26 22:17:14 - INFO - pipeline - Processing article: Vendas do Tesouro Direto batem recorde para meses de julho; veja papel mais buscado (DB ID: 2886) from infomoney_investir
+2025-08-26 22:17:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:17:14 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:17:14 - INFO - extractor - Collected 2 images from article (pre+post).
+2025-08-26 22:17:14 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/vendas-do-tesouro-direto-batem-recorde-para-meses-de-julho-veja-papel-mais-buscado/. Title: Vendas do Tesouro Direto batem recorde para meses ...
+2025-08-26 22:17:14 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:17:22 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:17:52 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 22:17:57 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/03/money-2387280_1280-1.jpg?quality=70
+2025-08-26 22:17:59 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/05/renda-fixa-hoje-005.jpg?quality=70&strip=all
+2025-08-26 22:18:09 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/jakub-zerdzicki-VM_6EtTAfDQ-unsplash.png?quality=70&strip=all
+2025-08-26 22:18:10 - INFO - wordpress - Created new tag 'Tesouro Direto' with ID 130.
+2025-08-26 22:18:10 - INFO - wordpress - Created new tag 'Tesouro Selic 2026' with ID 131.
+2025-08-26 22:18:11 - INFO - wordpress - Created new tag 'investimentos' with ID 132.
+2025-08-26 22:18:12 - INFO - wordpress - Created new tag 'COPOM' with ID 133.
+2025-08-26 22:18:12 - INFO - wordpress - Resolved tags ['Tesouro Direto', 'Tesouro Selic 2026', 'taxa Selic', 'inflação', 'investimentos', 'economia brasileira', 'COPOM'] to IDs: [130, 131, 107, 38, 132, 86, 133]
+2025-08-26 22:18:13 - INFO - store - Successfully recorded published post for article DB ID 2886 (WP Post ID: 3353).
+2025-08-26 22:18:13 - INFO - pipeline - Successfully published post 3353 for article DB ID 2886
+2025-08-26 22:18:13 - INFO - pipeline - Sleeping for 6.1s (per-article delay).
+2025-08-26 22:18:19 - INFO - pipeline - Processing article: ASA, de Alberto Safra, obtém licença de sociedade de crédito (DB ID: 2887) from infomoney_investir
+2025-08-26 22:18:19 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:18:19 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:18:19 - INFO - extractor - Collected 0 images from article (pre+post).
+2025-08-26 22:18:19 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/asa-de-alberto-safra-obtem-licenca-de-sociedade-de-credito/. Title: ASA, de Alberto Safra, obtém licença de sociedade ...
+2025-08-26 22:18:19 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:18:24 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:18:54 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 22:19:06 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/jakub-zerdzicki-VM_6EtTAfDQ-unsplash.png?quality=70
+2025-08-26 22:19:06 - INFO - wordpress - Created new tag 'ASA Investimentos' with ID 134.
+2025-08-26 22:19:07 - INFO - wordpress - Created new tag 'Alberto Safra' with ID 135.
+2025-08-26 22:19:07 - INFO - wordpress - Created new tag 'Grupo Safra' with ID 136.
+2025-08-26 22:19:08 - INFO - wordpress - Created new tag 'licença de crédito' with ID 137.
+2025-08-26 22:19:08 - INFO - wordpress - Created new tag 'sociedade de crédito' with ID 138.
+2025-08-26 22:19:08 - INFO - wordpress - Resolved tags ['ASA Investimentos', 'Alberto Safra', 'Grupo Safra', 'mercado financeiro', 'licença de crédito', 'sociedade de crédito'] to IDs: [134, 135, 136, 74, 137, 138]
+2025-08-26 22:19:09 - INFO - store - Successfully recorded published post for article DB ID 2887 (WP Post ID: 3355).
+2025-08-26 22:19:09 - INFO - pipeline - Successfully published post 3355 for article DB ID 2887
+2025-08-26 22:19:09 - INFO - pipeline - Sleeping for 9.9s (per-article delay).
+2025-08-26 22:19:19 - INFO - pipeline - Processing article: Fiagros se reinventam em busca de ampliar acesso do pequeno investidor ao agro (DB ID: 2888) from infomoney_investir
+2025-08-26 22:19:19 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:19:19 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:19:19 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:19:19 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/fiagros-se-reinventam-em-busca-de-ampliar-acesso-do-pequeno-investidor-ao-agro/. Title: Fiagros se reinventam em busca de ampliar acesso d...
+2025-08-26 22:19:19 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:19:25 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:19:55 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:20:05 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/james-baltz-zuhouVw4ZkQ-unsplash.png?quality=70
+2025-08-26 22:20:07 - INFO - wordpress - Successfully uploaded image: https://img.youtube.com/vi_webp/wq-_3m6hrX8/sddefault.webp
+2025-08-26 22:20:07 - INFO - wordpress - Created new tag 'Fiagros' with ID 139.
+2025-08-26 22:20:08 - INFO - wordpress - Created new tag 'agronegócio' with ID 140.
+2025-08-26 22:20:09 - INFO - wordpress - Created new tag 'pequenos investidores' with ID 141.
+2025-08-26 22:20:09 - INFO - wordpress - Created new tag 'tecnologia' with ID 142.
+2025-08-26 22:20:09 - INFO - wordpress - Created new tag 'CVM' with ID 143.
+2025-08-26 22:20:10 - INFO - wordpress - Created new tag 'educação financeira' with ID 144.
+2025-08-26 22:20:10 - INFO - wordpress - Resolved tags ['Fiagros', 'agronegócio', 'investimentos', 'pequenos investidores', 'tecnologia', 'CVM', 'educação financeira'] to IDs: [139, 140, 132, 141, 142, 143, 144]
+2025-08-26 22:20:11 - INFO - store - Successfully recorded published post for article DB ID 2888 (WP Post ID: 3358).
+2025-08-26 22:20:11 - INFO - pipeline - Successfully published post 3358 for article DB ID 2888
+2025-08-26 22:20:11 - INFO - pipeline - Sleeping for 9.3s (per-article delay).
+2025-08-26 22:20:20 - INFO - pipeline - Finished feed 'infomoney_investir'. Sleeping for 15s before next feed: infomoney_mundo
+2025-08-26 22:20:35 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 22:20:35 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:20:36 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 22:20:36 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 22:20:36 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 22:20:36 - INFO - pipeline - Found 10 new articles for infomoney_mundo
+2025-08-26 22:20:36 - INFO - pipeline - Processing article: Zelenskiy diz que países do Golfo ou da Europa poderiam sediar conversas com Putin (DB ID: 2896) from infomoney_mundo
+2025-08-26 22:20:37 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:20:37 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:20:37 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:20:37 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/zelenskiy-diz-que-paises-do-golfo-ou-da-europa-poderiam-sediar-conversas-com-putin/. Title: Zelenskiy diz que países do Golfo ou da Europa pod...
+2025-08-26 22:20:37 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:20:44 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:21:14 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:21:15 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-13T131139Z_2097253598_RC2MTCANP136_RTRMADP_3_UKRAINE-CRISIS-USA-REACTION.jpg?quality=70
+2025-08-26 22:21:18 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/07/900-x-300-com-texto-na-imagem-11.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 22:21:18 - INFO - wordpress - Created new tag 'Volodymyr Zelensky' with ID 145.
+2025-08-26 22:21:19 - INFO - wordpress - Created new tag 'Vladimir Putin' with ID 146.
+2025-08-26 22:21:19 - INFO - wordpress - Created new tag 'Ucrânia' with ID 147.
+2025-08-26 22:21:20 - INFO - wordpress - Created new tag 'Rússia' with ID 148.
+2025-08-26 22:21:20 - INFO - wordpress - Created new tag 'Negociações de Paz' with ID 149.
+2025-08-26 22:21:21 - INFO - wordpress - Created new tag 'Golfo Pérsico' with ID 150.
+2025-08-26 22:21:21 - INFO - wordpress - Created new tag 'Europa' with ID 151.
+2025-08-26 22:21:21 - INFO - wordpress - Resolved tags ['Volodymyr Zelensky', 'Vladimir Putin', 'Ucrânia', 'Rússia', 'Negociações de Paz', 'Golfo Pérsico', 'Europa'] to IDs: [145, 146, 147, 148, 149, 150, 151]
+2025-08-26 22:21:22 - INFO - store - Successfully recorded published post for article DB ID 2896 (WP Post ID: 3361).
+2025-08-26 22:21:22 - INFO - pipeline - Successfully published post 3361 for article DB ID 2896
+2025-08-26 22:21:22 - INFO - pipeline - Sleeping for 7.0s (per-article delay).
+2025-08-26 22:21:29 - INFO - pipeline - Processing article: Vieira: não procede alegação dos EUA de que Brasil é país mais favorecido por tarifas (DB ID: 2897) from infomoney_mundo
+2025-08-26 22:21:29 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:21:29 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:21:29 - INFO - extractor - Collected 3 images from article (pre+post).
+2025-08-26 22:21:29 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/vieira-nao-procede-alegacao-dos-eua-de-que-brasil-e-pais-mais-favorecido-por-tarifas/. Title: Vieira: não procede alegação dos EUA de que Brasil...
+2025-08-26 22:21:29 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:21:37 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:22:07 - INFO - pipeline - Attempting to upload up to 4 images.
+2025-08-26 22:22:10 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2024/04/2024-04-15T174233Z_1_LYNXNPEK3E0O4_RTROPTP_4_ISRAEL-PALESTINIANS-POLITICS-BRAZIL.jpg?quality=70
+2025-08-26 22:22:15 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 22:22:17 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Plantacao-de-cafe-e1756233248394.jpg?quality=70&strip=all
+2025-08-26 22:22:27 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_4dfea1.png?quality=70&strip=all
+2025-08-26 22:22:28 - INFO - wordpress - Created new tag 'Estados Unidos' with ID 152.
+2025-08-26 22:22:29 - INFO - wordpress - Created new tag 'OMC' with ID 153.
+2025-08-26 22:22:29 - INFO - wordpress - Created new tag 'Tarifas' with ID 154.
+2025-08-26 22:22:30 - INFO - wordpress - Created new tag 'Comércio Exterior' with ID 155.
+2025-08-26 22:22:30 - INFO - wordpress - Created new tag 'Política Comercial' with ID 156.
+2025-08-26 22:22:30 - INFO - wordpress - Resolved tags ['Fernando Haddad', 'Estados Unidos', 'OMC', 'Tarifas', 'Comércio Exterior', 'Política Comercial', 'Relações Internacionais'] to IDs: [82, 152, 153, 154, 155, 156, 92]
+2025-08-26 22:22:31 - INFO - store - Successfully recorded published post for article DB ID 2897 (WP Post ID: 3366).
+2025-08-26 22:22:31 - INFO - pipeline - Successfully published post 3366 for article DB ID 2897
+2025-08-26 22:22:31 - INFO - pipeline - Sleeping for 7.5s (per-article delay).
+2025-08-26 22:22:39 - INFO - pipeline - Processing article: Maduro critica envio de tropas dos EUA ao Caribe: “Ninguém toca nesta terra” (DB ID: 2898) from infomoney_mundo
+2025-08-26 22:22:39 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:22:39 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 22:22:39 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 22:22:39 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/maduro-critica-envio-de-tropas-dos-eua-ao-caribe-ninguem-toca-nesta-terra/. Title: Maduro critica envio de tropas dos EUA ao Caribe: ...
+2025-08-26 22:22:39 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 22:22:45 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 22:23:15 - INFO - pipeline - Attempting to upload up to 2 images.
+2025-08-26 22:23:26 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2024/08/2024-08-01T141041Z_1_LYNXMPEK701VV_RTROPTP_4_VENEZUELA-ELECTION_b71a0f.jpg?quality=70
+2025-08-26 22:23:29 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/07/900-x-300-com-texto-na-imagem-11.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 22:23:30 - INFO - wordpress - Created new tag 'Nicolás Maduro' with ID 157.
+2025-08-26 22:23:30 - INFO - wordpress - Created new tag 'Caribe' with ID 158.
+2025-08-26 22:23:31 - INFO - wordpress - Created new tag 'tensões geopolíticas' with ID 159.
+2025-08-26 22:23:31 - INFO - wordpress - Created new tag 'soberania nacional' with ID 160.
+2025-08-26 22:23:32 - INFO - wordpress - Created new tag 'FMI' with ID 161.
+2025-08-26 22:23:32 - INFO - wordpress - Created new tag 'OEA' with ID 162.
+2025-08-26 22:23:32 - INFO - wordpress - Resolved tags ['Nicolás Maduro', 'Estados Unidos', 'Caribe', 'tensões geopolíticas', 'soberania nacional', 'FMI', 'OEA'] to IDs: [157, 152, 158, 159, 160, 161, 162]
+2025-08-26 22:23:33 - INFO - store - Successfully recorded published post for article DB ID 2898 (WP Post ID: 3369).
+2025-08-26 22:23:33 - INFO - pipeline - Successfully published post 3369 for article DB ID 2898
+2025-08-26 22:23:33 - INFO - pipeline - Sleeping for 6.7s (per-article delay).
+2025-08-26 22:23:40 - INFO - pipeline - Pipeline cycle completed. Processed 13 articles.
+2025-08-26 22:23:40 - INFO - store - Database connection closed.
+2025-08-26 22:23:40 - INFO - main - Ciclo único finalizado.

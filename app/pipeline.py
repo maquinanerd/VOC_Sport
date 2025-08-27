@@ -163,6 +163,8 @@ def run_pipeline_cycle():
                         if featured_url := extracted_data.get('featured_image_url'):
                             k = featured_url.rstrip('/')
                             featured_media_id = uploaded_id_map.get(k)
+                        else:
+                            logger.info("No suitable featured image found after filtering; proceeding without one.")
                         if not featured_media_id and uploaded_id_map:
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
