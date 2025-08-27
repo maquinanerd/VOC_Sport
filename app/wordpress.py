@@ -2,10 +2,21 @@ import logging
 import requests
 import time
 import json
-from typing import Dict, Any, Optional
+import re
+from typing import Dict, Any, Optional, List
 from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
+
+def _slugify(name: str) -> str:
+    """Creates a simple, WordPress-compatible slug from a string."""
+    s = name.strip().lower()
+    # Remove characters that are not alphanumeric, whitespace, or hyphen
+    s = re.sub(r'[^\w\s-]', '', s, flags=re.UNICODE)
+    # Replace whitespace and underscores with a hyphen
+    s = re.sub(r'[\s_-]+', '-', s, flags=re.UNICODE)
+    # Strip leading/trailing hyphens and limit length
+    return s.strip('-')[:190] or 'tag'
 
 class WordPressClient:
     """A client for interacting with the WordPress REST API."""
@@ -28,6 +39,83 @@ class WordPressClient:
             return urlparse(self.api_url).netloc
         except Exception:
             return ""
+
+    def _get_existing_tag_id(self, name: str) -> Optional[int]:
+        """Searches for an existing tag by name or slug and returns its ID."""
+        slug = _slugify(name)
+        tags_endpoint = f"{self.api_url}/tags"
+        params = {"search": name, "per_page": 100}
+
+        try:
+            r = self.session.get(tags_endpoint, params=params, timeout=20)
+            r.raise_for_status()
+            items = r.json()
+            
+            # WordPress search can be broad, so we verify the match
+            for item in items:
+                if item.get('name', '').strip().lower() == name.strip().lower():
+                    return int(item['id'])
+            for item in items:
+                if item.get('slug') == slug:
+                    return int(item['id'])
+        except requests.RequestException as e:
+            logger.error(f"Error searching for tag '{name}': {e}")
+        
+        return None
+
+    def _create_tag(self, name: str) -> Optional[int]:
+        """Creates a new tag and returns its ID."""
+        tags_endpoint = f"{self.api_url}/tags"
+        payload = {"name": name, "slug": _slugify(name)}
+        
+        try:
+            r = self.session.post(tags_endpoint, json=payload, timeout=20)
+            
+            if r.status_code in (200, 201):
+                tag_id = int(r.json()['id'])
+                logger.info(f"Created new tag '{name}' with ID {tag_id}.")
+                return tag_id
+            
+            # Handle race condition where tag was created between search and post
+            if r.status_code == 400 and isinstance(r.json(), dict) and r.json().get("code") == "term_exists":
+                logger.warning(f"Tag '{name}' already exists (race condition). Re-fetching ID.")
+                return self._get_existing_tag_id(name)
+            
+            r.raise_for_status()
+        except requests.RequestException as e:
+            logger.error(f"Error creating tag '{name}': {e}")
+            if e.response is not None:
+                logger.error(f"Response body: {e.response.text}")
+
+        return None
+
+    def _ensure_tag_ids(self, tags: List[Any], max_tags: int = 10) -> List[int]:
+        """Converts a list of tag names/IDs into a list of integer IDs, creating tags if necessary."""
+        if not tags:
+            return []
+
+        # Normalize input (handles strings, ints, and comma-separated strings)
+        norm_tags: List[str] = []
+        for t in tags:
+            if isinstance(t, int):
+                norm_tags.append(str(t))
+            elif isinstance(t, str):
+                norm_tags.extend([p.strip() for p in t.split(',') if p.strip()])
+        
+        # Deduplicate and limit
+        cleaned_tags = list(dict.fromkeys(norm_tags))[:max_tags]
+        
+        tag_ids: List[int] = []
+        for tag_name in cleaned_tags:
+            if tag_name.isdigit():
+                tag_ids.append(int(tag_name))
+            elif len(tag_name) >= 2:
+                tag_id = self._get_existing_tag_id(tag_name) or self._create_tag(tag_name)
+                if tag_id:
+                    tag_ids.append(tag_id)
+        
+        logger.info(f"Resolved tags {tags} to IDs: {tag_ids}")
+        return tag_ids
 
     def upload_media_from_url(self, image_url: str, alt_text: str = "", max_attempts: int = 3) -> Optional[Dict[str, Any]]:
         """
@@ -69,6 +157,10 @@ class WordPressClient:
     def create_post(self, payload: Dict[str, Any]) -> Optional[int]:
         """Creates a new post in WordPress."""
         try:
+            # Resolve tag names to integer IDs before sending
+            if 'tags' in payload and payload['tags']:
+                payload['tags'] = self._ensure_tag_ids(payload['tags'])
+
             posts_endpoint = f"{self.api_url}/posts"
             payload.setdefault('status', 'publish')
 
@@ -79,7 +171,7 @@ class WordPressClient:
             except Exception as log_e:
                 logger.warning(f"Could not serialize payload for logging: {log_e}")
 
-            response = self.session.post(posts_endpoint, json=payload, timeout=30)
+            response = self.session.post(posts_endpoint, json=payload, timeout=60)
             response.raise_for_status()
             return response.json().get('id')
         except requests.RequestException as e:

@@ -20357,3 +20357,56 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ma
 2025-08-26 21:42:52 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-26 21:42:52 - INFO - store - Database connection closed.
 2025-08-26 21:42:52 - INFO - main - Ciclo único finalizado.
+2025-08-26 21:57:13 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 21:57:13 - INFO - store - Database connection closed.
+2025-08-26 21:57:13 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 21:57:13 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 21:57:13 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 21:57:13 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 21:57:13 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 21:57:13 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 21:57:13 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 21:57:13 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 21:57:13 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 21:57:13 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 21:57:13 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 21:57:14 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 21:57:14 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 21:57:14 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 21:57:14 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 21:57:14 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 21:57:14 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 21:57:14 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 21:57:14 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 21:57:14 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 21:57:14 - INFO - pipeline - Found 20 new articles for estadao_economia
+2025-08-26 21:57:14 - INFO - pipeline - Processing article: Tarifas de Trump põem em risco a espinha dorsal da cadeia global de peças para automóveis (DB ID: 2841) from estadao_economia
+2025-08-26 21:57:16 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 21:57:16 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 21:57:16 - INFO - extractor - Collected 0 images from article (pre+post).
+2025-08-26 21:57:16 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/espinha-cadeia-automotiva-global-risco-tarifas-trump/. Title: Tarifas de Trump põem em risco a espinha dorsal da...
+2025-08-26 21:57:16 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 21:57:24 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 21:57:54 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 21:57:59 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/ONEQSAW5PVFFLKR4BLU6IFELOY.jpg?quality=80&auth=ab1b25dc2f109a0dffe5d67b320da4d9837037def14a833530ce37454a38c730&width=1200&height=630&smart=true
+2025-08-26 21:57:59 - ERROR - wordpress - Failed to create WordPress post: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\wordpress.py", line 83, in create_post
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+2025-08-26 21:57:59 - ERROR - wordpress - WordPress response body on error: {"code":"rest_invalid_param","message":"Par\u00e2metro(s) inv\u00e1lido(s): tags","data":{"status":400,"params":{"tags":"tags[0] n\u00e3o \u00e9 do tipo integer."},"details":{"tags":{"code":"rest_invalid_type","message":"tags[0] n\u00e3o \u00e9 do tipo integer.","data":{"param":"tags[0]"}}}}}
+2025-08-26 21:57:59 - ERROR - pipeline - Failed to publish post for https://www.estadao.com.br/economia/espinha-cadeia-automotiva-global-risco-tarifas-trump/
+2025-08-26 21:57:59 - INFO - pipeline - Sleeping for 6.3s (per-article delay).
+2025-08-26 21:58:05 - INFO - pipeline - Processing article: Superintendente-geral do Cade sinaliza possível acordo em caso de moratória da soja (DB ID: 2842) from estadao_economia
+2025-08-26 21:58:06 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 21:58:06 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 21:58:06 - INFO - extractor - Collected 1 images from article (pre+post).
+2025-08-26 21:58:06 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/superintendente-cade-sinaliza-possivel-acordo-moratoria-soja/. Title: Superintendente-geral do Cade sinaliza possível ac...
+2025-08-26 21:58:06 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 21:58:13 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 21:58:38 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 21:58:38 - INFO - store - Database connection closed.
+2025-08-26 21:58:38 - INFO - main - Ciclo único finalizado.
