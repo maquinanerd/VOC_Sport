@@ -3,46 +3,10 @@ import logging
 import requests
 import xml.etree.ElementTree as ET
 from typing import List, Dict, Any, Optional
+import gzip
+import time
 
 logger = logging.getLogger(__name__)
-
-def _parse_sitemap(xml_bytes: bytes) -> List[Dict[str, Any]]:
-    """
-    Parses a sitemap.xml and returns a list of article-like dicts.
-    Based on user suggestion.
-    """
-    try:
-        root = ET.fromstring(xml_bytes)
-        ns = {'news': 'http://www.google.com/schemas/sitemap-news/0.9'}
-        items = []
-        # Use a namespace-agnostic way to find url tags
-        for url_element in root.findall('.//{*}url'):
-            loc = url_element.findtext('{*}loc')
-            if not loc:
-                continue
-
-            lastmod = url_element.findtext('{*}lastmod')
-            
-            # Try to find the title in the <news:news> block
-            news_block = url_element.find('{http://www.google.com/schemas/sitemap-news/0.9}news')
-            title = None
-            if news_block is not None:
-                title = news_block.findtext('news:title', ns)
-
-            items.append({
-                "link": loc,
-                "title": title or loc,
-                "published": lastmod,
-            })
-
-        # Sort by lastmod date (string comparison is fine for ISO 8601), descending.
-        items.sort(key=lambda x: x.get("published") or "", reverse=True)
-        
-        logger.info(f"Parsed {len(items)} items from sitemap.")
-        return items[:50] # Limit to 50 most recent
-    except ET.ParseError as e:
-        logger.error(f"Failed to parse XML sitemap: {e}")
-        return []
 
 class FeedReader:
     def __init__(self, user_agent: str):
@@ -53,10 +17,91 @@ class FeedReader:
         try:
             response = self.session.get(url, timeout=20)
             response.raise_for_status()
-            return response.content
+            
+            content = response.content
+            ctype = response.headers.get("Content-Type", "").lower()
+            
+            # Decompress if it's a gzipped file
+            if "gzip" in ctype or url.endswith(".gz"):
+                try:
+                    content = gzip.decompress(content)
+                except (gzip.BadGzipFile, OSError) as e:
+                    logger.warning(
+                        f"Content from {url} seems to be gzipped but failed to decompress. "
+                        f"Proceeding with original content. Error: {e}"
+                    )
+                except Exception as e:
+                    logger.error(f"An unexpected error occurred during gzip decompression for {url}: {e}")
+                    return None
+            
+            return content
         except requests.RequestException as e:
             logger.error(f"Failed to fetch feed/sitemap from {url}: {e}")
             return None
+
+    def _parse_sitemap(self, xml_bytes: bytes, limit: int = 50) -> List[Dict[str, Any]]:
+        """
+        Parses a sitemap.xml (or sitemapindex.xml) and returns a list of article-like dicts.
+        Handles nested sitemap indexes by fetching them.
+        """
+        try:
+            root = ET.fromstring(xml_bytes)
+        except ET.ParseError as e:
+            logger.error(f"Failed to parse XML sitemap: {e}")
+            return []
+
+        items = []
+
+        # Handle sitemap index by fetching and parsing child sitemaps
+        if root.tag.endswith("sitemapindex"):
+            logger.info("Detected sitemap index. Fetching child sitemaps.")
+            child_sitemap_urls = [
+                sm.findtext("{*}loc")
+                for sm in root.findall(".//{*}sitemap")
+                if sm.findtext("{*}loc")
+            ]
+
+            for url in child_sitemap_urls:
+                if len(items) >= limit:
+                    break
+                logger.debug(f"Fetching child sitemap from {url}")
+                child_bytes = self._fetch_content(url)
+                if child_bytes:
+                    # Recursive call to parse the child sitemap
+                    items.extend(self._parse_sitemap(child_bytes, limit=limit))
+                    time.sleep(0.2)  # Be polite
+            
+            # Sort and limit at the very end of processing the index
+            items.sort(key=lambda x: x.get("published") or "", reverse=True)
+            logger.info(f"Parsed {len(items)} total items from sitemap index.")
+            return items[:limit]
+
+        # Handle regular sitemap (urlset)
+        ns_news = "{http://www.google.com/schemas/sitemap-news/0.9}"
+        for url_element in root.findall(".//{*}url"):
+            loc = url_element.findtext("{*}loc")
+            if not loc:
+                continue
+
+            lastmod = url_element.findtext("{*}lastmod")
+            
+            title = None
+            news_block = url_element.find(ns_news + "news")
+            if news_block is not None:
+                title_element = news_block.find(ns_news + "title")
+                if title_element is not None and title_element.text:
+                    title = title_element.text.strip()
+
+            items.append({
+                "link": loc,
+                "title": title or loc,
+                "published": lastmod,
+            })
+
+        # For a single sitemap, sort and limit here.
+        items.sort(key=lambda x: x.get("published") or "", reverse=True)
+        logger.info(f"Parsed {len(items)} items from sitemap.")
+        return items[:limit]
 
     def read_feeds(self, feed_config: Dict[str, Any], source_id: str) -> List[Dict[str, Any]]:
         all_items = []
@@ -69,15 +114,26 @@ class FeedReader:
                 continue
 
             if feed_type == 'sitemap':
-                parsed_items = _parse_sitemap(content)
+                parsed_items = self._parse_sitemap(content, limit=50)
                 all_items.extend(parsed_items)
             else: # Default to 'rss'
                 feed = feedparser.parse(content)
                 if feed.bozo:
                     logger.warning(f"Feed from {url} is not well-formed: {feed.bozo_exception}")
-                all_items.extend(feed.entries)
+                
+                for entry in feed.entries:
+                    all_items.append({
+                        "link": entry.get("link"),
+                        "title": entry.get("title", entry.get("link")),
+                        "published": entry.get("published", entry.get("updated")),
+                    })
         
         seen_links = set()
-        unique_items = [item for item in all_items if item.get('link') and (item['link'] not in seen_links and not seen_links.add(item['link']))]
+        unique_items = []
+        for item in all_items:
+            link = item.get('link')
+            if link and link not in seen_links:
+                unique_items.append(item)
+                seen_links.add(link)
         logger.info(f"Found {len(unique_items)} total unique items for {source_id}.")
         return unique_items
