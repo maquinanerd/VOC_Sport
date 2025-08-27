@@ -25668,3 +25668,1503 @@ KeyError: 'link'
 2025-08-27 12:05:47 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
 2025-08-27 12:06:02 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-27 12:06:02 - INFO - store - Database connection closed.
+2025-08-27 14:46:40 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-27 14:46:40 - INFO - store - Initializing database tables if they don't exist...
+2025-08-27 14:46:40 - INFO - store - Database initialized successfully.
+2025-08-27 14:46:40 - INFO - store - Database connection closed.
+2025-08-27 14:46:40 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-27 14:46:40 - INFO - main - Executando o primeiro ciclo do pipeline imediatamente.
+2025-08-27 14:46:40 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 14:46:40 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 14:46:40 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 14:46:40 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 14:46:41 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 14:46:41 - INFO - pipeline - Found 16 new articles for estadao_politica
+2025-08-27 14:46:41 - INFO - pipeline - Processing article: Lula assina recondução de Gonet a novo mandato à frente da PGR (DB ID: 204) from estadao_politica
+2025-08-27 14:46:42 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/lula-assina-reconducao-de-gonet-a-novo-mandato-a-frente-da-pgr/. Will fall back to generic.
+2025-08-27 14:46:42 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:46:42 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/RYCIVGCYYVAWFLPA7TO7UURXJ4.jpg?quality=80&auth=8e9e15dc3d1d9a4896cf8e0b77dedbbb9f113e9454d6401fb0fa6a366323458f&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 14:46:42 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/lula-assina-reconducao-de-gonet-a-novo-mandato-a-frente-da-pgr/. Title: Lula assina recondução de Gonet a novo mandato à f...
+2025-08-27 14:46:42 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:46:50 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:47:20 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/RYCIVGCYYVAWFLPA7TO7UURXJ4.jpg?quality=80&auth=8e9e15dc3d1d9a4896cf8e0b77dedbbb9f113e9454d6401fb0fa6a366323458f&width=1200&height=630&smart=true
+2025-08-27 14:47:20 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:47:23 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/RYCIVGCYYVAWFLPA7TO7UURXJ4.jpg?quality=80&auth=8e9e15dc3d1d9a4896cf8e0b77dedbbb9f113e9454d6401fb0fa6a366323458f&width=1200&height=630&smart=true
+2025-08-27 14:47:24 - INFO - wordpress - Created new tag 'Augusto Aras' with ID 203.
+2025-08-27 14:47:25 - INFO - wordpress - Created new tag 'MPF' with ID 204.
+2025-08-27 14:47:26 - INFO - wordpress - Resolved tags ['Lula', 'Augusto Aras', 'PGR', 'MPF', 'Política Brasileira', 'STF', 'Governo Lula'] to IDs: [33, 203, 95, 204, 97, 45, 32]
+2025-08-27 14:47:26 - INFO - wordpress - WP payload: title_len=57 content_len=3106 cat=[21] tags=[33, 203, 95, 204, 97, 45, 32]
+2025-08-27 14:47:26 - INFO - store - Successfully recorded published post for article DB ID 204 (WP Post ID: 3464).
+2025-08-27 14:47:26 - INFO - pipeline - Successfully published post 3464 for article DB ID 204
+2025-08-27 14:47:26 - INFO - pipeline - Sleeping for 8.9s (per-article delay).
+2025-08-27 14:47:35 - INFO - pipeline - Processing article: Lula x Tarcísio: Relembre o embate entre os políticos que podem se enfrentar nas eleições de 2026 (DB ID: 205) from estadao_politica
+2025-08-27 14:47:35 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/lula-tarcisio-embate-politicos-podem-se-enfrentar-eleicoes-2026-nprp/. Will fall back to generic.
+2025-08-27 14:47:36 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:47:36 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/K7DMPSHCUFAR5LWCDNK2X6V4XY.jpg?quality=80&auth=e06aeb33f2e7a458f74ca86284c2f17b2f4dc0aadd478960cc93eee76a66f3c6&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 14:47:36 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/lula-tarcisio-embate-politicos-podem-se-enfrentar-eleicoes-2026-nprp/. Title: Lula x Tarcísio: Relembre o embate entre os políti...
+2025-08-27 14:47:36 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:47:44 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:48:14 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/K7DMPSHCUFAR5LWCDNK2X6V4XY.jpg?quality=80&auth=e06aeb33f2e7a458f74ca86284c2f17b2f4dc0aadd478960cc93eee76a66f3c6&width=1200&height=630&smart=true
+2025-08-27 14:48:14 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:48:17 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/K7DMPSHCUFAR5LWCDNK2X6V4XY.jpg?quality=80&auth=e06aeb33f2e7a458f74ca86284c2f17b2f4dc0aadd478960cc93eee76a66f3c6&width=1200&height=630&smart=true
+2025-08-27 14:48:18 - INFO - wordpress - Created new tag 'Eleições 2026' with ID 205.
+2025-08-27 14:48:20 - INFO - wordpress - Created new tag 'Ibovespa' with ID 206.
+2025-08-27 14:48:20 - INFO - wordpress - Resolved tags ['Lula', 'Tarcísio de Freitas', 'Eleições 2026', 'IPCA', 'Selic', 'COPOM', 'Ibovespa'] to IDs: [33, 163, 205, 93, 94, 133, 206]
+2025-08-27 14:48:20 - INFO - wordpress - WP payload: title_len=55 content_len=3770 cat=[21] tags=[33, 163, 205, 93, 94, 133, 206]
+2025-08-27 14:48:20 - INFO - store - Successfully recorded published post for article DB ID 205 (WP Post ID: 3466).
+2025-08-27 14:48:20 - INFO - pipeline - Successfully published post 3466 for article DB ID 205
+2025-08-27 14:48:20 - INFO - pipeline - Sleeping for 6.5s (per-article delay).
+2025-08-27 14:48:27 - INFO - pipeline - Processing article: México deve habilitar 14 novos frigoríficos para exportar carne bovina brasileira (DB ID: 206) from estadao_politica
+2025-08-27 14:48:28 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/coluna-do-estadao/mexico-deve-habilitar-14-novos-frigorificos-para-exportar-carne-bovina-brasileira/. Will fall back to generic.
+2025-08-27 14:48:28 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:48:28 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/6OVGQBQFFJDKTP6RDWQ2VV7T6I.jpg?quality=80&auth=e512192ac2184fcd1a198cba950f1fcf398e01ecfa19297d1e62070ca52c4c2e&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 14:48:28 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/coluna-do-estadao/mexico-deve-habilitar-14-novos-frigorificos-para-exportar-carne-bovina-brasileira/. Title: México deve habilitar 14 novos frigoríficos para e...
+2025-08-27 14:48:28 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:48:34 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:49:04 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/6OVGQBQFFJDKTP6RDWQ2VV7T6I.jpg?quality=80&auth=e512192ac2184fcd1a198cba950f1fcf398e01ecfa19297d1e62070ca52c4c2e&width=1200&height=630&smart=true
+2025-08-27 14:49:04 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:49:06 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/6OVGQBQFFJDKTP6RDWQ2VV7T6I.jpg?quality=80&auth=e512192ac2184fcd1a198cba950f1fcf398e01ecfa19297d1e62070ca52c4c2e&width=1200&height=630&smart=true
+2025-08-27 14:49:07 - INFO - wordpress - Created new tag 'México' with ID 207.
+2025-08-27 14:49:08 - INFO - wordpress - Created new tag 'Exportação de Carne Bovina' with ID 208.
+2025-08-27 14:49:08 - INFO - wordpress - Created new tag 'Frigoríficos Brasileiros' with ID 209.
+2025-08-27 14:49:09 - INFO - wordpress - Created new tag 'MAPA' with ID 210.
+2025-08-27 14:49:09 - INFO - wordpress - Resolved tags ['México', 'Exportação de Carne Bovina', 'Frigoríficos Brasileiros', 'Agronegócio', 'MAPA'] to IDs: [207, 208, 209, 140, 210]
+2025-08-27 14:49:09 - INFO - wordpress - WP payload: title_len=52 content_len=2874 cat=[21] tags=[207, 208, 209, 140, 210]
+2025-08-27 14:49:10 - INFO - store - Successfully recorded published post for article DB ID 206 (WP Post ID: 3468).
+2025-08-27 14:49:10 - INFO - pipeline - Successfully published post 3468 for article DB ID 206
+2025-08-27 14:49:10 - INFO - pipeline - Sleeping for 9.0s (per-article delay).
+2025-08-27 14:49:19 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-27 14:49:34 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 14:49:34 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 14:49:34 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 14:49:34 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 14:49:34 - INFO - pipeline - Found 9 new articles for infomoney_politica
+2025-08-27 14:49:34 - INFO - pipeline - Processing article: O que se sabe sobre o esquema especial de segurança do STF no julgamento de Bolsonaro (DB ID: 220) from infomoney_politica
+2025-08-27 14:49:35 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/politica/o-que-se-sabe-sobre-o-esquema-especial-de-seguranca-do-stf-no-julgamento-de-bolsonaro/. Will fall back to generic.
+2025-08-27 14:49:35 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:49:35 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-31T202510Z_715659772_RC2VXFAV7ANA_RTRMADP_3_USA-TRUMP-BRAZIL-TARIFFS.jpg?quality=70. Found 2 other valid images.
+2025-08-27 14:49:35 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/o-que-se-sabe-sobre-o-esquema-especial-de-seguranca-do-stf-no-julgamento-de-bolsonaro/. Title: O que se sabe sobre o esquema especial de seguranç...
+2025-08-27 14:49:35 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:49:42 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:50:12 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-31T202510Z_715659772_RC2VXFAV7ANA_RTRMADP_3_USA-TRUMP-BRAZIL-TARIFFS.jpg?quality=70
+2025-08-27 14:50:12 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:50:16 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-31T202510Z_715659772_RC2VXFAV7ANA_RTRMADP_3_USA-TRUMP-BRAZIL-TARIFFS.jpg?quality=70
+2025-08-27 14:50:17 - INFO - wordpress - Created new tag 'segurança' with ID 211.
+2025-08-27 14:50:17 - INFO - wordpress - Created new tag 'julgamento' with ID 212.
+2025-08-27 14:50:18 - INFO - wordpress - Created new tag 'polícia' with ID 213.
+2025-08-27 14:50:18 - INFO - wordpress - Resolved tags ['STF', 'Jair Bolsonaro', 'segurança', 'julgamento', 'polícia'] to IDs: [45, 46, 211, 212, 213]
+2025-08-27 14:50:18 - INFO - wordpress - WP payload: title_len=51 content_len=3968 cat=[21] tags=[45, 46, 211, 212, 213]
+2025-08-27 14:50:19 - INFO - store - Successfully recorded published post for article DB ID 220 (WP Post ID: 3470).
+2025-08-27 14:50:19 - INFO - pipeline - Successfully published post 3470 for article DB ID 220
+2025-08-27 14:50:19 - INFO - pipeline - Sleeping for 9.3s (per-article delay).
+2025-08-27 14:50:28 - INFO - pipeline - Processing article: “É ganha-ganha”, diz Alckmin ao defender exportações brasileiras para México e Canadá (DB ID: 221) from infomoney_politica
+2025-08-27 14:50:28 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/politica/e-ganha-ganha-diz-alckmin-ao-defender-exportacoes-brasileiras-para-mexico-e-canada/. Will fall back to generic.
+2025-08-27 14:50:28 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:50:28 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70. Found 2 other valid images.
+2025-08-27 14:50:28 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/e-ganha-ganha-diz-alckmin-ao-defender-exportacoes-brasileiras-para-mexico-e-canada/. Title: “É ganha-ganha”, diz Alckmin ao defender exportaçõ...
+2025-08-27 14:50:28 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:50:37 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:51:07 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70
+2025-08-27 14:51:07 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:51:10 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70
+2025-08-27 14:51:11 - INFO - wordpress - Created new tag 'Geraldo Alckmin' with ID 214.
+2025-08-27 14:51:12 - INFO - wordpress - Created new tag 'Canadá' with ID 215.
+2025-08-27 14:51:12 - INFO - wordpress - Created new tag 'Exportações Brasileiras' with ID 216.
+2025-08-27 14:51:13 - INFO - wordpress - Created new tag 'Acordos Comerciais' with ID 217.
+2025-08-27 14:51:13 - INFO - wordpress - Created new tag 'Agricultura' with ID 218.
+2025-08-27 14:51:14 - INFO - wordpress - Created new tag 'Indústria' with ID 219.
+2025-08-27 14:51:14 - INFO - wordpress - Resolved tags ['Geraldo Alckmin', 'México', 'Canadá', 'Exportações Brasileiras', 'Acordos Comerciais', 'Agricultura', 'Indústria'] to IDs: [214, 207, 215, 216, 217, 218, 219]
+2025-08-27 14:51:14 - INFO - wordpress - WP payload: title_len=63 content_len=4562 cat=[21] tags=[214, 207, 215, 216, 217, 218, 219]
+2025-08-27 14:51:15 - INFO - store - Successfully recorded published post for article DB ID 221 (WP Post ID: 3472).
+2025-08-27 14:51:15 - INFO - pipeline - Successfully published post 3472 for article DB ID 221
+2025-08-27 14:51:15 - INFO - pipeline - Sleeping for 8.1s (per-article delay).
+2025-08-27 14:51:23 - INFO - pipeline - Processing article: Haddad diz que Tarcísio é contra taxar super-ricos e cobra posicionamentos (DB ID: 222) from infomoney_politica
+2025-08-27 14:51:23 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/politica/haddad-diz-que-tarcisio-e-contra-taxar-super-ricos-e-cobra-posicionamentos/. Will fall back to generic.
+2025-08-27 14:51:23 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:51:23 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-25T130836Z_1_LYNXNPEL1O0GM_RTROPTP_4_BRAZIL-ECONOMY-LOANS-2.jpg?quality=70. Found 2 other valid images.
+2025-08-27 14:51:23 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/haddad-diz-que-tarcisio-e-contra-taxar-super-ricos-e-cobra-posicionamentos/. Title: Haddad diz que Tarcísio é contra taxar super-ricos...
+2025-08-27 14:51:23 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:51:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:52:02 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-25T130836Z_1_LYNXNPEL1O0GM_RTROPTP_4_BRAZIL-ECONOMY-LOANS-2.jpg?quality=70
+2025-08-27 14:52:02 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:52:15 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-25T130836Z_1_LYNXNPEL1O0GM_RTROPTP_4_BRAZIL-ECONOMY-LOANS-2.jpg?quality=70
+2025-08-27 14:52:16 - INFO - wordpress - Created new tag 'Imposto sobre grandes fortunas' with ID 220.
+2025-08-27 14:52:17 - INFO - wordpress - Resolved tags ['Fernando Haddad', 'Tarcísio de Freitas', 'Imposto sobre grandes fortunas', 'Política econômica', 'Congresso Nacional'] to IDs: [82, 163, 220, 36, 105]
+2025-08-27 14:52:17 - INFO - wordpress - WP payload: title_len=55 content_len=4941 cat=[21] tags=[82, 163, 220, 36, 105]
+2025-08-27 14:52:18 - INFO - store - Successfully recorded published post for article DB ID 222 (WP Post ID: 3474).
+2025-08-27 14:52:18 - INFO - pipeline - Successfully published post 3474 for article DB ID 222
+2025-08-27 14:52:18 - INFO - pipeline - Sleeping for 7.5s (per-article delay).
+2025-08-27 14:52:25 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: exame_brasil
+2025-08-27 14:52:40 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 14:52:40 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 14:52:40 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 14:52:45 - ERROR - pipeline - Error processing feed exame_brasil: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 14:52:45 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 14:53:00 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 14:53:00 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 14:53:00 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 14:53:00 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 14:53:00 - INFO - pipeline - Found 17 new articles for estadao_economia
+2025-08-27 14:53:00 - INFO - pipeline - Processing article: Haddad: Tarifaço machuca um pouco, mas Brasil tem condições macroeconômicas de enfrentar (DB ID: 229) from estadao_economia
+2025-08-27 14:53:01 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/fernando-haddad-tarifaco-beneficios-imposto-de-renda/. Will fall back to generic.
+2025-08-27 14:53:01 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:53:01 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/GE6UOZ4IVREOBNMFUIEPTZEBNA.jpg?quality=80&auth=a6b316840ee8dbaa028d18a99f0209af3e032a53ba37fe0bd683b0e4dd540062&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 14:53:01 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/fernando-haddad-tarifaco-beneficios-imposto-de-renda/. Title: Haddad: Tarifaço machuca um pouco, mas Brasil tem ...
+2025-08-27 14:53:01 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:53:11 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:53:41 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/GE6UOZ4IVREOBNMFUIEPTZEBNA.jpg?quality=80&auth=a6b316840ee8dbaa028d18a99f0209af3e032a53ba37fe0bd683b0e4dd540062&width=1200&height=630&smart=true
+2025-08-27 14:53:41 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:53:45 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/GE6UOZ4IVREOBNMFUIEPTZEBNA.jpg?quality=80&auth=a6b316840ee8dbaa028d18a99f0209af3e032a53ba37fe0bd683b0e4dd540062&width=1200&height=630&smart=true
+2025-08-27 14:53:47 - INFO - wordpress - Created new tag 'Luiz Inácio Lula da Silva' with ID 221.
+2025-08-27 14:53:47 - INFO - wordpress - Created new tag 'Dívida Pública' with ID 222.
+2025-08-27 14:53:47 - INFO - wordpress - Resolved tags ['Fernando Haddad', 'Taxa Selic', 'IPCA', 'Reforma Tributária', 'Banco Central', 'Luiz Inácio Lula da Silva', 'Dívida Pública'] to IDs: [82, 107, 93, 109, 37, 221, 222]
+2025-08-27 14:53:47 - INFO - wordpress - WP payload: title_len=42 content_len=4887 cat=[22] tags=[82, 107, 93, 109, 37, 221, 222]
+2025-08-27 14:53:48 - INFO - store - Successfully recorded published post for article DB ID 229 (WP Post ID: 3476).
+2025-08-27 14:53:48 - INFO - pipeline - Successfully published post 3476 for article DB ID 229
+2025-08-27 14:53:48 - INFO - pipeline - Sleeping for 8.0s (per-article delay).
+2025-08-27 14:53:56 - INFO - pipeline - Processing article: Gilmar Mendes, relator da pejotização, critica CLT: ‘Insistência em modelos ultrapassados’ (DB ID: 230) from estadao_economia
+2025-08-27 14:53:56 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/gilmar-diz-a-empresarios-que-clt-virou-vaca-sagrada-insistencia-em-manter-modelos-ultrapassados/. Will fall back to generic.
+2025-08-27 14:53:57 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:53:57 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/JJMTYIQ4KVD2DKWHVOLGXEB4B4.jpg?quality=80&auth=c8cc67cf49f7993656347fdf664e14cf35af948a0b5c9118d96076d68749913b&width=1200&height=630&focal=2717,1000. Found 0 other valid images.
+2025-08-27 14:53:57 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/gilmar-diz-a-empresarios-que-clt-virou-vaca-sagrada-insistencia-em-manter-modelos-ultrapassados/. Title: Gilmar Mendes, relator da pejotização, critica CLT...
+2025-08-27 14:53:57 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:54:08 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:54:38 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/JJMTYIQ4KVD2DKWHVOLGXEB4B4.jpg?quality=80&auth=c8cc67cf49f7993656347fdf664e14cf35af948a0b5c9118d96076d68749913b&width=1200&height=630&focal=2717,1000
+2025-08-27 14:54:38 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:54:40 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/JJMTYIQ4KVD2DKWHVOLGXEB4B4.jpg?quality=80&auth=c8cc67cf49f7993656347fdf664e14cf35af948a0b5c9118d96076d68749913b&width=1200&height=630&focal=2717,1000
+2025-08-27 14:54:40 - INFO - wordpress - Created new tag 'Gilmar Mendes' with ID 223.
+2025-08-27 14:54:41 - INFO - wordpress - Created new tag 'CLT' with ID 224.
+2025-08-27 14:54:41 - INFO - wordpress - Created new tag 'Pejotização' with ID 225.
+2025-08-27 14:54:42 - INFO - wordpress - Created new tag 'Reforma Trabalhista' with ID 226.
+2025-08-27 14:54:43 - INFO - wordpress - Created new tag 'mercado de trabalho' with ID 227.
+2025-08-27 14:54:43 - INFO - wordpress - Resolved tags ['Gilmar Mendes', 'CLT', 'Pejotização', 'Reforma Trabalhista', 'STF', 'economia', 'mercado de trabalho'] to IDs: [223, 224, 225, 226, 45, 104, 227]
+2025-08-27 14:54:43 - INFO - wordpress - WP payload: title_len=75 content_len=4119 cat=[22] tags=[223, 224, 225, 226, 45, 104, 227]
+2025-08-27 14:54:44 - INFO - store - Successfully recorded published post for article DB ID 230 (WP Post ID: 3478).
+2025-08-27 14:54:44 - INFO - pipeline - Successfully published post 3478 for article DB ID 230
+2025-08-27 14:54:44 - INFO - pipeline - Sleeping for 7.7s (per-article delay).
+2025-08-27 14:54:52 - INFO - pipeline - Processing article: Reforma administrativa precisa ter participação de Estados e municípios, diz Esther Dweck (DB ID: 231) from estadao_economia
+2025-08-27 14:54:52 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/reforma-administrativa-reestruturacao-estados-municipios/. Will fall back to generic.
+2025-08-27 14:54:52 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:54:52 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/Y5VFMG5PJRFVTP3FYDXIZGDBCE.jpg?quality=80&auth=555c484c16de924079fc85fc7ca7e0453f3700e96b04501eac92f89b2b8f3af9&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 14:54:52 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/reforma-administrativa-reestruturacao-estados-municipios/. Title: Reforma administrativa precisa ter participação de...
+2025-08-27 14:54:52 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:55:02 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:55:32 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/Y5VFMG5PJRFVTP3FYDXIZGDBCE.jpg?quality=80&auth=555c484c16de924079fc85fc7ca7e0453f3700e96b04501eac92f89b2b8f3af9&width=1200&height=630&smart=true
+2025-08-27 14:55:32 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:55:34 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/Y5VFMG5PJRFVTP3FYDXIZGDBCE.jpg?quality=80&auth=555c484c16de924079fc85fc7ca7e0453f3700e96b04501eac92f89b2b8f3af9&width=1200&height=630&smart=true
+2025-08-27 14:55:34 - INFO - wordpress - Created new tag 'Reforma Administrativa' with ID 228.
+2025-08-27 14:55:35 - INFO - wordpress - Created new tag 'Esther Dweck' with ID 229.
+2025-08-27 14:55:35 - INFO - wordpress - Created new tag 'Estados' with ID 230.
+2025-08-27 14:55:36 - INFO - wordpress - Created new tag 'Municípios' with ID 231.
+2025-08-27 14:55:36 - INFO - wordpress - Created new tag 'Gestão Pública' with ID 232.
+2025-08-27 14:55:37 - INFO - wordpress - Created new tag 'Administração Pública' with ID 233.
+2025-08-27 14:55:37 - INFO - wordpress - Resolved tags ['Reforma Administrativa', 'Esther Dweck', 'Estados', 'Municípios', 'Gestão Pública', 'Administração Pública', 'Governo'] to IDs: [228, 229, 230, 231, 232, 233, 100]
+2025-08-27 14:55:37 - INFO - wordpress - WP payload: title_len=82 content_len=5220 cat=[22] tags=[228, 229, 230, 231, 232, 233, 100]
+2025-08-27 14:55:38 - INFO - store - Successfully recorded published post for article DB ID 231 (WP Post ID: 3480).
+2025-08-27 14:55:38 - INFO - pipeline - Successfully published post 3480 for article DB ID 231
+2025-08-27 14:55:38 - INFO - pipeline - Sleeping for 7.5s (per-article delay).
+2025-08-27 14:55:46 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-27 14:56:01 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 14:56:01 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 14:56:01 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 14:56:01 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 14:56:01 - INFO - pipeline - Found 10 new articles for infomoney_economia
+2025-08-27 14:56:01 - INFO - pipeline - Processing article: “É ganha-ganha”, diz Alckmin ao defender exportações brasileiras para México e Canadá (DB ID: 246) from infomoney_economia
+2025-08-27 14:56:02 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/politica/e-ganha-ganha-diz-alckmin-ao-defender-exportacoes-brasileiras-para-mexico-e-canada/. Will fall back to generic.
+2025-08-27 14:56:02 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:56:02 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70. Found 2 other valid images.
+2025-08-27 14:56:02 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/e-ganha-ganha-diz-alckmin-ao-defender-exportacoes-brasileiras-para-mexico-e-canada/. Title: “É ganha-ganha”, diz Alckmin ao defender exportaçõ...
+2025-08-27 14:56:02 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:56:09 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:56:39 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70
+2025-08-27 14:56:39 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:56:42 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-10.45.54.jpeg?quality=70
+2025-08-27 14:56:44 - INFO - wordpress - Created new tag 'Exportações' with ID 234.
+2025-08-27 14:56:45 - INFO - wordpress - Created new tag 'Diplomacia Comercial' with ID 235.
+2025-08-27 14:56:45 - INFO - wordpress - Resolved tags ['Geraldo Alckmin', 'México', 'Canadá', 'Exportações', 'Agronegócio', 'Comércio Exterior', 'Diplomacia Comercial'] to IDs: [214, 207, 215, 234, 140, 155, 235]
+2025-08-27 14:56:45 - INFO - wordpress - WP payload: title_len=70 content_len=3245 cat=[22] tags=[214, 207, 215, 234, 140, 155, 235]
+2025-08-27 14:56:45 - INFO - store - Successfully recorded published post for article DB ID 246 (WP Post ID: 3482).
+2025-08-27 14:56:45 - INFO - pipeline - Successfully published post 3482 for article DB ID 246
+2025-08-27 14:56:45 - INFO - pipeline - Sleeping for 6.2s (per-article delay).
+2025-08-27 14:56:52 - INFO - pipeline - Processing article: Brasil amplia aposta no México e Canadá para driblar tarifa de Trump (DB ID: 247) from infomoney_economia
+2025-08-27 14:56:52 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/economia/brasil-amplia-aposta-no-mexico-e-canada-para-driblar-tarifa-de-trump/. Will fall back to generic.
+2025-08-27 14:56:52 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:56:52 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-09.56.36.jpeg?quality=70. Found 2 other valid images.
+2025-08-27 14:56:52 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/brasil-amplia-aposta-no-mexico-e-canada-para-driblar-tarifa-de-trump/. Title: Brasil amplia aposta no México e Canadá para dribl...
+2025-08-27 14:56:52 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:57:00 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:57:30 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-09.56.36.jpeg?quality=70
+2025-08-27 14:57:30 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:57:32 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-09.56.36.jpeg?quality=70
+2025-08-27 14:57:33 - INFO - wordpress - Created new tag 'tarifas de Trump' with ID 236.
+2025-08-27 14:57:34 - INFO - wordpress - Created new tag 'diversificação de exportações' with ID 237.
+2025-08-27 14:57:35 - INFO - wordpress - Created new tag 'acordo comercial' with ID 238.
+2025-08-27 14:57:35 - INFO - wordpress - Resolved tags ['México', 'Canadá', 'tarifas de Trump', 'diversificação de exportações', 'relações comerciais', 'crescimento econômico', 'acordo comercial'] to IDs: [207, 215, 236, 237, 62, 63, 238]
+2025-08-27 14:57:35 - INFO - wordpress - WP payload: title_len=63 content_len=3462 cat=[22] tags=[207, 215, 236, 237, 62, 63, 238]
+2025-08-27 14:57:36 - INFO - store - Successfully recorded published post for article DB ID 247 (WP Post ID: 3484).
+2025-08-27 14:57:36 - INFO - pipeline - Successfully published post 3484 for article DB ID 247
+2025-08-27 14:57:36 - INFO - pipeline - Sleeping for 9.6s (per-article delay).
+2025-08-27 14:57:45 - INFO - pipeline - Processing article: Atitude mais ‘honrosa’ que Cook poderia tomar é deixar Fed, diz membro da Casa Branca (DB ID: 248) from infomoney_economia
+2025-08-27 14:57:46 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mundo/atitude-mais-honrosa-que-cook-poderia-tomar-e-deixar-fed-diz-membro-da-casa-branca/. Will fall back to generic.
+2025-08-27 14:57:46 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:57:46 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70. Found 2 other valid images.
+2025-08-27 14:57:46 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/atitude-mais-honrosa-que-cook-poderia-tomar-e-deixar-fed-diz-membro-da-casa-branca/. Title: Atitude mais 'honrosa' que Cook poderia tomar é de...
+2025-08-27 14:57:46 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:57:56 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:58:26 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70
+2025-08-27 14:58:26 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 14:58:29 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70
+2025-08-27 14:58:30 - INFO - wordpress - Created new tag 'Jerome Powell' with ID 239.
+2025-08-27 14:58:30 - INFO - wordpress - Created new tag 'Casa Branca' with ID 240.
+2025-08-27 14:58:31 - INFO - wordpress - Created new tag 'Taxa de Juros' with ID 241.
+2025-08-27 14:58:32 - INFO - wordpress - Resolved tags ['Jerome Powell', 'Federal Reserve', 'Casa Branca', 'Taxa de Juros', 'Inflação', 'Política Monetária', 'Economia Americana'] to IDs: [239, 53, 240, 241, 38, 54, 67]
+2025-08-27 14:58:32 - INFO - wordpress - WP payload: title_len=59 content_len=4969 cat=[22] tags=[239, 53, 240, 241, 38, 54, 67]
+2025-08-27 14:58:32 - INFO - store - Successfully recorded published post for article DB ID 248 (WP Post ID: 3486).
+2025-08-27 14:58:32 - INFO - pipeline - Successfully published post 3486 for article DB ID 248
+2025-08-27 14:58:32 - INFO - pipeline - Sleeping for 9.6s (per-article delay).
+2025-08-27 14:58:42 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: exame_economia
+2025-08-27 14:58:57 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 14:58:57 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 14:58:57 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 14:59:00 - ERROR - pipeline - Error processing feed exame_economia: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 14:59:00 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 14:59:15 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 14:59:15 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 14:59:15 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 14:59:15 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 14:59:15 - INFO - pipeline - Found 8 new articles for infomoney_business
+2025-08-27 14:59:15 - INFO - pipeline - Processing article: Wellhub anuncia FDIC de R$ 100 mi para facilitar crédito de academias (DB ID: 256) from infomoney_business
+2025-08-27 14:59:16 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/business/wellhub-anuncia-fdic-de-r-100-mi-para-facilitar-credito-de-academias/. Will fall back to generic.
+2025-08-27 14:59:16 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 14:59:16 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Daniel-Mazini-foto-1_red.jpg?quality=70. Found 0 other valid images.
+2025-08-27 14:59:16 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/business/wellhub-anuncia-fdic-de-r-100-mi-para-facilitar-credito-de-academias/. Title: Wellhub anuncia FDIC de R$ 100 mi para facilitar c...
+2025-08-27 14:59:16 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 14:59:26 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 14:59:56 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Daniel-Mazini-foto-1_red.jpg?quality=70
+2025-08-27 14:59:56 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:00:00 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Daniel-Mazini-foto-1_red.jpg?quality=70
+2025-08-27 15:00:01 - INFO - wordpress - Created new tag 'Wellhub' with ID 242.
+2025-08-27 15:00:02 - INFO - wordpress - Created new tag 'FDIC' with ID 243.
+2025-08-27 15:00:02 - INFO - wordpress - Created new tag 'Crédito para Academias' with ID 244.
+2025-08-27 15:00:03 - INFO - wordpress - Created new tag 'Setor Fitness' with ID 245.
+2025-08-27 15:00:04 - INFO - wordpress - Created new tag 'Investimento' with ID 246.
+2025-08-27 15:00:04 - INFO - wordpress - Resolved tags ['Wellhub', 'FDIC', 'Crédito para Academias', 'Setor Fitness', 'Investimento'] to IDs: [242, 243, 244, 245, 246]
+2025-08-27 15:00:04 - INFO - wordpress - WP payload: title_len=63 content_len=3371 cat=[22] tags=[242, 243, 244, 245, 246]
+2025-08-27 15:00:05 - INFO - store - Successfully recorded published post for article DB ID 256 (WP Post ID: 3488).
+2025-08-27 15:00:05 - INFO - pipeline - Successfully published post 3488 for article DB ID 256
+2025-08-27 15:00:05 - INFO - pipeline - Sleeping for 8.5s (per-article delay).
+2025-08-27 15:00:13 - INFO - pipeline - Processing article: Advogados de Musk tentam impedir que OpenAI obtenha documentos de oferta da Meta (DB ID: 257) from infomoney_business
+2025-08-27 15:00:14 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/business/advogados-de-musk-tentam-impedir-que-openai-obtenha-documentos-de-oferta-da-meta/. Will fall back to generic.
+2025-08-27 15:00:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:00:14 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/06/2025-06-16T235401Z_1_LYNXMPEL5F13P_RTROPTP_4_SOUTHKOREA-OPENAI.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:00:14 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/business/advogados-de-musk-tentam-impedir-que-openai-obtenha-documentos-de-oferta-da-meta/. Title: Advogados de Musk tentam impedir que OpenAI obtenh...
+2025-08-27 15:00:14 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:00:22 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:00:52 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/06/2025-06-16T235401Z_1_LYNXMPEL5F13P_RTROPTP_4_SOUTHKOREA-OPENAI.jpg?quality=70
+2025-08-27 15:00:52 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:01:00 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/06/2025-06-16T235401Z_1_LYNXMPEL5F13P_RTROPTP_4_SOUTHKOREA-OPENAI.jpg?quality=70
+2025-08-27 15:01:01 - INFO - wordpress - Created new tag 'Elon Musk' with ID 247.
+2025-08-27 15:01:01 - INFO - wordpress - Created new tag 'OpenAI' with ID 248.
+2025-08-27 15:01:02 - INFO - wordpress - Created new tag 'Meta' with ID 249.
+2025-08-27 15:01:03 - INFO - wordpress - Created new tag 'Inteligência Artificial' with ID 250.
+2025-08-27 15:01:03 - INFO - wordpress - Created new tag 'Disputa Judicial' with ID 251.
+2025-08-27 15:01:04 - INFO - wordpress - Created new tag 'Segredos Comerciais' with ID 252.
+2025-08-27 15:01:04 - INFO - wordpress - Resolved tags ['Elon Musk', 'OpenAI', 'Meta', 'Inteligência Artificial', 'Disputa Judicial', 'Segredos Comerciais', 'Tecnologia'] to IDs: [247, 248, 249, 250, 251, 252, 142]
+2025-08-27 15:01:04 - INFO - wordpress - WP payload: title_len=54 content_len=4197 cat=[22] tags=[247, 248, 249, 250, 251, 252, 142]
+2025-08-27 15:01:05 - INFO - store - Successfully recorded published post for article DB ID 257 (WP Post ID: 3490).
+2025-08-27 15:01:05 - INFO - pipeline - Successfully published post 3490 for article DB ID 257
+2025-08-27 15:01:05 - INFO - pipeline - Sleeping for 9.7s (per-article delay).
+2025-08-27 15:01:15 - INFO - pipeline - Processing article: CEO brasileiro pode receber R$ 200 milhões com venda bilionária da dona do Café Pilão (DB ID: 258) from infomoney_business
+2025-08-27 15:01:15 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/business/ceo-brasileiro-pode-receber-r-200-milhoes-com-venda-bilionaria-da-dona-do-cafe-pilao/. Will fall back to generic.
+2025-08-27 15:01:15 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:01:15 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/rafael-oliveira-cde-peets-ceo.webp?quality=70. Found 0 other valid images.
+2025-08-27 15:01:15 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/business/ceo-brasileiro-pode-receber-r-200-milhoes-com-venda-bilionaria-da-dona-do-cafe-pilao/. Title: CEO brasileiro pode receber R$ 200 milhões com ven...
+2025-08-27 15:01:15 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:01:34 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:02:04 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/rafael-oliveira-cde-peets-ceo.webp?quality=70
+2025-08-27 15:02:04 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:02:06 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/rafael-oliveira-cde-peets-ceo.webp?quality=70
+2025-08-27 15:02:06 - INFO - wordpress - Created new tag '3 Corações' with ID 253.
+2025-08-27 15:02:07 - INFO - wordpress - Created new tag 'Café Pilão' with ID 254.
+2025-08-27 15:02:08 - INFO - wordpress - Created new tag 'JDE Peet's' with ID 255.
+2025-08-27 15:02:08 - INFO - wordpress - Created new tag 'Aquisição' with ID 256.
+2025-08-27 15:02:09 - INFO - wordpress - Created new tag 'Mercado de Café' with ID 257.
+2025-08-27 15:02:09 - INFO - wordpress - Created new tag 'CEO' with ID 258.
+2025-08-27 15:02:10 - INFO - wordpress - Created new tag 'R$ 200 milhões' with ID 259.
+2025-08-27 15:02:10 - INFO - wordpress - Resolved tags ['3 Corações', 'Café Pilão', "JDE Peet's", 'Aquisição', 'Mercado de Café', 'CEO', 'R$ 200 milhões'] to IDs: [253, 254, 255, 256, 257, 258, 259]
+2025-08-27 15:02:10 - INFO - wordpress - WP payload: title_len=53 content_len=2954 cat=[22] tags=[253, 254, 255, 256, 257, 258, 259]
+2025-08-27 15:02:11 - INFO - store - Successfully recorded published post for article DB ID 258 (WP Post ID: 3492).
+2025-08-27 15:02:11 - INFO - pipeline - Successfully published post 3492 for article DB ID 258
+2025-08-27 15:02:11 - INFO - pipeline - Sleeping for 6.3s (per-article delay).
+2025-08-27 15:02:17 - INFO - pipeline - Finished feed 'infomoney_business'. Sleeping for 15s before next feed: exame_invest
+2025-08-27 15:02:32 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 15:02:32 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:02:32 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 15:02:35 - ERROR - pipeline - Error processing feed exame_invest: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:02:35 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 15:02:50 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:02:50 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:02:50 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:02:51 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:02:51 - INFO - pipeline - Found 5 new articles for estadao_brasil
+2025-08-27 15:02:51 - INFO - pipeline - Processing article: PCC x Comando Vermelho: quem domina os rios e quem usa mais aviões no tráfico de drogas na Amazônia (DB ID: 264) from estadao_brasil
+2025-08-27 15:02:51 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/brasil/pcc-x-comando-vermelho-quem-domina-os-rios-e-quem-usa-mais-avioes-no-trafico-de-drogas-na-amazonia/. Will fall back to generic.
+2025-08-27 15:02:51 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:02:52 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/2O6SMCZMKZBRNE5OBUZL44NQBQ.jpg?quality=80&auth=7188ca8d231a11d8ce7976180528bc2866472961d269e3c39a6f863212b32b6a&width=1200&height=630&smart=true. Found 1 other valid images.
+2025-08-27 15:02:52 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/pcc-x-comando-vermelho-quem-domina-os-rios-e-quem-usa-mais-avioes-no-trafico-de-drogas-na-amazonia/. Title: PCC x Comando Vermelho: quem domina os rios e quem...
+2025-08-27 15:02:52 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:03:11 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:03:41 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/2O6SMCZMKZBRNE5OBUZL44NQBQ.jpg?quality=80&auth=7188ca8d231a11d8ce7976180528bc2866472961d269e3c39a6f863212b32b6a&width=1200&height=630&smart=true
+2025-08-27 15:03:41 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:03:44 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/2O6SMCZMKZBRNE5OBUZL44NQBQ.jpg?quality=80&auth=7188ca8d231a11d8ce7976180528bc2866472961d269e3c39a6f863212b32b6a&width=1200&height=630&smart=true
+2025-08-27 15:03:44 - INFO - wordpress - Created new tag 'PCC' with ID 260.
+2025-08-27 15:03:45 - INFO - wordpress - Created new tag 'Comando Vermelho' with ID 261.
+2025-08-27 15:03:46 - INFO - wordpress - Created new tag 'Tráfico de Drogas' with ID 262.
+2025-08-27 15:03:46 - INFO - wordpress - Created new tag 'Amazônia' with ID 263.
+2025-08-27 15:03:47 - INFO - wordpress - Created new tag 'Crimes Organizados' with ID 264.
+2025-08-27 15:03:47 - INFO - wordpress - Created new tag 'Forças Armadas' with ID 265.
+2025-08-27 15:03:48 - INFO - wordpress - Resolved tags ['PCC', 'Comando Vermelho', 'Tráfico de Drogas', 'Amazônia', 'Crimes Organizados', 'Forças Armadas', 'Segurança Pública'] to IDs: [260, 261, 262, 263, 264, 265, 49]
+2025-08-27 15:03:48 - INFO - wordpress - WP payload: title_len=54 content_len=5729 cat=[22] tags=[260, 261, 262, 263, 264, 265, 49]
+2025-08-27 15:03:48 - INFO - store - Successfully recorded published post for article DB ID 264 (WP Post ID: 3494).
+2025-08-27 15:03:48 - INFO - pipeline - Successfully published post 3494 for article DB ID 264
+2025-08-27 15:03:48 - INFO - pipeline - Sleeping for 6.4s (per-article delay).
+2025-08-27 15:03:55 - INFO - pipeline - Processing article: SC teve caso parecido com o de SP e soltou homem flagrado com 200 kg de cocaína; veja o que ocorreu (DB ID: 265) from estadao_brasil
+2025-08-27 15:03:55 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/brasil/justica-reve-decisao-e-prende-suspeito-solto-em-audiencia-apos-ser-flagrado-com-200-kg-de-cocaina-nprm/. Will fall back to generic.
+2025-08-27 15:03:55 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:03:55 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/ZTWVJ6NMFRDMPKAZXVJW4B25H4.jpeg?quality=80&auth=eea84f31f66eb566c3c31038cdc7cac286125771d042065b92398efb49d5eb0d&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:03:55 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/justica-reve-decisao-e-prende-suspeito-solto-em-audiencia-apos-ser-flagrado-com-200-kg-de-cocaina-nprm/. Title: SC teve caso parecido com o de SP e soltou homem f...
+2025-08-27 15:03:55 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:05:14 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:05:44 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/ZTWVJ6NMFRDMPKAZXVJW4B25H4.jpeg?quality=80&auth=eea84f31f66eb566c3c31038cdc7cac286125771d042065b92398efb49d5eb0d&width=1200&height=630&smart=true
+2025-08-27 15:05:44 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:05:47 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/ZTWVJ6NMFRDMPKAZXVJW4B25H4.jpeg?quality=80&auth=eea84f31f66eb566c3c31038cdc7cac286125771d042065b92398efb49d5eb0d&width=1200&height=630&smart=true
+2025-08-27 15:05:48 - INFO - wordpress - Created new tag 'Santa Catarina' with ID 266.
+2025-08-27 15:05:49 - INFO - wordpress - Created new tag '200kg de cocaína' with ID 267.
+2025-08-27 15:05:50 - INFO - wordpress - Created new tag 'impunidade' with ID 268.
+2025-08-27 15:05:50 - INFO - wordpress - Resolved tags ['Santa Catarina', 'tráfico de drogas', '200kg de cocaína', 'polícia', 'justiça', 'impunidade', 'segurança pública'] to IDs: [266, 262, 267, 213, 195, 268, 49]
+2025-08-27 15:05:50 - INFO - wordpress - WP payload: title_len=64 content_len=2700 cat=[22] tags=[266, 262, 267, 213, 195, 268, 49]
+2025-08-27 15:05:51 - INFO - store - Successfully recorded published post for article DB ID 265 (WP Post ID: 3496).
+2025-08-27 15:05:51 - INFO - pipeline - Successfully published post 3496 for article DB ID 265
+2025-08-27 15:05:51 - INFO - pipeline - Sleeping for 9.4s (per-article delay).
+2025-08-27 15:06:00 - INFO - pipeline - Processing article: Dois entre cada dez jovens que sofreram violência são pessoas com deficiência, diz estudo da Fiocruz (DB ID: 266) from estadao_brasil
+2025-08-27 15:06:01 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/brasil/vencer-limites/dois-entre-cada-dez-jovens-que-sofreram-violencia-sao-pessoas-com-deficiencia-diz-estudo-da-fiocruz/. Will fall back to generic.
+2025-08-27 15:06:01 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:06:02 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/LJMKEFME4VOZBEUN5EIQBTOWG4.jpg?quality=80&auth=684a0ce0862de897396c39ba6227425897446ca2589b4eb6b96c3c76b9454ec0&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:06:02 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/brasil/vencer-limites/dois-entre-cada-dez-jovens-que-sofreram-violencia-sao-pessoas-com-deficiencia-diz-estudo-da-fiocruz/. Title: Dois entre cada dez jovens que sofreram violência ...
+2025-08-27 15:06:02 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:06:08 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:06:38 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/LJMKEFME4VOZBEUN5EIQBTOWG4.jpg?quality=80&auth=684a0ce0862de897396c39ba6227425897446ca2589b4eb6b96c3c76b9454ec0&width=1200&height=630&smart=true
+2025-08-27 15:06:38 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:06:42 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/LJMKEFME4VOZBEUN5EIQBTOWG4.jpg?quality=80&auth=684a0ce0862de897396c39ba6227425897446ca2589b4eb6b96c3c76b9454ec0&width=1200&height=630&smart=true
+2025-08-27 15:06:42 - INFO - wordpress - Created new tag 'Fiocruz' with ID 269.
+2025-08-27 15:06:43 - INFO - wordpress - Created new tag 'violência contra jovens' with ID 270.
+2025-08-27 15:06:43 - INFO - wordpress - Created new tag 'deficiência' with ID 271.
+2025-08-27 15:06:44 - INFO - wordpress - Created new tag 'acessibilidade' with ID 272.
+2025-08-27 15:06:44 - INFO - wordpress - Resolved tags ['Fiocruz', 'violência contra jovens', 'deficiência', 'políticas públicas', 'acessibilidade'] to IDs: [269, 270, 271, 88, 272]
+2025-08-27 15:06:44 - INFO - wordpress - WP payload: title_len=82 content_len=2821 cat=[22] tags=[269, 270, 271, 88, 272]
+2025-08-27 15:06:45 - INFO - store - Successfully recorded published post for article DB ID 266 (WP Post ID: 3498).
+2025-08-27 15:06:45 - INFO - pipeline - Successfully published post 3498 for article DB ID 266
+2025-08-27 15:06:45 - INFO - pipeline - Sleeping for 9.6s (per-article delay).
+2025-08-27 15:06:55 - INFO - pipeline - Finished feed 'estadao_brasil'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-27 15:07:10 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:07:10 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:07:10 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:07:13 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:07:13 - INFO - pipeline - Found 10 new articles for infomoney_mercados
+2025-08-27 15:07:13 - INFO - pipeline - Processing article: BofA eleva RD Saúde e RADL3 sobe; banco cita resiliência e medidas para reduzir roubo (DB ID: 269) from infomoney_mercados
+2025-08-27 15:07:14 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mercados/bofa-eleva-rd-saude-e-radl3-sobe-banco-ve-resiliencia-e-medidas-para-reduzir-roubos/. Will fall back to generic.
+2025-08-27 15:07:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:07:14 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2022/02/drogasil-min.png?quality=70. Found 1 other valid images.
+2025-08-27 15:07:14 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/bofa-eleva-rd-saude-e-radl3-sobe-banco-ve-resiliencia-e-medidas-para-reduzir-roubos/. Title: BofA eleva RD Saúde e RADL3 sobe; banco cita resil...
+2025-08-27 15:07:14 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:07:27 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:07:57 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2022/02/drogasil-min.png?quality=70
+2025-08-27 15:07:57 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:08:02 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2022/02/drogasil-min.png?quality=70
+2025-08-27 15:08:03 - INFO - wordpress - Created new tag 'RD Saúde' with ID 273.
+2025-08-27 15:08:03 - INFO - wordpress - Created new tag 'RDOR3' with ID 274.
+2025-08-27 15:08:04 - INFO - wordpress - Created new tag 'BofA' with ID 275.
+2025-08-27 15:08:04 - INFO - wordpress - Created new tag 'Bank of America' with ID 276.
+2025-08-27 15:08:05 - INFO - wordpress - Created new tag 'ações' with ID 277.
+2025-08-27 15:08:06 - INFO - wordpress - Created new tag 'resiliência' with ID 278.
+2025-08-27 15:08:06 - INFO - wordpress - Resolved tags ['RD Saúde', 'RDOR3', 'BofA', 'Bank of America', 'ações', 'mercado financeiro', 'resiliência'] to IDs: [273, 274, 275, 276, 277, 74, 278]
+2025-08-27 15:08:06 - INFO - wordpress - WP payload: title_len=57 content_len=4093 cat=[26] tags=[273, 274, 275, 276, 277, 74, 278]
+2025-08-27 15:08:07 - INFO - store - Successfully recorded published post for article DB ID 269 (WP Post ID: 3500).
+2025-08-27 15:08:07 - INFO - pipeline - Successfully published post 3500 for article DB ID 269
+2025-08-27 15:08:07 - INFO - pipeline - Sleeping for 8.9s (per-article delay).
+2025-08-27 15:08:16 - INFO - pipeline - Processing article: “Nvidia chinesa” reverte prejuízo e lucra após receita disparar 4.400% (DB ID: 270) from infomoney_mercados
+2025-08-27 15:08:16 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mercados/nvidia-chinesa-reverte-prejuizo-e-lucra-apos-receita-disparar-4-400/. Will fall back to generic.
+2025-08-27 15:08:16 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:08:16 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/china-IA-chip.jpg?quality=70. Found 2 other valid images.
+2025-08-27 15:08:16 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/nvidia-chinesa-reverte-prejuizo-e-lucra-apos-receita-disparar-4-400/. Title: "Nvidia chinesa" reverte prejuízo e lucra após rec...
+2025-08-27 15:08:16 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:08:29 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:08:59 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/china-IA-chip.jpg?quality=70
+2025-08-27 15:08:59 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:09:05 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/china-IA-chip.jpg?quality=70
+2025-08-27 15:09:06 - INFO - wordpress - Created new tag 'Nvidia chinesa' with ID 279.
+2025-08-27 15:09:06 - INFO - wordpress - Created new tag 'semicondutores' with ID 280.
+2025-08-27 15:09:07 - INFO - wordpress - Created new tag 'crescimento receita' with ID 281.
+2025-08-27 15:09:07 - INFO - wordpress - Created new tag 'mercado chinês' with ID 282.
+2025-08-27 15:09:08 - INFO - wordpress - Created new tag 'investimentos em tecnologia' with ID 283.
+2025-08-27 15:09:08 - INFO - wordpress - Resolved tags ['Nvidia chinesa', 'semicondutores', 'crescimento receita', 'mercado chinês', 'investimentos em tecnologia'] to IDs: [279, 280, 281, 282, 283]
+2025-08-27 15:09:08 - INFO - wordpress - WP payload: title_len=49 content_len=3401 cat=[26] tags=[279, 280, 281, 282, 283]
+2025-08-27 15:09:09 - INFO - store - Successfully recorded published post for article DB ID 270 (WP Post ID: 3502).
+2025-08-27 15:09:09 - INFO - pipeline - Successfully published post 3502 for article DB ID 270
+2025-08-27 15:09:09 - INFO - pipeline - Sleeping for 8.8s (per-article delay).
+2025-08-27 15:09:18 - INFO - pipeline - Processing article: JBS e Marfrig: Santander ainda não vê fundo do ciclo e reitera cautela com as ações (DB ID: 271) from infomoney_mercados
+2025-08-27 15:09:18 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mercados/jbs-e-marfrig-santander-ainda-nao-ve-fundo-do-ciclo-e-reitera-cautela-com-as-acoes/. Will fall back to generic.
+2025-08-27 15:09:18 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:09:18 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2019/06/jbs-bloomberg.jpg?quality=70. Found 2 other valid images.
+2025-08-27 15:09:18 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mercados/jbs-e-marfrig-santander-ainda-nao-ve-fundo-do-ciclo-e-reitera-cautela-com-as-acoes/. Title: JBS e Marfrig: Santander ainda não vê fundo do cic...
+2025-08-27 15:09:18 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:09:24 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:09:54 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2019/06/jbs-bloomberg.jpg?quality=70
+2025-08-27 15:09:54 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:09:56 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2019/06/jbs-bloomberg.jpg?quality=70
+2025-08-27 15:09:56 - INFO - wordpress - Created new tag 'JBS' with ID 284.
+2025-08-27 15:09:57 - INFO - wordpress - Created new tag 'Marfrig' with ID 285.
+2025-08-27 15:09:58 - INFO - wordpress - Created new tag 'Santander' with ID 286.
+2025-08-27 15:09:59 - INFO - wordpress - Created new tag 'preços de proteínas' with ID 287.
+2025-08-27 15:10:00 - INFO - wordpress - Created new tag 'mercado de proteínas' with ID 288.
+2025-08-27 15:10:00 - INFO - wordpress - Created new tag 'análise de mercado' with ID 289.
+2025-08-27 15:10:00 - INFO - wordpress - Resolved tags ['JBS', 'Marfrig', 'Santander', 'ações', 'preços de proteínas', 'mercado de proteínas', 'análise de mercado'] to IDs: [284, 285, 286, 277, 287, 288, 289]
+2025-08-27 15:10:00 - INFO - wordpress - WP payload: title_len=58 content_len=2850 cat=[26] tags=[284, 285, 286, 277, 287, 288, 289]
+2025-08-27 15:10:01 - INFO - store - Successfully recorded published post for article DB ID 271 (WP Post ID: 3504).
+2025-08-27 15:10:01 - INFO - pipeline - Successfully published post 3504 for article DB ID 271
+2025-08-27 15:10:01 - INFO - pipeline - Sleeping for 6.4s (per-article delay).
+2025-08-27 15:10:08 - INFO - pipeline - Finished feed 'infomoney_mercados'. Sleeping for 15s before next feed: infomoney_investir
+2025-08-27 15:10:23 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:10:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:10:23 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:10:24 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:10:24 - INFO - pipeline - Found 10 new articles for infomoney_investir
+2025-08-27 15:10:24 - INFO - pipeline - Processing article: Liga de FIIs debate consequências do caso Virgo e riscos por trás dos CRIs (DB ID: 279) from infomoney_investir
+2025-08-27 15:10:24 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/onde-investir/liga-de-fiis-debate-consequencias-do-caso-virgo-e-riscos-por-tras-dos-cris/. Will fall back to generic.
+2025-08-27 15:10:24 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:10:24 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/05/7114.jpg?quality=70. Found 1 other valid images.
+2025-08-27 15:10:24 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/liga-de-fiis-debate-consequencias-do-caso-virgo-e-riscos-por-tras-dos-cris/. Title: Liga de FIIs debate consequências do caso Virgo e ...
+2025-08-27 15:10:24 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:10:31 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:11:01 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/05/7114.jpg?quality=70
+2025-08-27 15:11:01 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:11:05 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/05/7114.jpg?quality=70
+2025-08-27 15:11:05 - INFO - wordpress - Created new tag 'Virgo' with ID 290.
+2025-08-27 15:11:06 - INFO - wordpress - Created new tag 'FIIs' with ID 291.
+2025-08-27 15:11:07 - INFO - wordpress - Created new tag 'CRIs' with ID 292.
+2025-08-27 15:11:07 - INFO - wordpress - Created new tag 'Mercado Imobiliário' with ID 293.
+2025-08-27 15:11:08 - INFO - wordpress - Created new tag 'Riscos de Investimento' with ID 294.
+2025-08-27 15:11:09 - INFO - wordpress - Created new tag 'Liga de FIIs' with ID 295.
+2025-08-27 15:11:09 - INFO - wordpress - Resolved tags ['Virgo', 'FIIs', 'CRIs', 'Mercado Imobiliário', 'Riscos de Investimento', 'Regulamentação', 'Liga de FIIs'] to IDs: [290, 291, 292, 293, 294, 103, 295]
+2025-08-27 15:11:09 - INFO - wordpress - WP payload: title_len=46 content_len=2831 cat=[29] tags=[290, 291, 292, 293, 294, 103, 295]
+2025-08-27 15:11:09 - INFO - store - Successfully recorded published post for article DB ID 279 (WP Post ID: 3506).
+2025-08-27 15:11:09 - INFO - pipeline - Successfully published post 3506 for article DB ID 279
+2025-08-27 15:11:09 - INFO - pipeline - Sleeping for 8.4s (per-article delay).
+2025-08-27 15:11:18 - INFO - pipeline - Processing article: Quer investir em reais em empresas na Argentina? Novo ETF na B3 já permite isso (DB ID: 280) from infomoney_investir
+2025-08-27 15:11:18 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/onde-investir/quer-investir-em-reais-em-empresas-na-argentina-novo-etf-na-b3-ja-permite-isso/. Will fall back to generic.
+2025-08-27 15:11:18 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:11:18 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-06-20T153813Z_1887332228_RC2F6FAOKT7J_RTRMADP_3_ARGENTINA-MILEI.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:11:18 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/quer-investir-em-reais-em-empresas-na-argentina-novo-etf-na-b3-ja-permite-isso/. Title: Quer investir em reais em empresas na Argentina? N...
+2025-08-27 15:11:18 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:11:26 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:11:56 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-06-20T153813Z_1887332228_RC2F6FAOKT7J_RTRMADP_3_ARGENTINA-MILEI.jpg?quality=70
+2025-08-27 15:11:56 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:12:02 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-06-20T153813Z_1887332228_RC2F6FAOKT7J_RTRMADP_3_ARGENTINA-MILEI.jpg?quality=70
+2025-08-27 15:12:02 - INFO - wordpress - Created new tag 'ETF' with ID 296.
+2025-08-27 15:12:03 - INFO - wordpress - Created new tag 'B3' with ID 297.
+2025-08-27 15:12:04 - INFO - wordpress - Created new tag 'Argentina' with ID 298.
+2025-08-27 15:12:04 - INFO - wordpress - Created new tag 'Mercado Emergente' with ID 299.
+2025-08-27 15:12:05 - INFO - wordpress - Created new tag 'Risco Cambial' with ID 300.
+2025-08-27 15:12:06 - INFO - wordpress - Created new tag 'Diversificação' with ID 301.
+2025-08-27 15:12:06 - INFO - wordpress - Resolved tags ['ETF', 'B3', 'Argentina', 'Mercado Emergente', 'Investimentos', 'Risco Cambial', 'Diversificação'] to IDs: [296, 297, 298, 299, 132, 300, 301]
+2025-08-27 15:12:06 - INFO - wordpress - WP payload: title_len=60 content_len=3128 cat=[29] tags=[296, 297, 298, 299, 132, 300, 301]
+2025-08-27 15:12:06 - INFO - store - Successfully recorded published post for article DB ID 280 (WP Post ID: 3508).
+2025-08-27 15:12:06 - INFO - pipeline - Successfully published post 3508 for article DB ID 280
+2025-08-27 15:12:06 - INFO - pipeline - Sleeping for 9.8s (per-article delay).
+2025-08-27 15:12:16 - INFO - pipeline - Processing article: Corrida pelos isentos? Veja opções de CRI e CRA antes da tributação (DB ID: 281) from infomoney_investir
+2025-08-27 15:12:16 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/onde-investir/corrida-pelos-isentos-veja-opcoes-de-cri-e-cra-antes-da-tributacao/. Will fall back to generic.
+2025-08-27 15:12:17 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:12:17 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/05/renda-fixa-hoje-007.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:12:17 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/onde-investir/corrida-pelos-isentos-veja-opcoes-de-cri-e-cra-antes-da-tributacao/. Title: Corrida pelos isentos? Veja opções de CRI e CRA an...
+2025-08-27 15:12:17 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:12:24 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:12:54 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/05/renda-fixa-hoje-007.jpg?quality=70
+2025-08-27 15:12:54 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:12:56 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/05/renda-fixa-hoje-007.jpg?quality=70
+2025-08-27 15:12:57 - INFO - wordpress - Created new tag 'CRAs' with ID 302.
+2025-08-27 15:12:58 - INFO - wordpress - Created new tag 'investimento isento' with ID 303.
+2025-08-27 15:12:58 - INFO - wordpress - Created new tag 'tributação' with ID 304.
+2025-08-27 15:12:59 - INFO - wordpress - Created new tag 'renda fixa' with ID 305.
+2025-08-27 15:12:59 - INFO - wordpress - Resolved tags ['CRIs', 'CRAs', 'investimento isento', 'tributação', 'renda fixa'] to IDs: [292, 302, 303, 304, 305]
+2025-08-27 15:12:59 - INFO - wordpress - WP payload: title_len=55 content_len=3573 cat=[29] tags=[292, 302, 303, 304, 305]
+2025-08-27 15:12:59 - INFO - store - Successfully recorded published post for article DB ID 281 (WP Post ID: 3510).
+2025-08-27 15:12:59 - INFO - pipeline - Successfully published post 3510 for article DB ID 281
+2025-08-27 15:12:59 - INFO - pipeline - Sleeping for 9.9s (per-article delay).
+2025-08-27 15:13:09 - INFO - pipeline - Finished feed 'infomoney_investir'. Sleeping for 15s before next feed: infomoney_mundo
+2025-08-27 15:13:24 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:13:24 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:13:24 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:13:26 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:13:26 - INFO - pipeline - Found 10 new articles for infomoney_mundo
+2025-08-27 15:13:26 - INFO - pipeline - Processing article: Rutte, da Otan, alerta que Rússia e China se preparam para conflito “de longo prazo” (DB ID: 289) from infomoney_mundo
+2025-08-27 15:13:26 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mundo/rutte-da-otan-alerta-que-russia-e-china-se-preparam-para-conflito-de-longo-prazo/. Will fall back to generic.
+2025-08-27 15:13:26 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:13:26 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-15T174757Z_1_LYNXMPEL6E0TZ_RTROPTP_4_NATO-SUMMIT-RUTTE.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:13:26 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/rutte-da-otan-alerta-que-russia-e-china-se-preparam-para-conflito-de-longo-prazo/. Title: Rutte, da Otan, alerta que Rússia e China se prepa...
+2025-08-27 15:13:26 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:13:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:14:02 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-15T174757Z_1_LYNXMPEL6E0TZ_RTROPTP_4_NATO-SUMMIT-RUTTE.jpg?quality=70
+2025-08-27 15:14:02 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:14:06 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/07/2025-07-15T174757Z_1_LYNXMPEL6E0TZ_RTROPTP_4_NATO-SUMMIT-RUTTE.jpg?quality=70
+2025-08-27 15:14:07 - INFO - wordpress - Created new tag 'Mark Rutte' with ID 306.
+2025-08-27 15:14:08 - INFO - wordpress - Created new tag 'OTAN' with ID 307.
+2025-08-27 15:14:09 - INFO - wordpress - Created new tag 'China' with ID 308.
+2025-08-27 15:14:09 - INFO - wordpress - Created new tag 'Geopolítica' with ID 309.
+2025-08-27 15:14:10 - INFO - wordpress - Created new tag 'Guerra' with ID 310.
+2025-08-27 15:14:10 - INFO - wordpress - Resolved tags ['Mark Rutte', 'OTAN', 'Rússia', 'China', 'Geopolítica', 'Ucrânia', 'Guerra'] to IDs: [306, 307, 148, 308, 309, 147, 310]
+2025-08-27 15:14:10 - INFO - wordpress - WP payload: title_len=53 content_len=2476 cat=[30] tags=[306, 307, 148, 308, 309, 147, 310]
+2025-08-27 15:14:11 - INFO - store - Successfully recorded published post for article DB ID 289 (WP Post ID: 3512).
+2025-08-27 15:14:11 - INFO - pipeline - Successfully published post 3512 for article DB ID 289
+2025-08-27 15:14:11 - INFO - pipeline - Sleeping for 7.4s (per-article delay).
+2025-08-27 15:14:18 - INFO - pipeline - Processing article: Atitude mais ‘honrosa’ que Cook poderia tomar é deixar Fed, diz membro da Casa Branca (DB ID: 290) from infomoney_mundo
+2025-08-27 15:14:18 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mundo/atitude-mais-honrosa-que-cook-poderia-tomar-e-deixar-fed-diz-membro-da-casa-branca/. Will fall back to generic.
+2025-08-27 15:14:18 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:14:18 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70. Found 2 other valid images.
+2025-08-27 15:14:18 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/atitude-mais-honrosa-que-cook-poderia-tomar-e-deixar-fed-diz-membro-da-casa-branca/. Title: Atitude mais 'honrosa' que Cook poderia tomar é de...
+2025-08-27 15:14:18 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:14:27 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:14:57 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70
+2025-08-27 15:14:57 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:15:23 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/02/2025-02-12T154410Z_1_LYNXMPEL1B0PC_RTROPTP_4_MACRO-EUA-TARIFAS.jpg?quality=70
+2025-08-27 15:15:25 - INFO - wordpress - Resolved tags ['Jerome Powell', 'Federal Reserve', 'Casa Branca', 'Taxa Selic', 'Inflação', 'Política Monetária', 'Economia Americana'] to IDs: [239, 53, 240, 107, 38, 54, 67]
+2025-08-27 15:15:25 - INFO - wordpress - WP payload: title_len=49 content_len=3861 cat=[30] tags=[239, 53, 240, 107, 38, 54, 67]
+2025-08-27 15:15:25 - INFO - store - Successfully recorded published post for article DB ID 290 (WP Post ID: 3514).
+2025-08-27 15:15:25 - INFO - pipeline - Successfully published post 3514 for article DB ID 290
+2025-08-27 15:15:25 - INFO - pipeline - Sleeping for 8.4s (per-article delay).
+2025-08-27 15:15:33 - INFO - pipeline - Processing article: Ataque a tiros em escola católica de Mineápolis deixa 3 mortos, incluindo atirador (DB ID: 291) from infomoney_mundo
+2025-08-27 15:15:53 - ERROR - extractor - Failed to fetch HTML from https://www.infomoney.com.br/mundo/ataque-a-tiros-em-escola-catolica-de-mineapolis-deixa-3-mortos-incluindo-atirador/: ('Connection aborted.', ConnectionResetError(10054, 'Foi forçado o cancelamento de uma conexão existente pelo host remoto', None, 10054, None))
+2025-08-27 15:15:53 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mundo/ataque-a-tiros-em-escola-catolica-de-mineapolis-deixa-3-mortos-incluindo-atirador/
+2025-08-27 15:15:53 - INFO - pipeline - Finished feed 'infomoney_mundo'. Sleeping for 15s before next feed: exame_carreira
+2025-08-27 15:16:08 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:16:08 - INFO - pipeline - Pipeline cycle completed. Processed 26 articles.
+2025-08-27 15:16:08 - INFO - store - Database connection closed.
+2025-08-27 15:16:08 - ERROR - main - Erro durante a execução do primeiro ciclo: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 60, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 15:16:08 - INFO - main - Agendador iniciado. O pipeline será executado a cada 15 minutos.
+2025-08-27 15:31:08 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 15:31:08 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 15:31:08 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:31:08 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 15:31:09 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 15:31:09 - INFO - pipeline - Found 6 new articles for estadao_politica
+2025-08-27 15:31:09 - INFO - pipeline - Processing article: Damares Alves diz que está com câncer e passou por cirurgia (DB ID: 299) from estadao_politica
+2025-08-27 15:31:10 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/damares-alves-diz-que-esta-com-cancer-e-passou-por-cirurgia-nprp/. Will fall back to generic.
+2025-08-27 15:31:11 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:31:11 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/PUK4GVMETBE4LMZGN5VODILJRU.jpg?quality=80&auth=6b1f18e5b3ff1c385103b27ebc12f82f37e53a531627d0e18ca89c599306f329&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:31:11 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/damares-alves-diz-que-esta-com-cancer-e-passou-por-cirurgia-nprp/. Title: Damares Alves diz que está com câncer e passou por...
+2025-08-27 15:31:11 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:31:18 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:31:48 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/PUK4GVMETBE4LMZGN5VODILJRU.jpg?quality=80&auth=6b1f18e5b3ff1c385103b27ebc12f82f37e53a531627d0e18ca89c599306f329&width=1200&height=630&smart=true
+2025-08-27 15:31:48 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:31:52 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/PUK4GVMETBE4LMZGN5VODILJRU.jpg?quality=80&auth=6b1f18e5b3ff1c385103b27ebc12f82f37e53a531627d0e18ca89c599306f329&width=1200&height=630&smart=true
+2025-08-27 15:31:53 - INFO - wordpress - Created new tag 'Damares Alves' with ID 311.
+2025-08-27 15:31:54 - INFO - wordpress - Created new tag 'Câncer' with ID 312.
+2025-08-27 15:31:54 - INFO - wordpress - Created new tag 'Saúde' with ID 313.
+2025-08-27 15:31:55 - INFO - wordpress - Created new tag 'Política' with ID 314.
+2025-08-27 15:31:56 - INFO - wordpress - Created new tag 'Governo Bolsonaro' with ID 315.
+2025-08-27 15:31:56 - INFO - wordpress - Resolved tags ['Damares Alves', 'Câncer', 'Saúde', 'Política', 'Governo Bolsonaro', 'Redes Sociais'] to IDs: [311, 312, 313, 314, 315, 128]
+2025-08-27 15:31:56 - INFO - wordpress - WP payload: title_len=42 content_len=3146 cat=[21] tags=[311, 312, 313, 314, 315, 128]
+2025-08-27 15:31:57 - INFO - store - Successfully recorded published post for article DB ID 299 (WP Post ID: 3516).
+2025-08-27 15:31:57 - INFO - pipeline - Successfully published post 3516 for article DB ID 299
+2025-08-27 15:31:57 - INFO - pipeline - Sleeping for 8.2s (per-article delay).
+2025-08-27 15:32:05 - INFO - pipeline - Processing article: Daniel Silveira pede progressão para o regime aberto após fazer cursos e ler livros; veja a lista (DB ID: 300) from estadao_politica
+2025-08-27 15:32:05 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/daniel-silveira-pede-progressao-para-o-regime-aberto-apos-fazer-cursos-e-ler-livros-veja-a-lista/. Will fall back to generic.
+2025-08-27 15:32:05 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:32:05 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/W3PNEBFSEBDGZIKEOKYZRRY27Y.jpg?quality=80&auth=160802f149fbb454e0bfa3b151747569e98c946c221c826058c3ccba05fbf977&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:32:05 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/daniel-silveira-pede-progressao-para-o-regime-aberto-apos-fazer-cursos-e-ler-livros-veja-a-lista/. Title: Daniel Silveira pede progressão para o regime aber...
+2025-08-27 15:32:05 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:32:12 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:32:42 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/W3PNEBFSEBDGZIKEOKYZRRY27Y.jpg?quality=80&auth=160802f149fbb454e0bfa3b151747569e98c946c221c826058c3ccba05fbf977&width=1200&height=630&smart=true
+2025-08-27 15:32:42 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:32:45 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/W3PNEBFSEBDGZIKEOKYZRRY27Y.jpg?quality=80&auth=160802f149fbb454e0bfa3b151747569e98c946c221c826058c3ccba05fbf977&width=1200&height=630&smart=true
+2025-08-27 15:32:45 - INFO - wordpress - Created new tag 'Daniel Silveira' with ID 316.
+2025-08-27 15:32:46 - INFO - wordpress - Created new tag 'regime aberto' with ID 317.
+2025-08-27 15:32:47 - INFO - wordpress - Created new tag 'progressão de regime' with ID 318.
+2025-08-27 15:32:47 - INFO - wordpress - Created new tag 'sistema prisional brasileiro' with ID 319.
+2025-08-27 15:32:48 - INFO - wordpress - Created new tag 'Direito Constitucional' with ID 320.
+2025-08-27 15:32:48 - INFO - wordpress - Created new tag 'reforma do sistema penitenciário' with ID 321.
+2025-08-27 15:32:48 - INFO - wordpress - Resolved tags ['Daniel Silveira', 'STF', 'regime aberto', 'progressão de regime', 'sistema prisional brasileiro', 'Direito Constitucional', 'reforma do sistema penitenciário'] to IDs: [316, 45, 317, 318, 319, 320, 321]
+2025-08-27 15:32:48 - INFO - wordpress - WP payload: title_len=58 content_len=3100 cat=[21] tags=[316, 45, 317, 318, 319, 320, 321]
+2025-08-27 15:32:49 - INFO - store - Successfully recorded published post for article DB ID 300 (WP Post ID: 3518).
+2025-08-27 15:32:49 - INFO - pipeline - Successfully published post 3518 for article DB ID 300
+2025-08-27 15:32:49 - INFO - pipeline - Sleeping for 9.2s (per-article delay).
+2025-08-27 15:32:58 - INFO - pipeline - Processing article: O pós-Bolsonaro e o dilema de Tarcísio (DB ID: 301) from estadao_politica
+2025-08-27 15:32:59 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/politica/carlos-andreazza/o-pos-bolsonaro-e-o-dilema-de-tarcisio/. Will fall back to generic.
+2025-08-27 15:32:59 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:33:00 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/RAE74V6TZJBSPMRRJZGSH7ARL4.jpg?quality=80&auth=cf4a1d13914daedbbc29b7488ef7ce8c4c42c288c880f01bd127e6155a86e0be&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:33:00 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/carlos-andreazza/o-pos-bolsonaro-e-o-dilema-de-tarcisio/. Title: Opinião | O pós-Bolsonaro e o dilema de Tarcísio...
+2025-08-27 15:33:00 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:33:06 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:33:36 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/RAE74V6TZJBSPMRRJZGSH7ARL4.jpg?quality=80&auth=cf4a1d13914daedbbc29b7488ef7ce8c4c42c288c880f01bd127e6155a86e0be&width=1200&height=630&smart=true
+2025-08-27 15:33:36 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:33:39 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/RAE74V6TZJBSPMRRJZGSH7ARL4.jpg?quality=80&auth=cf4a1d13914daedbbc29b7488ef7ce8c4c42c288c880f01bd127e6155a86e0be&width=1200&height=630&smart=true
+2025-08-27 15:33:39 - INFO - wordpress - Created new tag 'Bolsonaro' with ID 322.
+2025-08-27 15:33:40 - INFO - wordpress - Resolved tags ['Tarcísio de Freitas', 'Bolsonaro', 'Governo de São Paulo', 'Política Brasileira', 'Eleições'] to IDs: [163, 322, 174, 97, 187]
+2025-08-27 15:33:40 - INFO - wordpress - WP payload: title_len=45 content_len=2827 cat=[21] tags=[163, 322, 174, 97, 187]
+2025-08-27 15:33:41 - INFO - store - Successfully recorded published post for article DB ID 301 (WP Post ID: 3520).
+2025-08-27 15:33:41 - INFO - pipeline - Successfully published post 3520 for article DB ID 301
+2025-08-27 15:33:41 - INFO - pipeline - Sleeping for 7.7s (per-article delay).
+2025-08-27 15:33:49 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-27 15:34:04 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 15:34:04 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:34:04 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 15:34:04 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 15:34:04 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 15:34:04 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 15:34:04 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:34:04 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 15:34:09 - ERROR - pipeline - Error processing feed exame_brasil: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:34:09 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 15:34:24 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 15:34:24 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:34:24 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 15:34:24 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 15:34:24 - INFO - pipeline - Found 4 new articles for estadao_economia
+2025-08-27 15:34:24 - INFO - pipeline - Processing article: Galípolo: Taxa de juro deve permanecer neste patamar por um período prolongado (DB ID: 305) from estadao_economia
+2025-08-27 15:34:25 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/galipolo-taxa-de-juro-deve-permanecer-neste-patamar-por-um-periodo-prolongado/. Will fall back to generic.
+2025-08-27 15:34:25 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:34:25 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/YODDS6O5WBEWJDUPDA67VC6WPA.jpg?quality=80&auth=762e8aae0e0beb0e577b213b9ea5f694bce619fd3db35639d5c17ebe27188306&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:34:25 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/galipolo-taxa-de-juro-deve-permanecer-neste-patamar-por-um-periodo-prolongado/. Title: Galípolo: Taxa de juro deve permanecer neste patam...
+2025-08-27 15:34:25 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:34:33 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:35:03 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/YODDS6O5WBEWJDUPDA67VC6WPA.jpg?quality=80&auth=762e8aae0e0beb0e577b213b9ea5f694bce619fd3db35639d5c17ebe27188306&width=1200&height=630&smart=true
+2025-08-27 15:35:03 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:35:06 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/YODDS6O5WBEWJDUPDA67VC6WPA.jpg?quality=80&auth=762e8aae0e0beb0e577b213b9ea5f694bce619fd3db35639d5c17ebe27188306&width=1200&height=630&smart=true
+2025-08-27 15:35:07 - INFO - wordpress - Created new tag 'Galípolo' with ID 323.
+2025-08-27 15:35:08 - INFO - wordpress - Created new tag 'Roberto Campos Neto' with ID 324.
+2025-08-27 15:35:09 - INFO - wordpress - Resolved tags ['Taxa Selic', 'Galípolo', 'Banco Central', 'IPCA', 'Inflação', 'Roberto Campos Neto', 'economia brasileira'] to IDs: [107, 323, 37, 93, 38, 324, 86]
+2025-08-27 15:35:09 - INFO - wordpress - WP payload: title_len=55 content_len=2679 cat=[22] tags=[107, 323, 37, 93, 38, 324, 86]
+2025-08-27 15:35:09 - INFO - store - Successfully recorded published post for article DB ID 305 (WP Post ID: 3522).
+2025-08-27 15:35:09 - INFO - pipeline - Successfully published post 3522 for article DB ID 305
+2025-08-27 15:35:09 - INFO - pipeline - Sleeping for 6.6s (per-article delay).
+2025-08-27 15:35:16 - INFO - pipeline - Processing article: Brasil gera 129,7 mil vagas formais de emprego em julho, aponta Caged (DB ID: 306) from estadao_economia
+2025-08-27 15:35:16 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/caged-emprego-julho-2025/. Will fall back to generic.
+2025-08-27 15:35:17 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:35:17 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/V42XWBE4WBAH5FJKU55ZO4IND4.jpeg?quality=80&auth=a62a3ece4853403e0d7ec32cbf033d31a76e1b25cdc23e3e525c591a416c1f69&width=1200&height=630&smart=true. Found 0 other valid images.
+2025-08-27 15:35:17 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/caged-emprego-julho-2025/. Title: Brasil gera 129,7 mil vagas formais de emprego em ...
+2025-08-27 15:35:17 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:35:25 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:35:55 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/V42XWBE4WBAH5FJKU55ZO4IND4.jpeg?quality=80&auth=a62a3ece4853403e0d7ec32cbf033d31a76e1b25cdc23e3e525c591a416c1f69&width=1200&height=630&smart=true
+2025-08-27 15:35:55 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:35:58 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/V42XWBE4WBAH5FJKU55ZO4IND4.jpeg?quality=80&auth=a62a3ece4853403e0d7ec32cbf033d31a76e1b25cdc23e3e525c591a416c1f69&width=1200&height=630&smart=true
+2025-08-27 15:35:58 - INFO - wordpress - Created new tag 'Caged' with ID 325.
+2025-08-27 15:35:59 - INFO - wordpress - Created new tag 'emprego formal' with ID 326.
+2025-08-27 15:36:00 - INFO - wordpress - Resolved tags ['Caged', 'mercado de trabalho', 'emprego formal', 'Fernando Haddad', 'Reforma Tributária', 'IPCA', 'Taxa Selic'] to IDs: [325, 227, 326, 82, 109, 93, 107]
+2025-08-27 15:36:00 - INFO - wordpress - WP payload: title_len=59 content_len=3736 cat=[22] tags=[325, 227, 326, 82, 109, 93, 107]
+2025-08-27 15:36:01 - INFO - store - Successfully recorded published post for article DB ID 306 (WP Post ID: 3524).
+2025-08-27 15:36:01 - INFO - pipeline - Successfully published post 3524 for article DB ID 306
+2025-08-27 15:36:01 - INFO - pipeline - Sleeping for 10.0s (per-article delay).
+2025-08-27 15:36:11 - INFO - pipeline - Processing article: Projeto de regeneração florestal da Vivo deve gerar créditos de carbono a partir de 2031, diz CEO (DB ID: 307) from estadao_economia
+2025-08-27 15:36:11 - WARNING - extractor - Specific extractor failed to find title/content for https://www.estadao.com.br/economia/governanca/projeto-regeneracao-florestal-vivo-deve-gerar-creditos-carbono-2031-diz-ceo/. Will fall back to generic.
+2025-08-27 15:36:12 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:36:12 - INFO - extractor - Selected featured image: https://www.estadao.com.br/resizer/v2/QHWFZ72XCFAGTIWSBCMKBQYWN4.jpg?quality=80&auth=4f9d15f2d28b2885f106e2f3f6d3ec002b7ebf9b2059277ce942f7fcbfaf02b2&width=1200&height=630&smart=true. Found 1 other valid images.
+2025-08-27 15:36:12 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/economia/governanca/projeto-regeneracao-florestal-vivo-deve-gerar-creditos-carbono-2031-diz-ceo/. Title: Entrevista | Projeto de regeneração florestal da V...
+2025-08-27 15:36:12 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:36:20 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:36:50 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.estadao.com.br/resizer/v2/QHWFZ72XCFAGTIWSBCMKBQYWN4.jpg?quality=80&auth=4f9d15f2d28b2885f106e2f3f6d3ec002b7ebf9b2059277ce942f7fcbfaf02b2&width=1200&height=630&smart=true
+2025-08-27 15:36:50 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:36:53 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/QHWFZ72XCFAGTIWSBCMKBQYWN4.jpg?quality=80&auth=4f9d15f2d28b2885f106e2f3f6d3ec002b7ebf9b2059277ce942f7fcbfaf02b2&width=1200&height=630&smart=true
+2025-08-27 15:36:54 - INFO - wordpress - Created new tag 'Vivo' with ID 327.
+2025-08-27 15:36:55 - INFO - wordpress - Created new tag 'créditos de carbono' with ID 328.
+2025-08-27 15:36:55 - INFO - wordpress - Created new tag 'regeneração florestal' with ID 329.
+2025-08-27 15:36:56 - INFO - wordpress - Created new tag 'ESG' with ID 330.
+2025-08-27 15:36:57 - INFO - wordpress - Created new tag 'sustentabilidade' with ID 331.
+2025-08-27 15:36:57 - INFO - wordpress - Resolved tags ['Vivo', 'créditos de carbono', 'regeneração florestal', 'ESG', 'Acordo de Paris', 'sustentabilidade'] to IDs: [327, 328, 329, 330, 43, 331]
+2025-08-27 15:36:57 - INFO - wordpress - WP payload: title_len=65 content_len=4332 cat=[22] tags=[327, 328, 329, 330, 43, 331]
+2025-08-27 15:36:57 - INFO - store - Successfully recorded published post for article DB ID 307 (WP Post ID: 3526).
+2025-08-27 15:36:57 - INFO - pipeline - Successfully published post 3526 for article DB ID 307
+2025-08-27 15:36:57 - INFO - pipeline - Sleeping for 9.2s (per-article delay).
+2025-08-27 15:37:07 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-27 15:37:22 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 15:37:22 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:37:22 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 15:37:22 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 15:37:22 - INFO - pipeline - Found 2 new articles for infomoney_economia
+2025-08-27 15:37:22 - INFO - pipeline - Processing article: Emissões de metano aumentam no Brasil, o maior exportador de carne bovina do mundo (DB ID: 309) from infomoney_economia
+2025-08-27 15:37:23 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/economia/emissoes-de-metano-aumentam-no-brasil-o-maior-exportador-de-carne-bovina-do-mundo/. Will fall back to generic.
+2025-08-27 15:37:23 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:37:23 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Rebanho_Brasil_gado.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:37:23 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/emissoes-de-metano-aumentam-no-brasil-o-maior-exportador-de-carne-bovina-do-mundo/. Title: Emissões de metano aumentam no Brasil, o maior exp...
+2025-08-27 15:37:23 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:37:31 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:38:01 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/Rebanho_Brasil_gado.jpg?quality=70
+2025-08-27 15:38:01 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:38:02 - WARNING - wordpress - Upload attempt 1/3 for 'https://www.infomoney.com.br/wp-content/uploads/2025/08/Rebanho_Brasil_gado.jpg?quality=70' failed with network error: ('Connection aborted.', ConnectionAbortedError(10053, 'Uma conexão estabelecida foi anulada pelo software no computador host', None, 10053, None)). Retrying in 2s...
+2025-08-27 15:38:09 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Rebanho_Brasil_gado.jpg?quality=70
+2025-08-27 15:38:09 - INFO - wordpress - Created new tag 'Emisiones de metano' with ID 332.
+2025-08-27 15:38:10 - INFO - wordpress - Created new tag 'Ganadería Brasileña' with ID 333.
+2025-08-27 15:38:11 - INFO - wordpress - Created new tag 'Carne Bovina' with ID 334.
+2025-08-27 15:38:11 - INFO - wordpress - Created new tag 'Cambio climático' with ID 335.
+2025-08-27 15:38:12 - INFO - wordpress - Created new tag 'Sostenibilidad' with ID 336.
+2025-08-27 15:38:12 - INFO - wordpress - Created new tag 'Política ambiental' with ID 337.
+2025-08-27 15:38:13 - INFO - wordpress - Created new tag 'Exportaciones Brasil' with ID 338.
+2025-08-27 15:38:13 - INFO - wordpress - Resolved tags ['Emisiones de metano', 'Ganadería Brasileña', 'Carne Bovina', 'Cambio climático', 'Sostenibilidad', 'Política ambiental', 'Exportaciones Brasil'] to IDs: [332, 333, 334, 335, 336, 337, 338]
+2025-08-27 15:38:13 - INFO - wordpress - WP payload: title_len=59 content_len=3930 cat=[22] tags=[332, 333, 334, 335, 336, 337, 338]
+2025-08-27 15:38:14 - INFO - store - Successfully recorded published post for article DB ID 309 (WP Post ID: 3528).
+2025-08-27 15:38:14 - INFO - pipeline - Successfully published post 3528 for article DB ID 309
+2025-08-27 15:38:14 - INFO - pipeline - Sleeping for 7.9s (per-article delay).
+2025-08-27 15:38:21 - INFO - pipeline - Processing article: Brasil abre 129.775 vagas formais de trabalho em julho, abaixo do esperado (DB ID: 310) from infomoney_economia
+2025-08-27 15:38:22 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/economia/brasil-abre-129-775-vagas-formais-de-trabalho-em-julho-abaixo-do-esperado/. Will fall back to generic.
+2025-08-27 15:38:22 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:38:22 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2019/08/carteira-de-trabalho-8.jpg?quality=70. Found 1 other valid images.
+2025-08-27 15:38:22 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/brasil-abre-129-775-vagas-formais-de-trabalho-em-julho-abaixo-do-esperado/. Title: Brasil abre 129.775 vagas formais de trabalho em j...
+2025-08-27 15:38:22 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:38:29 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:38:59 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2019/08/carteira-de-trabalho-8.jpg?quality=70
+2025-08-27 15:38:59 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:39:02 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2019/08/carteira-de-trabalho-8.jpg?quality=70
+2025-08-27 15:39:04 - INFO - wordpress - Resolved tags ['CAGED', 'Taxa Selic', 'Roberto Campos Neto', 'Fernando Haddad', 'Reforma Tributária', 'IPCA', 'IBOVESPA'] to IDs: [325, 107, 324, 82, 109, 93, 206]
+2025-08-27 15:39:04 - INFO - wordpress - WP payload: title_len=54 content_len=3147 cat=[22] tags=[325, 107, 324, 82, 109, 93, 206]
+2025-08-27 15:39:04 - INFO - store - Successfully recorded published post for article DB ID 310 (WP Post ID: 3530).
+2025-08-27 15:39:04 - INFO - pipeline - Successfully published post 3530 for article DB ID 310
+2025-08-27 15:39:04 - INFO - pipeline - Sleeping for 7.2s (per-article delay).
+2025-08-27 15:39:11 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: exame_economia
+2025-08-27 15:39:26 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 15:39:26 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:39:26 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 15:39:30 - ERROR - pipeline - Error processing feed exame_economia: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:39:30 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 15:39:45 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 15:39:45 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:39:45 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 15:39:46 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 15:39:46 - INFO - pipeline - Found 1 new articles for infomoney_business
+2025-08-27 15:39:46 - INFO - pipeline - Processing article: Google corta 35% dos gerentes de “equipes pequenas” em um ano, diz CNBC (DB ID: 311) from infomoney_business
+2025-08-27 15:39:46 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/business/google-corta-35-dos-gerentes-de-equipes-pequenas-em-um-ano-diz-cnbc/. Will fall back to generic.
+2025-08-27 15:39:47 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:39:47 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/sundar-pichai-google-io-2025-e1756319020576.png?quality=70. Found 2 other valid images.
+2025-08-27 15:39:47 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/business/google-corta-35-dos-gerentes-de-equipes-pequenas-em-um-ano-diz-cnbc/. Title: Google corta 35% dos gerentes de "equipes pequenas...
+2025-08-27 15:39:47 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:39:55 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:40:25 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/sundar-pichai-google-io-2025-e1756319020576.png?quality=70
+2025-08-27 15:40:25 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:40:29 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/sundar-pichai-google-io-2025-e1756319020576.png?quality=70
+2025-08-27 15:40:29 - INFO - wordpress - Created new tag 'Google' with ID 339.
+2025-08-27 15:40:30 - INFO - wordpress - Created new tag 'CNBC' with ID 340.
+2025-08-27 15:40:31 - INFO - wordpress - Created new tag 'Demissões' with ID 341.
+2025-08-27 15:40:32 - INFO - wordpress - Created new tag 'Gestão de Pessoal' with ID 342.
+2025-08-27 15:40:32 - INFO - wordpress - Created new tag 'Eficiência' with ID 343.
+2025-08-27 15:40:32 - INFO - wordpress - Resolved tags ['Google', 'CNBC', 'Demissões', 'Tecnologia', 'Mercado de Trabalho', 'Gestão de Pessoal', 'Eficiência'] to IDs: [339, 340, 341, 142, 227, 342, 343]
+2025-08-27 15:40:32 - INFO - wordpress - WP payload: title_len=59 content_len=3793 cat=[22] tags=[339, 340, 341, 142, 227, 342, 343]
+2025-08-27 15:40:33 - INFO - store - Successfully recorded published post for article DB ID 311 (WP Post ID: 3532).
+2025-08-27 15:40:33 - INFO - pipeline - Successfully published post 3532 for article DB ID 311
+2025-08-27 15:40:33 - INFO - pipeline - Sleeping for 7.7s (per-article delay).
+2025-08-27 15:40:41 - INFO - pipeline - Finished feed 'infomoney_business'. Sleeping for 15s before next feed: exame_invest
+2025-08-27 15:40:56 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 15:40:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:40:56 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 15:40:59 - ERROR - pipeline - Error processing feed exame_invest: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:40:59 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 15:41:14 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:41:14 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:41:14 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:41:14 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:41:14 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 15:41:14 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:41:14 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:41:14 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:41:15 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:41:15 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 15:41:15 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:41:15 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:41:15 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:41:16 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:41:16 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 15:41:16 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:41:16 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:41:16 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:41:16 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:41:17 - INFO - pipeline - Found 1 new articles for infomoney_mundo
+2025-08-27 15:41:17 - INFO - pipeline - Processing article: China e Rússia realizam 1ª patrulha conjunta com submarinos e Otan faz alerta (DB ID: 312) from infomoney_mundo
+2025-08-27 15:41:17 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/mundo/china-e-russia-realizam-1a-patrulha-conjunta-com-submarinos-e-otan-faz-alerta/. Will fall back to generic.
+2025-08-27 15:41:18 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:41:18 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-06T121630Z_1_LYNXMPEL750NL_RTROPTP_4_RUSSIA-CHINA-NAVY-DRILLS.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:41:18 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/mundo/china-e-russia-realizam-1a-patrulha-conjunta-com-submarinos-e-otan-faz-alerta/. Title: China e Rússia realizam 1ª patrulha conjunta com s...
+2025-08-27 15:41:18 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:41:25 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:41:55 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-06T121630Z_1_LYNXMPEL750NL_RTROPTP_4_RUSSIA-CHINA-NAVY-DRILLS.jpg?quality=70
+2025-08-27 15:41:55 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:41:58 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-06T121630Z_1_LYNXMPEL750NL_RTROPTP_4_RUSSIA-CHINA-NAVY-DRILLS.jpg?quality=70
+2025-08-27 15:41:59 - INFO - wordpress - Created new tag 'Patrulha Naval' with ID 344.
+2025-08-27 15:42:00 - INFO - wordpress - Created new tag 'Submarinos' with ID 345.
+2025-08-27 15:42:00 - INFO - wordpress - Created new tag 'Pacífico' with ID 346.
+2025-08-27 15:42:01 - INFO - wordpress - Resolved tags ['Rússia', 'China', 'OTAN', 'Patrulha Naval', 'Submarinos', 'Pacífico', 'Geopolítica'] to IDs: [148, 308, 307, 344, 345, 346, 309]
+2025-08-27 15:42:01 - INFO - wordpress - WP payload: title_len=54 content_len=3583 cat=[30] tags=[148, 308, 307, 344, 345, 346, 309]
+2025-08-27 15:42:01 - INFO - store - Successfully recorded published post for article DB ID 312 (WP Post ID: 3534).
+2025-08-27 15:42:01 - INFO - pipeline - Successfully published post 3534 for article DB ID 312
+2025-08-27 15:42:01 - INFO - pipeline - Sleeping for 9.7s (per-article delay).
+2025-08-27 15:42:11 - INFO - pipeline - Finished feed 'infomoney_mundo'. Sleeping for 15s before next feed: exame_carreira
+2025-08-27 15:42:26 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:42:26 - INFO - pipeline - Pipeline cycle completed. Processed 10 articles.
+2025-08-27 15:42:26 - INFO - store - Database connection closed.
+2025-08-27 15:42:26 - ERROR - main - Ocorreu um erro inesperado no loop do agendador: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 72, in main
+    schedule.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+    ~~~~~~~~~~~~~^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 15:43:26 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 15:43:26 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 15:43:26 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:43:26 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 15:43:27 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 15:43:27 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 15:43:27 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 15:43:27 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:43:27 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 15:43:28 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 15:43:28 - INFO - pipeline - Found 1 new articles for infomoney_politica
+2025-08-27 15:43:28 - INFO - pipeline - Processing article: Volume de emendas parlamentares cresce muito e sem coordenação, mostra estudo (DB ID: 313) from infomoney_politica
+2025-08-27 15:43:29 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/politica/volume-de-emendas-parlamentares-cresce-muito-e-sem-coordenacao-mostra-estudo/. Will fall back to generic.
+2025-08-27 15:43:30 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:43:30 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-14.25.40.jpeg?quality=70. Found 0 other valid images.
+2025-08-27 15:43:30 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/volume-de-emendas-parlamentares-cresce-muito-e-sem-coordenacao-mostra-estudo/. Title: Volume de emendas parlamentares cresce muito e sem...
+2025-08-27 15:43:30 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:43:37 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:44:07 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-14.25.40.jpeg?quality=70
+2025-08-27 15:44:07 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:44:12 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-27-at-14.25.40.jpeg?quality=70
+2025-08-27 15:44:12 - INFO - wordpress - Created new tag 'Emendas Parlamentares' with ID 347.
+2025-08-27 15:44:13 - INFO - wordpress - Created new tag 'Gastos Públicos' with ID 348.
+2025-08-27 15:44:14 - INFO - wordpress - Created new tag 'Transparência' with ID 349.
+2025-08-27 15:44:14 - INFO - wordpress - Created new tag 'Controle de Recursos' with ID 350.
+2025-08-27 15:44:14 - INFO - wordpress - Resolved tags ['Emendas Parlamentares', 'Gastos Públicos', 'Transparência', 'Gestão Pública', 'Controle de Recursos'] to IDs: [347, 348, 349, 232, 350]
+2025-08-27 15:44:14 - INFO - wordpress - WP payload: title_len=59 content_len=3315 cat=[21] tags=[347, 348, 349, 232, 350]
+2025-08-27 15:44:15 - INFO - store - Successfully recorded published post for article DB ID 313 (WP Post ID: 3536).
+2025-08-27 15:44:15 - INFO - pipeline - Successfully published post 3536 for article DB ID 313
+2025-08-27 15:44:15 - INFO - pipeline - Sleeping for 6.9s (per-article delay).
+2025-08-27 15:44:22 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: exame_brasil
+2025-08-27 15:44:37 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 15:44:37 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:44:37 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 15:44:41 - ERROR - pipeline - Error processing feed exame_brasil: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:44:41 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 15:44:56 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 15:44:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:44:56 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 15:44:56 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 15:44:56 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 15:44:56 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 15:44:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:44:56 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 15:44:58 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 15:44:58 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 15:44:58 - WARNING - pipeline - Circuit open for feed exame_economia (3 fails) → skipping this round.
+2025-08-27 15:44:58 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 15:44:58 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:44:58 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 15:44:58 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 15:44:58 - INFO - pipeline - No new articles found for infomoney_business.
+2025-08-27 15:44:58 - WARNING - pipeline - Circuit open for feed exame_invest (3 fails) → skipping this round.
+2025-08-27 15:44:58 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:44:58 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:44:58 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:44:58 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:44:58 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 15:44:58 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:44:58 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:44:58 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:44:59 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:44:59 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 15:44:59 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:44:59 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:44:59 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:44:59 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:44:59 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 15:44:59 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:44:59 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:44:59 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:44:59 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:44:59 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 15:44:59 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:44:59 - INFO - pipeline - Pipeline cycle completed. Processed 1 articles.
+2025-08-27 15:44:59 - INFO - store - Database connection closed.
+2025-08-27 15:44:59 - ERROR - main - Ocorreu um erro inesperado no loop do agendador: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 72, in main
+    schedule.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+    ~~~~~~~~~~~~~^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 15:45:59 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 15:45:59 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 15:45:59 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:45:59 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 15:46:00 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 15:46:00 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 15:46:00 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 15:46:00 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:46:00 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 15:46:00 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 15:46:00 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 15:46:00 - WARNING - pipeline - Circuit open for feed exame_brasil (3 fails) → skipping this round.
+2025-08-27 15:46:00 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 15:46:00 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:46:00 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 15:46:00 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 15:46:00 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 15:46:00 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 15:46:00 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:46:00 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 15:46:01 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 15:46:01 - INFO - pipeline - Found 1 new articles for infomoney_economia
+2025-08-27 15:46:01 - INFO - pipeline - Processing article: Dívida pública federal sobe 0,71% em julho, a R$ 7,939 trilhões, diz Tesouro (DB ID: 314) from infomoney_economia
+2025-08-27 15:46:03 - WARNING - extractor - Specific extractor failed to find title/content for https://www.infomoney.com.br/economia/divida-publica-federal-sobe-071-em-julho-a-r-7939-trilhoes-diz-tesouro/. Will fall back to generic.
+2025-08-27 15:46:03 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-27 15:46:03 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/01/2025-01-06T215113Z_1_LYNXMPEL050SA_RTROPTP_4_BRAZIL-ECONOMY.jpg?quality=70. Found 0 other valid images.
+2025-08-27 15:46:03 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/divida-publica-federal-sobe-071-em-julho-a-r-7939-trilhoes-diz-tesouro/. Title: Dívida pública federal sobe 0,71% em julho, a R$ 7...
+2025-08-27 15:46:03 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-27 15:46:12 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-27 15:46:42 - INFO - pipeline - Valid featured image found, preparing for upload: https://www.infomoney.com.br/wp-content/uploads/2025/01/2025-01-06T215113Z_1_LYNXMPEL050SA_RTROPTP_4_BRAZIL-ECONOMY.jpg?quality=70
+2025-08-27 15:46:42 - INFO - pipeline - Attempting to upload 1 image(s).
+2025-08-27 15:46:49 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/01/2025-01-06T215113Z_1_LYNXMPEL050SA_RTROPTP_4_BRAZIL-ECONOMY.jpg?quality=70
+2025-08-27 15:46:50 - INFO - wordpress - Created new tag 'Dívida Pública Federal' with ID 351.
+2025-08-27 15:46:50 - INFO - wordpress - Created new tag 'Tesouro Nacional' with ID 352.
+2025-08-27 15:46:52 - INFO - wordpress - Created new tag 'investidores' with ID 353.
+2025-08-27 15:46:53 - INFO - wordpress - Resolved tags ['Dívida Pública Federal', 'Tesouro Nacional', 'IPCA', 'Selic', 'economia brasileira', 'investidores', 'mercado financeiro'] to IDs: [351, 352, 93, 94, 86, 353, 74]
+2025-08-27 15:46:53 - INFO - wordpress - WP payload: title_len=51 content_len=3132 cat=[22] tags=[351, 352, 93, 94, 86, 353, 74]
+2025-08-27 15:46:53 - INFO - store - Successfully recorded published post for article DB ID 314 (WP Post ID: 3538).
+2025-08-27 15:46:53 - INFO - pipeline - Successfully published post 3538 for article DB ID 314
+2025-08-27 15:46:53 - INFO - pipeline - Sleeping for 9.8s (per-article delay).
+2025-08-27 15:47:03 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: exame_economia
+2025-08-27 15:47:18 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 15:47:18 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:47:18 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 15:47:21 - ERROR - pipeline - Error processing feed exame_economia: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:47:21 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 15:47:36 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 15:47:36 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:47:36 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 15:47:37 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 15:47:37 - INFO - pipeline - No new articles found for infomoney_business.
+2025-08-27 15:47:37 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 15:47:37 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:47:37 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 15:47:39 - ERROR - pipeline - Error processing feed exame_invest: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:47:39 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 15:47:54 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:47:54 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:47:54 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:47:55 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:47:55 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 15:47:55 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:47:55 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:47:55 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:47:55 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:47:55 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 15:47:55 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:47:55 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:47:55 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:47:56 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:47:56 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 15:47:56 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:47:56 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:47:56 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:47:56 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:47:56 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 15:47:56 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:47:56 - INFO - pipeline - Pipeline cycle completed. Processed 1 articles.
+2025-08-27 15:47:56 - INFO - store - Database connection closed.
+2025-08-27 15:47:56 - ERROR - main - Ocorreu um erro inesperado no loop do agendador: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 72, in main
+    schedule.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+    ~~~~~~~~~~~~~^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 15:48:56 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 15:48:56 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 15:48:56 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:48:56 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 15:48:56 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 15:48:56 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 15:48:56 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 15:48:56 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:48:56 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 15:48:57 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 15:48:57 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 15:48:57 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 15:48:57 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:48:57 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 15:49:02 - ERROR - pipeline - Error processing feed exame_brasil: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:49:02 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 15:49:17 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 15:49:17 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:17 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 15:49:17 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 15:49:17 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 15:49:17 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 15:49:17 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:17 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 15:49:18 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 15:49:18 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 15:49:18 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 15:49:18 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:18 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 15:49:21 - ERROR - pipeline - Error processing feed exame_economia: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:49:21 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 15:49:36 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 15:49:36 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:36 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 15:49:36 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 15:49:36 - INFO - pipeline - No new articles found for infomoney_business.
+2025-08-27 15:49:36 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 15:49:36 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:36 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 15:49:38 - ERROR - pipeline - Error processing feed exame_invest: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:49:38 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 15:49:53 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:49:53 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:49:53 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:49:53 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:49:53 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 15:49:53 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:49:53 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:53 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:49:54 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:49:54 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 15:49:54 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:49:54 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:49:54 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:49:54 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:49:54 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 15:49:54 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:49:54 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:49:54 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:49:54 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:49:54 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 15:49:54 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:49:54 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 15:49:54 - INFO - store - Database connection closed.
+2025-08-27 15:49:54 - ERROR - main - Ocorreu um erro inesperado no loop do agendador: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 72, in main
+    schedule.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+    ~~~~~~~~~~~~~^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 15:50:54 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 15:50:54 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 15:50:54 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:50:54 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 15:50:54 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 15:50:54 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 15:50:54 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 15:50:54 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:50:54 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 15:50:55 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 15:50:55 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 15:50:55 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 15:50:55 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:50:55 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 15:50:59 - ERROR - pipeline - Error processing feed exame_brasil: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:50:59 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 15:51:14 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 15:51:14 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:14 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 15:51:15 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 15:51:15 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 15:51:15 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 15:51:15 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:15 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 15:51:15 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 15:51:15 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 15:51:15 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 15:51:15 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:15 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 15:51:17 - ERROR - pipeline - Error processing feed exame_economia: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:51:17 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 15:51:32 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 15:51:32 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:32 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 15:51:32 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 15:51:32 - INFO - pipeline - No new articles found for infomoney_business.
+2025-08-27 15:51:32 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 15:51:32 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:32 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 15:51:34 - ERROR - pipeline - Error processing feed exame_invest: '<' not supported between instances of 'dict' and 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 119, in run_pipeline_cycle
+    feed_items = feed_reader.read_feeds(feed_config, source_id)
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 191, in read_feeds
+    raw_items.extend(self._parse_sitemap(
+                     ~~~~~~~~~~~~~~~~~~~^
+        content, limit=50,
+        ^^^^^^^^^^^^^^^^^^
+        allow_regex=feed_config.get('allow_regex'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        deny_regex=feed_config.get('deny_regex')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ))
+    ^
+  File "E:\Área de Trabalho 2\VocMoney\app\feeds.py", line 176, in _parse_sitemap
+    items.sort(key=lambda x: x.get("published") or "", reverse=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'dict' and 'dict'
+2025-08-27 15:51:34 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 15:51:49 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 15:51:49 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:51:49 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 15:51:49 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 15:51:49 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 15:51:49 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 15:51:49 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:49 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 15:51:49 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 15:51:49 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 15:51:49 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 15:51:49 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 15:51:49 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 15:51:49 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 15:51:49 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 15:51:49 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 15:51:49 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 15:51:49 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 15:51:49 - INFO - feeds - Found 10 total unique items for infomoney_mundo.
+2025-08-27 15:51:49 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 15:51:49 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 15:51:49 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 15:51:49 - INFO - store - Database connection closed.
+2025-08-27 15:51:49 - ERROR - main - Ocorreu um erro inesperado no loop do agendador: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 72, in main
+    schedule.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 854, in run_pending
+    default_scheduler.run_pending()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 101, in run_pending
+    self._run_job(job)
+    ~~~~~~~~~~~~~^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 173, in _run_job
+    ret = job.run()
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\schedule\__init__.py", line 691, in run
+    ret = self.job_func()
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 116, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.

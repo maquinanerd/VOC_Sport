@@ -21,6 +21,7 @@ CATEGORY_ALIASES = {
     'brasil': 'politica',
     'onde-investir': 'economia',
     'internacional': 'politica',
+    'carreira': 'economia',
 }
 
 AI_SYSTEM_RULES = """

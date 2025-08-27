@@ -7,12 +7,64 @@ from typing import List, Dict, Any, Optional
 import gzip
 import time
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
 NS = {"ns":"http://www.sitemaps.org/schemas/sitemap/0.9",
       "news":"http://www.google.com/schemas/sitemap-news/0.9"}
+
+# --- New helper functions for robust date parsing and sorting ---
+ISO_CLEAN_Z = re.compile(r'Z$')
+
+def _to_iso(s: str) -> str:
+    if not s:
+        return ""
+    s = s.strip()
+    # normaliza 'Z' para +00:00 (compatível com fromisoformat)
+    s = ISO_CLEAN_Z.sub("+00:00", s)
+    return s
+
+def _pick_date_from_dict(d: dict) -> str:
+    # tenta chaves comuns
+    for k in ("news:publication_date", "publication_date", "pubDate", "lastmod", "updated", "date"):
+        v = d.get(k)
+        if v:
+            return _to_iso(v if isinstance(v, str) else str(v))
+    # se tiver só um par, pega o valor
+    if len(d) == 1:
+        return _to_iso(str(next(iter(d.values()))))
+    return ""
+
+def _normalize_published(v) -> str:
+    if isinstance(v, str):
+        return _to_iso(v)
+    if isinstance(v, dict):
+        return _to_iso(_pick_date_from_dict(v))
+    if isinstance(v, list):
+        return _normalize_published(v[0]) if v else ""
+    return ""
+
+def _parse_dt(s: str):
+    if not s:
+        return None
+    # tenta fromisoformat primeiro
+    try:
+        return datetime.fromisoformat(s)
+    except Exception:
+        pass
+    # tenta alguns formatos comuns de sitemap/news
+    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%a, %d %b %Y %H:%M:%S %z"):
+        try:
+            return datetime.strptime(s, fmt)
+        except Exception:
+            continue
+    return None
+
+def _sort_key(item: dict):
+    dt = _parse_dt(_normalize_published(item.get("published")))
+    return dt if dt else datetime.min.replace(tzinfo=timezone.utc)
+# --- End of new helper functions ---
 
 def _stable_id_from(text: str) -> str:
     return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
@@ -138,7 +190,7 @@ class FeedReader:
                     time.sleep(0.2)  # Be polite
             
             # Sort and limit at the very end of processing the index
-            items.sort(key=lambda x: x.get("published") or "", reverse=True)
+            items.sort(key=_sort_key, reverse=True)
             logger.info(f"Parsed {len(items)} total items from sitemap index.")
             return items[:limit]
         
@@ -173,7 +225,7 @@ class FeedReader:
             })
 
         # For a single sitemap, sort and limit here.
-        items.sort(key=lambda x: x.get("published") or "", reverse=True)
+        items.sort(key=_sort_key, reverse=True)
         logger.info(f"Parsed {len(items)} items from sitemap.")
         return items[:limit]
 
