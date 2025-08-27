@@ -20963,3 +20963,716 @@ TypeError: unhashable type: 'dict'
 2025-08-26 22:53:59 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
 2025-08-26 22:54:01 - INFO - pipeline - Pipeline cycle completed. Processed 1 articles.
 2025-08-26 22:54:01 - INFO - store - Database connection closed.
+2025-08-26 22:54:14 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 22:54:14 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:54:14 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 22:54:14 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 22:54:14 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 22:54:14 - INFO - pipeline - Found 10 new articles for infomoney_economia
+2025-08-26 22:54:14 - INFO - pipeline - Processing article: Quem é o proeminente advogado a quem Lisa Cook recorreu para enfrentar Donald Trump (DB ID: 51) from infomoney_economia
+2025-08-26 22:54:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:14 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/economia/quem-e-o-proeminente-advogado-a-quem-lisa-cook-recorreu-para-enfrentar-donald-trump/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:14 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/economia/quem-e-o-proeminente-advogado-a-quem-lisa-cook-recorreu-para-enfrentar-donald-trump/
+2025-08-26 22:54:14 - INFO - pipeline - Processing article: Trump considera dois nomes para substituir Lisa Cook na diretoria do Fed, informa WSJ (DB ID: 52) from infomoney_economia
+2025-08-26 22:54:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:14 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/economia/trump-considera-dois-nomes-para-substituir-lisa-cook-na-diretoria-do-fed-informa-wsj/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:14 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/economia/trump-considera-dois-nomes-para-substituir-lisa-cook-na-diretoria-do-fed-informa-wsj/
+2025-08-26 22:54:15 - INFO - pipeline - Processing article: Prevalece a complementariedade no comércio entre Brasil e EUA, diz secretária do MDIC (DB ID: 53) from infomoney_economia
+2025-08-26 22:54:15 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:15 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/economia/prevalece-a-complementariedade-no-comercio-entre-brasil-e-eua-diz-secretaria-do-mdic/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:15 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/economia/prevalece-a-complementariedade-no-comercio-entre-brasil-e-eua-diz-secretaria-do-mdic/
+2025-08-26 22:54:15 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-26 22:54:30 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 22:54:30 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:54:30 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 22:54:30 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 22:54:30 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 22:54:30 - INFO - pipeline - Found 20 new articles for estadao_brasil
+2025-08-26 22:54:30 - INFO - pipeline - Processing article: Quem é o brasileiro encontrado morto em piscina de hotel na Grécia; amigo estava desacordado (DB ID: 61) from estadao_brasil
+2025-08-26 22:54:30 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:31 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/quem-e-o-brasileiro-encontrado-morto-em-piscina-de-hotel-na-grecia-amigo-estava-desacordado-nprm/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:31 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/quem-e-o-brasileiro-encontrado-morto-em-piscina-de-hotel-na-grecia-amigo-estava-desacordado-nprm/
+2025-08-26 22:54:31 - INFO - pipeline - Processing article: Alcolumbre anuncia votação do projeto de lei da adultização nesta quarta-feira (DB ID: 62) from estadao_brasil
+2025-08-26 22:54:31 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:32 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/alcolumbre-anuncia-votacao-do-projeto-de-lei-da-adultizacao-nesta-quarta-feira/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:32 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/alcolumbre-anuncia-votacao-do-projeto-de-lei-da-adultizacao-nesta-quarta-feira/
+2025-08-26 22:54:32 - INFO - pipeline - Processing article: Homem preso por fazer ameaças de morte a Felca é investigado por outros crimes; veja quais (DB ID: 63) from estadao_brasil
+2025-08-26 22:54:33 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:33 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/homem-preso-por-ameacar-felca-de-morte-e-investigado-por-outros-crimes-veja-quais-nprm/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:33 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/homem-preso-por-ameacar-felca-de-morte-e-investigado-por-outros-crimes-veja-quais-nprm/
+2025-08-26 22:54:33 - INFO - pipeline - Finished feed 'estadao_brasil'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-26 22:54:48 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 22:54:48 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:54:48 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 22:54:48 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 22:54:48 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 22:54:48 - INFO - pipeline - Found 10 new articles for infomoney_mercados
+2025-08-26 22:54:48 - INFO - pipeline - Processing article: B3 compra 62% da Shipay por R$ 37 mi, com opção de aquisição remanescente até 2030 (DB ID: 81) from infomoney_mercados
+2025-08-26 22:54:48 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:48 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mercados/b3-compra-62-da-shipay-por-r-37-mi-com-opcao-de-aquisicao-remanescente-ate-2030/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:48 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mercados/b3-compra-62-da-shipay-por-r-37-mi-com-opcao-de-aquisicao-remanescente-ate-2030/
+2025-08-26 22:54:48 - INFO - pipeline - Processing article: Calmaria nos mercados está praticamente no fim, apontam Goldman e Deutsche Bank (DB ID: 82) from infomoney_mercados
+2025-08-26 22:54:48 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:48 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mercados/calmaria-nos-mercados-esta-praticamente-no-fim-apontam-goldman-e-deutsche-bank/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:48 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mercados/calmaria-nos-mercados-esta-praticamente-no-fim-apontam-goldman-e-deutsche-bank/
+2025-08-26 22:54:49 - INFO - pipeline - Processing article: BNDES lança Floresta Viva 2, que prevê R$ 100 mi para preservação de biomas (DB ID: 83) from infomoney_mercados
+2025-08-26 22:54:49 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:54:49 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mercados/bndes-lanca-floresta-viva-2-que-preve-r-100-mi-para-preservacao-de-biomas/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:54:49 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mercados/bndes-lanca-floresta-viva-2-que-preve-r-100-mi-para-preservacao-de-biomas/
+2025-08-26 22:54:49 - INFO - pipeline - Finished feed 'infomoney_mercados'. Sleeping for 15s before next feed: infomoney_investir
+2025-08-26 22:55:04 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 22:55:04 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:55:04 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 22:55:04 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 22:55:04 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 22:55:04 - INFO - pipeline - Found 10 new articles for infomoney_investir
+2025-08-26 22:55:04 - INFO - pipeline - Processing article: Vendas do Tesouro Direto batem recorde para meses de julho; veja papel mais buscado (DB ID: 91) from infomoney_investir
+2025-08-26 22:55:04 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:04 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/onde-investir/vendas-do-tesouro-direto-batem-recorde-para-meses-de-julho-veja-papel-mais-buscado/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:04 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/onde-investir/vendas-do-tesouro-direto-batem-recorde-para-meses-de-julho-veja-papel-mais-buscado/
+2025-08-26 22:55:04 - INFO - pipeline - Processing article: ASA, de Alberto Safra, obtém licença de sociedade de crédito (DB ID: 92) from infomoney_investir
+2025-08-26 22:55:04 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:05 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/onde-investir/asa-de-alberto-safra-obtem-licenca-de-sociedade-de-credito/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:05 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/onde-investir/asa-de-alberto-safra-obtem-licenca-de-sociedade-de-credito/
+2025-08-26 22:55:05 - INFO - pipeline - Processing article: Fiagros se reinventam em busca de ampliar acesso do pequeno investidor ao agro (DB ID: 93) from infomoney_investir
+2025-08-26 22:55:05 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:05 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/onde-investir/fiagros-se-reinventam-em-busca-de-ampliar-acesso-do-pequeno-investidor-ao-agro/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:05 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/onde-investir/fiagros-se-reinventam-em-busca-de-ampliar-acesso-do-pequeno-investidor-ao-agro/
+2025-08-26 22:55:05 - INFO - pipeline - Finished feed 'infomoney_investir'. Sleeping for 15s before next feed: infomoney_mundo
+2025-08-26 22:55:20 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 22:55:20 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:55:20 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 22:55:20 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 22:55:20 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 22:55:20 - INFO - pipeline - Found 10 new articles for infomoney_mundo
+2025-08-26 22:55:20 - INFO - pipeline - Processing article: Zelenskiy diz que países do Golfo ou da Europa poderiam sediar conversas com Putin (DB ID: 101) from infomoney_mundo
+2025-08-26 22:55:20 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:20 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mundo/zelenskiy-diz-que-paises-do-golfo-ou-da-europa-poderiam-sediar-conversas-com-putin/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:20 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mundo/zelenskiy-diz-que-paises-do-golfo-ou-da-europa-poderiam-sediar-conversas-com-putin/
+2025-08-26 22:55:20 - INFO - pipeline - Processing article: Vieira: não procede alegação dos EUA de que Brasil é país mais favorecido por tarifas (DB ID: 102) from infomoney_mundo
+2025-08-26 22:55:21 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:21 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mundo/vieira-nao-procede-alegacao-dos-eua-de-que-brasil-e-pais-mais-favorecido-por-tarifas/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:21 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mundo/vieira-nao-procede-alegacao-dos-eua-de-que-brasil-e-pais-mais-favorecido-por-tarifas/
+2025-08-26 22:55:21 - INFO - pipeline - Processing article: Maduro critica envio de tropas dos EUA ao Caribe: “Ninguém toca nesta terra” (DB ID: 103) from infomoney_mundo
+2025-08-26 22:55:21 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 22:55:21 - ERROR - extractor - An unexpected error occurred during extraction for https://www.infomoney.com.br/mundo/maduro-critica-envio-de-tropas-dos-eua-ao-caribe-ninguem-toca-nesta-terra/: unhashable type: 'dict'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 514, in extract
+    return None
+    
+TypeError: unhashable type: 'dict'
+2025-08-26 22:55:21 - WARNING - pipeline - Failed to extract content from https://www.infomoney.com.br/mundo/maduro-critica-envio-de-tropas-dos-eua-ao-caribe-ninguem-toca-nesta-terra/
+2025-08-26 22:55:21 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 22:55:21 - INFO - store - Database connection closed.
+2025-08-26 22:56:50 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 22:56:50 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 22:56:50 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 22:56:50 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 22:56:50 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 22:56:50 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 22:56:50 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 22:56:50 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-26 22:56:51 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 22:56:51 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 22:56:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 22:56:51 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 22:56:51 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 22:56:51 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-26 22:56:51 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 22:56:51 - INFO - store - Database connection closed.
+2025-08-26 23:10:21 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 23:10:21 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 23:10:21 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:10:22 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 23:10:22 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 23:10:22 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 23:10:22 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 23:10:22 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 23:10:22 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 23:10:23 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 23:10:23 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 23:10:23 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-26 23:10:23 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 23:10:23 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:10:23 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 23:10:24 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 23:10:24 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 23:10:24 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-26 23:10:24 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 23:10:24 - INFO - store - Database connection closed.
+2025-08-26 23:11:33 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 23:11:33 - INFO - store - Initializing database tables if they don't exist...
+2025-08-26 23:11:33 - INFO - store - Database initialized successfully.
+2025-08-26 23:11:33 - INFO - store - Database connection closed.
+2025-08-26 23:11:33 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 23:11:33 - INFO - main - Executando o primeiro ciclo do pipeline imediatamente.
+2025-08-26 23:11:33 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 23:11:33 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 23:11:33 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:34 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 23:11:34 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 23:11:34 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 23:11:34 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 23:11:34 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 23:11:34 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:34 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-26 23:11:35 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 23:11:35 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:35 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 23:11:35 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 23:11:35 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 23:11:35 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-26 23:11:35 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 23:11:35 - INFO - store - Database connection closed.
+2025-08-26 23:11:35 - INFO - main - Primeiro ciclo concluído.
+2025-08-26 23:11:35 - INFO - main - Agendador iniciado. O pipeline será executado a cada 15 minutos.
+2025-08-26 23:11:52 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 23:11:52 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 23:11:52 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:52 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 23:11:52 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 23:11:52 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 23:11:52 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 23:11:52 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 23:11:52 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-26 23:11:53 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 23:11:53 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:53 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 23:11:53 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 23:11:53 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 23:11:53 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-26 23:11:53 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 23:11:53 - INFO - store - Database connection closed.
+2025-08-26 23:11:54 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 23:11:54 - INFO - store - Initializing database tables if they don't exist...
+2025-08-26 23:11:54 - INFO - store - Database initialized successfully.
+2025-08-26 23:11:54 - INFO - store - Database connection closed.
+2025-08-26 23:11:54 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 23:11:54 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 23:11:54 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 23:11:54 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 23:11:54 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:55 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 23:11:55 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 23:11:55 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 23:11:55 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-26 23:11:55 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 23:11:55 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:55 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 23:11:55 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 23:11:55 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 23:11:55 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-26 23:11:55 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 23:11:55 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:55 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 23:11:55 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 23:11:55 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 23:11:55 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-26 23:11:55 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 23:11:55 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:55 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 23:11:55 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 23:11:55 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 23:11:55 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-26 23:11:55 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 23:11:55 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:55 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 23:11:56 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 23:11:56 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 23:11:56 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-26 23:11:56 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-26 23:11:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:56 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-26 23:11:56 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-26 23:11:56 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-26 23:11:56 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-26 23:11:56 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-26 23:11:56 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:11:56 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-26 23:11:56 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-26 23:11:56 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-26 23:11:56 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-26 23:11:56 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-26 23:11:56 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:11:56 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-26 23:11:56 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-26 23:11:56 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-26 23:11:56 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-26 23:11:56 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 23:11:56 - INFO - store - Database connection closed.
+2025-08-26 23:11:56 - INFO - main - Ciclo único finalizado.
+2025-08-26 23:12:13 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 23:12:13 - INFO - store - Initializing database tables if they don't exist...
+2025-08-26 23:12:13 - INFO - store - Database initialized successfully.
+2025-08-26 23:12:13 - INFO - store - Database connection closed.
+2025-08-26 23:12:13 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 23:12:13 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 23:12:13 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 23:12:13 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 23:12:13 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:12:14 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 23:12:14 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 23:12:14 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 23:12:14 - INFO - pipeline - Found 20 new articles for estadao_politica
+2025-08-26 23:12:14 - INFO - pipeline - Processing article: Em meio à crise com EUA, Tarcísio discute tarifaço com governador da Geórgia e fala em ‘diplomacia’ (DB ID: 1) from estadao_politica
+2025-08-26 23:12:14 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:12:15 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/politica/em-meio-a-crise-com-eua-tarcisio-discute-tarifaco-com-governador-da-georgia-e-fala-em-diplomacia/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:12:15 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/politica/em-meio-a-crise-com-eua-tarcisio-discute-tarifaco-com-governador-da-georgia-e-fala-em-diplomacia/
+2025-08-26 23:12:15 - INFO - pipeline - Processing article: Moraes aumenta prazo para que a PGR se manifeste sobre descumprimento de cautelares de Bolsonaro (DB ID: 2) from estadao_politica
+2025-08-26 23:12:15 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:12:15 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/politica/moraes-aumenta-prazo-pgr-manifeste-descumprimento-cautelares-bolsonaro-nprp/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:12:15 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/politica/moraes-aumenta-prazo-pgr-manifeste-descumprimento-cautelares-bolsonaro-nprp/
+2025-08-26 23:12:15 - INFO - pipeline - Processing article: Filhos de Bolsonaro criticam monitoramento constante ao ex-presidente (DB ID: 3) from estadao_politica
+2025-08-26 23:12:15 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:12:15 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/politica/filhos-bolsonaro-criticam-monitoramento-constante-ex-presidente-nprp/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:12:15 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/politica/filhos-bolsonaro-criticam-monitoramento-constante-ex-presidente-nprp/
+2025-08-26 23:12:15 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-26 23:12:30 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-26 23:12:30 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:12:31 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-26 23:12:31 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-26 23:12:31 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-26 23:12:31 - INFO - pipeline - Found 10 new articles for infomoney_politica
+2025-08-26 23:12:31 - INFO - pipeline - Processing article: Escândalo de corrupção implica irmã de Milei e atinge governo a semanas de eleições (DB ID: 21) from infomoney_politica
+2025-08-26 23:12:31 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:12:31 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg?quality=70. Found 3 other valid images.
+2025-08-26 23:12:31 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/escandalo-de-corrupcao-implica-irma-de-milei-e-atinge-governo-a-semanas-de-eleicoes/. Title: Escândalo de corrupção implica irmã de Milei e ati...
+2025-08-26 23:12:31 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:12:39 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:13:09 - INFO - pipeline - Attempting to upload up to 4 images.
+2025-08-26 23:13:13 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-07-26T141505Z_2024923372_RC2DUFA6ECUY_RTRMADP_3_ARGENTINA-MILEI-RURAL.jpg?quality=70
+2025-08-26 23:13:16 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2024/12/cta-sts-2-900x300-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 23:13:19 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 23:13:25 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 23:13:25 - INFO - wordpress - Created new tag 'Javier Milei' with ID 167.
+2025-08-26 23:13:26 - INFO - wordpress - Created new tag 'Karina Milei' with ID 168.
+2025-08-26 23:13:26 - INFO - wordpress - Created new tag 'Eleições Argentina' with ID 169.
+2025-08-26 23:13:27 - INFO - wordpress - Created new tag 'Corrupção Argentina' with ID 170.
+2025-08-26 23:13:27 - INFO - wordpress - Created new tag 'Crise Política Argentina' with ID 171.
+2025-08-26 23:13:27 - INFO - wordpress - Resolved tags ['Javier Milei', 'Karina Milei', 'Eleições Argentina', 'Corrupção Argentina', 'Crise Política Argentina'] to IDs: [167, 168, 169, 170, 171]
+2025-08-26 23:13:27 - INFO - wordpress - WP payload: title_len=67 content_len=3995 cat=[21] tags=[167, 168, 169, 170, 171]
+2025-08-26 23:13:27 - INFO - store - Successfully recorded published post for article DB ID 21 (WP Post ID: 3390).
+2025-08-26 23:13:27 - INFO - pipeline - Successfully published post 3390 for article DB ID 21
+2025-08-26 23:13:27 - INFO - pipeline - Sleeping for 8.2s (per-article delay).
+2025-08-26 23:13:36 - INFO - pipeline - Processing article: Tarcísio recebe elogios de Temer e Kassab em evento de prefeitos de São Paulo (DB ID: 22) from infomoney_politica
+2025-08-26 23:13:36 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:13:36 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/tarcisio-de-freitas.png?quality=70. Found 2 other valid images.
+2025-08-26 23:13:36 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/tarcisio-recebe-elogios-de-temer-e-kassab-em-evento-de-prefeitos-de-sao-paulo/. Title: Tarcísio recebe elogios de Temer e Kassab em event...
+2025-08-26 23:13:36 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:13:42 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:14:12 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 23:14:16 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/tarcisio-de-freitas.png?quality=70
+2025-08-26 23:14:19 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-14T180851Z_1083234547_RC267GAX774C_RTRMADP_3_USA-TRUMP.jpg?quality=70&strip=all
+2025-08-26 23:14:21 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Plantacao-de-cafe-e1756233248394.jpg?quality=70&strip=all
+2025-08-26 23:14:22 - INFO - wordpress - Created new tag 'Michel Temer' with ID 172.
+2025-08-26 23:14:22 - INFO - wordpress - Created new tag 'Kassab' with ID 173.
+2025-08-26 23:14:23 - INFO - wordpress - Created new tag 'Governo de São Paulo' with ID 174.
+2025-08-26 23:14:23 - INFO - wordpress - Created new tag 'Política Paulista' with ID 175.
+2025-08-26 23:14:24 - INFO - wordpress - Created new tag 'MDB' with ID 176.
+2025-08-26 23:14:24 - INFO - wordpress - Created new tag 'PSD' with ID 177.
+2025-08-26 23:14:24 - INFO - wordpress - Resolved tags ['Tarcísio de Freitas', 'Michel Temer', 'Kassab', 'Governo de São Paulo', 'Política Paulista', 'MDB', 'PSD'] to IDs: [163, 172, 173, 174, 175, 176, 177]
+2025-08-26 23:14:24 - INFO - wordpress - WP payload: title_len=59 content_len=3396 cat=[21] tags=[163, 172, 173, 174, 175, 176, 177]
+2025-08-26 23:14:24 - INFO - store - Successfully recorded published post for article DB ID 22 (WP Post ID: 3394).
+2025-08-26 23:14:24 - INFO - pipeline - Successfully published post 3394 for article DB ID 22
+2025-08-26 23:14:24 - INFO - pipeline - Sleeping for 9.3s (per-article delay).
+2025-08-26 23:14:34 - INFO - pipeline - Processing article: Planalto lança novo slogan e Lula quer ministros defendendo governo (DB ID: 23) from infomoney_politica
+2025-08-26 23:14:34 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:14:34 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg?quality=70. Found 2 other valid images.
+2025-08-26 23:14:34 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/politica/planalto-lanca-novo-slogan-e-lula-quer-ministros-defendendo-governo/. Title: Planalto lança novo slogan e Lula quer ministros d...
+2025-08-26 23:14:34 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:14:40 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:15:10 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 23:15:16 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T203350Z_1_LYNXMPEL7P0ZD_RTROPTP_4_USA-BRAZIL-VISAS.jpg?quality=70
+2025-08-26 23:15:19 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-13T161751Z_1355094333_RC2G6GANB5CX_RTRMADP_3_USA-TRUMP-TARIFFS-BRAZIL.jpg?quality=70&strip=all
+2025-08-26 23:15:24 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Screenshot_9afba6.png?quality=70&strip=all
+2025-08-26 23:15:25 - INFO - wordpress - Created new tag 'Novo Slogan' with ID 178.
+2025-08-26 23:15:25 - INFO - wordpress - Created new tag 'Comunicação Governamental' with ID 179.
+2025-08-26 23:15:25 - INFO - wordpress - Resolved tags ['Governo Lula', 'Fernando Haddad', 'Novo Slogan', 'Comunicação Governamental', 'Política Brasileira'] to IDs: [32, 82, 178, 179, 97]
+2025-08-26 23:15:25 - INFO - wordpress - WP payload: title_len=51 content_len=3489 cat=[21] tags=[32, 82, 178, 179, 97]
+2025-08-26 23:15:26 - INFO - store - Successfully recorded published post for article DB ID 23 (WP Post ID: 3398).
+2025-08-26 23:15:26 - INFO - pipeline - Successfully published post 3398 for article DB ID 23
+2025-08-26 23:15:26 - INFO - pipeline - Sleeping for 9.7s (per-article delay).
+2025-08-26 23:15:36 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: estadao_economia
+2025-08-26 23:15:51 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-26 23:15:51 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:15:51 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-26 23:15:51 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-26 23:15:51 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-26 23:15:51 - INFO - pipeline - Found 20 new articles for estadao_economia
+2025-08-26 23:15:51 - INFO - pipeline - Processing article: Governo deve criar teto para taxa do vale-refeição cobrada de comerciantes (DB ID: 31) from estadao_economia
+2025-08-26 23:15:52 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:15:52 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/coluna-do-broad/governo-deve-criar-teto-para-taxa-do-vale-refeicao-cobrada-de-comerciantes/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:15:52 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/coluna-do-broad/governo-deve-criar-teto-para-taxa-do-vale-refeicao-cobrada-de-comerciantes/
+2025-08-26 23:15:52 - INFO - pipeline - Processing article: Por que a aposta de corte dos juros nos EUA pode tornar o real a moeda mais atrativa dos emergentes (DB ID: 32) from estadao_economia
+2025-08-26 23:15:53 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:15:53 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/fabio-alves/aposta-juros-eua-real-moeda-mais-atrativa-emergentes/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:15:53 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/fabio-alves/aposta-juros-eua-real-moeda-mais-atrativa-emergentes/
+2025-08-26 23:15:53 - INFO - pipeline - Processing article: Brasil corre sério risco de permanecer preso a juros reais de 7% a 8%, sem ajuste fiscal efetivo (DB ID: 33) from estadao_economia
+2025-08-26 23:15:55 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:15:55 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/economia/sufocados-pelos-juros/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    videos = self._extract_youtube_videos(soup)
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    vid = self._extract_youtube_id(iframe.get("src", ""))
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    if og := soup.find('meta', property='og:image'):
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:15:55 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/economia/sufocados-pelos-juros/
+2025-08-26 23:15:55 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-26 23:16:10 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-26 23:16:10 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-26 23:16:10 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-26 23:16:10 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-26 23:16:10 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-26 23:16:10 - INFO - pipeline - Found 10 new articles for infomoney_economia
+2025-08-26 23:16:10 - INFO - pipeline - Processing article: Quem é o proeminente advogado a quem Lisa Cook recorreu para enfrentar Donald Trump (DB ID: 51) from infomoney_economia
+2025-08-26 23:16:11 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:16:11 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Captura-de-tela-2025-08-26-194854.png?quality=70. Found 5 other valid images.
+2025-08-26 23:16:11 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/quem-e-o-proeminente-advogado-a-quem-lisa-cook-recorreu-para-enfrentar-donald-trump/. Title: Quem é o proeminente advogado a quem Lisa Cook rec...
+2025-08-26 23:16:11 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:16:18 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:16:48 - INFO - pipeline - Attempting to upload up to 6 images.
+2025-08-26 23:16:53 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/Captura-de-tela-2025-08-26-194854.png?quality=70
+2025-08-26 23:16:54 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 23:16:59 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/06/900-x-300-com-texto-na-imagem-1.png?fit=900%2C300&quality=70&strip=all
+2025-08-26 23:17:00 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-03-20T000000Z_93104975_MT1NURPHO000DD7YH7_RTRMADP_3_ECONOMIST-KRUGMAN-SHIPPING-SUMMIT.jpg?quality=70&strip=all
+2025-08-26 23:17:09 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg?quality=70&strip=all
+2025-08-26 23:17:12 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-26T001642Z_1_LYNXMPEL7P00C_RTROPTP_4_USA-FED-JACKSONHOLE.jpg?quality=70&strip=all
+2025-08-26 23:17:14 - INFO - wordpress - Created new tag 'advogado' with ID 180.
+2025-08-26 23:17:14 - INFO - wordpress - Resolved tags ['Lisa Cook', 'Donald Trump', 'Federal Reserve', 'economia americana', 'política monetária', 'advogado', 'Estados Unidos'] to IDs: [52, 51, 53, 67, 54, 180, 152]
+2025-08-26 23:17:14 - INFO - wordpress - WP payload: title_len=49 content_len=4506 cat=[22] tags=[52, 51, 53, 67, 54, 180, 152]
+2025-08-26 23:17:15 - INFO - store - Successfully recorded published post for article DB ID 51 (WP Post ID: 3406).
+2025-08-26 23:17:15 - INFO - pipeline - Successfully published post 3406 for article DB ID 51
+2025-08-26 23:17:15 - INFO - pipeline - Sleeping for 9.5s (per-article delay).
+2025-08-26 23:17:24 - INFO - pipeline - Processing article: Trump considera dois nomes para substituir Lisa Cook na diretoria do Fed, informa WSJ (DB ID: 52) from infomoney_economia
+2025-08-26 23:17:25 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:17:25 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg. Found 2 other valid images.
+2025-08-26 23:17:25 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/trump-considera-dois-nomes-para-substituir-lisa-cook-na-diretoria-do-fed-informa-wsj/. Title: Trump considera dois nomes para substituir Lisa Co...
+2025-08-26 23:17:25 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:17:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:18:02 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 23:18:11 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/2025-08-15T125217Z_1_LYNXMPEL7E0H0_RTROPTP_4_EUA-TRUMP-ACO-CHIPS.jpg
+2025-08-26 23:18:12 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2024/11/420207198.jpg?quality=70&strip=all
+2025-08-26 23:18:15 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/08/438505845.jpg?quality=70&strip=all
+2025-08-26 23:18:16 - INFO - wordpress - Resolved tags ['Donald Trump', 'Lisa Cook', 'Federal Reserve', 'Política Monetária', 'EUA', 'Mercado Financeiro', 'Wall Street Journal'] to IDs: [51, 52, 53, 54, 59, 74, 56]
+2025-08-26 23:18:16 - INFO - wordpress - WP payload: title_len=51 content_len=3885 cat=[22] tags=[51, 52, 53, 54, 59, 74, 56]
+2025-08-26 23:18:17 - INFO - store - Successfully recorded published post for article DB ID 52 (WP Post ID: 3411).
+2025-08-26 23:18:17 - INFO - pipeline - Successfully published post 3411 for article DB ID 52
+2025-08-26 23:18:17 - INFO - pipeline - Sleeping for 7.9s (per-article delay).
+2025-08-26 23:18:25 - INFO - pipeline - Processing article: Prevalece a complementariedade no comércio entre Brasil e EUA, diz secretária do MDIC (DB ID: 53) from infomoney_economia
+2025-08-26 23:18:25 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:18:25 - INFO - extractor - Selected featured image: https://www.infomoney.com.br/wp-content/uploads/2025/06/daniel-dan-hshfCysx-wg-unsplash.jpg?quality=70. Found 0 other valid images.
+2025-08-26 23:18:25 - INFO - extractor - Successfully extracted and cleaned content from https://www.infomoney.com.br/economia/prevalece-a-complementariedade-no-comercio-entre-brasil-e-eua-diz-secretaria-do-mdic/. Title: Prevalece a complementariedade no comércio entre B...
+2025-08-26 23:18:25 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 23:18:32 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 23:19:02 - INFO - pipeline - Attempting to upload up to 1 images.
+2025-08-26 23:19:04 - INFO - wordpress - Successfully uploaded image: https://www.infomoney.com.br/wp-content/uploads/2025/06/daniel-dan-hshfCysx-wg-unsplash.jpg?quality=70
+2025-08-26 23:19:05 - INFO - wordpress - Created new tag 'Complementariedade Econômica' with ID 181.
+2025-08-26 23:19:06 - INFO - wordpress - Resolved tags ['MDIC', 'Comércio Bilateral', 'Brasil', 'Estados Unidos', 'Complementariedade Econômica', 'Relações Comerciais', 'Crescimento Econômico'] to IDs: [57, 60, 58, 152, 181, 62, 63]
+2025-08-26 23:19:06 - INFO - wordpress - WP payload: title_len=70 content_len=3874 cat=[22] tags=[57, 60, 58, 152, 181, 62, 63]
+2025-08-26 23:19:06 - INFO - store - Successfully recorded published post for article DB ID 53 (WP Post ID: 3413).
+2025-08-26 23:19:06 - INFO - pipeline - Successfully published post 3413 for article DB ID 53
+2025-08-26 23:19:06 - INFO - pipeline - Sleeping for 7.4s (per-article delay).
+2025-08-26 23:19:13 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-26 23:19:28 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-26 23:19:28 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 23:19:30 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-26 23:19:30 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-26 23:19:30 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-26 23:19:30 - INFO - pipeline - Found 20 new articles for estadao_brasil
+2025-08-26 23:19:30 - INFO - pipeline - Processing article: Quem é o brasileiro encontrado morto em piscina de hotel na Grécia; amigo estava desacordado (DB ID: 61) from estadao_brasil
+2025-08-26 23:19:31 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:19:31 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/quem-e-o-brasileiro-encontrado-morto-em-piscina-de-hotel-na-grecia-amigo-estava-desacordado-nprm/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    self._pre_clean_html(soup)
+             ~~~~~~~~~~~^^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    # og:image often ends with .../<ID>/hqdefault.jpg
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    Extracts a YouTube video ID from a URL using various patterns.
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:19:31 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/quem-e-o-brasileiro-encontrado-morto-em-piscina-de-hotel-na-grecia-amigo-estava-desacordado-nprm/
+2025-08-26 23:19:31 - INFO - pipeline - Processing article: Alcolumbre anuncia votação do projeto de lei da adultização nesta quarta-feira (DB ID: 62) from estadao_brasil
+2025-08-26 23:19:32 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:19:32 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/alcolumbre-anuncia-votacao-do-projeto-de-lei-da-adultizacao-nesta-quarta-feira/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    self._pre_clean_html(soup)
+             ~~~~~~~~~~~^^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    # og:image often ends with .../<ID>/hqdefault.jpg
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    Extracts a YouTube video ID from a URL using various patterns.
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:19:32 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/alcolumbre-anuncia-votacao-do-projeto-de-lei-da-adultizacao-nesta-quarta-feira/
+2025-08-26 23:19:32 - INFO - pipeline - Processing article: Homem preso por fazer ameaças de morte a Felca é investigado por outros crimes; veja quais (DB ID: 63) from estadao_brasil
+2025-08-26 23:19:33 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 23:19:33 - ERROR - extractor - An unexpected error occurred during extraction for https://www.estadao.com.br/brasil/homem-preso-por-ameacar-felca-de-morte-e-investigado-por-outros-crimes-veja-quais-nprm/: name 'soup' is not defined
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 545, in extract
+    self._pre_clean_html(soup)
+             ~~~~~~~~~~~^^^^^^
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 506, in _extract_youtube_videos
+    # og:image often ends with .../<ID>/hqdefault.jpg
+  File "E:\Área de Trabalho 2\VocMoney\app\extractor.py", line 479, in _extract_youtube_id
+    Extracts a YouTube video ID from a URL using various patterns.
+             ^^^^
+NameError: name 'soup' is not defined
+2025-08-26 23:19:33 - WARNING - pipeline - Failed to extract content from https://www.estadao.com.br/brasil/homem-preso-por-ameacar-felca-de-morte-e-investigado-por-outros-crimes-veja-quais-nprm/
+2025-08-26 23:19:33 - INFO - pipeline - Finished feed 'estadao_brasil'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-26 23:19:43 - INFO - pipeline - Pipeline cycle completed. Processed 6 articles.
+2025-08-26 23:19:43 - INFO - store - Database connection closed.
+2025-08-26 23:19:43 - INFO - main - Ciclo único finalizado.

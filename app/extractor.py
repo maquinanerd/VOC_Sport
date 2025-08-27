@@ -108,6 +108,10 @@ YOUTUBE_DOMAINS = (
     "youtu.be", "www.youtu.be",
 )
 
+_YT_PATTERNS = (
+    r"(?:youtube\.com/(?:embed/|shorts/|v/)|youtu\.be/)([A-Za-z0-9_-]{11})",
+)
+
 PRIORITY_CDN_DOMAINS = (
     "static1.srcdn.com",              # ScreenRant
     "static1.colliderimages.com",     # Collider
@@ -127,13 +131,19 @@ FORBIDDEN_LABELS: Set[str] = {
     "Producer", "Producers", "Cast"
 }
 
-JUNK_IMAGE_PATTERNS = ("placeholder", "sprite", "icon", "emoji", ".svg")
+JUNK_IMAGE_PATTERNS = (
+    "placeholder", "sprite", "icon", "emoji", ".svg",
+    # From user suggestion to filter out non-content images
+    "cta", "read-more", "share", "logo"
+)
 
 # Blocos a ignorar (relacionados/sidebars/galerias etc.)
 _BAD_SECTION_RX = re.compile(
     r"(related|trending|more|sidebar|aside|recommend|recommended|"
     r"gallery|carousel|slideshow|video|playlist|social|share|"
     r"footer|header|nav|subscribe|newsletter|ad|advert|sponsor|"
+    # From user suggestion
+    r"cta|banner|paid|outbrain|taboola|"
     r"screen-hub|screenhub|hub|most-popular|popular)",
     re.I
 )
@@ -165,6 +175,14 @@ def _has_bad_keyword(url: str) -> bool:
     u = url.lower()
     return any(k in u for k in BAD_IMAGE_KEYWORDS)
 
+def _is_junk_filename(url: str) -> bool:
+    """Checks if the image filename suggests it's a non-content image."""
+    try:
+        name = urlparse(url).path.rsplit("/", 1)[-1].lower()
+        return any(snippet in name for snippet in JUNK_IMAGE_PATTERNS)
+    except Exception:
+        return False # Fail safe
+
 def _passes_min_size(url: str, min_w: int = 600, min_h: int = 315) -> bool:
     w, h = _guess_dimensions_from_url(url)
     if w is None or h is None:
@@ -182,6 +200,8 @@ def is_valid_article_image(url: str) -> bool:
     if _is_bad_domain(url):
         return False
     if _has_bad_keyword(url):
+        return False
+    if _is_junk_filename(url):
         return False
     if not _passes_min_size(url):
         return False
@@ -217,10 +237,13 @@ def _find_article_body(soup: BeautifulSoup) -> BeautifulSoup:
     - Prefere seletores comuns (article body/content)
     - Evita nós com classes/ids que casem _BAD_SECTION_RX
     - Fallback: nó com mais <p> + <figure>
-    """
+    """    
+    # Enhanced with user suggestions for more specific content containers
     candidates = soup.select(
-        "[itemprop='articleBody'], .article-body, .article-content, "
-        ".entry-content, .post-content, article .content, article"
+        "article .entry-content, article .content, article [itemprop='articleBody'], "
+        ".post-content, .single-content, .post-body, "
+        "[itemprop='articleBody'], .article-body, .article-content, " # Original selectors
+        "article" # Fallback
     )
     if not candidates:
         candidates = soup.find_all(True)
@@ -264,7 +287,7 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
         urls.append(abs_u.rstrip("/"))
 
     # 1) <img> tags
-    for img in root.find_all("img"):
+    for img in root.select("img:not([aria-hidden='true'])"):
         cand = None
         for attr in ("src", "data-src", "data-original", "data-lazy-src", "data-image", "data-img-url"):
             if img.get(attr):
@@ -332,12 +355,18 @@ class ContentExtractor:
 
     def _pre_clean_html(self, soup: BeautifulSoup):
         """Remove widgets/ads/blocos óbvios ANTES da extração."""
-        selectors_to_remove = [
-            # metadados/ratings
+        # Merged list from original and user suggestions for more robust cleaning
+        selectors_to_remove = {
+            # User-suggested selectors for CTAs, ads, and social sharing
+            ".cta-middle", ".wp-block-infomoney-blocks-infomoney-read-more",
+            ".infomoney-read-more", ".read-more", ".related-posts", ".post__related",
+            ".sharing", ".share", ".social", ".banner", ".ads", ".advertisement",
+            "[data-ad]", "[data-ad-slot]",
+            ".sponsored", ".paid-content", ".partner", ".outbrain", ".taboola",
+            
+            # Original selectors
             '[class*="srdb"]', '[class*="rating"]', '.review', '.score', '.meter',
-            # blocos ruins por padrão
             'header', 'footer', 'nav', 'aside',
-            # areas relacionadas/trending/comentários
             '[class*="related"]', '[id*="related"]',
             '[class*="trending"]', '[id*="trending"]',
             '[class*="sidebar"]',  '[id*="sidebar"]',
@@ -346,12 +375,12 @@ class ContentExtractor:
             '[class*="most-popular"]','[id*="most-popular"]',
             '[class*="popular"]','[id*="popular"]',
             '[class*="newsletter"]','[id*="newsletter"]',
-            '[class*="ad-"]','[id*="ad-"]','[class*="advert"]','[id*="advert"]', '.comments', '#comments',
-            # Author/byline selectors
+            '[class*="ad-"]','[id*="ad-"]','[class*="advert"]','[id*="advert"]',
+            '.comments', '#comments',
             '.author', '.author-box', '.post-author', '.byline', '.entry-author',
             '.avatar', '.author__image', '.author-profile', '.wp-block-embed',
-            '.related', '.newsletter', '.subscribe', 'header .author', 'aside .author'
-        ]
+            '.subscribe',
+        }
         for sel in selectors_to_remove:
             for el in soup.select(sel):
                 try:
@@ -470,40 +499,48 @@ class ContentExtractor:
         logger.warning(f"Could not find a valid featured image for {base_url}")
         return None
 
-    def _extract_youtube_id(self, src: str) -> Optional[str]:
+    def _extract_youtube_id(self, url: str, soup: Optional[BeautifulSoup] = None) -> Optional[str]:
         """
-        Extracts a list of candidate URLs for the featured image from various sources.
-        (og:image, twitter:image, json-ld, first <img> in <article>)
+        Extracts a YouTube video ID from a URL using various patterns.
+        Optionally uses the soup object to find a fallback ID in meta tags.
         """
-        candidates = []
-        if og := soup.find('meta', property='og:image'):
-            if og.get('content'):
-                candidates.append(urljoin(base_url, og['content']))
-
-        if tw := soup.find('meta', attrs={'name': 'twitter:image'}):
-            if tw.get('content'):
-                candidates.append(urljoin(base_url, tw['content']))
-        if not src:
+        if not url:
             return None
+
+        # 1) Common patterns (embed/shorts/youtu.be)
+        for pattern in _YT_PATTERNS:
+            m = re.search(pattern, url)
+            if m:
+                return m.group(1)
+
+        # 2) watch?v=ID
         try:
-            u = urlparse(src)
-            if u.netloc not in YOUTUBE_DOMAINS and not any(u.netloc.endswith(d) for d in YOUTUBE_DOMAINS):
-                return None
-            if u.path.startswith("/embed/") or u.path.startswith("/shorts/"):
-                return u.path.split("/")[2].split("?")[0]
-            if u.netloc.endswith("youtu.be"):
-                return u.path.lstrip("/")
-            if u.path == "/watch":
-                q = parse_qs(u.query)
-                return q.get("v", [None])[0]
-        except (IndexError, TypeError):
-            logger.warning(f"Could not parse YouTube ID from src: {src}")
+            pu = urlparse(url)
+            if "youtube.com" in pu.netloc and pu.path == "/watch":
+                q = parse_qs(pu.query)
+                if "v" in q and len(q["v"][0]) == 11:
+                    return q["v"][0]
+        except Exception:
+            pass
+
+        # 3) Optional fallback using og:image (only if soup is provided)
+        if soup is not None:
+            try:
+                og = soup.find("meta", property="og:image")
+                if og and og.get("content"):
+                    # og:image often ends with .../<ID>/hqdefault.jpg
+                    mm = re.search(r"/([A-Za-z0-9_-]{11})/hqdefault", og["content"])
+                    if mm:
+                        return mm.group(1)
+            except Exception:
+                pass
+
         return None
 
     def _extract_youtube_videos(self, soup: BeautifulSoup) -> list[dict]:
         ids = []
         for iframe in soup.find_all("iframe"):
-            vid = self._extract_youtube_id(iframe.get("src", ""))
+            vid = self._extract_youtube_id(iframe.get("src", ""), soup=soup)
             if vid:
                 ids.append(vid)
         for div in soup.select('.w-youtube[id], .youtube[id], [data-youtube-id]'):
