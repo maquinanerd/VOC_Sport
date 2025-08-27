@@ -12,11 +12,15 @@ PIPELINE_ORDER: List[str] = [
     'estadao_economia',
     'infomoney_economia',
     'exame_economia',
+    'infomoney_business',
     'estadao_brasil',
     'exame_brasil',
     'infomoney_mercados',
+    'exame_invest',
     'infomoney_investir',
     'infomoney_mundo',
+    'exame_carreira',
+    'infomoney_carreira',
 ]
 
 # --- Feeds RSS (padronizados, sem "synthetic_from") ---
@@ -53,6 +57,11 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
         'category': 'mercados',
         'source_name': 'InfoMoney',
     },
+    'infomoney_business': {
+        'urls': ['https://www.infomoney.com.br/business/feed/'],
+        'category': 'economia',
+        'source_name': 'InfoMoney',
+    },
     'infomoney_investir': {
         'urls': ['https://www.infomoney.com.br/onde-investir/feed/'],
         'category': 'onde-investir',
@@ -72,6 +81,21 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
         'urls': ['https://morss.it/:proxy:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/economia/'],
         'category': 'economia',
         'source_name': 'Exame',
+    },
+    'exame_invest': {
+        'urls': ['https://morss.it/:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/invest/'],
+        'category': 'mercados',
+        'source_name': 'Exame',
+    },
+    'exame_carreira': {
+        'urls': ['https://morss.it/:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/carreira/'],
+        'category': 'carreiras',
+        'source_name': 'Exame',
+    },
+    'infomoney_carreira': {
+        'urls': ['https://www.infomoney.com.br/carreira/feed/'],
+        'category': 'carreiras',
+        'source_name': 'InfoMoney',
     },
 }
 
@@ -134,6 +158,7 @@ WORDPRESS_CATEGORIES: Dict[str, int] = {
     'mercados': 26,
     'onde-investir': 29,
     'internacional': 30,
+    'carreiras': 202,
     # Categorias genéricas
     'Notícias': 1,
     'Dinheiro': 13,
