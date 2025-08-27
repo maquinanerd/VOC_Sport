@@ -25385,3 +25385,176 @@ app.exceptions.AIProcessorError: Invalid AI category specified: 'carreiras'. No 
 2025-08-27 02:58:57 - INFO - pipeline - No new articles found for infomoney_mundo.
 2025-08-27 02:58:57 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
 2025-08-27 02:58:57 - INFO - store - Database connection closed.
+2025-08-27 03:11:48 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-27 03:11:48 - INFO - store - Initializing database tables if they don't exist...
+2025-08-27 03:11:48 - INFO - store - Database initialized successfully.
+2025-08-27 03:11:48 - INFO - store - Database connection closed.
+2025-08-27 03:11:48 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-27 03:11:48 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-27 03:11:48 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 03:11:48 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 03:11:48 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 03:11:48 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/ for source 'estadao_politica'
+2025-08-27 03:11:49 - INFO - feeds - Found 20 total unique items for estadao_politica.
+2025-08-27 03:11:49 - ERROR - pipeline - Error processing feed estadao_politica: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:11:49 - INFO - pipeline - Finished feed 'estadao_politica'. Sleeping for 15s before next feed: infomoney_politica
+2025-08-27 03:12:04 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 03:12:04 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 03:12:04 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/politica/feed/ for source 'infomoney_politica'
+2025-08-27 03:12:05 - INFO - feeds - Found 10 total unique items for infomoney_politica.
+2025-08-27 03:12:05 - ERROR - pipeline - Error processing feed infomoney_politica: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:12:05 - INFO - pipeline - Finished feed 'infomoney_politica'. Sleeping for 15s before next feed: exame_brasil
+2025-08-27 03:12:20 - INFO - pipeline - Processing feed: exame_brasil (Category: politica)
+2025-08-27 03:12:20 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 03:12:20 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/brasil/sitemap.xml for source 'exame_brasil'
+2025-08-27 03:12:22 - INFO - feeds - Parsed 601 items from sitemap.
+2025-08-27 03:12:22 - INFO - feeds - Found 50 total unique items for exame_brasil.
+2025-08-27 03:12:22 - ERROR - pipeline - Error processing feed exame_brasil: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:12:22 - INFO - pipeline - Finished feed 'exame_brasil'. Sleeping for 15s before next feed: estadao_economia
+2025-08-27 03:12:37 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 03:12:37 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:12:37 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/ for source 'estadao_economia'
+2025-08-27 03:12:37 - INFO - feeds - Found 20 total unique items for estadao_economia.
+2025-08-27 03:12:37 - ERROR - pipeline - Error processing feed estadao_economia: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:12:37 - INFO - pipeline - Finished feed 'estadao_economia'. Sleeping for 15s before next feed: infomoney_economia
+2025-08-27 03:12:52 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 03:12:52 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:12:52 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/economia/feed/ for source 'infomoney_economia'
+2025-08-27 03:12:52 - INFO - feeds - Found 10 total unique items for infomoney_economia.
+2025-08-27 03:12:52 - ERROR - pipeline - Error processing feed infomoney_economia: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:12:52 - INFO - pipeline - Finished feed 'infomoney_economia'. Sleeping for 15s before next feed: exame_economia
+2025-08-27 03:13:07 - INFO - pipeline - Processing feed: exame_economia (Category: economia)
+2025-08-27 03:13:07 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:13:07 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/economia/sitemap.xml for source 'exame_economia'
+2025-08-27 03:13:09 - INFO - feeds - Parsed 601 items from sitemap.
+2025-08-27 03:13:09 - INFO - feeds - Found 50 total unique items for exame_economia.
+2025-08-27 03:13:09 - ERROR - pipeline - Error processing feed exame_economia: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:13:09 - INFO - pipeline - Finished feed 'exame_economia'. Sleeping for 15s before next feed: infomoney_business
+2025-08-27 03:13:24 - INFO - pipeline - Processing feed: infomoney_business (Category: economia)
+2025-08-27 03:13:24 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:13:24 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/business/feed/ for source 'infomoney_business'
+2025-08-27 03:13:24 - INFO - feeds - Found 10 total unique items for infomoney_business.
+2025-08-27 03:13:24 - ERROR - pipeline - Error processing feed infomoney_business: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:13:24 - INFO - pipeline - Finished feed 'infomoney_business'. Sleeping for 15s before next feed: exame_invest
+2025-08-27 03:13:39 - INFO - pipeline - Processing feed: exame_invest (Category: economia)
+2025-08-27 03:13:39 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:13:39 - INFO - feeds - Reading sitemap feed from https://exame.com/categorias/invest/sitemap.xml for source 'exame_invest'
+2025-08-27 03:13:41 - INFO - feeds - Parsed 601 items from sitemap.
+2025-08-27 03:13:41 - INFO - feeds - Found 50 total unique items for exame_invest.
+2025-08-27 03:13:41 - ERROR - pipeline - Error processing feed exame_invest: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:13:42 - INFO - pipeline - Finished feed 'exame_invest'. Sleeping for 15s before next feed: estadao_brasil
+2025-08-27 03:13:57 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 03:13:57 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 03:13:57 - INFO - feeds - Reading rss feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/ for source 'estadao_brasil'
+2025-08-27 03:13:57 - INFO - feeds - Found 20 total unique items for estadao_brasil.
+2025-08-27 03:13:57 - ERROR - pipeline - Error processing feed estadao_brasil: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:13:57 - INFO - pipeline - Finished feed 'estadao_brasil'. Sleeping for 15s before next feed: infomoney_mercados
+2025-08-27 03:14:12 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 03:14:12 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:14:12 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mercados/feed/ for source 'infomoney_mercados'
+2025-08-27 03:14:12 - INFO - feeds - Found 10 total unique items for infomoney_mercados.
+2025-08-27 03:14:12 - ERROR - pipeline - Error processing feed infomoney_mercados: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:14:12 - INFO - pipeline - Finished feed 'infomoney_mercados'. Sleeping for 15s before next feed: infomoney_investir
+2025-08-27 03:14:27 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 03:14:27 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 03:14:27 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/onde-investir/feed/ for source 'infomoney_investir'
+2025-08-27 03:14:27 - INFO - feeds - Found 10 total unique items for infomoney_investir.
+2025-08-27 03:14:27 - ERROR - pipeline - Error processing feed infomoney_investir: 'id'
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 103, in run_pipeline_cycle
+    new_articles = db.filter_new_articles(source_id, feed_items)
+  File "E:\Área de Trabalho 2\VocMoney\app\store.py", line 145, in filter_new_articles
+    cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                                                                                                       ~~~~^^^^^^
+KeyError: 'id'
+2025-08-27 03:14:27 - INFO - pipeline - Finished feed 'infomoney_investir'. Sleeping for 15s before next feed: infomoney_mundo
+2025-08-27 03:14:42 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 03:14:42 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 03:14:42 - INFO - feeds - Reading rss feed from https://www.infomoney.com.br/mundo/feed/ for source 'infomoney_mundo'
+2025-08-27 03:15:01 - ERROR - feeds - Failed to fetch feed/sitemap from https://www.infomoney.com.br/mundo/feed/: ('Connection aborted.', ConnectionResetError(10054, 'Foi forçado o cancelamento de uma conexão existente pelo host remoto', None, 10054, None))
+2025-08-27 03:15:01 - INFO - feeds - Found 0 total unique items for infomoney_mundo.
+2025-08-27 03:15:01 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 03:15:01 - INFO - pipeline - Processing feed: exame_carreira (Category: carreira)
+2025-08-27 03:15:01 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 03:15:01 - INFO - store - Database connection closed.
+2025-08-27 03:15:01 - CRITICAL - main - Erro crítico durante a execução do ciclo único: Invalid AI category specified: 'carreira'. No configuration found.
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\main.py", line 51, in main
+    run_pipeline_cycle()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\app\pipeline.py", line 99, in run_pipeline_cycle
+    ai_processor = AIProcessor(category)
+  File "E:\Área de Trabalho 2\VocMoney\app\ai_processor.py", line 71, in __init__
+    raise AIProcessorError(msg)
+app.exceptions.AIProcessorError: Invalid AI category specified: 'carreira'. No configuration found.
+2025-08-27 03:15:01 - INFO - main - Ciclo único finalizado.

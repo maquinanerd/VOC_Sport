@@ -5,8 +5,60 @@ import xml.etree.ElementTree as ET
 from typing import List, Dict, Any, Optional
 import gzip
 import time
+import hashlib
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
+
+def _stable_id_from(text: str) -> str:
+    return hashlib.sha256(text.strip().encode("utf-8")).hexdigest()
+
+def normalize_item(raw: dict) -> dict:
+    """
+    Aceita item vindo de RSS (feedparser) ou de sitemap e garante chaves padronizadas.
+    Preferência de ID:
+      1) guid/id do RSS se existir e for não-vazio
+      2) link/url/loc
+      3) fallback: hash de title+published
+    """
+    # Possíveis nomes vindos do parser
+    guid = raw.get("guid") or raw.get("id")  # feedparser pode pôr 'id'
+    link = raw.get("link") or raw.get("url") or raw.get("loc")
+    title = raw.get("title") or raw.get("news_title") or ""
+    published = raw.get("published") or raw.get("pubDate") or raw.get("lastmod")
+    author = raw.get("author") or raw.get("dc_creator") or None
+    summary = raw.get("summary") or raw.get("description") or None
+
+    # Normaliza data (deixa string se não souber converter)
+    def _parse_dt(dt):
+        if not dt or not isinstance(dt, str):
+            return dt
+        for fmt in ("%a, %d %b %Y %H:%M:%S %z", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%d"):
+            try:
+                return datetime.strptime(dt, fmt).isoformat()
+            except (ValueError, TypeError):
+                continue
+        return dt  # mantém como veio
+
+    published_iso = _parse_dt(published)
+
+    # Monta ID estável
+    if guid:
+        ext_id = str(guid).strip()
+    elif link:
+        ext_id = _stable_id_from(link)
+    else:
+        ext_id = _stable_id_from(f"{title}|{published_iso or ''}")
+
+    return {
+        "id": ext_id,
+        "url": link,
+        "title": title.strip() if isinstance(title, str) else title,
+        "published": published_iso,
+        "author": author,
+        "summary": summary,
+        "_raw": raw,
+    }
 
 class FeedReader:
     def __init__(self, user_agent: str):
@@ -104,7 +156,7 @@ class FeedReader:
         return items[:limit]
 
     def read_feeds(self, feed_config: Dict[str, Any], source_id: str) -> List[Dict[str, Any]]:
-        all_items = []
+        raw_items = []
         feed_type = feed_config.get('type', 'rss')
 
         for url in feed_config.get('urls', []):
@@ -114,26 +166,27 @@ class FeedReader:
                 continue
 
             if feed_type == 'sitemap':
-                parsed_items = self._parse_sitemap(content, limit=50)
-                all_items.extend(parsed_items)
+                raw_items.extend(self._parse_sitemap(content, limit=50))
             else: # Default to 'rss'
                 feed = feedparser.parse(content)
                 if feed.bozo:
                     logger.warning(f"Feed from {url} is not well-formed: {feed.bozo_exception}")
-                
-                for entry in feed.entries:
-                    all_items.append({
-                        "link": entry.get("link"),
-                        "title": entry.get("title", entry.get("link")),
-                        "published": entry.get("published", entry.get("updated")),
-                    })
+                raw_items.extend(feed.entries)
         
-        seen_links = set()
+        all_items = [normalize_item(item) for item in raw_items]
+
+        if logger.isEnabledFor(logging.DEBUG):
+            if raw_items:
+                logger.debug("RAW sample for %s: %r", source_id, raw_items[0])
+            if all_items:
+                logger.debug("Normalized sample for %s: %r", source_id, all_items[0])
+
+        seen_urls = set()
         unique_items = []
         for item in all_items:
-            link = item.get('link')
-            if link and link not in seen_links:
+            item_url = item.get('url')
+            if item_url and item_url not in seen_urls:
                 unique_items.append(item)
-                seen_links.add(link)
+                seen_urls.add(item_url)
         logger.info(f"Found {len(unique_items)} total unique items for {source_id}.")
         return unique_items

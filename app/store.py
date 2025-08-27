@@ -4,6 +4,7 @@ Database management for the application using SQLite.
 """
 
 import sqlite3
+import hashlib
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -142,17 +143,35 @@ class Database:
         try:
             cursor = self._get_cursor()
             for item in items:
-                cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, item['id']))
+                ext_id = item.get("id")
+                # Defensive check: if 'id' is missing, generate it from the URL.
+                if not ext_id:
+                    url = item.get("url") or ""
+                    if url:
+                        ext_id = hashlib.sha256(url.encode("utf-8")).hexdigest()
+                        item["id"] = ext_id  # Add it back to the item for later use
+                        logger.warning(f"Item for source '{source_id}' missing 'id'. Generated from URL: {item.get('title')}")
+                    else:
+                        logger.warning(f"Item for source '{source_id}' missing both 'id' and 'url', skipping: {item.get('title', 'No Title')}")
+                        continue
+
+                cursor.execute("SELECT id FROM seen_articles WHERE source_id = ? AND external_id = ?", (source_id, ext_id))
                 if cursor.fetchone() is None:
+                    # Item is new, insert it.
                     cursor.execute(
                         "INSERT INTO seen_articles (source_id, external_id, url, published_at) VALUES (?, ?, ?, ?)",
-                        (source_id, item['id'], item['link'], item['published_at'])
+                        (source_id, ext_id, item.get('url'), item.get('published'))
                     )
                     item['db_id'] = cursor.lastrowid
                     new_articles.append(item)
             self.conn.commit()
         except sqlite3.Error as e:
-            logger.error(f"Error filtering new articles for {source_id}: {e}")
+            logger.error(f"Database error filtering new articles for {source_id}: {e}", exc_info=True)
+            self.conn.rollback()
+            return []
+        except Exception as e:
+            logger.error(f"Unexpected error filtering new articles for {source_id}: {e}", exc_info=True)
+            self.conn.rollback()
             return []
         return new_articles
 
