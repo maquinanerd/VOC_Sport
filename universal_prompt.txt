@@ -4,15 +4,19 @@ A SUA RESPOSTA DEVE SER ESTRITAMENTE UM OBJETO JSON VÁLIDO. NÃO INCLUA NENHUM 
 
 Use a seguinte estrutura JSON para a sua resposta:
 
-{{
+{
   "titulo_final": "O título otimizado para SEO vai aqui (máximo 70 caracteres)",
   "conteudo_final": "<p>O conteúdo HTML reescrito e otimizado vai aqui, com parágrafos, <b>negrito</b> e links.</p><h2>Subtítulo Exemplo</h2><p>Mais conteúdo...</p>",
   "meta_description": "O resumo para o Google vai aqui (máximo 155 caracteres).",
   "focus_keyword": "A palavra-chave principal vai aqui",
   "tags": ["tag-especifica-1", "tag-especifica-2", "tag-especifica-3"],
-  "titulo_original": "{titulo_original}",
-  "url_original": "{url_original}"
-}}
+  "yoast_meta": {
+    "_yoast_wpseo_title": "O título para o Google vai aqui (máximo 65 caracteres)",
+    "_yoast_wpseo_metadesc": "A meta description para o Google vai aqui (máximo 155 caracteres)",
+    "_yoast_wpseo_focuskw": "A palavra-chave foco principal vai aqui",
+    "_yoast_news_keywords": "palavra-chave 1, palavra-chave 2, outra keyword"
+  }
+}
 
 ---
 
@@ -64,11 +68,11 @@ DETALHES PARA CADA CAMPO DO JSON
 - NÃO USE TAGS GENÉRICAS como "economia", "política" ou "notícia".
 - Use nomes próprios, indicadores, empresas, etc. (ex: "Roberto Campos Neto", "IPCA", "Petrobras", "PL das Fake News", "STF").
 
-6. **titulo_original**
-- Copie exatamente o título original fornecido.
-
-7. **url_original**
-- Copie exatamente a URL original fornecida.
+6. **yoast_meta**
+- **_yoast_wpseo_title**: Crie um título para o Google com no máximo 65 caracteres. Pode ser uma variação do `titulo_final`, mas ainda mais focado em busca.
+- **_yoast_wpseo_metadesc**: Crie uma meta description para o Google com no máximo 155 caracteres. Deve ser idêntica ou uma leve melhoria do campo `meta_description`.
+- **_yoast_wpseo_focuskw**: A palavra-chave principal do artigo. Deve ser idêntica ao campo `focus_keyword`.
+- **_yoast_news_keywords**: Uma string com 3 a 5 palavras-chave relevantes para o Google News, separadas por vírgula. Ex: "B3, Shipay, mercado financeiro, pagamentos digitais".
 
 ---
 

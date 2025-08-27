@@ -209,6 +209,10 @@ def run_pipeline_cycle():
                         if not featured_media_id and uploaded_id_map:
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
+                        # Prepare Yoast meta, including canonical URL to original source
+                        yoast_meta = rewritten_data.get('yoast_meta', {})
+                        yoast_meta['_yoast_wpseo_canonical'] = article_data['link']
+
                         post_payload = {
                             'title': title,
                             'content': content_html,
@@ -216,6 +220,7 @@ def run_pipeline_cycle():
                             'categories': [wp_category_id] if wp_category_id else [],
                             'tags': rewritten_data.get('tags', []),
                             'featured_media': featured_media_id,
+                            'meta': yoast_meta,
                         }
 
                         wp_post_id = wp_client.create_post(post_payload)

@@ -23237,3 +23237,271 @@ TypeError: unhashable type: 'dict'
 2025-08-27 00:49:48 - INFO - pipeline - Pipeline cycle completed. Processed 3 articles.
 2025-08-27 00:49:48 - INFO - store - Database connection closed.
 2025-08-27 00:49:48 - INFO - main - Ciclo único finalizado.
+2025-08-27 00:56:14 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 00:56:14 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 00:56:14 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:15 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-27 00:56:15 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-27 00:56:15 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-27 00:56:15 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 00:56:15 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 00:56:15 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:15 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-27 00:56:15 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-27 00:56:15 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-27 00:56:15 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 00:56:15 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 00:56:15 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 00:56:16 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 00:56:16 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 00:56:16 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 00:56:16 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 00:56:16 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 00:56:16 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 00:56:16 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 00:56:16 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 00:56:16 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 00:56:16 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:16 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-27 00:56:16 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-27 00:56:16 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-27 00:56:16 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 00:56:16 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 00:56:16 - INFO - store - Database connection closed.
+2025-08-27 00:56:48 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 00:56:48 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 00:56:48 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:49 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-27 00:56:49 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-27 00:56:49 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-27 00:56:49 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 00:56:49 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 00:56:49 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:49 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 00:56:50 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 00:56:50 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:56:50 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-27 00:56:50 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-27 00:56:50 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-27 00:56:50 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 00:56:50 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 00:56:50 - INFO - store - Database connection closed.
+2025-08-27 00:57:06 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 00:57:06 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 00:57:06 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:57:07 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-27 00:57:07 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-27 00:57:07 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-27 00:57:07 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 00:57:07 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 00:57:07 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 00:57:08 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 00:57:08 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:57:08 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-27 00:57:08 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-27 00:57:08 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-27 00:57:08 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 00:57:08 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 00:57:08 - INFO - store - Database connection closed.
+2025-08-27 00:58:30 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 00:58:30 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 00:58:30 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:58:31 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-27 00:58:31 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-27 00:58:31 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-27 00:58:31 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 00:58:31 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 00:58:31 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:58:31 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-27 00:58:31 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-27 00:58:31 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-27 00:58:31 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 00:58:31 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 00:58:31 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:58:31 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-27 00:58:31 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-27 00:58:31 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-27 00:58:31 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 00:58:31 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 00:58:31 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:58:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-27 00:58:32 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-27 00:58:32 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-27 00:58:32 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 00:58:32 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 00:58:32 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:58:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-27 00:58:32 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-27 00:58:32 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-27 00:58:32 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 00:58:32 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 00:58:32 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:58:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-27 00:58:32 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-27 00:58:32 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-27 00:58:32 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 00:58:32 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 00:58:32 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 00:58:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-27 00:58:32 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-27 00:58:32 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-27 00:58:32 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 00:58:32 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 00:58:32 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 00:58:32 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-27 00:58:32 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-27 00:58:32 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-27 00:58:32 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 00:58:32 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 00:58:32 - INFO - store - Database connection closed.
+2025-08-27 01:01:36 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-27 01:01:36 - INFO - store - Initializing database tables if they don't exist...
+2025-08-27 01:01:36 - INFO - store - Database initialized successfully.
+2025-08-27 01:01:36 - INFO - store - Database connection closed.
+2025-08-27 01:01:36 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-27 01:01:36 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-27 01:01:36 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-27 01:01:36 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-27 01:01:36 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 01:01:36 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-27 01:01:36 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-27 01:01:36 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-27 01:01:36 - INFO - pipeline - No new articles found for estadao_politica.
+2025-08-27 01:01:36 - INFO - pipeline - Processing feed: infomoney_politica (Category: politica)
+2025-08-27 01:01:36 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 01:01:37 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/politica/feed/
+2025-08-27 01:01:37 - INFO - feeds - Parsed 10 items from feed content for infomoney_politica.
+2025-08-27 01:01:37 - INFO - feeds - Total unique items for infomoney_politica: 10
+2025-08-27 01:01:37 - INFO - pipeline - No new articles found for infomoney_politica.
+2025-08-27 01:01:37 - INFO - pipeline - Processing feed: estadao_economia (Category: economia)
+2025-08-27 01:01:37 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 01:01:37 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/
+2025-08-27 01:01:37 - INFO - feeds - Parsed 20 items from feed content for estadao_economia.
+2025-08-27 01:01:37 - INFO - feeds - Total unique items for estadao_economia: 20
+2025-08-27 01:01:37 - INFO - pipeline - No new articles found for estadao_economia.
+2025-08-27 01:01:37 - INFO - pipeline - Processing feed: exame_brasil (Category: brasil)
+2025-08-27 01:01:37 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 01:01:39 - INFO - feeds - Successfully fetched official RSS feed from https://morss.it/:proxy:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/brasil/
+2025-08-27 01:01:39 - INFO - feeds - Parsed 10 items from feed content for exame_brasil.
+2025-08-27 01:01:39 - INFO - feeds - Total unique items for exame_brasil: 10
+2025-08-27 01:01:39 - INFO - pipeline - No new articles found for exame_brasil.
+2025-08-27 01:01:39 - INFO - pipeline - Processing feed: infomoney_economia (Category: economia)
+2025-08-27 01:01:39 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 01:01:39 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/economia/feed/
+2025-08-27 01:01:39 - INFO - feeds - Parsed 10 items from feed content for infomoney_economia.
+2025-08-27 01:01:39 - INFO - feeds - Total unique items for infomoney_economia: 10
+2025-08-27 01:01:39 - INFO - pipeline - No new articles found for infomoney_economia.
+2025-08-27 01:01:39 - INFO - pipeline - Processing feed: estadao_brasil (Category: brasil)
+2025-08-27 01:01:39 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 01:01:39 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/
+2025-08-27 01:01:40 - INFO - feeds - Parsed 20 items from feed content for estadao_brasil.
+2025-08-27 01:01:40 - INFO - feeds - Total unique items for estadao_brasil: 20
+2025-08-27 01:01:40 - INFO - pipeline - No new articles found for estadao_brasil.
+2025-08-27 01:01:40 - INFO - pipeline - Processing feed: infomoney_mercados (Category: mercados)
+2025-08-27 01:01:40 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 01:01:42 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mercados/feed/
+2025-08-27 01:01:42 - INFO - feeds - Parsed 10 items from feed content for infomoney_mercados.
+2025-08-27 01:01:42 - INFO - feeds - Total unique items for infomoney_mercados: 10
+2025-08-27 01:01:42 - INFO - pipeline - No new articles found for infomoney_mercados.
+2025-08-27 01:01:42 - INFO - pipeline - Processing feed: infomoney_investir (Category: onde-investir)
+2025-08-27 01:01:42 - INFO - ai_processor - Using API key index 0 for category 'economia'.
+2025-08-27 01:01:42 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/onde-investir/feed/
+2025-08-27 01:01:42 - INFO - feeds - Parsed 10 items from feed content for infomoney_investir.
+2025-08-27 01:01:42 - INFO - feeds - Total unique items for infomoney_investir: 10
+2025-08-27 01:01:42 - INFO - pipeline - No new articles found for infomoney_investir.
+2025-08-27 01:01:42 - INFO - pipeline - Processing feed: infomoney_mundo (Category: internacional)
+2025-08-27 01:01:42 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-27 01:01:43 - INFO - feeds - Successfully fetched official RSS feed from https://www.infomoney.com.br/mundo/feed/
+2025-08-27 01:01:43 - INFO - feeds - Parsed 10 items from feed content for infomoney_mundo.
+2025-08-27 01:01:43 - INFO - feeds - Total unique items for infomoney_mundo: 10
+2025-08-27 01:01:43 - INFO - pipeline - No new articles found for infomoney_mundo.
+2025-08-27 01:01:43 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-27 01:01:43 - INFO - store - Database connection closed.
+2025-08-27 01:01:43 - INFO - main - Ciclo único finalizado.

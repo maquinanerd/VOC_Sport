@@ -262,13 +262,27 @@ class AIProcessor:
             # Validate the presence of all required keys for a successful rewrite
             required_keys = [
                 "titulo_final", "conteudo_final", "meta_description",
-                "focus_keyword", "tags"
+                "focus_keyword", "tags", "yoast_meta"
             ]
             missing_keys = [key for key in required_keys if key not in data]
 
             if missing_keys:
                 logger.error(f"AI response is missing required keys: {', '.join(missing_keys)}")
                 logger.debug(f"Received data: {data}")
+                return None
+
+            # Validate the inner keys of yoast_meta
+            if 'yoast_meta' in data and isinstance(data['yoast_meta'], dict):
+                required_yoast_keys = [
+                    "_yoast_wpseo_title", "_yoast_wpseo_metadesc",
+                    "_yoast_wpseo_focuskw", "_yoast_news_keywords"
+                ]
+                missing_yoast_keys = [key for key in required_yoast_keys if key not in data['yoast_meta']]
+                if missing_yoast_keys:
+                    logger.error(f"AI response 'yoast_meta' is missing keys: {', '.join(missing_yoast_keys)}")
+                    return None
+            else:
+                logger.error("AI response is missing 'yoast_meta' object or it's not a dictionary.")
                 return None
 
             logger.info("Successfully parsed and validated AI response.")
