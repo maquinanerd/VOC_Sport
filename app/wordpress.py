@@ -1,6 +1,7 @@
 import logging
 import requests
 import time
+import json
 from typing import Dict, Any, Optional
 from urllib.parse import urlparse
 
@@ -70,11 +71,21 @@ class WordPressClient:
         try:
             posts_endpoint = f"{self.api_url}/posts"
             payload.setdefault('status', 'publish')
+
+            # Log the payload for debugging. Set logging level to DEBUG to see this.
+            try:
+                log_payload = json.dumps(payload, indent=2, ensure_ascii=False)
+                logger.debug(f"Sending payload to WordPress:\n{log_payload}")
+            except Exception as log_e:
+                logger.warning(f"Could not serialize payload for logging: {log_e}")
+
             response = self.session.post(posts_endpoint, json=payload, timeout=30)
             response.raise_for_status()
             return response.json().get('id')
         except requests.RequestException as e:
             logger.error(f"Failed to create WordPress post: {e}", exc_info=True)
+            if e.response is not None:
+                logger.error(f"WordPress response body on error: {e.response.text}")
             return None
 
     def close(self):

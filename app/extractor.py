@@ -6,6 +6,7 @@ from typing import Dict, Optional, Any, Set
 from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import re
+import os
 
 from .config import USER_AGENT
 
@@ -70,13 +71,26 @@ def _parse_srcset(srcset: str):
 
 
 def is_small(u: str) -> bool:
-    """Heurística para descartar thumbs e imagens irrelevantes."""
+    """Heurística para descartar thumbs, tracking pixels e imagens irrelevantes."""
     if not u:
         return True
+
+    # 1. Must have a valid image extension. This filters out tracking pixels.
+    try:
+        path = urlparse(u).path
+        # Path can be empty for tracking pixels like scorecardresearch.com/p?c1=...
+        if not path or path == '/':
+            return True
+        ext = os.path.splitext(path)[1].lower()
+        if ext not in {".jpg", ".jpeg", ".png", ".webp", ".gif"}:
+            return True
+    except Exception:
+        return True # Malformed URL, discard.
+
     low = u.lower()
 
-    # lixo comum
-    if any(pat in low for pat in ("placeholder","sprite","icon","emoji",".svg")):
+    # lixo comum (SVG already filtered by extension)
+    if any(pat in low for pat in ("placeholder", "sprite", "icon", "emoji")):
         return True
 
     # posters/avatares genéricos do Collider
@@ -86,9 +100,9 @@ def is_small(u: str) -> bool:
     # thumbs de card (fit=crop 420x300 etc.)
     try:
         params = parse_qs(urlparse(u).query)
-        w = int((params.get("w",["0"])[0] or "0"))
-        h = int((params.get("h",["0"])[0] or "0"))
-        fit = (params.get("fit",[""])[0] or "").lower()
+        w = int((params.get("w", ["0"])[0] or "0"))
+        h = int((params.get("h", ["0"])[0] or "0"))
+        fit = (params.get("fit", [""])[0] or "").lower()
         if fit == "crop" and ((w and w <= 600) or (h and h <= 400)):
             return True
         if (w and w < 320) or (h and h < 200):

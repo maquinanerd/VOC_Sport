@@ -5,11 +5,11 @@ A SUA RESPOSTA DEVE SER ESTRITAMENTE UM OBJETO JSON VÁLIDO. NÃO INCLUA NENHUM 
 Use a seguinte estrutura JSON para a sua resposta:
 
 {{
-  "titulo_final": "{titulo_final}",
-  "conteudo_final": "{conteudo_final}",
-  "meta_description": "{meta_description}",
-  "focus_keyword": "{focus_keyword}",
-  "tags": {tags},
+  "titulo_final": "O título otimizado para SEO vai aqui (máximo 70 caracteres)",
+  "conteudo_final": "<p>O conteúdo HTML reescrito e otimizado vai aqui, com parágrafos, <b>negrito</b> e links.</p><h2>Subtítulo Exemplo</h2><p>Mais conteúdo...</p>",
+  "meta_description": "O resumo para o Google vai aqui (máximo 155 caracteres).",
+  "focus_keyword": "A palavra-chave principal vai aqui",
+  "tags": ["tag-especifica-1", "tag-especifica-2", "tag-especifica-3"],
   "titulo_original": "{titulo_original}",
   "url_original": "{url_original}"
 }}

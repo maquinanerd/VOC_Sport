@@ -20296,3 +20296,64 @@ Traceback (most recent call last):
     raise AIProcessorError(msg)
 app.exceptions.AIProcessorError: Invalid AI category specified: 'onde-investir'. No configuration found.
 2025-08-26 20:50:03 - INFO - main - Ciclo único finalizado.
+2025-08-26 21:41:05 - INFO - main - Verificando o esquema do banco de dados...
+2025-08-26 21:41:05 - INFO - store - Database connection closed.
+2025-08-26 21:41:05 - INFO - main - Verificação do banco de dados concluída com sucesso.
+2025-08-26 21:41:05 - INFO - main - Executando um único ciclo do pipeline (--once).
+2025-08-26 21:41:05 - INFO - pipeline - Starting new pipeline cycle.
+2025-08-26 21:41:05 - INFO - pipeline - Processing feed: estadao_politica (Category: politica)
+2025-08-26 21:41:05 - INFO - ai_processor - Using API key index 0 for category 'politica'.
+2025-08-26 21:41:06 - INFO - feeds - Successfully fetched official RSS feed from https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/
+2025-08-26 21:41:06 - INFO - feeds - Parsed 20 items from feed content for estadao_politica.
+2025-08-26 21:41:06 - INFO - feeds - Total unique items for estadao_politica: 20
+2025-08-26 21:41:06 - INFO - pipeline - Found 20 new articles for estadao_politica
+2025-08-26 21:41:06 - INFO - pipeline - Processing article: Filhos de Bolsonaro criticam monitoramento constante ao ex-presidente (DB ID: 2821) from estadao_politica
+2025-08-26 21:41:07 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 21:41:07 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 21:41:07 - INFO - extractor - Collected 2 images from article (pre+post).
+2025-08-26 21:41:07 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/filhos-bolsonaro-criticam-monitoramento-constante-ex-presidente-nprp/. Title: Filhos de Bolsonaro criticam monitoramento constan...
+2025-08-26 21:41:07 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 21:41:07 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 21:41:17 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 21:41:47 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 21:41:51 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/ZNWXWFXP5VDPHHULC56LRTIAI4.jpg?quality=80&auth=a526b7c99be34d80cbab06c44fa8e32d906d69515878be05f78fb65503b1f42a&width=1200&height=630&smart=true
+2025-08-26 21:41:52 - ERROR - wordpress - Upload of 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' failed with non-retriable error: 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 21:41:52 - ERROR - wordpress - Final failure to upload image 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' after 1 attempt(s): 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 21:41:53 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fauthor-service-images-prod-us-east-1.publishing.aws.arc.pub%2Festadao%2F7f614b0c-6bd0-4d80-a91f-2ef961106071.png?quality=80&auth=d70a9fb5a6cc7be5a23e2e85393ffac1905b11dd17380c50433baaa901c0668a&width=60&height=60&smart=true
+2025-08-26 21:41:53 - ERROR - wordpress - Failed to create WordPress post: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\wordpress.py", line 74, in create_post
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+2025-08-26 21:41:53 - ERROR - pipeline - Failed to publish post for https://www.estadao.com.br/politica/filhos-bolsonaro-criticam-monitoramento-constante-ex-presidente-nprp/
+2025-08-26 21:41:53 - INFO - pipeline - Sleeping for 8.2s (per-article delay).
+2025-08-26 21:42:01 - INFO - pipeline - Processing article: O presente que Tarcísio deu para Lula e que nenhum petista sonhava ganhar (DB ID: 2822) from estadao_politica
+2025-08-26 21:42:02 - INFO - extractor - Pre-cleaned HTML, removing unwanted widgets and blocks.
+2025-08-26 21:42:02 - INFO - extractor - Found featured image via 'og:image'.
+2025-08-26 21:42:02 - INFO - extractor - Collected 2 images from article (pre+post).
+2025-08-26 21:42:02 - INFO - extractor - Successfully extracted and cleaned content from https://www.estadao.com.br/politica/marcelo-godoy/o-presente-que-tarcisio-deu-para-lula-e-que-nenhum-petista-sonhava-ganhar/. Title: O presente que Tarcísio deu para Lula e que nenhum...
+2025-08-26 21:42:02 - WARNING - ai_processor - Prompt template placeholder '{conteudo_final}' is not in the provided fields dictionary.
+2025-08-26 21:42:02 - INFO - ai_processor - Sending content to AI for rewriting (Key index: 0)...
+2025-08-26 21:42:10 - INFO - ai_processor - Successfully parsed and validated AI response.
+2025-08-26 21:42:40 - INFO - pipeline - Attempting to upload up to 3 images.
+2025-08-26 21:42:42 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/JBZ2TDCECFCRJOUO6KIYSERGIM.jpeg?quality=80&auth=9b351c8ae1ab6ab2333b0f00120f1401170de9d233a6997da81ec12c6c412b09&width=1200&height=630&smart=true
+2025-08-26 21:42:43 - ERROR - wordpress - Upload of 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' failed with non-retriable error: 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 21:42:43 - ERROR - wordpress - Final failure to upload image 'https://sb.scorecardresearch.com/p?c1=2&c2=24963488&cv=4.4.0&cj=1' after 1 attempt(s): 500 Server Error: Internal Server Error for url: https://maquinamoney.com/wp-json/wp/v2/media
+2025-08-26 21:42:44 - INFO - wordpress - Successfully uploaded image: https://www.estadao.com.br/resizer/v2/https%3A%2F%2Fs3.amazonaws.com%2Farc-authors%2Festadao%2Fa82be494-74cd-4d46-b47f-9d977ccb29ca.jpg?quality=80&auth=a8c6696a2161ce6bd031d00fdf8251be913e3ed3b1eef80c821040789527a348&width=60&height=60&smart=true
+2025-08-26 21:42:44 - ERROR - wordpress - Failed to create WordPress post: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+Traceback (most recent call last):
+  File "E:\Área de Trabalho 2\VocMoney\app\wordpress.py", line 74, in create_post
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Área de Trabalho 2\VocMoney\venv\Lib\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://maquinamoney.com/wp-json/wp/v2/posts
+2025-08-26 21:42:44 - ERROR - pipeline - Failed to publish post for https://www.estadao.com.br/politica/marcelo-godoy/o-presente-que-tarcisio-deu-para-lula-e-que-nenhum-petista-sonhava-ganhar/
+2025-08-26 21:42:44 - INFO - pipeline - Sleeping for 7.8s (per-article delay).
+2025-08-26 21:42:52 - INFO - pipeline - Processing article: México ocupa lugar dos EUA e se torna 2º maior mercado da carne bovina brasileira pós-tarifaço (DB ID: 2823) from estadao_politica
+2025-08-26 21:42:52 - INFO - pipeline - Pipeline cycle completed. Processed 0 articles.
+2025-08-26 21:42:52 - INFO - store - Database connection closed.
+2025-08-26 21:42:52 - INFO - main - Ciclo único finalizado.
