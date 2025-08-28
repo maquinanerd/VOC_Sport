@@ -206,6 +206,7 @@ class AIProcessor:
             "domain": domain,
             "fonte_nome": fonte,
             "categoria": final_category,
+            "schema_original": json.dumps(kwargs.get("schema_original"), indent=2, ensure_ascii=False) if kwargs.get("schema_original") else "Nenhum",
             "tag": (tags[0] if tags else final_category),
             "tags": (", ".join(tags) if tags else final_category),
             "videos_list": "\n".join([v.get("embed_url", "") for v in videos if isinstance(v, dict) and v.get("embed_url")]) or "Nenhum",

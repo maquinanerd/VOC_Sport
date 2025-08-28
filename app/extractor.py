@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import requests
 import html # New import for html.unescape
 from typing import Dict, Optional, Any, Set, List, Tuple, Union
-from urllib.parse import urljoin, urlparse, parse_qs
 import json
 import re
 import os
+from urllib.parse import urljoin, urlparse, parse_qs
 
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
@@ -472,6 +472,36 @@ def _extract_site_specific(soup: BeautifulSoup, url: str, selectors: Dict[str, U
         logger.error(f"Error in site-specific extractor for {url}: {e}. Falling back to generic.", exc_info=False)
         return None
 
+def _extract_json_ld(soup: BeautifulSoup) -> List[Dict[str, Any]]:
+    """
+    Encontra e parseia todos os scripts do tipo ld+json da página.
+    """
+    json_ld_data = []
+    scripts = soup.find_all('script', type='application/ld+json')
+    for script in scripts:
+        if script.string:
+            try:
+                # Corrigir JSONs malformados com vírgulas extras
+                clean_str = re.sub(r',\s*([}\]])', r'\1', script.string)
+                data = json.loads(clean_str)
+                if isinstance(data, dict):
+                    json_ld_data.append(data)
+                elif isinstance(data, list):
+                    json_ld_data.extend([d for d in data if isinstance(d, dict)])
+            except json.JSONDecodeError:
+                logger.warning("Falha ao parsear script JSON-LD.", exc_info=False)
+    return json_ld_data
+
+def _find_news_article_in_json_ld(json_ld_data: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """
+    Busca nos dados JSON-LD parseados por um objeto NewsArticle, Article ou BlogPosting.
+    """
+    for data in json_ld_data:
+        graph = data.get('@graph', [data])
+        for item in graph:
+            if isinstance(item, dict) and item.get('@type') in ('NewsArticle', 'Article', 'BlogPosting'):
+                return item
+    return None
 
 class ContentExtractor:
     """Extrai e limpa conteúdo para o pipeline."""
@@ -701,33 +731,40 @@ class ContentExtractor:
         try:
             soup = BeautifulSoup(html, 'lxml')
 
-            # 1) limpeza prévia pesada
+            # 1) Tenta extrair metadados de JSON-LD primeiro, pois é a fonte mais confiável
+            all_json_ld = _extract_json_ld(soup)
+            news_article_schema = _find_news_article_in_json_ld(all_json_ld)
+
+            # 2) limpeza prévia pesada
             self._pre_clean_html(soup)
 
-            # 2) normaliza data-img-url -> <figure>
+            # 3) normaliza data-img-url -> <figure>
             self._convert_data_img_to_figure(soup)
 
-            # 3) Extrai imagem destacada com a nova lógica de priorização
+            # 4) Extrai imagem destacada com a nova lógica de priorização
             featured_image_url = self._pick_featured_image(soup, url)
 
-            # 4) Extrai imagens do corpo do artigo
+            # 5) Extrai imagens do corpo do artigo
             body_images = collect_images_from_article(soup, base_url=url)
 
-            # 5) vídeos
+            # 6) vídeos
             videos = self._extract_youtube_videos(soup)
 
-            # 6) metadados
-            title = soup.title.string if soup.title else 'No Title Found'
-            if og_title := soup.find('meta', property='og:title'):
-                if og_title.get('content'):
-                    title = og_title['content']
+            # 7) metadados: Prioriza JSON-LD, com fallback para tags meta
+            title = 'No Title Found'
             excerpt = ''
-            if meta_desc := soup.find('meta', attrs={'name': 'description'}):
-                excerpt = meta_desc.get('content') or ''
-            elif og_desc := soup.find('meta', property='og:description'):
-                excerpt = og_desc.get('content') or ''
+            if news_article_schema:
+                logger.info(f"Usando metadados do JSON-LD para {url}")
+                title = news_article_schema.get('headline') or news_article_schema.get('name') or title
+                excerpt = news_article_schema.get('description') or excerpt
+                if not featured_image_url:
+                     featured_image_url = _coerce_url(news_article_schema.get('image'))
+            else: # Fallback
+                title = (og_title.get('content') if (og_title := soup.find('meta', property='og:title')) else None) or (soup.title.string if soup.title else title)
+                excerpt = (meta_desc.get('content') if (meta_desc := soup.find('meta', attrs={'name': 'description'})) else None) or \
+                          (og_desc.get('content') if (og_desc := soup.find('meta', property='og:description')) else '')
 
-            # 7) extrair corpo com trafilatura
+            # 8) extrair corpo com trafilatura
             cleaned_html_str = str(soup)
             content_html = trafilatura.extract(
                 cleaned_html_str,
@@ -741,11 +778,11 @@ class ContentExtractor:
                 logger.warning(f"Trafilatura returned empty content for {url}")
                 return None
 
-            # 8) pós-processar corpo
+            # 9) pós-processar corpo
             article_soup = BeautifulSoup(content_html, 'lxml')
             self._remove_forbidden_blocks(article_soup)
 
-            # 9) Seleciona imagens do corpo (excluindo a destacada)
+            # 10) Seleciona imagens do corpo (excluindo a destacada)
             # A `collect_images_from_article` já aplica `is_valid_article_image`
             other_valid_images = [
                 u for u in body_images if u != featured_image_url
@@ -766,6 +803,7 @@ class ContentExtractor:
                 "images": other_valid_images,
                 "videos": videos,
                 "source_url": url,
+                "schema_original": news_article_schema # Passa o schema extraído adiante
             }
             logger.info(f"Successfully extracted and cleaned content from {url}. Title: {result['title'][:50]}...")
             return result
