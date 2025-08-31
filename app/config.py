@@ -9,17 +9,13 @@ load_dotenv()
 PIPELINE_ORDER: List[str] = [
     'estadao_politica',
     'infomoney_politica',
-    'exame_brasil',
     'estadao_economia',
     'infomoney_economia',
-    'exame_economia',
     'infomoney_business',
-    'exame_invest',
     'estadao_brasil',
     'infomoney_mercados',
     'infomoney_investir',
     'infomoney_mundo',
-    'exame_carreira',
     'infomoney_carreira',
 ]
 
@@ -71,35 +67,6 @@ RSS_FEEDS: Dict[str, Dict[str, Any]] = {
         'urls': ['https://www.infomoney.com.br/mundo/feed/'],
         'category': 'internacional',
         'source_name': 'InfoMoney',
-    },
-    'exame_brasil': {
-        'urls': ['https://exame.com/categorias/brasil/sitemap.xml'],
-        'type': 'sitemap',
-        'category': 'politica',
-        'deny_regex': r"^https://exame\.com/brasil/?$",
-        'allow_regex': r"^https://exame\.com/brasil/.+",
-        'source_name': 'Exame',
-    },
-    'exame_economia': {
-        'urls': ['https://exame.com/categorias/economia/sitemap.xml'],
-        'type': 'sitemap',
-        'category': 'economia',
-        'deny_regex': r"^https://exame\.com/economia/?$",
-        'allow_regex': r"^https://exame\.com/economia/.+",
-        'source_name': 'Exame',
-    },
-    'exame_invest': {
-        'urls': ['https://exame.com/categorias/invest/sitemap.xml'],
-        'type': 'sitemap',
-        'category': 'economia',
-        'deny_regex': r"^https://exame\.com/invest/?$",
-        'allow_regex': r"^https://exame\.com/invest/.+",
-        'source_name': 'Exame',
-    },
-    'exame_carreira': {
-        'urls': ['https://morss.it/:format=html:items=%7C%7C*[class=sc-dbce6183-0]/https://exame.com/carreira/'],
-        'category': 'carreira',
-        'source_name': 'Exame',
     },
     'infomoney_carreira': {
         'urls': ['https://www.infomoney.com.br/carreira/feed/'],

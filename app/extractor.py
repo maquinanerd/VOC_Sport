@@ -843,14 +843,6 @@ class ContentExtractor:
             }
             extracted_data = _extract_site_specific(soup, url, selectors)
 
-        elif 'exame.com' in domain:
-            selectors = {
-                'title': 'h1.single-title, h1.title',
-                'content': 'div.single-content, div.article-body',
-                'junk': ['.cta-middle', '.related-posts', '.ads-box', '.wp-block-related-posts-by-taxonomy']
-            }
-            extracted_data = _extract_site_specific(soup, url, selectors)
-
         # If a specific extractor ran and succeeded, return its data.
         if extracted_data:
             return extracted_data
