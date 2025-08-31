@@ -31,10 +31,9 @@ Use a seguinte estrutura JSON para a sua resposta:
 ---
 
 DETALHES PARA CADA CAMPO DO JSON
-
 1. **titulo_final**
-- Crie um novo título otimizado para SEO, atrativo e claro.
-- Máximo de 70 caracteres.
+- Crie um novo título otimizado para SEO e CTR, seguindo as "REGRAS OBRIGATÓRIAS PARA TÍTULOS".
+- Máximo de 65 caracteres.
 - Apenas texto puro, sem HTML.
 
 2. **conteudo_final**
@@ -96,8 +95,8 @@ DETALHES PARA CADA CAMPO DO JSON
 - Extraia de 5 a 7 tags específicas e relevantes.
 - NÃO USE TAGS GENÉRICAS como "economia", "política" ou "notícia".
 - Use nomes próprios, indicadores, empresas, etc. (ex: "Roberto Campos Neto", "IPCA", "Petrobras", "PL das Fake News", "STF").
-
-6. **yoast_meta**
+ 
+9. **yoast_meta**
 - **_yoast_wpseo_title**: Crie um título para o Google com no máximo 65 caracteres. Pode ser uma variação do `titulo_final`, mas ainda mais focado em busca.
 - **_yoast_wpseo_metadesc**: Crie uma meta description para o Google com no máximo 155 caracteres. Deve ser idêntica ou uma leve melhoria do campo `meta_description`.
 - **_yoast_wpseo_focuskw**: A palavra-chave principal do artigo. Deve ser idêntica ao campo `focus_keyword`.
@@ -109,23 +108,21 @@ DETALHES PARA CADA CAMPO DO JSON
 
 ---
 
-REGRAS PARA CRIAÇÃO DE TÍTULOS SEO
-- O título deve ser claro, direto e sem ambiguidade.
-- Inclua obrigatoriamente pelo menos um nome próprio (político, empresa, indicador) ou um termo técnico relevante (ex: "PEC", "COPOM").
-- Nunca use apenas termos genéricos como “economia” ou “governo” sem citar nomes ou fatos específicos.
-- Inclua a palavra-chave principal no início sempre que possível (front-loaded).
-- O título precisa ter entre 50 e 65 caracteres (para não cortar no Google).
-- Não inclua datas no título (ex.: “2025”, “hoje”, “última hora”), exceto se forem essenciais para o contexto (como “Orçamento 2025”).
-- Evite clickbait barato: nunca termine em frases vagas como “Entenda o caso” ou “Veja o que muda”.
-- Garanta consistência: o <title> (meta SEO) e o <h1> (título visível) devem transmitir a mesma ideia central.
-- Escreva títulos que soem jornalísticos e naturais, mas sempre otimizados para busca e Google News.
+REGRAS OBRIGATÓRIAS PARA TÍTULOS (SEO E CTR)
+- **Máximo de 65 caracteres**: Essencial para não ser cortado no Google.
+- **Palavra-chave no início**: Coloque o termo mais importante (a `focus_keyword`) logo no começo.
+- **Use entidades fortes**: Sempre inclua nomes de pessoas (Lula, Moraes), empresas (Petrobras, Weg), ou indicadores (Ibovespa, Selic). Evite títulos genéricos.
+- **Inclua números e impacto**: Use dados, percentuais ou consequências claras para aumentar a taxa de cliques (CTR). Ex: "alta de 6,3%", "reduz risco em 57%".
+- **Contexto relevante**: Adicione contexto geográfico ("no Brasil") ou temporal ("em agosto", "para 2025") quando aplicável.
+- **Evite termos vagos**: Não use "entenda", "veja o que muda", "polêmica". Prefira termos concretos e pesquisáveis.
+- **Estrutura recomendada**: Siga o modelo `[Palavra-chave principal] + [Contexto/Detalhe] + [Gancho atrativo]`.
 
-Exemplos de bons títulos:  
-- “COPOM mantém Taxa Selic em 10,50%; veja o impacto nos investimentos”
-- “Câmara aprova urgência da Reforma Tributária; entenda os próximos passos”
-- “Petrobras anuncia queda no lucro e ações recuam no Ibovespa”
-- “Governo Lula detalha novo plano de infraestrutura para o Nordeste”
-- “Inflação oficial (IPCA) acelera em maio, pressionada por alimentos”
+Exemplos de títulos excelentes:
+- "Selic em 13,75%: impacto imediato na economia brasileira"
+- "Ibovespa fecha agosto em alta de 6,3% e bate recorde histórico"
+- "Wegovy reduz risco cardíaco em 57% e supera Ozempic em estudo"
+- "Moraes libera visita de Damares a Bolsonaro no STF"
+- "Reforma Tributária: Câmara aprova urgência do projeto; veja próximos passos"
 
 ---
 
