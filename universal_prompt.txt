@@ -9,12 +9,22 @@ Use a seguinte estrutura JSON para a sua resposta:
   "conteudo_final": "<p>O conteúdo HTML reescrito e otimizado vai aqui, com parágrafos, <b>negrito</b> e links.</p><h2>Subtítulo Exemplo</h2><p>Mais conteúdo...</p>",
   "meta_description": "O resumo para o Google vai aqui (máximo 155 caracteres).",
   "focus_keyword": "A palavra-chave principal vai aqui",
+  "related_keyphrases": ["variação da palavra-chave", "sinônimo da keyword", "pergunta relacionada"],
+  "slug": "url-amigavel-para-o-post",
+  "image_alt_texts": {
+    "nome-original-da-imagem.jpg": "Texto alternativo para a imagem 1, com a palavra-chave.",
+    "outra-imagem.png": "Descrição da imagem 2, útil para acessibilidade e SEO."
+  },
   "tags": ["tag-especifica-1", "tag-especifica-2", "tag-especifica-3"],
   "yoast_meta": {
     "_yoast_wpseo_title": "O título para o Google vai aqui (máximo 65 caracteres)",
     "_yoast_wpseo_metadesc": "A meta description para o Google vai aqui (máximo 155 caracteres)",
     "_yoast_wpseo_focuskw": "A palavra-chave foco principal vai aqui",
-    "_yoast_news_keywords": "palavra-chave 1, palavra-chave 2, outra keyword"
+    "_yoast_news_keywords": "palavra-chave 1, palavra-chave 2, outra keyword",
+    "_yoast_wpseo_opengraph-title": "Título para redes sociais (Opcional, se diferente do principal)",
+    "_yoast_wpseo_opengraph-description": "Descrição para redes sociais (Opcional)",
+    "_yoast_wpseo_twitter-title": "Título para o Twitter (Opcional, se diferente do OG)",
+    "_yoast_wpseo_twitter-description": "Descrição para o Twitter (Opcional)"
   }
 }
 
@@ -53,6 +63,11 @@ DETALHES PARA CADA CAMPO DO JSON
   - Adapte sempre ao contexto (decisão do COPOM, votação no congresso, resultado da Petrobras, etc.).
 - Inclua citações específicas de relatórios, discursos ou entrevistas quando disponíveis.
 - Mencione análises de mercado e projeções de especialistas.
+- Otimização SEO no conteúdo:
+  - A palavra-chave principal (`focus_keyword`) deve aparecer no primeiro parágrafo.
+  - Use variações da palavra-chave e termos relacionados (long-tail) nos subtítulos <h2>.
+  - Considere a intenção de busca do usuário ao reescrever. O texto responde à pergunta que a palavra-chave sugere?
+  - Insira links internos para tags (`{domain}/tag/{tag}`) e também links externos para fontes de autoridade quando fizer sentido (ex: Wikipedia, sites oficiais).
 - Sempre que possível, adicione fontes ou falas de ministros, presidentes de bancos, economistas ou analistas políticos para dar credibilidade.
 - Evite frases genéricas; entregue conteúdo verificável e detalhado para sustentar a narrativa.
 
@@ -63,7 +78,21 @@ DETALHES PARA CADA CAMPO DO JSON
 4. **focus_keyword**
 - Identifique a palavra-chave principal do artigo (ex: "Taxa Selic", "Reforma Tributária", "Resultado Petrobras").
 
-5. **tags**
+5. **related_keyphrases** (Opcional)
+- Forneça uma lista de 2 a 3 palavras-chave secundárias ou sinônimos.
+- Exemplo: se `focus_keyword` é "Reforma Tributária", `related_keyphrases` pode ser ["impostos sobre consumo", "unificação de tributos", "PEC 45"].
+
+6. **slug** (Opcional)
+- Crie uma URL amigável (slug) para o post, com no máximo 5 palavras, separadas por hífens.
+- Exemplo: `copom-mantem-selic-10-50`.
+
+7. **image_alt_texts** (Opcional)
+- Crie um texto alternativo (alt text) para as imagens principais.
+- A chave do objeto deve ser o NOME DO ARQUIVO da imagem (ex: `petrobras-anuncio-lucro.jpg`).
+- O valor deve ser uma descrição concisa que inclua a palavra-chave principal.
+- Exemplo: `"petrobras-anuncio-lucro.jpg": "Gráfico mostrando o lucro da Petrobras no último trimestre, relacionado ao resultado da empresa."`
+
+8. **tags**
 - Extraia de 5 a 7 tags específicas e relevantes.
 - NÃO USE TAGS GENÉRICAS como "economia", "política" ou "notícia".
 - Use nomes próprios, indicadores, empresas, etc. (ex: "Roberto Campos Neto", "IPCA", "Petrobras", "PL das Fake News", "STF").
@@ -73,6 +102,10 @@ DETALHES PARA CADA CAMPO DO JSON
 - **_yoast_wpseo_metadesc**: Crie uma meta description para o Google com no máximo 155 caracteres. Deve ser idêntica ou uma leve melhoria do campo `meta_description`.
 - **_yoast_wpseo_focuskw**: A palavra-chave principal do artigo. Deve ser idêntica ao campo `focus_keyword`.
 - **_yoast_news_keywords**: Uma string com 3 a 5 palavras-chave relevantes para o Google News, separadas por vírgula. Ex: "B3, Shipay, mercado financeiro, pagamentos digitais".
+- **_yoast_wpseo_opengraph-title**: (Opcional) Título para redes sociais. Se omitido, o Yoast usará o título principal.
+- **_yoast_wpseo_opengraph-description**: (Opcional) Descrição para redes sociais. Se omitido, o Yoast usará a meta description.
+- **_yoast_wpseo_twitter-title**: (Opcional) Título para o Twitter. Se omitido, o Yoast usará o título do Open Graph.
+- **_yoast_wpseo_twitter-description**: (Opcional) Descrição para o Twitter. Se omitido, o Yoast usará a descrição do Open Graph.
 
 ---
 

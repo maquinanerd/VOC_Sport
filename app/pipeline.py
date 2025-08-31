@@ -1,9 +1,10 @@
 import logging
 import time
 import random
+import json
 import re
 from collections import OrderedDict
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from typing import Dict, Any, Optional
 
 from .config import (
@@ -231,12 +232,38 @@ def run_pipeline_cycle():
                         if not featured_media_id and uploaded_id_map:
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
+                        # 3.5: Set alt text for uploaded images
+                        focus_kw = rewritten_data.get("focus_keyword", "")
+                        # The AI is asked to provide a dict like: { "filename.jpg": "alt text" }
+                        alt_map = rewritten_data.get("image_alt_texts", {})
+
+                        if uploaded_id_map and (alt_map or focus_kw):
+                            logger.info("Setting alt text for uploaded images.")
+                            for original_url, media_id in uploaded_id_map.items():
+                                # Extract filename from the original URL to match keys in alt_map
+                                filename = urlparse(original_url).path.split('/')[-1]
+
+                                # Try to get specific alt text from AI, fallback to a generic one
+                                alt_text = alt_map.get(filename)
+                                if not alt_text and focus_kw:
+                                    alt_text = f"{focus_kw} — foto ilustrativa"
+
+                                if alt_text:
+                                    wp_client.set_media_alt_text(media_id, alt_text)
+
                         # Prepare Yoast meta, including canonical URL to original source
                         yoast_meta = rewritten_data.get('yoast_meta', {})
                         yoast_meta['_yoast_wpseo_canonical'] = article_url_to_process
 
+                        # Add related keyphrases if present
+                        related_kws = rewritten_data.get('related_keyphrases')
+                        if isinstance(related_kws, list) and related_kws:
+                            # Yoast stores this as a JSON string of objects: [{"keyword": "phrase"}, ...]
+                            yoast_meta['_yoast_wpseo_keyphrases'] = json.dumps([{"keyword": kw} for kw in related_kws])
+
                         post_payload = {
                             'title': title,
+                            'slug': rewritten_data.get('slug'),
                             'content': content_html,
                             'excerpt': rewritten_data.get('meta_description', ''),
                             'categories': [wp_category_id] if wp_category_id else [],

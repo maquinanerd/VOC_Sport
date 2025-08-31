@@ -2,7 +2,7 @@ import logging
 import requests
 import time
 import json
-import re
+import re 
 from typing import Dict, Any, Optional, List
 from urllib.parse import urlparse
 
@@ -153,6 +153,38 @@ class WordPressClient:
 
         logger.error(f"Final failure to upload image '{image_url}' after {attempt} attempt(s): {last_err}")
         return None
+
+    def set_media_alt_text(self, media_id: int, alt_text: str) -> bool:
+        """Sets the alt text for a media item in WordPress."""
+        if not alt_text:
+            return False
+        try:
+            endpoint = f"{self.api_url}/media/{media_id}"
+            payload = {"alt_text": alt_text}
+            r = self.session.post(endpoint, json=payload, timeout=20)
+            r.raise_for_status()
+            logger.info(f"Successfully set alt text for media ID {media_id}.")
+            return True
+        except requests.RequestException as e:
+            logger.warning(f"Failed to set alt_text on media {media_id}: {e}")
+            if e.response is not None:
+                logger.warning(f"Response body: {e.response.text}")
+            return False
+
+    def find_related_posts(self, term: str, limit: int = 3) -> List[Dict[str, str]]:
+        """Searches for posts on the site and returns their title and URL."""
+        if not term:
+            return []
+        try:
+            endpoint = f"{self.api_url}/search"
+            params = {"search": term, "per_page": limit, "_embed": "self"}
+            resp = self.session.get(endpoint, params=params, timeout=15)
+            resp.raise_for_status()
+            # The 'url' in the search result is the API URL, we need the 'link' from the embedded post object
+            return [{"title": i.get("title", ""), "url": i.get("_embedded", {}).get("self", [{}])[0].get("link", "")} for i in resp.json()]
+        except requests.RequestException as e:
+            logger.error(f"Error searching for related posts with term '{term}': {e}")
+            return []
 
     def create_post(self, payload: Dict[str, Any]) -> Optional[int]:
         """Creates a new post in WordPress."""
