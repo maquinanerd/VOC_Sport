@@ -1,8 +1,8 @@
 import argparse
 import logging
-import time
 import sys
-import schedule
+from datetime import datetime, timezone
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from app.pipeline import run_pipeline_cycle
 from app.store import Database
@@ -54,28 +54,20 @@ def main():
         finally:
             logger.info("Ciclo único finalizado.")
     else:
-        # Executa o ciclo uma vez imediatamente ao iniciar
-        logger.info("Executando o primeiro ciclo do pipeline imediatamente.")
-        try:
-            run_pipeline_cycle()
-            logger.info("Primeiro ciclo concluído.")
-        except Exception as e:
-            # Usar logger.error para erros não-críticos que não param o scheduler
-            logger.error(f"Erro durante a execução do primeiro ciclo: {e}", exc_info=True)
-
         # Agenda as execuções futuras
         interval = SCHEDULE_CONFIG.get('check_interval_minutes', 15)
         logger.info(f"Agendador iniciado. O pipeline será executado a cada {interval} minutos.")
-        schedule.every(interval).minutes.do(run_pipeline_cycle)
-        while True:
-            try:
-                schedule.run_pending()
-                time.sleep(1)
-            except KeyboardInterrupt:
-                logger.info("Agendador interrompido pelo usuário.")
-                break
-            except Exception as e:
-                logger.error(f"Ocorreu um erro inesperado no loop do agendador: {e}", exc_info=True)
-                time.sleep(60)  # Aguarda um minuto antes de tentar novamente
+
+        scheduler = BlockingScheduler(timezone='UTC')
+
+        # Executa o ciclo uma vez imediatamente e depois a cada `interval` minutos.
+        scheduler.add_job(run_pipeline_cycle, 'interval', minutes=interval, next_run_time=datetime.now(timezone.utc))
+
+        logger.info("Pressione Ctrl+C para sair.")
+        try:
+            scheduler.start()
+        except (KeyboardInterrupt, SystemExit):
+            logger.info("Agendador interrompido pelo usuário.")
+
 if __name__ == "__main__":
     main()

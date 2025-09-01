@@ -8,4 +8,4 @@ lxml
 pytz
 python-slugify
 google-generativeai
-schedule
+APScheduler
