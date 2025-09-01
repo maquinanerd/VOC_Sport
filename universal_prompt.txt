@@ -49,9 +49,10 @@ DETALHES PARA CADA CAMPO DO JSON
   <figure class="video-container"><iframe src="URL_DO_EMBED" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
 - Destaque termos-chave com <b>.
 - Crie no máximo 4 links internos relevantes usando {domain}/tag/{tag}.
-- Os links DEVEM estar SEMPRE embutidos em palavras-chave no formato:
+- Os links internos DEVEM ser sempre absolutos, no formato:
   <a href="{domain}/tag/{tag}">Palavra-Chave</a>
 - Nunca insira a URL sozinha, sem âncora de texto.
+- Nunca concatene a URL do post com {domain}. O link deve ser único, partindo diretamente de {domain}.
 - As palavras escolhidas para âncora devem ser nomes de empresas, políticos, indicadores econômicos ou termos relevantes do artigo.
 - Exemplo correto: <b><a href="{domain}/tag/reforma-tributaria">Reforma Tributária</a></b>
 - Exemplo incorreto (proibido): {domain}/tag/economia
@@ -63,7 +64,7 @@ DETALHES PARA CADA CAMPO DO JSON
 - Inclua citações específicas de relatórios, discursos ou entrevistas quando disponíveis.
 - Mencione análises de mercado e projeções de especialistas.
 - Otimização SEO no conteúdo:
-  - A palavra-chave principal (`focus_keyword`) deve aparecer no primeiro parágrafo.
+  - A palavra-chave principal (`focus_keyword`) deve aparecer **naturalmente** no primeiro parágrafo, sem nunca dizer que é uma palavra-chave.
   - Use variações da palavra-chave e termos relacionados (long-tail) nos subtítulos <h2>.
   - Considere a intenção de busca do usuário ao reescrever. O texto responde à pergunta que a palavra-chave sugere?
   - Insira links internos para tags (`{domain}/tag/{tag}`) e também links externos para fontes de autoridade quando fizer sentido (ex: Wikipedia, sites oficiais).
@@ -95,7 +96,7 @@ DETALHES PARA CADA CAMPO DO JSON
 - Extraia de 5 a 7 tags específicas e relevantes.
 - NÃO USE TAGS GENÉRICAS como "economia", "política" ou "notícia".
 - Use nomes próprios, indicadores, empresas, etc. (ex: "Roberto Campos Neto", "IPCA", "Petrobras", "PL das Fake News", "STF").
- 
+
 9. **yoast_meta**
 - **_yoast_wpseo_title**: Crie um título para o Google com no máximo 65 caracteres. Pode ser uma variação do `titulo_final`, mas ainda mais focado em busca.
 - **_yoast_wpseo_metadesc**: Crie uma meta description para o Google com no máximo 155 caracteres. Deve ser idêntica ou uma leve melhoria do campo `meta_description`.
@@ -127,7 +128,6 @@ Exemplos de títulos excelentes:
 ---
 
 TÉCNICAS DE UM TEXTO LONGO JORNALÍSTICO
-
 1. Estrutura narrativa clara
 - Lead forte: o que aconteceu, quem, onde e por quê.
 - Pirâmide invertida: informações principais no início, contexto depois.
@@ -151,14 +151,13 @@ TÉCNICAS DE UM TEXTO LONGO JORNALÍSTICO
 ---
 
 TÉCNICAS DE SEO EM TEXTO LONGO
-
 1. Títulos e subtítulos otimizados
 - H1: 50–65 caracteres, keyword logo no início.
 - H2/H3: variações semânticas da keyword.
 
 2. Palavra-chave e variações
-- Inclua a focus keyword no primeiro parágrafo.
-- Espalhe de forma natural (sem stuffing).
+- Inclua a focus keyword no primeiro parágrafo de forma natural, **sem nunca explicar que é a palavra-chave**.
+- Espalhe de forma orgânica (sem stuffing).
 - Use sinônimos e termos relacionados.
 
 3. Rich snippets e SEO técnico
@@ -187,4 +186,3 @@ DADOS PARA PROCESSAMENTO:
 - Vídeos do YouTube Disponíveis (use a embed_url): {videos_list}
 - Conteúdo Original (HTML):
 {content}
----
