@@ -50,9 +50,9 @@ DETALHES PARA CADA CAMPO DO JSON
 - Destaque termos-chave com <b>.
 
 - Crie no máximo 4 links internos relevantes usando {domain}/tag/{tag}.
-- Os links internos DEVEM ser sempre absolutos, no formato:
+- Os links internos DEVEM ser SEMPRE absolutos, **com https:// obrigatório**, no formato exato:
   <a href="https://{domain}/tag/{tag}">Palavra-Chave</a>
-- Nunca use apenas {domain}/tag/{tag} sem o protocolo HTTPS.
+- Qualquer outra forma de link é proibida (ex.: maquinamoney.com/tag/politica, {domain}/tag/politica ou /tag/politica).
 - Nunca insira a URL sozinha, sem âncora de texto.
 - Nunca concatene a URL do post com {domain}. O link deve ser único, partindo diretamente de https://{domain}.
 - As palavras escolhidas para âncora devem ser nomes de empresas, políticos, indicadores econômicos ou termos relevantes do artigo.
