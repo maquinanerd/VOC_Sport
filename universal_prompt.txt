@@ -81,7 +81,7 @@ Se houver qualquer divergência:
     "_yoast_wpseo_title": "{string — título SEO (até 70 caracteres, pode ser igual a titulo_final)}",
     "_yoast_wpseo_metadesc": "{string — meta description (até 155 caracteres)}",
     "_yoast_wpseo_focuskw": "{string — palavra-chave foco (igual a focus_keyword do topo)}",
-    "_yoast_news_keywords": ["{lista de palavras-chave para Google News, 3 a 8 termos separados em itens}"]
+    "_yoast_news_keywords": "{palavras-chave para Google News, 3 a 8 termos separados por vírgulas e espaço}"
   },
   "internal_links": [
     "/politica/noticia-relacionada-1",
