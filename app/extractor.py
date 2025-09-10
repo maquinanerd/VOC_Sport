@@ -503,6 +503,23 @@ def _find_news_article_in_json_ld(json_ld_data: List[Dict[str, Any]]) -> Optiona
                 return item
     return None
 
+# --- New constants for related content removal ---
+LEIA_HEADING_RE = re.compile(r"(leia também|veja também|relacionad[oa]s|recomendad[oa]s|tópicos relacionados)", re.I)
+
+# Site-specific rules for related content
+SITE_SPECIFIC_RELATED_SELECTORS = {
+    "infomoney.com.br": [
+        ".single__related", ".article__related", ".post-related", ".related-posts",
+        ".rm-related", ".block-related", ".single__sidebar", ".article__sidebar",
+        "section.single__see-also", ".wp-block-infomoney-blocks-infomoney-read-more",
+    ],
+    "estadao.com.br": [
+        ".links-relacionados", ".mat-relacionadas", ".es-relacionadas",
+        ".stories-related", ".see-also", ".link-relacionado", ".box-relacionadas",
+    ],
+}
+
+
 class ContentExtractor:
     """Extrai e limpa conteúdo para o pipeline."""
     def __init__(self):
@@ -518,13 +535,47 @@ class ContentExtractor:
             logger.error(f"Failed to fetch HTML from {url}: {e}")
             return None
 
-    def _pre_clean_html(self, soup: BeautifulSoup):
+    def _pre_clean_html(self, soup: BeautifulSoup, url: str):
         """Remove widgets/ads/blocos óbvios ANTES da extração."""
+        # --- New robust related content removal logic from user patch ---
+        try:
+            # 1. Remove sections by heading text (e.g., "Leia também")
+            # Iterate backwards to avoid issues with modifying the list while iterating
+            for h in reversed(soup.find_all(re.compile("^h[1-6]$"))):
+                heading_text = h.get_text(" ", strip=True)
+                if heading_text and LEIA_HEADING_RE.search(heading_text):
+                    parent_container = h.find_parent(('section', 'aside', 'div'))
+                    if parent_container and len(parent_container.find_all(re.compile("^h[1-6]$"))) <= 2:
+                        logger.debug(f"Decomposing parent container '{parent_container.name}' of related heading: {heading_text}")
+                        parent_container.decompose()
+                    else:
+                        logger.debug(f"Decomposing related heading and its sibling: {heading_text}")
+                        next_sibling = h.find_next_sibling()
+                        if next_sibling and next_sibling.name in ("div", "ul", "section", "ol"):
+                            next_sibling.decompose()
+                        h.decompose()
+            
+            # 2. Remove by site-specific selectors
+            source_host = (urlparse(url).hostname or "").replace("www.", "")
+            if source_host in SITE_SPECIFIC_RELATED_SELECTORS:
+                for sel in SITE_SPECIFIC_RELATED_SELECTORS[source_host]:
+                    for el in soup.select(sel):
+                        el.decompose()
+            
+            # 3. Remove links that are likely related content wrappers
+            for a in soup.select("a"):
+                cls = " ".join(a.get("class", [])).lower()
+                if any(k in cls for k in ["relacion", "related", "leia", "veja"]) or a.get("data-gtm-cta") in ("related", "see_more"):
+                    a.decompose()
+
+        except Exception as e:
+            logger.warning(f"Error during advanced related content removal for {url}: {e}", exc_info=False)
+        # --- End of new logic ---
+
         # Merged list from original and user suggestions for more robust cleaning
         selectors_to_remove = {
             # User-suggested selectors for CTAs, ads, and social sharing
-            ".cta-middle", ".wp-block-infomoney-blocks-infomoney-read-more",
-            ".infomoney-read-more", ".read-more", ".related-posts", ".post__related",
+            ".cta-middle", ".infomoney-read-more", ".read-more", ".post__related",
             ".sharing", ".share", ".social", ".banner", ".ads", ".advertisement",
             "[data-ad]", "[data-ad-slot]",
             ".sponsored", ".paid-content", ".partner", ".outbrain", ".taboola",
@@ -533,7 +584,11 @@ class ContentExtractor:
             '[class*="srdb"]', '[class*="rating"]', '.review', '.score', '.meter',
             'header', 'footer', 'nav', 'aside',
             '[class*="related"]', '[id*="related"]',
-            '[class*="trending"]', '[id*="trending"]',
+            # From user's patch (GENERIC_REL_SELECTORS)
+            "[class*='relacionad']", "[class*='relaciona']", "[class*='recommend']",
+            "[class*='veja-tambem']", "[class*='leia-tambem']", "[id*='relacionad']",
+            "[id*='leia']", "section[aria-label*='Leia']", "section[aria-label*='Relacionad']",
+            '[class*="trending"]', '[id*="trending"]', 'div.widget',
             '[class*="sidebar"]',  '[id*="sidebar"]',
             '[class*="recommend"]','[class*="recommended"]',
             '[class*="screen-hub"]','[class*="screenhub"]',
@@ -543,7 +598,7 @@ class ContentExtractor:
             '[class*="ad-"]','[id*="ad-"]','[class*="advert"]','[id*="advert"]',
             '.comments', '#comments',
             '.author', '.author-box', '.post-author', '.byline', '.entry-author',
-            '.avatar', '.author__image', '.author-profile', '.wp-block-embed',
+            '.avatar', '.author__image', '.author-profile',
             '.subscribe',
         }
         for sel in selectors_to_remove:
@@ -736,7 +791,7 @@ class ContentExtractor:
             news_article_schema = _find_news_article_in_json_ld(all_json_ld)
 
             # 2) limpeza prévia pesada
-            self._pre_clean_html(soup)
+            self._pre_clean_html(soup, url)
 
             # 3) normaliza data-img-url -> <figure>
             self._convert_data_img_to_figure(soup)
