@@ -9,20 +9,12 @@ from urllib.parse import urlparse
 import re
 import time
 from pathlib import Path 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, ClassVar
 
-from .config import AI_CONFIG, SCHEDULE_CONFIG
+from .config import AI_API_KEYS, SCHEDULE_CONFIG
 from .exceptions import AIProcessorError, AllKeysFailedError
 
 logger = logging.getLogger(__name__)
-
-CATEGORY_ALIASES = {
-    'mercados': 'economia',
-    'brasil': 'politica',
-    'onde-investir': 'economia',
-    'internacional': 'politica',
-    'carreira': 'economia',
-}
 
 AI_SYSTEM_RULES = """
 [REGRAS OBRIGATÓRIAS — CUMPRIR 100%]
@@ -36,49 +28,23 @@ Somente produzir o conteúdo jornalístico reescrito do artigo principal.
 Se algum desses itens aparecer no texto de origem, exclua-os do resultado.
 """
 
-# Log the number of keys found for diagnostics at startup.
-for category, keys in AI_CONFIG.items():
-    # Filter out empty/None keys before counting
-    valid_keys_count = len([k for k in keys if k])
-    if valid_keys_count > 0:
-        logger.info(f"Found {valid_keys_count} API keys for category '{category}'.")
-    else:
-        logger.warning(f"No API keys found for category '{category}'.")
-
 
 class AIProcessor:
     """
     Handles content rewriting using a Generative AI model with API key failover.
     """
-    _prompt_template: Optional[str] = None
+    _prompt_template: ClassVar[Optional[str]] = None
 
-    def __init__(self, category: str):
+    def __init__(self):
         """
-        Initializes the AI processor for a specific content category.
-
-        Args:
-            category: The content category (e.g., 'politica', 'mercados').
-
-        Raises:
-            AIProcessorError: If the category is invalid or has no API keys.
+        Initializes the AI processor.
+        It uses a single pool of API keys and rotates through them on failure.
         """
-        resolved_category = CATEGORY_ALIASES.get(category, category)
-
-        if resolved_category not in AI_CONFIG:
-            if category != resolved_category:
-                msg = f"Invalid AI category specified: '{category}' (resolved to '{resolved_category}'). No configuration found for resolved category."
-            else:
-                msg = f"Invalid AI category specified: '{category}'. No configuration found."
-            raise AIProcessorError(msg)
-
-        self.category = resolved_category
-        self.api_keys: List[str] = [key for key in AI_CONFIG.get(self.category, []) if key]
+        self.api_keys: List[str] = AI_API_KEYS
         if not self.api_keys:
-            if category != self.category:
-                msg = f"No valid API keys found for category '{category}' (resolved to '{self.category}')."
-            else:
-                msg = f"No valid API keys found for category '{category}'."
-            raise AIProcessorError(msg)
+            raise AIProcessorError("No GEMINI_ API keys found in the environment. Please set at least one GEMINI_... key.")
+
+        logger.info(f"AI Processor initialized with {len(self.api_keys)} API key(s).")
 
         self.current_key_index = 0
         self.model = None
@@ -87,7 +53,7 @@ class AIProcessor:
     def _configure_model(self):
         """Configures the generative AI model with the current API key."""
         if self.current_key_index >= len(self.api_keys):
-            raise AllKeysFailedError(f"All {len(self.api_keys)} API keys for category '{self.category}' have failed.")
+            raise AllKeysFailedError(f"All {len(self.api_keys)} API keys have failed.")
 
         api_key = self.api_keys[self.current_key_index]
         try:
@@ -100,7 +66,7 @@ class AIProcessor:
                 'gemini-1.5-flash-latest',
                 generation_config=generation_config
             )
-            logger.info(f"Using API key index {self.current_key_index} for category '{self.category}'.")
+            logger.info(f"Configured AI model with API key index {self.current_key_index}.")
         except Exception as e:
             logger.error(f"Failed to configure Gemini with API key index {self.current_key_index}: {e}")
             self._failover_to_next_key()
@@ -109,7 +75,7 @@ class AIProcessor:
     def _failover_to_next_key(self):
         """Switches to the next available API key."""
         self.current_key_index += 1
-        logger.warning(f"Failing over to next API key for category '{self.category}'.")
+        logger.warning("Failing over to next API key.")
 
     @classmethod
     def _load_prompt_template(cls) -> str:
@@ -196,7 +162,7 @@ class AIProcessor:
             except Exception:
                 fonte = ""  # Fallback in case of URL parsing error
 
-        final_category = category or self.category or ""
+        final_category = category or ""
         domain = kwargs.get("domain", "")
 
         fields = {
@@ -248,7 +214,7 @@ class AIProcessor:
                     logger.critical("All API keys have failed.")
                     break  # Exit loop if all keys are exhausted
         
-        final_reason = f"All API keys for category '{self.category}' failed. Last error: {last_error}"
+        final_reason = f"All available API keys failed. Last error: {last_error}"
         logger.critical(f"Failed to rewrite content. {final_reason}")
         return None, final_reason
 

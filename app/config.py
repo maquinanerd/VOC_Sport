@@ -83,23 +83,21 @@ USER_AGENT = (
 )
 
 # --- Configuração da IA ---
-def _load_ai_keys() -> Dict[str, List[str]]:
+def _load_ai_keys() -> List[str]:
     """
-    Lê chaves GEMINI_* do ambiente e agrupa por categoria.
-    Ex.: GEMINI_ONDE_INVESTIR_1 -> categoria 'onde-investir'
-    As categorias devem corresponder às definidas em RSS_FEEDS.
+    Lê todas as chaves GEMINI_* do ambiente e as retorna em uma lista única e ordenada.
     """
-    keys_by_category: Dict[str, List[str]] = {}
+    keys = {}
     for key, value in os.environ.items():
         if value and key.startswith('GEMINI_'):
-            parts = key.split('_')
-            if len(parts) >= 3:  # GEMINI + CATEGORIA(+...) + NUM
-                category_parts = parts[1:-1]
-                category = "-".join(category_parts).lower().replace('__', '_')
-                keys_by_category.setdefault(category, []).append(value)
-    return keys_by_category
+            keys[key] = value
+    
+    # Sort by key name for predictable order (e.g., GEMINI_ECONOMIA_1, GEMINI_POLITICA_1)
+    sorted_key_names = sorted(keys.keys())
+    
+    return [keys[k] for k in sorted_key_names]
 
-AI_CONFIG = _load_ai_keys()
+AI_API_KEYS = _load_ai_keys()
 
 # Caminho para o prompt universal na raiz do projeto
 PROMPT_FILE_PATH = os.path.join(

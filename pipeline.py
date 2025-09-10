@@ -38,7 +38,7 @@ def run_pipeline_cycle():
         feed_reader = FeedReader(db)
         extractor = ContentExtractor()
         key_manager = KeyManager(db)
-        ai_processor = AIProcessor(feed_config['category'])
+        ai_processor = AIProcessor()
         rewriter = Rewriter()
         tag_generator = TagGenerator()
         categorizer = WordPressCategorizer()
@@ -74,7 +74,15 @@ def run_pipeline_cycle():
                 tags_text = ", ".join(tags)
 
                 # 6. Reescrever com IA
-                rewritten_text = ai_processor.rewrite_content(
+                # A chamada foi corrigida para corresponder à assinatura do método
+                # e para passar a categoria explicitamente para o prompt.
+                rewritten_data, failure_reason = ai_processor.rewrite_content(
                     title=article.title,
-                    excerpt=article.summary,
-                    tags_text=tags_text,
+                    content_html=extracted_data['content'],
+                    source_url=article.link,
+                    category=feed_config['category'],
+                    tags=tags,
+                    domain=publisher.domain,
+                    source_name=feed_config.get('source_name', ''),
+                    images=extracted_data.get('images', []),
+                    videos=extracted_data.get('videos', [])
