@@ -75,7 +75,22 @@ Se houver qualquer divergência:
   "citacoes_mantidas": 0,
   "fonte_checada": "{url_original}",
   "hash_original": "{sha256_do_html_original}",
-  "hash_reescrita": "{sha256_do_conteudo_final}"
+  "hash_reescrita": "{sha256_do_conteudo_final}",
+
+  "yoast_meta": {
+    "title": "{string — título SEO (pode ser igual ao titulo_final ou ajustado)}",
+    "description": "{string — meta description (até 155 caracteres)}",
+    "focus_keyword": "{string — palavra-chave foco}",
+    "slug": "{string — slug-otimizado-sem-acentos}",
+    "canonical": "{string — url canonica (normalmente igual à url_original)}",
+    "robots": "index,follow"
+  },
+  "internal_links": [
+    "/politica/noticia-relacionada-1",
+    "/politica/noticia-relacionada-2"
+  ],
+  "categories": ["{sempre incluir a categoria principal da matéria (politica, economia, esportes, cultura, cinema, series, games, tecnologia, internacional) e até 2 subcategorias relevantes}"],
+  "featured_image": "{string — url absoluta da imagem destaque (ou vazio se não houver)}"
 }
 
 ---
@@ -155,4 +170,4 @@ Se houver qualquer divergência:
 ## FINAL
 A saída deve ser apenas o objeto JSON, nunca texto extra.  
 Qualquer divergência factual → bloqueie publicação.  
-Se tudo consistente → entregue conteúdo otimizado para SEO, fiel e formatado.
+Se tudo consistente → entregue conteúdo otimizado para SEO, fiel e formatado
