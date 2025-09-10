@@ -78,12 +78,10 @@ Se houver qualquer divergência:
   "hash_reescrita": "{sha256_do_conteudo_final}",
 
   "yoast_meta": {
-    "title": "{string — título SEO (pode ser igual ao titulo_final ou ajustado)}",
-    "description": "{string — meta description (até 155 caracteres)}",
-    "focus_keyword": "{string — palavra-chave foco}",
-    "slug": "{string — slug-otimizado-sem-acentos}",
-    "canonical": "{string — url canonica (normalmente igual à url_original)}",
-    "robots": "index,follow"
+    "_yoast_wpseo_title": "{string — título SEO (até 70 caracteres, pode ser igual a titulo_final)}",
+    "_yoast_wpseo_metadesc": "{string — meta description (até 155 caracteres)}",
+    "_yoast_wpseo_focuskw": "{string — palavra-chave foco (igual a focus_keyword do topo)}",
+    "_yoast_news_keywords": ["{lista de palavras-chave para Google News, 3 a 8 termos separados em itens}"]
   },
   "internal_links": [
     "/politica/noticia-relacionada-1",
@@ -170,4 +168,4 @@ Se houver qualquer divergência:
 ## FINAL
 A saída deve ser apenas o objeto JSON, nunca texto extra.  
 Qualquer divergência factual → bloqueie publicação.  
-Se tudo consistente → entregue conteúdo otimizado para SEO, fiel e formatado
+Se tudo consistente → entregue conteúdo otimizado para SEO, fiel e formatado.
