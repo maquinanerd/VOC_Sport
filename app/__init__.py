@@ -1,1 +1,0 @@
-# This file makes the 'taxonomy' directory a Python package.

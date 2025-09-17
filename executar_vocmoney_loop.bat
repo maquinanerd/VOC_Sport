@@ -1,6 +1,6 @@
 @echo off
 :loop
-cd /d "E:\Área de Trabalho 2\VocMoney"
+cd /d "E:\Área de Trabalho 2\VocSport"
 call .venv\Scripts\activate.bat
 python -m app.main
 echo ==========================================
