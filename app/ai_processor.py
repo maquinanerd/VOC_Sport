@@ -13,6 +13,7 @@ from typing import Any, Dict, List, Optional, Tuple, ClassVar
 
 from .config import AI_API_KEYS, SCHEDULE_CONFIG
 from .exceptions import AIProcessorError, AllKeysFailedError
+from .taxonomy.intelligence import robust_json_parser
 
 logger = logging.getLogger(__name__)
 
@@ -229,17 +230,16 @@ class AIProcessor:
     @staticmethod
     def _parse_response(text: str) -> Optional[Dict[str, Any]]:
         """
-        Parses the JSON response from the AI and validates its structure.
+        Parses the JSON response from the AI using a robust parser and validates its structure.
         """
         try:
-            clean_text = text.strip()
-            if clean_text.startswith("```json"):
-                clean_text = clean_text[7:-3].strip()
-            elif clean_text.startswith("```"):
-                clean_text = clean_text[3:-3].strip()
+            # Use the robust parser to handle potential malformations from the AI
+            data = robust_json_parser(text)
 
-            data = json.loads(clean_text)
-
+            if data is None:
+                # robust_json_parser already logs the specific JSON error
+                return None
+            
             if not isinstance(data, dict):
                 logger.error(f"AI response is not a dictionary. Received type: {type(data)}")
                 return None
@@ -278,10 +278,6 @@ class AIProcessor:
             logger.info("Successfully parsed and validated AI response.")
             return data
 
-        except json.JSONDecodeError as e:
-            logger.error(f"Error decoding JSON from AI response: {e}")
-            logger.debug(f"Received text: {text[:500]}...")
-            return None
         except Exception as e:
             logger.error(f"An unexpected error occurred while parsing AI response: {e}")
             logger.debug(f"Received text: {text[:500]}...")
