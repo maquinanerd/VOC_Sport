@@ -2,6 +2,7 @@ import json
 import logging
 import re
 from pathlib import Path
+import inspect
 from typing import Dict, List, Optional, Any
 from collections import Counter
 
@@ -37,7 +38,16 @@ FASES = _load_json_data("fases.json")
 
 def normalize_slug(name: str) -> str:
     """Generates a clean, URL-friendly slug from a string."""
-    return slugify(name, to_lower=True, separator='-')
+    # This is a robust way to handle different versions of slugify libraries.
+    # Some use 'to_lower', older ones use 'lower', and some don't have the option.
+    sig = inspect.signature(slugify)
+    kwargs = {'separator': '-'}
+    if 'to_lower' in sig.parameters:
+        kwargs['to_lower'] = True
+    elif 'lower' in sig.parameters:
+        kwargs['lower'] = True
+
+    return slugify(name, **kwargs)
 
 # --- Entity Extraction ---
 
