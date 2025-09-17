@@ -70,5 +70,32 @@
       "slug": "quartas-de-final",
       "parent": 0
     }
+  },
+  "final": {
+    "timestamp": "2025-09-17T19:37:59.841404",
+    "data": {
+      "id": 52,
+      "name": "Final",
+      "slug": "final",
+      "parent": 0
+    }
+  },
+  "corinthians": {
+    "timestamp": "2025-09-17T19:40:07.211637",
+    "data": {
+      "id": 66,
+      "name": "Corinthians",
+      "slug": "corinthians",
+      "parent": 34
+    }
+  },
+  "flamengo": {
+    "timestamp": "2025-09-17T19:40:07.911718",
+    "data": {
+      "id": 67,
+      "name": "Flamengo",
+      "slug": "flamengo",
+      "parent": 34
+    }
   }
 }

@@ -19,6 +19,19 @@ MAX_SPECIFIC_CATEGORIES = 3
 MIN_SCORE = 0.6
 DEFAULT_PARENT_CATEGORY_NAME = "Notícias"
 
+FEMININO_KEYWORDS = {
+    "feminina", "feminino", "guerreira", "guerreiras", "guerreiras grenás", 
+    "meninas da vila", "brabas", "minas da fiel", "gloriosas", "sereias da vila"
+}
+
+# Map from generic/male slug to the specific female slug
+FEMALE_COMPETITION_MAP = {
+    "copa-do-brasil": "copa-do-brasil-feminina",
+    "brasileirao": "brasileirao-feminino",
+    "libertadores": "libertadores-feminina",
+    "copa-do-mundo": "copa-do-mundo-feminina",
+}
+
 # --- Data Loading ---
 
 def _load_json_data(filename: str) -> List[Dict[str, Any]]:
@@ -83,10 +96,12 @@ class TaxonomyExtractor:
     def extract_entities(self, text: str) -> Dict[str, Any]:
         """
         Extracts entities (clubs, competitions, etc.) from text using keyword matching.
-        Returns a dictionary with lists of found entities and their scores.
+        Returns a dictionary with lists of found entities, scores, and modality.
         """
         text_lower = text.lower()
         
+        is_feminino = any(keyword in text_lower for keyword in FEMININO_KEYWORDS)
+
         # A simple presence check is used for scoring. More advanced methods could use frequency or context.
         clubes = {self._club_map[k]['slug'] for k in self._club_map if k in text_lower}
         competicoes = {self._liga_map[k]['slug'] for k in self._liga_map if k in text_lower}
@@ -100,7 +115,8 @@ class TaxonomyExtractor:
             "competicoes": list(competicoes - assuntos),
             "fases": list(fases),
             "assuntos": list(assuntos),
-            "scores": scores
+            "scores": scores,
+            "is_feminino": is_feminino,
         }
 
 # --- Category Management ---
@@ -160,6 +176,19 @@ class CategoryManager:
         """
         text_to_analyze = f"{title} {content}"
         entities = self.extractor.extract_entities(text_to_analyze)
+
+        # Handle female competitions based on detected keywords
+        if entities.get("is_feminino"):
+            logger.info("Women's football context detected. Adjusting competitions.")
+            corrected_competicoes = []
+            for comp_slug in entities["competicoes"]:
+                female_slug = FEMALE_COMPETITION_MAP.get(comp_slug)
+                if female_slug:
+                    logger.debug(f"Mapping competition '{comp_slug}' to '{female_slug}'.")
+                    corrected_competicoes.append(female_slug)
+                else:
+                    corrected_competicoes.append(comp_slug)
+            entities["competicoes"] = corrected_competicoes
         
         default_parent_slug = normalize_slug(DEFAULT_PARENT_CATEGORY_NAME)
         default_parent_cat = self.ensure_category(DEFAULT_PARENT_CATEGORY_NAME, default_parent_slug)
@@ -197,6 +226,38 @@ class CategoryManager:
         
         logger.info(f"Assigned category IDs: {list(final_category_ids)}")
         return list(final_category_ids)
+
+    def generate_tags(self, title: str, content: str) -> List[str]:
+        """
+        Generates a list of relevant tag names based on extracted entities,
+        adhering to the editor's rules.
+        """
+        text_to_analyze = f"{title} {content}"
+        entities = self.extractor.extract_entities(text_to_analyze)
+        
+        tag_slugs = set()
+        
+        # Handle female competitions for tags as well
+        competicoes = entities["competicoes"]
+        if entities.get("is_feminino"):
+            competicoes = [FEMALE_COMPETITION_MAP.get(c, c) for c in competicoes]
+
+        # Add all relevant, specific entities to tags
+        tag_slugs.update(competicoes)
+        tag_slugs.update(entities["clubes"])
+        tag_slugs.update(entities["fases"])
+        tag_slugs.update(entities["assuntos"])
+
+        # Convert slugs back to names for the tags
+        tag_names = []
+        for slug in tag_slugs:
+            entity_info = next((item for item in self.all_taxonomy_data if item['slug'] == slug), None)
+            if entity_info:
+                tag_names.append(entity_info['nome'])
+        
+        logger.info(f"Generated tags: {tag_names[:12]}")
+        # Return between 5 and 12 tags, as per user rule (best effort)
+        return tag_names[:12]
 
 def reclassify_existing_posts(wp_client: WordPressClient, limit: int = 200, update: bool = False):
     """

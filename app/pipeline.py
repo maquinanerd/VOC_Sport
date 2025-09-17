@@ -252,12 +252,19 @@ def run_pipeline_cycle():
                         if not featured_media_id and uploaded_id_map:
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
+                        # Generate tags based on strict taxonomy rules, overriding AI
+                        logger.info("Generating tags based on taxonomy rules, overriding AI suggestions.")
+                        tags_to_assign = category_manager.generate_tags(
+                            title=title,
+                            content=content_html
+                        )
+
                         # 3.5: Set alt text for uploaded images
                         focus_kw = rewritten_data.get("focus_keyword", "")
                         # The AI is asked to provide a dict like: { "filename.jpg": "alt text" }
                         alt_map = rewritten_data.get("image_alt_texts", {})
 
-                        if uploaded_id_map and (alt_map or focus_kw):
+                        if uploaded_id_map and (alt_map or focus_kw or tags_to_assign):
                             logger.info("Setting alt text for uploaded images.")
                             for original_url, media_id in uploaded_id_map.items():
                                 # Extract filename from the original URL to match keys in alt_map
@@ -266,7 +273,7 @@ def run_pipeline_cycle():
                                 # Try to get specific alt text from AI, fallback to a generic one
                                 alt_text = alt_map.get(filename)
                                 if not alt_text and focus_kw:
-                                    alt_text = f"{focus_kw} — foto ilustrativa"
+                                    alt_text = f"{focus_kw} - {tags_to_assign[0] if tags_to_assign else 'foto ilustrativa'}"
 
                                 if alt_text:
                                     wp_client.set_media_alt_text(media_id, alt_text)
@@ -287,7 +294,7 @@ def run_pipeline_cycle():
                             'content': content_html,
                             'excerpt': rewritten_data.get('meta_description', ''),
                             'categories': category_ids_to_assign,
-                            'tags': rewritten_data.get('tags', []),
+                            'tags': tags_to_assign,
                             'featured_media': featured_media_id,
                             'meta': yoast_meta,
                         }
