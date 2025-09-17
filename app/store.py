@@ -4,6 +4,7 @@ Database management for the application using SQLite.
 """
 
 import sqlite3
+import json
 import hashlib
 import logging
 from datetime import datetime, timedelta
@@ -361,8 +362,8 @@ class TaxonomyCache:
         try:
             with open(self.cache_file, 'w', encoding='utf-8') as f:
                 json.dump(self.cache, f, indent=2, ensure_ascii=False)
-        except IOError:
-            logger.error(f"Failed to write to taxonomy cache file at {self.cache_file}.")
+        except IOError as e:
+            logger.error(f"Failed to write to taxonomy cache file at {self.cache_file}: {e}")
 
     def get_category(self, slug: str) -> Optional[Dict[str, Any]]:
         """

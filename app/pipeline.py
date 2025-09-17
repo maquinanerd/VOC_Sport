@@ -192,13 +192,22 @@ def run_pipeline_cycle():
                         )
                         
                         # 3.3: Upload ONLY the featured image if it's valid
-                        urls_to_upload = []
                         featured_image_url = extracted_data.get('featured_image_url')
-                        if featured_image_url and is_valid_upload_candidate(featured_image_url):
-                            urls_to_upload.append(featured_image_url)
-                            logger.info(f"Valid featured image found, preparing for upload: {featured_image_url}")
-                        else:
-                            logger.info("No valid featured image to upload. The post will not have a highlight.")
+
+                        # If the primary featured image is invalid, search for a fallback.
+                        if not (featured_image_url and is_valid_upload_candidate(featured_image_url)):
+                            logger.warning(f"Initial featured image '{featured_image_url}' is not valid. Searching for a fallback.")
+                            found_fallback = False
+                            for img_url in extracted_data.get('images', []):
+                                if is_valid_upload_candidate(img_url):
+                                    featured_image_url = img_url  # Found a valid fallback
+                                    logger.info(f"Found a valid fallback featured image: {featured_image_url}")
+                                    found_fallback = True
+                                    break
+                            if not found_fallback:
+                                featured_image_url = None # Ensure it's None if no valid image is found
+
+                        urls_to_upload = [featured_image_url] if featured_image_url else []
 
                         uploaded_src_map = {}
                         uploaded_id_map = {}

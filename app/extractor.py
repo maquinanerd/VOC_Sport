@@ -2,12 +2,15 @@ import logging
 import trafilatura
 from bs4 import BeautifulSoup
 import requests
-import html # New import for html.unescape
+import html
 from typing import Dict, Optional, Any, Set, List, Tuple, Union
 import json
 import re
 import os
+import time
 from urllib.parse import urljoin, urlparse, parse_qs
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
@@ -525,10 +528,20 @@ class ContentExtractor:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update({'User-Agent': USER_AGENT})
+        # Configure retries with backoff as requested
+        retries = Retry(
+            total=3,
+            backoff_factor=1.5,
+            status_forcelist=[429, 500, 502, 503, 504]
+        )
+        adapter = HTTPAdapter(max_retries=retries)
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
 
     def _fetch_html(self, url: str) -> Optional[str]:
         try:
-            resp = self.session.get(url, timeout=20.0, allow_redirects=True)
+            # Increased timeout to 75s as requested
+            resp = self.session.get(url, timeout=75.0, allow_redirects=True)
             resp.raise_for_status()
             return resp.text
         except requests.RequestException as e:
