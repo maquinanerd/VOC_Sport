@@ -37,7 +37,7 @@ FASES = _load_json_data("fases.json")
 
 def normalize_slug(name: str) -> str:
     """Generates a clean, URL-friendly slug from a string."""
-    return slugify(name, lower=True, separator='-')
+    return slugify(name, to_lower=True, separator='-')
 
 # --- Entity Extraction ---
 
@@ -201,4 +201,3 @@ def reclassify_existing_posts(wp_client: WordPressClient, limit: int = 200, upda
     # 4. Compare new IDs with existing IDs and log differences.
     # 5. If update=True, call wp_client.update_post_categories(post.id, new_ids).
     logger.info("Reclassification analysis complete.")
-
