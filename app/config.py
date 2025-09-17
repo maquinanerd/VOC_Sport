@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from typing import Dict, List, Any
 from collections import defaultdict
+from urllib.parse import urlparse
 
 # Carrega variáveis de ambiente de um arquivo .env
 load_dotenv()
@@ -106,7 +107,18 @@ SCHEDULE_CONFIG = {
     'cleanup_after_hours': int(os.getenv('CLEANUP_AFTER_HOURS', 72)),
 }
 
+def _get_domain_from_wp_url(wp_url: str) -> str:
+    """Extrai o domínio (ex: cornetafc.com.br) da URL do WordPress."""
+    if not wp_url:
+        return "example.com"  # Fallback
+    try:
+        # Ex: https://cornetafc.com.br/wp-json/wp/v2 -> cornetafc.com.br
+        return urlparse(wp_url).netloc
+    except Exception:
+        return "example.com"
+
 PIPELINE_CONFIG = {
+    'domain': _get_domain_from_wp_url(os.getenv('WORDPRESS_URL')),
     'images_mode': os.getenv('IMAGES_MODE', 'hotlink'),  # 'hotlink' ou 'download_upload'
     'attribution_policy': 'Fonte: {domain}',
     'publisher_name': 'Corneta FC',

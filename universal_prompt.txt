@@ -47,18 +47,17 @@ DETALHES PARA CADA CAMPO DO JSON
   - A primeira imagem deve ser considerada a destacada (featured), portanto não repita no corpo.
   - As imagens devem ficar alternadas entre os parágrafos, evitando repetições seguidas.
 - Incorpore no máximo 3 vídeos do YouTube no formato:
-  <figure class="video-container"><iframe src="URL_DO_EMBED" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>
+  `<figure class="video-container"><iframe src="URL_DO_EMBED" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></figure>`
 - Destaque termos-chave com <b>.
-- Crie no máximo 4 links internos relevantes usando {domain}/tag/{tag}.
+- Crie no máximo 4 links internos relevantes usando o formato `https://{domain}/tag/{tag}`.
 - Os links internos DEVEM ser SEMPRE absolutos, **com https:// obrigatório**, no formato exato:
   <a href="https://{domain}/tag/{tag}">Palavra-Chave</a>
 - Qualquer outra forma de link é proibida.
 - Nunca insira a URL sozinha, sem âncora de texto.
-- Nunca concatene a URL do post com {domain}.
 - As palavras escolhidas para âncora devem ser nomes de clubes, jogadores, técnicos, campeonatos ou estádios.
 - Exemplo correto: <b><a href="https://cornetafc.com.br/tag/gabigol">Gabigol</a></b>
-- Exemplo incorreto (proibido): cornetafc.com.br/tag/futebol
-- Exemplo incorreto (proibido): /post/cornetafc.com.br/tag/palmeiras
+- Exemplo incorreto (sem https://): `cornetafc.com.br/tag/futebol`
+- Exemplo incorreto (link relativo): `/tag/palmeiras`
 - Obrigatório: use subtítulos <h2> para organizar o texto (mínimo 3 seções).
   - Exemplos: “Resumo da Partida”, “Destaques Individuais”, “Próximos Jogos”, “Classificação Atualizada”.
 - Inclua citações de técnicos, jogadores ou comentaristas quando disponíveis.
@@ -167,7 +166,7 @@ Um bom texto esportivo deve ter lead forte, contexto histórico, estatísticas, 
 DADOS PARA PROCESSAMENTO:
 - Título Original: {titulo_original}
 - URL Original: {url_original}
-- Domínio para Links Internos: {domain}
+- Domínio para Links Internos (use para montar a URL `https://{domain}/tag/...`): {domain}
 - Vídeos do YouTube Disponíveis (use a embed_url): {videos_list}
 - Conteúdo Original (HTML):
 {content}
