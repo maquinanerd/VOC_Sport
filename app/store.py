@@ -8,7 +8,7 @@ import hashlib
 import logging
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from .config import PIPELINE_ORDER
 
@@ -331,3 +331,64 @@ class Database:
             self.conn.close()
             self.conn = None
             logger.info("Database connection closed.")
+
+class TaxonomyCache:
+    """Manages a local JSON cache for WordPress category IDs with a TTL."""
+
+    def __init__(self, cache_path: str = 'data/taxonomy_cache.json', ttl_hours: int = 24):
+        self.cache_file = Path(cache_path)
+        self.ttl = timedelta(hours=ttl_hours)
+        self.cache: Dict[str, Dict[str, Any]] = self._load_cache()
+        self.cache_file.parent.mkdir(parents=True, exist_ok=True)
+
+    def _load_cache(self) -> Dict[str, Dict[str, Any]]:
+        """Loads the cache from the JSON file."""
+        if not self.cache_file.exists():
+            return {}
+        try:
+            with open(self.cache_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                # Basic validation
+                if isinstance(data, dict):
+                    return data
+                return {}
+        except (json.JSONDecodeError, IOError):
+            logger.warning(f"Could not read or parse taxonomy cache file at {self.cache_file}. Starting fresh.")
+            return {}
+
+    def _save_cache(self):
+        """Saves the current cache state to the JSON file."""
+        try:
+            with open(self.cache_file, 'w', encoding='utf-8') as f:
+                json.dump(self.cache, f, indent=2, ensure_ascii=False)
+        except IOError:
+            logger.error(f"Failed to write to taxonomy cache file at {self.cache_file}.")
+
+    def get_category(self, slug: str) -> Optional[Dict[str, Any]]:
+        """
+        Retrieves a category from the cache if it exists and is not expired.
+        """
+        if slug not in self.cache:
+            return None
+
+        cached_item = self.cache[slug]
+        cached_time = datetime.fromisoformat(cached_item.get('timestamp', '1970-01-01T00:00:00'))
+
+        if datetime.now() - cached_time > self.ttl:
+            logger.info(f"Cache for category '{slug}' has expired. Removing from cache.")
+            del self.cache[slug]
+            self._save_cache()
+            return None
+
+        return cached_item.get('data')
+
+    def set_category(self, slug: str, category_data: Dict[str, Any]):
+        """
+        Adds or updates a category in the cache.
+        """
+        self.cache[slug] = {
+            'timestamp': datetime.now().isoformat(),
+            'data': category_data
+        }
+        self._save_cache()
+        logger.debug(f"Updated cache for category '{slug}'.")

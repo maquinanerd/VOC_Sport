@@ -16,10 +16,10 @@ from .config import (
     PIPELINE_CONFIG,
 )
 from .store import Database
+from .store import TaxonomyCache
 from .feeds import FeedReader
 from .extractor import ContentExtractor
 from .ai_processor import AIProcessor
-from .categorizer import Categorizer
 from .wordpress import WordPressClient
 from .store import Database # Ensure Database is imported
 from .html_utils import (
@@ -30,7 +30,7 @@ from .html_utils import (
     remove_broken_image_placeholders,
     strip_naked_internal_links,
 )
-from .ai_processor import AIProcessor
+from .taxonomy.intelligence import CategoryManager
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
@@ -94,6 +94,8 @@ def run_pipeline_cycle():
     extractor = ContentExtractor()
     wp_client = WordPressClient(config=WORDPRESS_CONFIG, categories_map=WORDPRESS_CATEGORIES)
     ai_processor = AIProcessor()
+    tax_cache = TaxonomyCache()
+    category_manager = CategoryManager(wp_client=wp_client, cache=tax_cache)
 
     processed_articles_in_cycle = 0
 
@@ -224,8 +226,11 @@ def run_pipeline_cycle():
                         content_html += f"\n{credit_line}"
 
                         # Step 4: Prepare payload for WordPress
-                        wp_category_id = WORDPRESS_CATEGORIES.get(category)
-
+                        # Dynamic category assignment
+                        category_ids_to_assign = category_manager.assign_categories(
+                            title=title,
+                            content=content_html
+                        )
                         # 4.1: Determine featured media ID to avoid re-upload
                         featured_media_id = None
                         if featured_url := extracted_data.get('featured_image_url'):
@@ -270,7 +275,7 @@ def run_pipeline_cycle():
                             'slug': rewritten_data.get('slug'),
                             'content': content_html,
                             'excerpt': rewritten_data.get('meta_description', ''),
-                            'categories': [wp_category_id] if wp_category_id else [],
+                            'categories': category_ids_to_assign,
                             'tags': rewritten_data.get('tags', []),
                             'featured_media': featured_media_id,
                             'meta': yoast_meta,

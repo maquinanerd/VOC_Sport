@@ -222,6 +222,60 @@ class WordPressClient:
             logger.error(f"Failed to create WordPress post: {e}", exc_info=False)
             return None
 
+    def get_category_by_slug(self, slug: str) -> Optional[Dict[str, Any]]:
+        """Searches for an existing category by slug and returns its data."""
+        endpoint = f"{self.api_url}/categories"
+        params = {"slug": slug, "per_page": 1}
+        try:
+            r = self.session.get(endpoint, params=params, timeout=20)
+            r.raise_for_status()
+            items = r.json()
+            if items and isinstance(items, list):
+                # Ensure we have an exact slug match
+                for item in items:
+                    if item.get('slug') == slug:
+                        logger.debug(f"Found category by slug '{slug}' with ID {item['id']}.")
+                        return {
+                            'id': item['id'],
+                            'name': item['name'],
+                            'slug': item['slug'],
+                            'parent': item.get('parent', 0)
+                        }
+        except requests.RequestException as e:
+            logger.error(f"Error searching for category with slug '{slug}': {e}")
+        return None
+
+    def create_category(self, name: str, slug: str, parent_id: Optional[int] = None) -> Optional[Dict[str, Any]]:
+        """Creates a new category and returns its data."""
+        endpoint = f"{self.api_url}/categories"
+        payload = {"name": name, "slug": slug}
+        if parent_id:
+            payload["parent"] = parent_id
+        
+        try:
+            r = self.session.post(endpoint, json=payload, timeout=20)
+            
+            if r.status_code in (200, 201):
+                data = r.json()
+                logger.info(f"Created new category '{name}' (slug: {slug}) with ID {data['id']}.")
+                return {
+                    'id': data['id'],
+                    'name': data['name'],
+                    'slug': data['slug'],
+                    'parent': data.get('parent', 0)
+                }
+            
+            if r.status_code == 400 and isinstance(r.json(), dict) and r.json().get("code") == "term_exists":
+                logger.warning(f"Category '{name}' already exists (race condition). Re-fetching by slug.")
+                return self.get_category_by_slug(slug)
+            
+            r.raise_for_status()
+        except requests.RequestException as e:
+            logger.error(f"Error creating category '{name}': {e}")
+            if e.response is not None:
+                logger.error(f"Response body: {e.response.text}")
+        return None
+
     def close(self):
         """Closes the requests session."""
         self.session.close()

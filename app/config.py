@@ -9,7 +9,7 @@ load_dotenv()
 
 # --- Ordem de processamento dos feeds ---
 PIPELINE_ORDER: List[str] = [
-    'lance_futebol',
+    # 'lance_futebol', # ATENÇÃO: Feed desabilitado por fornecer conteúdo incorreto (política). Substitua por um feed oficial.
     'globo_futebol',
     'globo_futebol_internacional',
 ]
