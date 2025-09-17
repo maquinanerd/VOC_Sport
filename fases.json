@@ -1,0 +1,16 @@
+[
+  {
+    "nome": "Fase de Grupos", "slug": "fase-de-grupos", "keywords": ["fase de grupos", "grupos"]
+  },
+  {
+    "nome": "Oitavas de Final", "slug": "oitavas-de-final", "keywords": ["oitavas de final", "oitavas"]
+  },
+  {
+    "nome": "Quartas de Final", "slug": "quartas-de-final", "keywords": ["quartas de final", "quartas"]
+  },
+  {
+    "nome": "Semifinal", "slug": "semifinal", "keywords": ["semifinal", "semifinais"]
+  },
+  {
+    "nome": "Final", "slug": "final", "keywords": ["final", "decisão"]}
+]
