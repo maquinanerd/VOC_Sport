@@ -203,6 +203,9 @@ def _passes_min_size(url: str, min_w: int = 600, min_h: int = 315) -> bool:
 def is_valid_article_image(url: str) -> bool:
     if not url or url.startswith('data:'):
         return False
+    # From user patch: do not accept thumbs/frames from video hosts
+    if any(h in url for h in VIDEO_HOSTS):
+        return False
     if _is_bad_domain(url):
         return False
     if _has_bad_keyword(url):
@@ -581,10 +584,22 @@ class ContentExtractor:
                 cls = " ".join(a.get("class", [])).lower()
                 if any(k in cls for k in ["relacion", "related", "leia", "veja"]) or a.get("data-gtm-cta") in ("related", "see_more"):
                     a.decompose()
+        """Remove widgets/ads/blocos óbvios ANTES da extração, com foco em sites como GE."""
+        # 0) Scope to the main article body to avoid sidebars and footers
+        article_body = soup.select_one('article[itemprop="articleBody"]')
+        # If a specific article body is found, we work only within that scope.
+        # Otherwise, we work on the whole soup.
+        target_soup = BeautifulSoup(str(article_body), "lxml") if article_body else soup
 
         except Exception as e:
             logger.warning(f"Error during advanced related content removal for {url}: {e}", exc_info=False)
         # --- End of new logic ---
+        # 1) Block playlists, video players, ads, and editorial CTAs
+        blocked_selectors = [
+            # Playlists and multicontent blocks (GE)
+            "div.show-multicontent-playlist-container",
+            "[data-block-type='playlist']",
+            "[data-track-category='multicontent'][data-track-action*='playlist']",
 
         # Merged list from original and user suggestions for more robust cleaning
         selectors_to_remove = {
@@ -621,6 +636,12 @@ class ContentExtractor:
                     el.decompose()
                 except Exception:
                     pass
+            # Video players and wrappers (GE)
+            "article.content-video",
+            "div.cxm-video-block.content-video",
+            "div.content-media.content-video",
+            "div.content-video__video",
+            "div.poster.poster--hidden",
 
         # remover texto "powered by srdb"
         for text_node in soup.find_all(string=lambda t: isinstance(t, str) and "powered by srdb" in t.lower()):
@@ -630,8 +651,13 @@ class ContentExtractor:
                     p.decompose()
                 except Exception:
                     pass
+            # Generic iframes/players
+            "iframe", "bs-player", "amp-iframe", "figure[class*='video']",
+            "div[class*='video']",
 
         logger.info("Pre-cleaned HTML, removing unwanted widgets and blocks.")
+            # Ads (GE)
+            "div.content-ads", "glb-ad",
 
         # Focus on the main article body to avoid extracting junk from sidebars
         article = (
@@ -639,8 +665,28 @@ class ContentExtractor:
             soup.select_one("div#mc-body") or  # fallback GE
             soup
         )
+            # Text-based CTAs (GE)
+            "div.mc-column.content-text[data-block-type='unstyled']"
+        ]
+        for sel in blocked_selectors:
+            for el in target_soup.select(sel):
+                el.decompose()
 
         return str(article)
+        # 1.1) Remove specific text blocks that might escape selectors
+        for p in target_soup.find_all(["p", "div"]):
+            text = (p.get_text(" ", strip=True) or "").lower()
+            if any(x in text for x in ("podcast ge corinthians", "assista: tudo sobre", "assista tudo sobre")):
+                p.decompose()
+
+        # 2) Fine-grained removal of video thumbnails/frames by host
+        for img in target_soup.find_all("img"):
+            src = (img.get("src") or "") + (img.get("data-src") or "")
+            if any(h in src for h in VIDEO_HOSTS):
+                img.decompose()
+        
+        logger.info("Pre-cleaned HTML, removing GE-specific unwanted widgets and blocks.")
+        return str(target_soup)
 
     def _remove_forbidden_blocks(self, soup: BeautifulSoup) -> None:
         """Remove infobox técnica e mensagens indesejadas do html extraído."""
