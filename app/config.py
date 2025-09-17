@@ -9,7 +9,7 @@ load_dotenv()
 
 # --- Ordem de processamento dos feeds ---
 PIPELINE_ORDER: List[str] = [
-    # 'lance_futebol', # ATENÇÃO: Feed desabilitado por fornecer conteúdo incorreto (política). Substitua por um feed oficial.
+    'lance_futebol',
     'globo_futebol',
     'globo_futebol_internacional',
 ]
@@ -100,8 +100,8 @@ WORDPRESS_CATEGORIES: Dict[str, int] = {
 
 # --- Agendador / Pipeline ---
 SCHEDULE_CONFIG = {
-    'check_interval_minutes': int(os.getenv('CHECK_INTERVAL_MINUTES', 15)),
-    'max_articles_per_feed': int(os.getenv('MAX_ARTICLES_PER_FEED', 3)),
+    'check_interval_minutes': int(os.getenv('CHECK_INTERVAL_MINUTES', 5)),
+    'max_articles_per_feed': int(os.getenv('MAX_ARTICLES_PER_FEED', 10)),
     'per_article_delay_seconds': int(os.getenv('PER_ARTICLE_DELAY_SECONDS', 8)),
     'per_feed_delay_seconds': int(os.getenv('PER_FEED_DELAY_SECONDS', 15)),
     'cleanup_after_hours': int(os.getenv('CLEANUP_AFTER_HOURS', 72)),
