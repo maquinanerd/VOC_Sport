@@ -40,9 +40,17 @@ class AIProcessor:
         Initializes the AI processor.
         It uses a single pool of API keys and rotates through them on failure.
         """
-        self.api_keys: List[str] = AI_API_KEYS
+        # Flatten the dictionary of keys from config into a single list.
+        # This allows the processor to cycle through all available keys regardless of category.
+        all_keys = []
+        if isinstance(AI_API_KEYS, dict):
+            for key_list in AI_API_KEYS.values():
+                if isinstance(key_list, list):
+                    all_keys.extend(key for key in key_list if key)
+
+        self.api_keys: List[str] = all_keys
         if not self.api_keys:
-            raise AIProcessorError("No GEMINI_ API keys found in the environment. Please set at least one GEMINI_... key.")
+            raise AIProcessorError("No valid GEMINI_ API keys found in the environment. Please set at least one GEMINI_... key.")
 
         logger.info(f"AI Processor initialized with {len(self.api_keys)} API key(s).")
 
