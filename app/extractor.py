@@ -12,6 +12,7 @@ from urllib.parse import urljoin, urlparse, parse_qs
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+from .html_utils import normalize_images_with_captions
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
@@ -548,7 +549,7 @@ class ContentExtractor:
             logger.error(f"Failed to fetch HTML from {url}: {e}")
             return None
 
-    def _pre_clean_html(self, soup: BeautifulSoup, url: str):
+    def _pre_clean_html(self, soup: BeautifulSoup, url: str) -> str:
         """Remove widgets/ads/blocos óbvios ANTES da extração."""
         # --- New robust related content removal logic from user patch ---
         try:
@@ -631,6 +632,15 @@ class ContentExtractor:
                     pass
 
         logger.info("Pre-cleaned HTML, removing unwanted widgets and blocks.")
+
+        # Focus on the main article body to avoid extracting junk from sidebars
+        article = (
+            soup.select_one("[itemprop='articleBody']") or
+            soup.select_one("div#mc-body") or  # fallback GE
+            soup
+        )
+
+        return str(article)
 
     def _remove_forbidden_blocks(self, soup: BeautifulSoup) -> None:
         """Remove infobox técnica e mensagens indesejadas do html extraído."""
@@ -803,12 +813,6 @@ class ContentExtractor:
             all_json_ld = _extract_json_ld(soup)
             news_article_schema = _find_news_article_in_json_ld(all_json_ld)
 
-            # 2) limpeza prévia pesada
-            self._pre_clean_html(soup, url)
-
-            # 3) normaliza data-img-url -> <figure>
-            self._convert_data_img_to_figure(soup)
-
             # 4) Extrai imagem destacada com a nova lógica de priorização
             featured_image_url = self._pick_featured_image(soup, url)
 
@@ -832,10 +836,17 @@ class ContentExtractor:
                 excerpt = (meta_desc.get('content') if (meta_desc := soup.find('meta', attrs={'name': 'description'})) else None) or \
                           (og_desc.get('content') if (og_desc := soup.find('meta', property='og:description')) else '')
 
+            # 2) Limpeza prévia pesada e normalização de imagens
+            # A limpeza agora retorna uma string do corpo do artigo focado
+            body_html_string = self._pre_clean_html(BeautifulSoup(html, 'lxml'), url)
+            body_html_string = normalize_images_with_captions(body_html_string)
+
+            # 3) normaliza data-img-url -> <figure> (agora dentro de normalize_images)
+            # self._convert_data_img_to_figure(soup) # Esta lógica foi absorvida/melhorada
+
             # 8) extrair corpo com trafilatura
-            cleaned_html_str = str(soup)
             content_html = trafilatura.extract(
-                cleaned_html_str,
+                body_html_string,
                 include_images=True,
                 include_links=True,
                 include_comments=False,

@@ -1,0 +1,74 @@
+{
+  "noticias": {
+    "timestamp": "2025-09-17T18:45:56.653594",
+    "data": {
+      "id": 29,
+      "name": "Notícias",
+      "slug": "noticias",
+      "parent": 0
+    }
+  },
+  "copa-do-brasil": {
+    "timestamp": "2025-09-17T18:45:57.326427",
+    "data": {
+      "id": 33,
+      "name": "Copa do Brasil",
+      "slug": "copa-do-brasil",
+      "parent": 29
+    }
+  },
+  "brasileirao": {
+    "timestamp": "2025-09-17T18:45:57.656655",
+    "data": {
+      "id": 32,
+      "name": "Brasileirão",
+      "slug": "brasileirao",
+      "parent": 29
+    }
+  },
+  "serie-a": {
+    "timestamp": "2025-09-17T18:45:58.321527",
+    "data": {
+      "id": 34,
+      "name": "Série A",
+      "slug": "serie-a",
+      "parent": 32
+    }
+  },
+  "internacional": {
+    "timestamp": "2025-09-17T18:47:02.361989",
+    "data": {
+      "id": 30,
+      "name": "Internacional",
+      "slug": "internacional",
+      "parent": 29
+    }
+  },
+  "libertadores": {
+    "timestamp": "2025-09-17T18:47:03.047830",
+    "data": {
+      "id": 42,
+      "name": "Libertadores",
+      "slug": "libertadores",
+      "parent": 30
+    }
+  },
+  "sao-paulo": {
+    "timestamp": "2025-09-17T18:47:03.704418",
+    "data": {
+      "id": 43,
+      "name": "São Paulo",
+      "slug": "sao-paulo",
+      "parent": 34
+    }
+  },
+  "quartas-de-final": {
+    "timestamp": "2025-09-17T18:47:04.352106",
+    "data": {
+      "id": 44,
+      "name": "Quartas de Final",
+      "slug": "quartas-de-final",
+      "parent": 0
+    }
+  }
+}

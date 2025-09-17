@@ -314,3 +314,93 @@ def strip_naked_internal_links(html: str) -> str:
         html,
         flags=re.IGNORECASE
     )
+
+def normalize_images_with_captions(html: str) -> str:
+    """
+    Ensures images are wrapped in <figure> and attempts to find and standardize
+    a <figcaption> with a caption and credit.
+    """
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "lxml")
+
+    # Do not process video thumbnails
+    BAD_HOSTS = ("video.glbimg.com", "s01.video.glbimg.com", "s02.video.glbimg.com", "s01.video.globo.com")
+
+    # Common caption/credit selectors, especially for GE
+    CAPTION_SELECTORS = [
+        "figcaption",
+        ".content-media__legend", ".content-media__caption", ".foto__legenda", ".foto-legenda",
+        ".media-caption", ".credits", ".credito", ".legenda"
+    ]
+
+    for img in soup.find_all("img"):
+        src = (img.get("src") or "") + (img.get("data-src") or "")
+        if any(h in src for h in BAD_HOSTS):
+            img.decompose()
+            continue
+
+        # Skip tiny placeholder images
+        if img.has_attr("width") and img.has_attr("height"):
+            try:
+                if int(img["width"]) < 150 or int(img["height"]) < 150:
+                    continue
+            except ValueError:  # Handles non-integer values like "100%"
+                pass
+
+        figure = img.find_parent("figure")
+        if not figure:
+            figure = soup.new_tag("figure")
+            img.replace_with(figure)
+            figure.append(img)
+
+        caption_text, credit_text = "", ""
+
+        # 1. Find existing caption/credit elements
+        cap_tag = next((figure.select_one(sel) or img.find_next_sibling(sel) or figure.find_next_sibling(sel) for sel in CAPTION_SELECTORS if figure.select_one(sel) or img.find_next_sibling(sel) or figure.find_next_sibling(sel)), None)
+        if cap_tag:
+            caption_text = cap_tag.get_text(" ", strip=True)
+
+        # 2. Heuristic for text nodes
+        if not caption_text and (nxt := figure.find_next(string=True)):
+            txt = str(nxt).strip()
+            if "Foto:" in txt or "Crédito:" in txt or "— Foto:" in txt:
+                caption_text = txt
+
+        # 3. Fallback to alt text
+        if not caption_text:
+            caption_text = (img.get("alt") or "").strip()
+
+        # Extract credit from common patterns
+        credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I)
+        if credit_match:
+            caption_text = credit_match.group(1).strip()
+            credit_text = credit_match.group(2).strip()
+        else:
+            credit_match = re.search(r"((?:Foto|Crédito):.*)", caption_text, flags=re.I)
+            if credit_match:
+                credit_text = credit_match.group(1).strip()
+                caption_text = caption_text.replace(credit_text, "").strip()
+
+        # Rebuild figcaption
+        if caption_text or credit_text:
+            for old_cap in figure.find_all("figcaption"): old_cap.decompose()
+            figcap = soup.new_tag("figcaption")
+            full_caption = f"{caption_text} {credit_text}".strip()
+            figcap.string = full_caption
+            figure.append(figcap)
+
+    return str(soup)
+
+def collapse_h2_headings(html: str, keep_first: int = 1) -> str:
+    """Converts all <h2> tags after the first 'keep_first' into <p><strong>...</strong></p>."""
+    if not html: return html
+    soup = BeautifulSoup(html, "lxml")
+    for idx, h2 in enumerate(soup.find_all("h2")):
+        if idx >= keep_first:
+            p_tag = soup.new_tag("p")
+            strong_tag = soup.new_tag("strong")
+            strong_tag.string = h2.get_text(" ", strip=True)
+            p_tag.append(strong_tag)
+            h2.replace_with(p_tag)
+    return str(soup)

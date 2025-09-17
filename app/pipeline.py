@@ -30,6 +30,7 @@ from .html_utils import (
     remove_broken_image_placeholders,
     strip_naked_internal_links,
 )
+from .html_utils import collapse_h2_headings
 from .taxonomy.intelligence import CategoryManager
 from bs4 import BeautifulSoup
 
@@ -184,6 +185,7 @@ def run_pipeline_cycle():
                         # Defensive cleanup of common AI errors (e.g., leftover placeholders)
                         content_html = remove_broken_image_placeholders(content_html)
                         content_html = strip_naked_internal_links(content_html)
+                        content_html = collapse_h2_headings(content_html, keep_first=1)
 
                         # 3.2: Ensure images from original article exist in content, injecting if AI removed them
                         content_html = merge_images_into_content(
