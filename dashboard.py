@@ -7,7 +7,7 @@ import os
 import sys
 import sqlite3
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 import logging
@@ -102,22 +102,22 @@ def get_db_stats():
         row = cursor.fetchone()
         last_activity = row[0] if row and row[0] else None
 
-        check_interval = SCHEDULE_CONFIG.get('check_interval', 15)
+        check_interval = SCHEDULE_CONFIG.get('check_interval_minutes', 15)
 
         if last_activity:
             try:
-                # SQLite datetime format is 'YYYY-MM-DD HH:MM:SS'
-                last_time = datetime.strptime(last_activity, '%Y-%m-%d %H:%M:%S')
+                # SQLite datetime is 'YYYY-MM-DD HH:MM:SS', assume UTC as per main.py
+                last_time = datetime.strptime(last_activity, '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
                 next_cycle = last_time + timedelta(minutes=check_interval)
                 # If next cycle is in the past, schedule for 15 minutes from now
-                if next_cycle < datetime.now():
-                    next_cycle = datetime.now() + timedelta(minutes=check_interval)
+                if next_cycle < datetime.now(timezone.utc):
+                    next_cycle = datetime.now(timezone.utc) + timedelta(minutes=check_interval)
             except (ValueError, TypeError):
-                next_cycle = datetime.now() + timedelta(minutes=check_interval)
+                next_cycle = datetime.now(timezone.utc) + timedelta(minutes=check_interval)
         else:
-            next_cycle = datetime.now() + timedelta(minutes=check_interval)
+            next_cycle = datetime.now(timezone.utc) + timedelta(minutes=check_interval)
             
-        next_cycle_str = next_cycle.strftime('%H:%M:%S')
+        next_cycle_str = next_cycle.astimezone().strftime('%H:%M:%S')
 
         conn.close()
 
@@ -284,8 +284,7 @@ def api_start_system():
     try:
         # Start main.py as a background process
         python_executable = sys.executable
-        main_script_path = BASE_DIR / 'main.py'
-        subprocess.Popen([python_executable, str(main_script_path)], cwd=BASE_DIR)
+        subprocess.Popen([python_executable, '-m', 'app.main'], cwd=BASE_DIR)
         return jsonify({'success': True, 'message': 'Sistema iniciado com sucesso.'})
     except Exception as e:
         logging.error(f"Failed to start system: {e}")
