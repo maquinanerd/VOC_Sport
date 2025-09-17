@@ -2,6 +2,7 @@ import logging
 import trafilatura
 from bs4 import BeautifulSoup
 import requests
+import random
 import html
 from typing import Dict, Optional, Any, Set, List, Tuple, Union
 import json
@@ -17,6 +18,13 @@ from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
 logger = logging.getLogger(__name__)
+
+DEFAULT_UA_LIST = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+]
+
 
 def _coerce_url(candidate: Any) -> Optional[str]:
     """
@@ -82,6 +90,21 @@ BAD_IMAGE_DOMAINS = {
     "schema.org", "scorecardresearch.com", "doubleclick.net",
     "quantserve.com", "chartbeat.com", "google-analytics.com"
 }
+
+# ---- Media/host filters (from user request) ----
+VIDEO_HOSTS = (
+    "youtube.com", "youtu.be", "player.vimeo.com", "vimeo.com",
+    "dailymotion.com", "player.dailymotion.com", "jwplayer", "brightcove",
+    "spotify.com", "soundcloud.com", "tiktok.com", "embed", "iframe",
+    "globo.com/play", "globoplay.globo.com", "tv.uol.com.br", "video"
+)
+
+IMAGE_BLACKLIST_PATTERNS = (
+    "sprite", "icon", "favicon", "logo", "placehold", "placeholder",
+    "tracker", "pixel", "adsystem", "badge", "play-button", "og-image",
+    "opengraph", "/ads/", "/advert", "feedburner"
+)
+
 
 # aceita query ?width=1200&height=630 e sufixos -1200x630.jpg
 DIM_SUFFIX_RE = re.compile(r'-(\d{2,5})x(\d{2,5})(?=\.[a-z]{3,4})(?:\?.*)?$', re.IGNORECASE)
@@ -203,9 +226,17 @@ def _passes_min_size(url: str, min_w: int = 600, min_h: int = 315) -> bool:
 def is_valid_article_image(url: str) -> bool:
     if not url or url.startswith('data:'):
         return False
+
+    u_lower = url.lower()
+
     # From user patch: do not accept thumbs/frames from video hosts
-    if any(h in url for h in VIDEO_HOSTS):
+    if any(host in u_lower for host in VIDEO_HOSTS):
         return False
+
+    # From user patch: bloquear imagens típicas de UI/ads/placeholder
+    if any(p in u_lower for p in IMAGE_BLACKLIST_PATTERNS):
+        return False
+
     if _is_bad_domain(url):
         return False
     if _has_bad_keyword(url):
@@ -530,24 +561,42 @@ SITE_SPECIFIC_RELATED_SELECTORS = {
 class ContentExtractor:
     """Extrai e limpa conteúdo para o pipeline."""
     def __init__(self):
-        self.session = requests.Session()
-        self.session.headers.update({'User-Agent': USER_AGENT})
-        # Configure retries with backoff as requested
-        retries = Retry(
-            total=3,
-            backoff_factor=1.5,
-            status_forcelist=[429, 500, 502, 503, 504]
-        )
+        self.session = self._session_with_retries()
+
+    def _session_with_retries(self) -> requests.Session:
+        s = requests.Session()
+        retries = Retry(total=3, backoff_factor=0.6, status_forcelist=(403, 429, 500, 502, 503, 504))
         adapter = HTTPAdapter(max_retries=retries)
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
+        s.mount("https://", adapter)
+        s.mount("http://", adapter)
+        return s
 
     def _fetch_html(self, url: str) -> Optional[str]:
+        headers = {
+            "User-Agent": random.choice(DEFAULT_UA_LIST),
+            "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Referer": "https://www.google.com/",
+            "Cache-Control": "no-cache",
+        }
         try:
-            # Increased timeout to 75s as requested
-            resp = self.session.get(url, timeout=75.0, allow_redirects=True)
+            resp = self.session.get(url, headers=headers, timeout=12, allow_redirects=True)
             resp.raise_for_status()
             return resp.text
+        except requests.HTTPError as e:
+            if e.response is not None and e.response.status_code == 403:
+                logger.warning(f"Got 403 for {url} with requests. Falling back to trafilatura.fetch_url().")
+                try:
+                    # trafilatura.fetch_url might also fail
+                    html = trafilatura.fetch_url(url)
+                    if html:
+                        logger.info(f"Successfully fetched {url} with trafilatura fallback.")
+                        return html
+                except Exception as te:
+                    logger.error(f"Trafilatura fallback also failed for {url}: {te}")
+            # Log original error if fallback fails or is not applicable
+            logger.error(f"Failed to fetch HTML from {url}: {e}")
+            return None
         except requests.RequestException as e:
             logger.error(f"Failed to fetch HTML from {url}: {e}")
             return None

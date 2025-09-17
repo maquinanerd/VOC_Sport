@@ -85,6 +85,41 @@ def is_valid_upload_candidate(url: str) -> bool:
     except Exception:
         return False
 
+# --- Regras de URL por fonte para filtrar conteúdo indesejado ---
+SOURCE_URL_RULES = {
+    # Só aceitar UOL com /esporte/ no path
+    "lance_futebol": {
+        "allow_domains": ["lance.com.br", "ge.globo.com", "uol.com.br"],
+        "path_must_include": {
+            "uol.com.br": ["/esporte/"],
+        }
+    },
+    "globo_futebol": {
+        "allow_domains": ["ge.globo.com", "g1.globo.com"],
+        "path_must_include": {
+            "ge.globo.com": ["/futebol/"],
+        }
+    },
+}
+
+def is_allowed_by_source_rules(source_key: str, url: str) -> bool:
+    try:
+        rules = SOURCE_URL_RULES.get(source_key)
+        if not rules:
+            return True # Se não há regras, permite
+        p_url = urlparse(url)
+        netloc = p_url.netloc.lower()
+        path = p_url.path.lower()
+
+        if rules.get("allow_domains") and not any(d in netloc for d in rules["allow_domains"]):
+            return False
+
+        for dom, substrs in rules.get("path_must_include", {}).items():
+            if dom in netloc and not any(s in path for s in substrs):
+                return False
+        return True
+    except Exception:
+        return True # Em caso de erro na verificação, não bloqueia
 
 def run_pipeline_cycle():
     """Executes a full cycle of the content processing pipeline."""
@@ -135,6 +170,11 @@ def run_pipeline_cycle():
                         if not article_url_to_process:
                             logger.warning(f"Skipping article {article_data.get('id')} - missing/invalid URL.")
                             db.update_article_status(article_db_id, 'FAILED', reason="Missing/invalid URL")
+                            continue
+
+                        if not is_allowed_by_source_rules(source_id, article_url_to_process):
+                            logger.info(f"Skipping URL by source rules: {article_url_to_process}")
+                            db.update_article_status(article_db_id, 'SKIPPED', reason="Filtered by source rules")
                             continue
 
                         logger.info(f"Processing article: {article_data.get('title', 'N/A')} (DB ID: {article_db_id}) from {source_id}")
