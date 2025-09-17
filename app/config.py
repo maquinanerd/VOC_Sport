@@ -1,77 +1,35 @@
 import os
 from dotenv import load_dotenv
 from typing import Dict, List, Any
+from collections import defaultdict
 
 # Carrega variáveis de ambiente de um arquivo .env
 load_dotenv()
 
 # --- Ordem de processamento dos feeds ---
 PIPELINE_ORDER: List[str] = [
-    'estadao_politica',
-    'infomoney_politica',
-    'estadao_economia',
-    'infomoney_economia',
-    'infomoney_business',
-    'estadao_brasil',
-    'infomoney_mercados',
-    'infomoney_investir',
-    'infomoney_mundo',
-    'infomoney_carreira',
+    'lance_futebol',
+    'globo_futebol',
+    'globo_futebol_internacional',
 ]
 
-# --- Feeds RSS (padronizados, sem "synthetic_from") ---
+# --- Feeds RSS ---
+# As URLs são carregadas das variáveis de ambiente (FEED_1, FEED_2, etc.)
 RSS_FEEDS: Dict[str, Dict[str, Any]] = {
-    'estadao_politica': {
-        'urls': ['https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/politica/'],
-        'category': 'politica',
-        'source_name': 'Estadão',
+    'lance_futebol': {
+        'urls': [os.getenv('FEED_1', '')],
+        'category': 'futebol',
+        'source_name': 'Lance!',
     },
-    'infomoney_politica': {
-        'urls': ['https://www.infomoney.com.br/politica/feed/'],
-        'category': 'politica',
-        'source_name': 'InfoMoney',
+    'globo_futebol': {
+        'urls': [os.getenv('FEED_2', '')],
+        'category': 'futebol',
+        'source_name': 'Globo Esporte',
     },
-
-    'estadao_economia': {
-        'urls': ['https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/economia/'],
-        'category': 'economia',
-        'source_name': 'Estadão',
-    },
-    'infomoney_economia': {
-        'urls': ['https://www.infomoney.com.br/economia/feed/'],
-        'category': 'economia',
-        'source_name': 'InfoMoney',
-    },
-
-    'estadao_brasil': {
-        'urls': ['https://www.estadao.com.br/arc/outboundfeeds/feeds/rss/sections/brasil/'],
-        'category': 'brasil',
-        'source_name': 'Estadão',
-    },
-    'infomoney_mercados': {
-        'urls': ['https://www.infomoney.com.br/mercados/feed/'],
-        'category': 'mercados',
-        'source_name': 'InfoMoney',
-    },
-    'infomoney_business': {
-        'urls': ['https://www.infomoney.com.br/business/feed/'],
-        'category': 'economia',
-        'source_name': 'InfoMoney',
-    },
-    'infomoney_investir': {
-        'urls': ['https://www.infomoney.com.br/onde-investir/feed/'],
-        'category': 'onde-investir',
-        'source_name': 'InfoMoney',
-    },
-    'infomoney_mundo': {
-        'urls': ['https://www.infomoney.com.br/mundo/feed/'],
-        'category': 'internacional',
-        'source_name': 'InfoMoney',
-    },
-    'infomoney_carreira': {
-        'urls': ['https://www.infomoney.com.br/carreira/feed/'],
-        'category': 'carreira',
-        'source_name': 'InfoMoney',
+    'globo_futebol_internacional': {
+        'urls': [os.getenv('FEED_3', '')],
+        'category': 'futebol',
+        'source_name': 'Globo Esporte (Internacional)',
     },
 }
 
@@ -83,20 +41,28 @@ USER_AGENT = (
 )
 
 # --- Configuração da IA ---
-def _load_ai_keys() -> List[str]:
+def _load_ai_keys() -> Dict[str, List[str]]:
     """
-    Lê todas as chaves GEMINI_* do ambiente e as retorna em uma lista única e ordenada.
+    Lê todas as chaves GEMINI_* do ambiente e as agrupa por categoria.
+    Ex: GEMINI_FUTEBOL_1 -> {'futebol': ['key1', ...]}
     """
-    keys = {}
+    keys_by_category = defaultdict(dict)
     for key, value in os.environ.items():
         if value and key.startswith('GEMINI_'):
-            keys[key] = value
-    
-    # Sort by key name for predictable order (e.g., GEMINI_ECONOMIA_1, GEMINI_POLITICA_1)
-    sorted_key_names = sorted(keys.keys())
-    
-    return [keys[k] for k in sorted_key_names]
+            parts = key.split('_')
+            if len(parts) >= 3 and parts[0] == 'GEMINI':
+                category = parts[1].lower()
+                keys_by_category[category][key] = value
 
+    # Sort keys within each category and return just the values
+    sorted_keys = {}
+    for category, keys_dict in keys_by_category.items():
+        sorted_key_names = sorted(keys_dict.keys())
+        sorted_keys[category] = [keys_dict[k] for k in sorted_key_names]
+
+    return sorted_keys
+
+# AI_API_KEYS é um dicionário que mapeia categorias (ex: 'futebol') para uma lista de chaves.
 AI_API_KEYS = _load_ai_keys()
 
 # Caminho para o prompt universal na raiz do projeto
@@ -126,16 +92,9 @@ WORDPRESS_CONFIG = {
 
 # IDs das categorias no WordPress (ajuste os IDs conforme o seu WP)
 WORDPRESS_CATEGORIES: Dict[str, int] = {
-    'politica': 21,
-    'economia': 22,
-    'brasil': 22,          # TODO: substituir pelo ID real da sua categoria "Brasil"
-    'mercados': 26,
-    'onde-investir': 29,
-    'internacional': 30,
-    'carreira': 202,
+    'futebol': 1,  # TODO: Atualizar com o ID correto da categoria "Futebol" no WordPress
     # Categorias genéricas
-    'Notícias': 1,
-    'Dinheiro': 13,
+    'Notícias': 1, # Geralmente ID 1 é "Uncategorized", mas pode ser usado como fallback
 }
 
 # --- Agendador / Pipeline ---
@@ -150,9 +109,9 @@ SCHEDULE_CONFIG = {
 PIPELINE_CONFIG = {
     'images_mode': os.getenv('IMAGES_MODE', 'hotlink'),  # 'hotlink' ou 'download_upload'
     'attribution_policy': 'Fonte: {domain}',
-    'publisher_name': 'VocMoney',
+    'publisher_name': 'Corneta FC',
     'publisher_logo_url': os.getenv(
         'PUBLISHER_LOGO_URL',
-        'https://exemplo.com/logo.png'  # TODO: atualizar para a URL real do logo
+        'https://cornetafc.com.br/wp-content/uploads/2024/05/logo-corneta-fc-512.png'
     ),
 }
