@@ -211,3 +211,29 @@ def reclassify_existing_posts(wp_client: WordPressClient, limit: int = 200, upda
     # 4. Compare new IDs with existing IDs and log differences.
     # 5. If update=True, call wp_client.update_post_categories(post.id, new_ids).
     logger.info("Reclassification analysis complete.")
+
+def robust_json_parser(raw_response: str) -> Optional[Dict[str, Any]]:
+    """
+    Extracts and parses a JSON object from a raw string, which may contain
+    extraneous text or common formatting errors from an AI model.
+    """
+    if not raw_response:
+        return None
+
+    # Find the start and end of the main JSON object, stripping markdown backticks
+    raw_response = raw_response.strip().replace("```json", "").replace("```", "")
+    match = re.search(r'\{.*\}', raw_response, re.DOTALL)
+    
+    if not match:
+        logger.error("Could not find a JSON object in the AI response.")
+        logger.debug(f"Raw AI response: {raw_response}")
+        return None
+
+    json_str = match.group(0)
+
+    try:
+        return json.loads(json_str)
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to decode JSON from AI response: {e}")
+        logger.debug(f"Problematic JSON string: {json_str}")
+        return None
