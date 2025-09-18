@@ -183,6 +183,54 @@ def _replace_in_srcset(srcset: str, mapping: Dict[str, str]) -> str:
     return ", ".join(parts)
 
 
+# --- New Lance-specific helpers ---
+LANCE_KILL_TEXTS = [
+    r'\bRelacionad[oa]s?\b', r'\bFique por dentro\b', r'\bMais notícias\b',
+    r'\bÚltimas notícias\b', r'\bLeia também\b', r'\bVeja também\b',
+    r'\bVer mais notícias\b', r'\bTudo sobre\b', r'\bSiga o Lance!\b'
+]
+LANCE_KILL_SELECTORS = [
+    # containers de navegação/rodapé/sidebars/carrosséis
+    'nav', 'aside', 'footer',
+    '[class*="swiper"]', '[class*="carousel"]', '[class*="carrossel"]',
+    '[class*="related"]', '[class*="relacionad"]',
+    '[class*="mais-noticias"]', '[data-qa*="related"]', '[aria-label*="Relacionad"]'
+]
+
+def _is_lance(url: str) -> bool:
+    return 'lance.com.br' in (url or '')
+
+def remove_lance_widgets(soup: BeautifulSoup) -> None:
+    # 1) remove por seletor
+    for sel in LANCE_KILL_SELECTORS:
+        for el in soup.select(sel):
+            el.decompose()
+
+    # 2) remove por texto-sentinela
+    rx = re.compile('|'.join(LANCE_KILL_TEXTS), flags=re.I)
+    for txt in soup.find_all(string=rx):
+        from bs4 import Tag
+        node = txt.parent
+        if not node: continue
+
+        kill = node
+        for _ in range(5):
+            if not kill or not isinstance(kill, Tag) or kill.name in ('body', 'main', 'article'):
+                break
+            if len(kill.find_all('a')) >= 3 or len(kill.find_all('img')) >= 2:
+                kill.decompose()
+                break
+            kill = kill.parent
+
+def strip_lance_cdn(url: str) -> str:
+    if not url:
+        return url
+    return re.sub(
+        r'^(https://lncimg\.lance\.com\.br)/cdn-cgi/image/[^/]+/(uploads/.*)$',
+        r'\1/\2',
+        url
+    )
+
 def merge_images_into_content(content_html: str, image_urls: List[str], max_images: int = 6) -> str:
     """
     Garante imagens no corpo:
@@ -360,7 +408,7 @@ def convert_twitter_embeds_to_oembed(root: BeautifulSoup):
                 bq.replace_with(new_p)
 
 
-def normalize_images_with_captions(html: str) -> str:
+def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
     """
     Ensures images are wrapped in <figure> and attempts to find and standardize
     a <figcaption> with a caption and credit.
@@ -368,6 +416,10 @@ def normalize_images_with_captions(html: str) -> str:
     if not html:
         return ""
     soup = BeautifulSoup(html, "lxml")
+
+    is_lance_source = _is_lance(source_url)
+    if is_lance_source:
+        remove_lance_widgets(soup)
 
     BAD_HOSTS = ("video.glbimg.com", "s01.video.glbimg.com", "s02.video.glbimg.com", "s01.video.globo.com")
     CAPTION_SELECTORS = [
@@ -378,10 +430,28 @@ def normalize_images_with_captions(html: str) -> str:
 
     seen_images = set()
     # Itera sobre potenciais contêineres de imagem para ser mais robusto
-    for container in soup.select('figure, picture, img'):
+    for container in list(soup.select('figure, picture, img')):
         try:
+            if is_lance_source:
+                if container.find_parent(['nav','aside','footer']):
+                    container.decompose()
+                    continue
+                if any(c for c in (container.get('class') or []) if re.search(r'(card|carousel|relacionad|mais-noticia|swiper)', c, re.I)):
+                    container.decompose()
+                    continue
+                if re.search(r'(Relacionad|Fique por dentro|Mais notícias|Veja mais notícias)', container.get_text(' ', strip=True), re.I):
+                    container.decompose()
+                    continue
+
             # Lógica robusta para extrair o src da imagem
             img = container if container.name == 'img' else container.find("img")
+            if not img or not isinstance(img, Tag):
+                continue
+
+            if is_lance_source and img.find_parent(['nav','aside','footer']):
+                container.decompose()
+                continue
+
             src = _best_img_src(img)
 
             if not src: # Fallback para <picture> sem <img> ou background-image
@@ -390,6 +460,18 @@ def normalize_images_with_captions(html: str) -> str:
 
             # Deduplicação de imagens (ignora transformações de CDN)
             if src:
+                if is_lance_source:
+                    src = strip_lance_cdn(src)
+                    if 'lncimg.lance.com.br' in src and '/uploads/' not in src:
+                        container.decompose()
+                        continue
+
+                if re.search(r'/(assets|attachments|favicon|logo|icon|sprite)/', src):
+                    container.decompose()
+                    continue
+
+                img['src'] = src
+
                 key = src
                 if '/uploads/' in src:
                     key = src.split('/uploads/', 1)[-1]

@@ -1,7 +1,7 @@
 import logging
 import trafilatura
 from bs4 import BeautifulSoup
-from bs4 import Tag
+from bs4 import Tag, BeautifulSoup
 import requests
 import random
 import html
@@ -13,8 +13,7 @@ import time
 from urllib.parse import urljoin, urlparse, parse_qs
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-
-from .html_utils import normalize_images_with_captions, convert_twitter_embeds_to_oembed
+from .html_utils import normalize_images_with_captions, convert_twitter_embeds_to_oembed, remove_lance_widgets
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
@@ -705,6 +704,10 @@ class ContentExtractor:
         # Otherwise, we work on the whole soup.
         target_soup = BeautifulSoup(str(article_body), "lxml") if article_body else soup
 
+        # --- LANCE-SPECIFIC CLEANING ---
+        if 'lance.com.br' in url:
+            remove_lance_widgets(target_soup)
+
         # 1) Block playlists, video players, ads, and editorial CTAs
         blocked_selectors = [
             # Playlists and multicontent blocks (GE)
@@ -958,7 +961,7 @@ class ContentExtractor:
             else:
                  body_html_string = str(content_root)
 
-            body_html_string = normalize_images_with_captions(body_html_string)
+            body_html_string = normalize_images_with_captions(body_html_string, source_url=url)
 
             # 8) extrair corpo com trafilatura
             content_html = trafilatura.extract(
