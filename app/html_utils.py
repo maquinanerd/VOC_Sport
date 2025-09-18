@@ -208,10 +208,13 @@ def remove_lance_widgets(soup: BeautifulSoup) -> None:
 
     # 2) remove por texto-sentinela
     rx = re.compile('|'.join(LANCE_KILL_TEXTS), flags=re.I)
-    for txt in soup.find_all(string=rx):
+    # Iterate over a copy of the list, as we are modifying the tree
+    for txt in list(soup.find_all(string=rx)):
         from bs4 import Tag
+        # Defensive check for parent attribute, as reported in logs
+        if not hasattr(txt, 'parent') or not txt.parent:
+            continue
         node = txt.parent
-        if not node: continue
 
         kill = node
         for _ in range(5):
@@ -401,7 +404,8 @@ def convert_twitter_embeds_to_oembed(root: BeautifulSoup):
         if link and link.get("href"):
             url = link.get("href")
             # Cria um novo <p> e substitui o blockquote
-            new_p = root.new_tag("p")
+            # Use .soup to access the BeautifulSoup instance from a Tag or from itself.
+            new_p = root.soup.new_tag("p")
             new_p.string = url
             parent = bq.parent
             if parent:
