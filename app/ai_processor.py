@@ -275,7 +275,11 @@ class AIProcessor:
                 
                 if AI_DRIVEN_CATEGORIES:
                     ai_cats = parsed_data.get("categorias") or []
-                    slug_nome_grupo = validate_ai_categories(ai_cats, parsed_data.get("conteudo_final",""))
+                    slug_nome_grupo = validate_ai_categories(
+                        ai_cats,
+                        content_html=parsed_data.get("conteudo_final", ""),
+                        title_text=parsed_data.get("titulo_final", "")
+                    )
                     parsed_data["__slug_nome_grupo"] = slug_nome_grupo
 
                 # YOAST / Focus keyphrase

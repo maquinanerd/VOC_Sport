@@ -22,6 +22,20 @@ CATEGORY_DENYLIST = {
     "final", "semifinal", "semi-final", "quartas-de-final",
     "quartas", "oitavas-de-final", "oitavas", "fase-de-grupos", "rodada"
 }
+# aliases/sinônimos (amplie conforme usar)
+TEAM_ALIASES = {
+    "palmeiras": ["palmeiras","verdão","verdao"],
+    "river-plate": ["river plate","river"],
+    "corinthians": ["corinthians", "timão", "timao"],
+    "flamengo": ["flamengo", "mengão", "mengao"],
+    "sao-paulo": ["são paulo", "sao paulo", "tricolor paulista"],
+}
+COMP_SYNONYMS = {
+    "libertadores": ["libertadores","copa libertadores","taça libertadores","taca libertadores"],
+    "sul-americana": ["sul-americana","sul americana","copa sul-americana","copa sul americana"],
+    "brasileirao": ["brasileirão","brasileirao","serie a","série a", "campeonato brasileiro"],
+    "copa-do-brasil": ["copa do brasil"],
+}
 
 def _norm(s: str) -> str:
     s = unicodedata.normalize("NFKD", s or "")
@@ -33,18 +47,36 @@ def slugify(name: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
     return s
 
-def validate_ai_categories(ai_list: List[Dict], content_html: str) -> List[Tuple[str,str,str]]:
+def _contains_any(text_norm: str, phrases: List[str]) -> bool:
+    """Verifica se alguma das frases (normalizadas) está no texto (normalizado)."""
+    phrases = [p for p in (phrases or []) if p]
+    return any(_norm(p) in text_norm for p in phrases)
+
+def _aliases_for(slug: str, nome: str, grupo: str) -> List[str]:
+    """Retorna uma lista de nomes e apelidos para uma categoria."""
+    if grupo == "competicoes":
+        return COMP_SYNONYMS.get(slug, []) + [nome]
+    if grupo == "times":
+        return TEAM_ALIASES.get(slug, []) + [nome]
+    return [nome]
+
+def validate_ai_categories(ai_list: List[Dict], content_html: str, title_text: str) -> List[Tuple[str,str,str]]:
     """
-    Retorna lista [(slug, nome, grupo)] já filtrada/ordenada por prioridade.
+    Aceita categoria se:
+      - evidence aparecer no TÍTULO ou CORPO (normalizado), OU
+      - nome/aliases/sinônimos aparecerem no TÍTULO ou CORPO.
+    Ordena por prioridade (editorias > times > competicoes) e limita a MAX_CATEGORIES.
     """
     if not ai_list: return []
-    text = _norm(re.sub("<[^>]+>", " ", content_html or ""))
+    body_norm  = _norm(re.sub("<[^>]+>"," ", content_html or ""))
+    title_norm = _norm(title_text or "")
+    text_norm  = f"{title_norm} {body_norm}"
 
-    # ordenar por prioridade
     prio = {"editorias": 0, "times": 1, "competicoes": 2}
+    picked, seen = [], set()
+
     ai_sorted = sorted(ai_list, key=lambda x: prio.get((x or {}).get("grupo",""), 99))
 
-    picked, seen = [], set()
     for item in ai_sorted:
         nome = (item.get("nome") or "").strip()
         grupo = (item.get("grupo") or "").strip()
@@ -52,18 +84,21 @@ def validate_ai_categories(ai_list: List[Dict], content_html: str) -> List[Tuple
 
         if not nome or grupo not in CATEGORY_PARENTS:
             continue
-        if slugify(nome) in CATEGORY_DENYLIST:
-            continue
-        # evidência tem que existir no texto
-        if evid and _norm(evid) not in text:
-            logger.warning(f"Category '{nome}' discarded. Evidence '{evid}' not in text.")
+        
+        slug = slugify(nome)
+        if slug in CATEGORY_DENYLIST or slug in seen:
             continue
 
-        slug = slugify(nome)
-        if slug in seen: 
+        evid_ok = bool(evid) and _contains_any(text_norm, [evid])
+        name_ok = _contains_any(text_norm, _aliases_for(slug, nome, grupo))
+
+        if not (evid_ok or name_ok):
+            logger.debug("Category '%s' discarded. Evidence/alias not found in title or body.", nome)
             continue
+
         seen.add(slug)
         picked.append((slug, nome, grupo))
+        logger.info("Accepted category '%s' via %s", nome, "evidence" if evid_ok else "name/alias")
         if len(picked) >= MAX_CATEGORIES:
             break
     return picked
