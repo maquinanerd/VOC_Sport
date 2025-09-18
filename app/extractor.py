@@ -179,33 +179,17 @@ _BAD_SECTION_RX = re.compile(
 
 RELATED_CLASS_RE = re.compile(r'(relacionad|mais[- ]noticia|card|carousel)', re.I)
 
-def _clean_lance_dom(soup: BeautifulSoup) -> Tag:
+def _lance_cleaner(soup: BeautifulSoup) -> Tag:
     """
     Isola o corpo do artigo em páginas do Lance.com.br, removendo lixo
     global mas preservando embeds de redes sociais DENTRO do corpo do artigo.
     """
     # 1) Remover lixo global (cabeçalho, rodapé, carrosséis, etc.)
     for sel in [
-        # Do patch do usuário:
-        'aside#more-news',
-        '[aria-label*=newsletter i]',
-        'div[class*="newsletter" i]',
-        'section[class*="newsletter" i]',
-        'div[id^="taboola-"], div[id*="taboola"]',
-        # Da implementação original:
         "header", "footer", "nav", "template", "script", "style", "svg",
-        'a[data-ga4-param-title="Ver mais notícias"]', # carrossel
-        'a[href*="/mais-noticias"]',
-        ".share", ".breadcrumbs"
     ]:
-        for el in soup.select(sel):
-            el.decompose()
-
-    # 2) Remover blocos "Relacionadas" / "Mais notícias"
-    for h in soup.find_all(['h2', 'h3'], string=re.compile(r'(Relacionad|Mais notícias)', re.I)):
-        container = h.find_parent(['section', 'aside', 'div'])
-        if container:
-            container.decompose()
+        for el in soup.select(sel): el.decompose()
+    remove_lance_widgets(soup)
 
     # 3) Remover placeholders de publicidade
     for t in soup.find_all(string=re.compile(r'continua\s+após\s+a\s+publicidade', re.I)):
@@ -238,6 +222,46 @@ def _clean_lance_dom(soup: BeautifulSoup) -> Tag:
             el.parent.decompose()
 
     return body_root
+
+def _ge_cleaner(soup: BeautifulSoup) -> None:
+    """
+    Cleans GE (Globo Esporte) pages by removing video players, playlists,
+    ads, and other non-content blocks. Modifies the soup in-place.
+    """
+    logger.info("Applying GE-specific DOM cleaning.")
+    
+    blocked_selectors = [
+        # Playlists and multicontent blocks (GE)
+        "div.show-multicontent-playlist-container",
+        "[data-block-type='playlist']",
+        "[data-track-category='multicontent'][data-track-action*='playlist']",
+        # Video players and wrappers (GE)
+        "article.content-video",
+        "div.cxm-video-block.content-video",
+        "div.content-media.content-video",
+        "div.content-video__video",
+        "div.poster.poster--hidden",
+        # Generic iframes/players
+        "iframe", "bs-player", "amp-iframe", "figure[class*='video']",
+        "div[class*='video']",
+        # Ads (GE)
+        "div.content-ads", "glb-ad",
+        # Text-based CTAs (GE)
+        "div.mc-column.content-text[data-block-type='unstyled']"
+    ]
+    for sel in blocked_selectors:
+        for el in soup.select(sel):
+            el.decompose()
+
+    for p in soup.find_all(["p", "div"]):
+        text = (p.get_text(" ", strip=True) or "").lower()
+        if any(x in text for x in ("podcast ge corinthians", "assista: tudo sobre", "assista tudo sobre")):
+            p.decompose()
+
+    for img in soup.find_all("img"):
+        src = (img.get("src") or "") + (img.get("data-src") or "")
+        if any(h in src for h in VIDEO_HOSTS):
+            img.decompose()
 
 def _parse_srcset(srcset: str):
     """Retorna a URL com maior largura declarada em um srcset."""
@@ -651,6 +675,12 @@ SITE_SPECIFIC_RELATED_SELECTORS = {
     ],
 }
 
+# --- Site-specific Cleaner Registry ---
+CLEANER_REGISTRY = {
+    'lance.com.br': _lance_cleaner,
+    'ge.globo.com': _ge_cleaner,
+}
+
 
 class ContentExtractor:
     """Extrai e limpa conteúdo para o pipeline."""
@@ -695,61 +725,6 @@ class ContentExtractor:
         except requests.RequestException as e:
             logger.error(f"Failed to fetch HTML from {url}: {e}")
             return None
-
-    def _pre_clean_html(self, soup: BeautifulSoup, url: str) -> str:
-        """Remove widgets/ads/blocos óbvios ANTES da extração, com foco em sites como GE."""
-        # 0) Scope to the main article body to avoid sidebars and footers
-        article_body = soup.select_one('article[itemprop="articleBody"]')
-        # If a specific article body is found, we work only within that scope.
-        # Otherwise, we work on the whole soup.
-        target_soup = BeautifulSoup(str(article_body), "lxml") if article_body else soup
-
-        # --- LANCE-SPECIFIC CLEANING ---
-        if 'lance.com.br' in url:
-            remove_lance_widgets(target_soup)
-
-        # 1) Block playlists, video players, ads, and editorial CTAs
-        blocked_selectors = [
-            # Playlists and multicontent blocks (GE)
-            "div.show-multicontent-playlist-container",
-            "[data-block-type='playlist']",
-            "[data-track-category='multicontent'][data-track-action*='playlist']",
-
-            # Video players and wrappers (GE)
-            "article.content-video",
-            "div.cxm-video-block.content-video",
-            "div.content-media.content-video",
-            "div.content-video__video",
-            "div.poster.poster--hidden",
-
-            # Generic iframes/players
-            "iframe", "bs-player", "amp-iframe", "figure[class*='video']",
-            "div[class*='video']",
-
-            # Ads (GE)
-            "div.content-ads", "glb-ad",
-
-            # Text-based CTAs (GE)
-            "div.mc-column.content-text[data-block-type='unstyled']"
-        ]
-        for sel in blocked_selectors:
-            for el in target_soup.select(sel):
-                el.decompose()
-
-        # 1.1) Remove specific text blocks that might escape selectors
-        for p in target_soup.find_all(["p", "div"]):
-            text = (p.get_text(" ", strip=True) or "").lower()
-            if any(x in text for x in ("podcast ge corinthians", "assista: tudo sobre", "assista tudo sobre")):
-                p.decompose()
-
-        # 2) Fine-grained removal of video thumbnails/frames by host
-        for img in target_soup.find_all("img"):
-            src = (img.get("src") or "") + (img.get("data-src") or "")
-            if any(h in src for h in VIDEO_HOSTS):
-                img.decompose()
-        
-        logger.info("Pre-cleaned HTML, removing GE-specific unwanted widgets and blocks.")
-        return str(target_soup)
 
     def _remove_forbidden_blocks(self, soup: BeautifulSoup) -> None:
         """Remove infobox técnica e mensagens indesejadas do html extraído."""
@@ -905,65 +880,61 @@ class ContentExtractor:
 
     def _extract_with_trafilatura(self, html: str, url: str) -> Optional[Dict[str, Any]]:
         """
-        Generic extraction method using Trafilatura as the core engine.
-        This was the original `extract` method.
+        Generic extraction method using Trafilatura as the core engine. It uses a
+        modular cleaner system for site-specific logic.
         """
         logger.debug(f"Using generic (trafilatura) extractor for {url}")
         try:
             soup = BeautifulSoup(html, 'lxml')
+            domain = urlparse(url).netloc.lower()
 
-            # --- LANCE-SPECIFIC CLEANING ---
-            if "lance.com.br" in url:
-                logger.info("Applying Lance-specific DOM cleaning.")
-                content_root = _clean_lance_dom(soup)
-                logger.info("Using Lance content_root: %d paragraphs, %d figures", len(content_root.find_all("p")), len(content_root.find_all('figure')))
-            else:
-                # Para outros sites, usa a lógica de encontrar o corpo principal
+            # 1. Apply site-specific cleaner if available.
+            # The cleaner can modify the soup in-place and optionally return a
+            # pre-identified content_root.
+            content_root = None
+            for cleaner_domain, cleaner_func in CLEANER_REGISTRY.items():
+                if cleaner_domain in domain:
+                    content_root = cleaner_func(soup)
+                    break
+            
+            # 2. If no specific cleaner returned a root, use the generic finder on the (potentially cleaned) soup.
+            if content_root is None:
                 content_root = _find_article_body(soup)
 
-            # Converter embeds do Twitter para URLs oEmbed antes de qualquer outra coisa
+            # 3. Common processing on the identified content root
+            # Convert Twitter embeds to oEmbed URLs before further processing
             tweet_count = len(content_root.select("blockquote.twitter-tweet"))
             if tweet_count > 0:
                 convert_twitter_embeds_to_oembed(content_root)
                 logger.info(f"Converted {tweet_count} Twitter embeds to oEmbed URLs.")
 
-
-            # 1) Tenta extrair metadados de JSON-LD primeiro, pois é a fonte mais confiável
+            # 4. Metadata extraction (from the original full soup)
             all_json_ld = _extract_json_ld(soup)
             news_article_schema = _find_news_article_in_json_ld(all_json_ld)
-
-            # 4) Extrai imagem destacada com a nova lógica de priorização
             featured_image_url = self._pick_featured_image(soup, url)
-
-            # 5) Extrai imagens do corpo do artigo
+            videos = self._extract_youtube_videos(soup)
+            
+            # Extract images from the identified content root
             body_images = collect_images_from_article(content_root, base_url=url)
 
-            # 6) vídeos
-            videos = self._extract_youtube_videos(soup)
-
-            # 7) metadados: Prioriza JSON-LD, com fallback para tags meta
+            # Prioritize JSON-LD for title/excerpt, with fallback to meta tags
             title = 'No Title Found'
             excerpt = ''
             if news_article_schema:
                 logger.info(f"Usando metadados do JSON-LD para {url}")
                 title = news_article_schema.get('headline') or news_article_schema.get('name') or title
                 excerpt = news_article_schema.get('description') or excerpt
-                if not featured_image_url:
-                     featured_image_url = _coerce_url(news_article_schema.get('image'))
+                if not featured_image_url: featured_image_url = _coerce_url(news_article_schema.get('image'))
             else: # Fallback
                 title = (og_title.get('content') if (og_title := soup.find('meta', property='og:title')) else None) or (soup.title.string if soup.title else title)
                 excerpt = (meta_desc.get('content') if (meta_desc := soup.find('meta', attrs={'name': 'description'})) else None) or \
                           (og_desc.get('content') if (og_desc := soup.find('meta', property='og:description')) else '')
 
-            # A limpeza prévia do GE não deve rodar para o Lance
-            if "lance.com.br" not in url:
-                 body_html_string = self._pre_clean_html(content_root, url)
-            else:
-                 body_html_string = str(content_root)
-
+            # 5. Prepare body for trafilatura
+            body_html_string = str(content_root)
             body_html_string = normalize_images_with_captions(body_html_string, source_url=url)
 
-            # 8) extrair corpo com trafilatura
+            # 6. Extract main content with Trafilatura
             content_html = trafilatura.extract(
                 body_html_string,
                 include_images=True,
@@ -976,15 +947,12 @@ class ContentExtractor:
                 logger.warning(f"Trafilatura returned empty content for {url}")
                 return None
 
-            # 9) pós-processar corpo
+            # 7. Post-process the extracted content
             article_soup = BeautifulSoup(content_html, 'lxml')
             self._remove_forbidden_blocks(article_soup)
 
-            # 10) Seleciona imagens do corpo (excluindo a destacada)
-            # A `collect_images_from_article` já aplica `is_valid_article_image`
-            other_valid_images = [
-                u for u in body_images if u != featured_image_url
-            ]
+            # 8. Select final body images (excluding the featured one)
+            other_valid_images = [u for u in body_images if u != featured_image_url]
 
             logger.info(f"Selected featured image: {featured_image_url}. Found {len(other_valid_images)} other valid images.")
 
