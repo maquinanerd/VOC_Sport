@@ -18,7 +18,7 @@ PIPELINE_ORDER: List[str] = [
 # As URLs são carregadas das variáveis de ambiente (FEED_1, FEED_2, etc.)
 RSS_FEEDS: Dict[str, Dict[str, Any]] = {
     'lance_futebol': {
-        'urls': [os.getenv('FEED_1', '')],
+        'urls': [os.getenv('FEED_1', 'https://aprenderpoker.site/feeds/lance/futebol/rss')],
         'category': 'futebol',
         'source_name': 'Lance!',
     },
