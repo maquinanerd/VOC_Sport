@@ -2,7 +2,7 @@
 import re
 import logging
 from typing import List, Dict, Optional
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from urllib.parse import urlparse, parse_qs
 
 logger = logging.getLogger(__name__)
@@ -536,12 +536,12 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
                     if "legenda" in stext or "crédito" in stext or "credito" in stext:
                         caption_text = re.sub(r"\s+", " ", sib.get_text(" ", strip=True))
                         sib.decompose() # Remove o irmão, pois a legenda foi absorvida
-
-            # 4. Fallback obrigatório
-            if not caption_text:
+            
+            # 4. Fallback for Lance only
+            if not caption_text and is_lance_source:
                 caption_text = "Foto: Lance!"
 
-            credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I) # Separa crédito
+            credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I)  # Separa crédito
             if credit_match:
                 caption_text = credit_match.group(1).strip()
                 credit_text = credit_match.group(2).strip()
@@ -552,14 +552,16 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
                     caption_text = caption_text.replace(credit_text, "").strip()
 
             # Garante que a tag img tenha o alt text preenchido
-            if img:
+            if img and caption_text:
                 img['alt'] = caption_text.strip()
 
             # Reconstrói o figcaption para garantir padronização
-            for old_cap in figure.find_all("figcaption"): old_cap.decompose()
-            figcap = soup.new_tag("figcaption")
-            figcap.string = caption_text.strip()
-            figure.append(figcap)
+            for old_cap in figure.find_all("figcaption"):
+                old_cap.decompose()
+            if caption_text.strip():
+                figcap = soup.new_tag("figcaption")
+                figcap.string = caption_text.strip()
+                figure.append(figcap)
 
         except Exception as e:
             logger.warning(f"Error normalizing an image container: {e}. Skipping.", exc_info=False)
