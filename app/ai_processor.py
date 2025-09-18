@@ -11,7 +11,7 @@ import time
 from pathlib import Path 
 from typing import Any, Dict, List, Optional, Tuple, ClassVar
 
-from .config import AI_API_KEYS, SCHEDULE_CONFIG
+from .config import AI_API_KEYS, SCHEDULE_CONFIG, AI_GENERATION_CONFIG
 from .exceptions import AIProcessorError, AllKeysFailedError
 from .taxonomy.intelligence import robust_json_parser
 
@@ -130,7 +130,8 @@ class AIProcessor:
             genai.configure(api_key=api_key)
             # Enforce JSON output from the model for reliable parsing
             generation_config = genai.types.GenerationConfig(
-                response_mime_type="application/json"
+                response_mime_type="application/json",
+                **AI_GENERATION_CONFIG,
             )
             self.model = genai.GenerativeModel(
                 'gemini-1.5-flash-latest',
@@ -269,6 +270,30 @@ class AIProcessor:
                 if "erro" in parsed_data:
                     return None, parsed_data["erro"]
 
+                # --- BEGIN: APPLY CATEGORY/SEO FROM AI (do not duplicate) ---
+                from .intelligence import AI_DRIVEN_CATEGORIES, validate_ai_categories
+                
+                if AI_DRIVEN_CATEGORIES:
+                    ai_cats = parsed_data.get("categorias") or []
+                    slug_nome_grupo = validate_ai_categories(ai_cats, parsed_data.get("conteudo_final",""))
+                    parsed_data["__slug_nome_grupo"] = slug_nome_grupo
+
+                # YOAST / Focus keyphrase
+                focus_kw = (parsed_data.get("focus_keyphrase") or "").strip()
+                related_kws = parsed_data.get("related_keyphrases") or []
+                meta_desc = (parsed_data.get("meta_description") or "").strip()
+
+                # guard-rails: não deixar vazio se a IA não mandar
+                if not focus_kw:
+                    # fallback simples = título truncado
+                    focus_kw = (parsed_data.get("titulo_final") or "")[:60].strip()
+
+                # estes três valores serão enviados ao WP após criar o post
+                parsed_data["__yoast_focus_kw"] = focus_kw
+                parsed_data["__yoast_related_kws"] = related_kws
+                parsed_data["__yoast_metadesc"] = meta_desc
+                # --- END: APPLY CATEGORY/SEO FROM AI ---
+
                 # --- BEGIN: APPLY SANITIZATION (do not duplicate) ---
                 if "conteudo_final" in parsed_data:
                     parsed_data["conteudo_final"] = sanitize_content(parsed_data["conteudo_final"])
@@ -322,28 +347,13 @@ class AIProcessor:
 
             # Validate the presence of all required keys for a successful rewrite
             required_keys = [
-                "titulo_final", "conteudo_final", "meta_description",
-                "focus_keyword", "tags", "yoast_meta"
+                "titulo_final", "conteudo_final", "meta_description"
             ]
             missing_keys = [key for key in required_keys if key not in data]
 
             if missing_keys:
                 logger.error(f"AI response is missing required keys: {', '.join(missing_keys)}")
                 logger.debug(f"Received data: {data}")
-                return None
-
-            # Validate the inner keys of yoast_meta
-            if 'yoast_meta' in data and isinstance(data['yoast_meta'], dict):
-                required_yoast_keys = [
-                    "_yoast_wpseo_title", "_yoast_wpseo_metadesc",
-                    "_yoast_wpseo_focuskw", "_yoast_news_keywords"
-                ]
-                missing_yoast_keys = [key for key in required_yoast_keys if key not in data['yoast_meta']]
-                if missing_yoast_keys:
-                    logger.error(f"AI response 'yoast_meta' is missing keys: {', '.join(missing_yoast_keys)}")
-                    return None
-            else:
-                logger.error("AI response is missing 'yoast_meta' object or it's not a dictionary.")
                 return None
 
             logger.info("Successfully parsed and validated AI response.")

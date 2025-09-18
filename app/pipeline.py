@@ -16,7 +16,7 @@ from .config import (
     PIPELINE_CONFIG,
 )
 from .store import Database
-from .store import TaxonomyCache
+from .store import TaxonomyCache 
 from .feeds import FeedReader
 from .extractor import ContentExtractor
 from .ai_processor import AIProcessor
@@ -31,7 +31,7 @@ from .html_utils import (
     strip_naked_internal_links,
 )
 from .html_utils import collapse_h2_headings
-from .taxonomy.intelligence import CategoryManager
+from .intelligence import ensure_categories, AI_DRIVEN_CATEGORIES
 from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
@@ -147,8 +147,6 @@ def run_pipeline_cycle():
     wp_client = WordPressClient(config=WORDPRESS_CONFIG, categories_map=WORDPRESS_CATEGORIES)
     ai_processor = AIProcessor()
     tax_cache = TaxonomyCache()
-    category_manager = CategoryManager(wp_client=wp_client, cache=tax_cache)
-
     processed_articles_in_cycle = 0
 
     try:
@@ -303,12 +301,22 @@ def run_pipeline_cycle():
                         content_html += f"\n{credit_line}"
 
                         # Step 4: Prepare payload for WordPress
-                        # Dynamic category assignment
-                        category_ids_to_assign = category_manager.assign_categories(
-                            title=title,
-                            content=content_html
-                        )
-                        # 4.1: Determine featured media ID to avoid re-upload
+                        # 4.1: AI-driven category and tag assignment
+                        category_ids_to_assign = []
+                        if AI_DRIVEN_CATEGORIES and rewritten_data.get("__slug_nome_grupo"):
+                            category_ids_to_assign = ensure_categories(rewritten_data["__slug_nome_grupo"], wp_client)
+                        
+                        # Fallback to default category if none assigned
+                        if not category_ids_to_assign:
+                            category_ids_to_assign = [WORDPRESS_CATEGORIES.get('futebol', 1)]
+
+                        # TAGS: Replicate names from validated categories + AI suggestions
+                        tags_from_cats = [name for (_slug, name, _grp) in rewritten_data.get("__slug_nome_grupo", [])]
+                        tags_ai = rewritten_data.get("tags_sugeridas") or []
+                        tags_final = list(dict.fromkeys(tags_from_cats + tags_ai))[:5]
+                        tags_to_assign = wp_client.resolve_tags_by_name(tags_final, create_if_missing=False)
+
+                        # 4.2: Determine featured media ID
                         featured_media_id = None
                         if featured_url := extracted_data.get('featured_image_url'):
                             k = featured_url.rstrip('/')
@@ -318,16 +326,8 @@ def run_pipeline_cycle():
                         if not featured_media_id and uploaded_id_map:
                             featured_media_id = next(iter(uploaded_id_map.values()), None)
 
-                        # Generate tags based on strict taxonomy rules, overriding AI
-                        logger.info("Generating tags based on taxonomy rules, overriding AI suggestions.")
-                        tags_to_assign = category_manager.generate_tags(
-                            title=title,
-                            content=content_html
-                        )
-
-                        # 3.5: Set alt text for uploaded images
-                        focus_kw = rewritten_data.get("focus_keyword", "")
-                        # The AI is asked to provide a dict like: { "filename.jpg": "alt text" }
+                        # 4.3: Set alt text for uploaded images
+                        focus_kw = rewritten_data.get("__yoast_focus_kw", "")
                         alt_map = rewritten_data.get("image_alt_texts", {})
 
                         if uploaded_id_map and (alt_map or focus_kw or tags_to_assign):
@@ -344,15 +344,9 @@ def run_pipeline_cycle():
                                 if alt_text:
                                     wp_client.set_media_alt_text(media_id, alt_text)
 
-                        # Prepare Yoast meta, including canonical URL to original source
-                        yoast_meta = rewritten_data.get('yoast_meta', {})
+                        # Prepare post meta, including canonical URL to original source
+                        yoast_meta = {}
                         yoast_meta['_yoast_wpseo_canonical'] = article_url_to_process
-
-                        # Add related keyphrases if present
-                        related_kws = rewritten_data.get('related_keyphrases')
-                        if isinstance(related_kws, list) and related_kws:
-                            # Yoast stores this as a JSON string of objects: [{"keyword": "phrase"}, ...]
-                            yoast_meta['_yoast_wpseo_keyphrases'] = json.dumps([{"keyword": kw} for kw in related_kws])
 
                         post_payload = {
                             'title': title,
@@ -370,6 +364,15 @@ def run_pipeline_cycle():
                         if wp_post_id:
                             db.save_processed_post(article_db_id, wp_post_id)
                             logger.info(f"Successfully published post {wp_post_id} for article DB ID {article_db_id}")
+                            
+                            # --- BEGIN: UPDATE YOAST AFTER PUBLISH (do not duplicate) ---
+                            wp_client.update_yoast_meta(
+                                post_id=wp_post_id,
+                                focus_kw=rewritten_data.get("__yoast_focus_kw",""),
+                                related_kws=rewritten_data.get("__yoast_related_kws",[]),
+                                meta_desc=rewritten_data.get("__yoast_metadesc",""),
+                            )
+                            # --- END: UPDATE YOAST AFTER PUBLISH ---
                             processed_articles_in_cycle += 1
                         else:
                             logger.error(f"Failed to publish post for {article_url_to_process}")

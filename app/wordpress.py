@@ -1,7 +1,7 @@
 import logging
 import requests
 import time
-import json
+import json 
 import re 
 from typing import Dict, Any, Optional, List
 from urllib.parse import urlparse
@@ -115,6 +115,25 @@ class WordPressClient:
                     tag_ids.append(tag_id)
         
         logger.info(f"Resolved tags {tags} to IDs: {tag_ids}")
+        return tag_ids
+
+    def resolve_tags_by_name(self, tag_names: List[str], create_if_missing: bool = False) -> List[int]:
+        """Converts a list of tag names into a list of integer IDs, optionally creating them."""
+        if not tag_names:
+            return []
+
+        # Deduplicate and limit
+        cleaned_tags = list(dict.fromkeys(tag_names))[:10]
+        
+        tag_ids: List[int] = []
+        for tag_name in cleaned_tags:
+            if len(tag_name) >= 2:
+                tag_id = self._get_existing_tag_id(tag_name)
+                if tag_id:
+                    tag_ids.append(tag_id)
+                elif create_if_missing:
+                    if new_id := self._create_tag(tag_name):
+                        tag_ids.append(new_id)
         return tag_ids
 
     def upload_media_from_url(self, image_url: str, alt_text: str = "", max_attempts: int = 3) -> Optional[Dict[str, Any]]:
@@ -245,12 +264,17 @@ class WordPressClient:
             logger.error(f"Error searching for category with slug '{slug}': {e}")
         return None
 
-    def create_category(self, name: str, slug: str, parent_id: Optional[int] = None) -> Optional[Dict[str, Any]]:
+    def create_category(self, name: str, slug: str, parent_slug: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """Creates a new category and returns its data."""
         endpoint = f"{self.api_url}/categories"
         payload = {"name": name, "slug": slug}
+
+        parent_id: Optional[int] = None
+        if parent_slug:
+            parent_cat = self.get_category_by_slug(parent_slug)
+            parent_id = parent_cat['id'] if parent_cat else None
         if parent_id:
-            payload["parent"] = parent_id
+            payload['parent'] = parent_id
         
         try:
             r = self.session.post(endpoint, json=payload, timeout=20)
@@ -275,6 +299,41 @@ class WordPressClient:
             if e.response is not None:
                 logger.error(f"Response body: {e.response.text}")
         return None
+
+    def resolve_categories_by_slugs(self, slugs: List[str]) -> List[int]:
+        """Resolves a list of category slugs to their corresponding integer IDs."""
+        if not slugs:
+            return []
+        ids = []
+        for slug in slugs:
+            cat = self.get_category_by_slug(slug)
+            if cat and cat.get('id'):
+                ids.append(cat['id'])
+        return ids
+
+    def update_yoast_meta(self, post_id: int, focus_kw: str, related_kws: List[str], meta_desc: str):
+        """
+        Updates the Yoast SEO metadata for a given post.
+        Note: This requires the meta keys to be exposed in the WP REST API.
+        """
+        if not post_id:
+            return
+
+        payload = {
+            "meta": {
+                "_yoast_wpseo_focuskw": focus_kw,
+                # Yoast stores related keyphrases as a JSON string of objects
+                "_yoast_wpseo_keyphrases": json.dumps([{"keyword": kw} for kw in related_kws]) if related_kws else "",
+                "_yoast_wpseo_metadesc": meta_desc
+            }
+        }
+        endpoint = f"{self.api_url}/posts/{post_id}"
+        try:
+            r = self.session.post(endpoint, json=payload, timeout=20)
+            r.raise_for_status()
+            logger.info(f"Successfully updated Yoast meta for post {post_id}.")
+        except requests.RequestException as e:
+            logger.warning(f"Could not update Yoast meta via REST for post {post_id}: {e.response.text if e.response else e}")
 
     def close(self):
         """Closes the requests session."""
