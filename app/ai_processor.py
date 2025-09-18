@@ -17,6 +17,67 @@ from .taxonomy.intelligence import robust_json_parser
 
 logger = logging.getLogger(__name__)
 
+# --- BEGIN: SEO SANITIZATION UTILS (do not duplicate) ---
+SEO_LEAK_PATTERNS = [
+    r"\bpalavra-?chave\b",
+    r"\bfocus\s*keyword\b",
+    r"\bmeta\s*description\b",
+    r"\byoast\b",
+    r"\bseo\b",
+    r"\bkeyword\b",
+    r"\bdensidade\b",
+    r"\blsi\b",
+]
+
+FORBIDDEN_PHRASES = [
+    "saiba mais",
+    "acompanhe aqui",
+    "últimas notícias",
+    "clique aqui",
+]
+
+HASHTAG_RE = re.compile(r"#\w+", flags=re.IGNORECASE)
+
+def sanitize_content(html: str) -> str:
+    if not html:
+        return html
+    cleaned = html
+
+    # remove parágrafos inteiros que contenham jargão de SEO
+    combined_pattern = "|".join(SEO_LEAK_PATTERNS)
+    cleaned = re.sub(
+        r"<p>[^<]*(" + combined_pattern + r")[^<]*</p>",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+
+    # remove linhas “soltas” com jargão de SEO
+    lines = re.split(r"(\r?\n)", cleaned)
+    def _bad(s: str) -> bool:
+        u = s.lower()
+        return any(re.search(p, u) for p in SEO_LEAK_PATTERNS)
+    cleaned = "".join(s for s in lines if not _bad(s))
+
+    # remover hashtags
+    cleaned = HASHTAG_RE.sub("", cleaned)
+
+    # remover frases promocionais comuns
+    for phrase in FORBIDDEN_PHRASES:
+        cleaned = re.sub(rf"{re.escape(phrase)}.*?$", "", cleaned, flags=re.IGNORECASE | re.MULTILINE)
+
+    # normalizar espaços
+    cleaned = re.sub(r">\s+<", "><", cleaned)        # entre tags
+    cleaned = re.sub(r"\s{2,}", " ", cleaned).strip()
+    return cleaned
+
+def assert_no_seo_leak(html: str):
+    low = (html or "").lower()
+    for pat in SEO_LEAK_PATTERNS:
+        if re.search(pat, low):
+            raise ValueError(f"SEO leak detectado em conteudo_final: '{pat}' encontrado.")
+# --- END: SEO SANITIZATION UTILS ---
+
 AI_SYSTEM_RULES = """
 [REGRAS OBRIGATÓRIAS — CUMPRIR 100%]
 
@@ -207,6 +268,16 @@ class AIProcessor:
                 # If the AI returned a specific rejection error, handle it as a failure.
                 if "erro" in parsed_data:
                     return None, parsed_data["erro"]
+
+                # --- BEGIN: APPLY SANITIZATION (do not duplicate) ---
+                if "conteudo_final" in parsed_data:
+                    parsed_data["conteudo_final"] = sanitize_content(parsed_data["conteudo_final"])
+                    # opcional: validação dura; se preferir só logar, troque por logger.warning
+                    try:
+                        assert_no_seo_leak(parsed_data["conteudo_final"])
+                    except Exception as e:
+                        logger.warning("Sanitization caught SEO leak and cleaned it: %s", e)
+                # --- END: APPLY SANITIZATION ---
 
                 # Success: Add a delay between calls to respect rate limits
                 time.sleep(SCHEDULE_CONFIG.get('api_call_delay', 30))
