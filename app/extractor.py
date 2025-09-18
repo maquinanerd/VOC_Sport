@@ -101,7 +101,7 @@ VIDEO_HOSTS = (
 
 IMAGE_BLACKLIST_PATTERNS = (
     "sprite", "icon", "favicon", "logo", "placehold", "placeholder",
-    "tracker", "pixel", "adsystem", "badge", "play-button", "og-image",
+    "tracker", "pixel", "adsystem", "badge", "play-button", "og-image", "share",
     "opengraph", "/ads/", "/advert", "feedburner"
 )
 
@@ -580,7 +580,7 @@ class ContentExtractor:
             "Cache-Control": "no-cache",
         }
         try:
-            resp = self.session.get(url, headers=headers, timeout=12, allow_redirects=True)
+            resp = self.session.get(url, headers=headers, timeout=20, allow_redirects=True)
             resp.raise_for_status()
             return resp.text
         except requests.HTTPError as e:
@@ -718,36 +718,30 @@ class ContentExtractor:
         1. og:image / og:image:secure_url
         2. twitter:image
         3. First valid <img> inside <article> or <figure>
-        It also filters out known tracker/placeholder domains.
+        It now uses the robust `is_valid_article_image` filter.
         """
-        # Helper to check domain and basic validity
-        def is_valid_source_url(url: Optional[str]) -> bool:
-            if not url or not url.strip().startswith(("http://", "https")):
-                return False
-            try:
-                host = urlparse(url).netloc.lower()
-                if not host or any(bad_domain in host for bad_domain in BAD_IMAGE_DOMAINS):
-                    return False
-            except Exception:
-                return False
-            return True
-
         # 1) og:image / og:image:secure_url
         for prop in ("og:image", "og:image:secure_url"):
             tag = soup.find("meta", property=prop)
-            if tag and is_valid_source_url(tag.get("content")):
-                return urljoin(base_url, tag["content"])
+            if tag and tag.get("content"):
+                url = urljoin(base_url, tag["content"])
+                if is_valid_article_image(url):
+                    return url
 
         # 2) twitter:image
         tag = soup.find("meta", attrs={"name": "twitter:image"})
-        if tag and is_valid_source_url(tag.get("content")):
-            return urljoin(base_url, tag["content"])
+        if tag and tag.get("content"):
+            url = urljoin(base_url, tag["content"])
+            if is_valid_article_image(url):
+                return url
 
         # 3) First <figure><img> or <article><img>
         for img in soup.select("article img, .content img, figure img"):
             src = img.get("data-src") or img.get("src")
-            if is_valid_source_url(src):
-                return urljoin(base_url, src)
+            if src:
+                url = urljoin(base_url, src)
+                if is_valid_article_image(url):
+                    return url
         
         logger.warning(f"Could not find a valid featured image for {base_url}")
         return None

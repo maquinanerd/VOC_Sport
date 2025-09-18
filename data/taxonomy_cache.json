@@ -97,5 +97,14 @@
       "slug": "flamengo",
       "parent": 34
     }
+  },
+  "serie-b": {
+    "timestamp": "2025-09-17T20:56:44.597906",
+    "data": {
+      "id": 84,
+      "name": "Série B",
+      "slug": "serie-b",
+      "parent": 32
+    }
   }
 }
