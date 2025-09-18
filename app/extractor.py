@@ -1,10 +1,11 @@
 import logging
 import trafilatura
 from bs4 import BeautifulSoup
+from bs4 import Tag
 import requests
 import random
 import html
-from typing import Dict, Optional, Any, Set, List, Tuple, Union
+from typing import Dict, Optional, Any, Set, List, Tuple, Union, TYPE_CHECKING
 import json
 import re
 import os
@@ -13,7 +14,7 @@ from urllib.parse import urljoin, urlparse, parse_qs
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-from .html_utils import normalize_images_with_captions
+from .html_utils import normalize_images_with_captions, convert_twitter_embeds_to_oembed
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
@@ -177,6 +178,47 @@ _BAD_SECTION_RX = re.compile(
     re.I
 )
 
+def _clean_lance_dom(soup: BeautifulSoup) -> Tag:
+    """
+    Isola o corpo do artigo em páginas do Lance.com.br, removendo lixo
+    global mas preservando embeds de redes sociais.
+    """
+    # 1) Remover lixo global (mas NÃO remover embeds do Twitter)
+    for sel in [
+        "header", "footer", "nav", "template", "script", "style", "svg",
+        '[id="taboola-slot"]',                         # anúncios
+        'a[data-ga4-param-title="Ver mais notícias"]', # carrossel
+        'a[href*="/mais-noticias"]',
+        ".newsletter", ".share", ".breadcrumbs"
+    ]:
+        for el in soup.select(sel):
+            el.decompose()
+
+    # 2) Achar um container que de fato é o artigo
+    h1 = soup.find("h1")
+    body_root = None
+    candidates = []
+    if h1:
+        cur = h1
+        while cur and isinstance(cur, Tag):
+            candidates.append(cur)
+            cur = cur.parent
+
+    pools = (
+        soup.select("article, [itemprop='articleBody']") +
+        [n for n in candidates if isinstance(n, Tag)]
+    )
+    # Filtra pools para garantir que não sejam None
+    pools = [p for p in pools if p]
+    pools = sorted(set(pools), key=lambda n: len(n.find_all("p")), reverse=True)
+    body_root = pools[0] if pools else soup
+
+    # 3) Remover blocos de "continua após a publicidade" ou similares
+    for el in body_root.find_all(string=re.compile(r"continua.*publicidade|texto:|fonte:|crédito:|credito:", re.I)):
+        if isinstance(el, str) and el.parent and len(el.parent.get_text(strip=True)) < 50:
+            el.parent.decompose()
+
+    return body_root
 
 def _parse_srcset(srcset: str):
     """Retorna a URL com maior largura declarada em um srcset."""
@@ -572,6 +614,7 @@ class ContentExtractor:
         return s
 
     def _fetch_html(self, url: str) -> Optional[str]:
+        """Busca o HTML da URL com retries e fallback."""
         headers = {
             "User-Agent": random.choice(DEFAULT_UA_LIST),
             "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
@@ -813,6 +856,22 @@ class ContentExtractor:
         try:
             soup = BeautifulSoup(html, 'lxml')
 
+            # --- LANCE-SPECIFIC CLEANING ---
+            if "lance.com.br" in url:
+                logger.info("Applying Lance-specific DOM cleaning.")
+                content_root = _clean_lance_dom(soup)
+                logger.info("Using Lance content_root: %d paragraphs, %d figures", len(content_root.find_all("p")), len(content_root.find_all('figure')))
+            else:
+                # Para outros sites, usa a lógica de encontrar o corpo principal
+                content_root = _find_article_body(soup)
+
+            # Converter embeds do Twitter para URLs oEmbed antes de qualquer outra coisa
+            tweet_count = len(content_root.select("blockquote.twitter-tweet"))
+            if tweet_count > 0:
+                convert_twitter_embeds_to_oembed(content_root)
+                logger.info(f"Converted {tweet_count} Twitter embeds to oEmbed URLs.")
+
+
             # 1) Tenta extrair metadados de JSON-LD primeiro, pois é a fonte mais confiável
             all_json_ld = _extract_json_ld(soup)
             news_article_schema = _find_news_article_in_json_ld(all_json_ld)
@@ -821,7 +880,7 @@ class ContentExtractor:
             featured_image_url = self._pick_featured_image(soup, url)
 
             # 5) Extrai imagens do corpo do artigo
-            body_images = collect_images_from_article(soup, base_url=url)
+            body_images = collect_images_from_article(content_root, base_url=url)
 
             # 6) vídeos
             videos = self._extract_youtube_videos(soup)
@@ -840,13 +899,13 @@ class ContentExtractor:
                 excerpt = (meta_desc.get('content') if (meta_desc := soup.find('meta', attrs={'name': 'description'})) else None) or \
                           (og_desc.get('content') if (og_desc := soup.find('meta', property='og:description')) else '')
 
-            # 2) Limpeza prévia pesada e normalização de imagens
-            # A limpeza agora retorna uma string do corpo do artigo focado
-            body_html_string = self._pre_clean_html(BeautifulSoup(html, 'lxml'), url)
-            body_html_string = normalize_images_with_captions(body_html_string)
+            # A limpeza prévia do GE não deve rodar para o Lance
+            if "lance.com.br" not in url:
+                 body_html_string = self._pre_clean_html(content_root, url)
+            else:
+                 body_html_string = str(content_root)
 
-            # 3) normaliza data-img-url -> <figure> (agora dentro de normalize_images)
-            # self._convert_data_img_to_figure(soup) # Esta lógica foi absorvida/melhorada
+            body_html_string = normalize_images_with_captions(body_html_string)
 
             # 8) extrair corpo com trafilatura
             content_html = trafilatura.extract(

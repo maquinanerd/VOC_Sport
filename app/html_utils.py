@@ -337,6 +337,28 @@ def _best_img_src(tag) -> str:
         return _first_from_srcset(srcset)
     return ""
 
+TWEET_URL_RE = re.compile(r"https?://(twitter|x)\.com/.+?/status/\d+", re.I)
+
+def convert_twitter_embeds_to_oembed(root: BeautifulSoup):
+    """
+    Converte `blockquote.twitter-tweet` em parágrafos com a URL do tweet,
+    permitindo que o oEmbed do WordPress funcione.
+    """
+    # 1) blockquote.twitter-tweet -> <p>URL</p>
+    for bq in root.select("blockquote.twitter-tweet"):
+        link = bq.find("a", href=TWEET_URL_RE)
+        if not link:
+            link = next((a for a in bq.find_all("a") if TWEET_URL_RE.search(a.get("href",""))), None)
+        
+        if link and link.get("href"):
+            url = link.get("href")
+            # Cria um novo <p> e substitui o blockquote
+            new_p = root.new_tag("p")
+            new_p.string = url
+            parent = bq.parent
+            if parent:
+                bq.replace_with(new_p)
+
 
 def normalize_images_with_captions(html: str) -> str:
     """
@@ -365,6 +387,13 @@ def normalize_images_with_captions(html: str) -> str:
                 source_tag = container.find("source")
                 src = _best_img_src(source_tag)
             
+            # Filtros anti-lixo (logos, ícones, etc.)
+            bad_parts = ("Ultimas-noticias.png", "/icons/", "/favicon", "/sprites", "/ads/")
+            if any(p in src for p in bad_parts):
+                # Decompose the container if it's a junk image
+                container.decompose()
+                continue
+
             if not src and container.get("style") and "background-image" in container.get("style"):
                 style = container.get("style", "")
                 m = re.search(r"url\(([^)]+)\)", style)
@@ -392,20 +421,29 @@ def normalize_images_with_captions(html: str) -> str:
                 figure.append(container)
 
             # Lógica de extração de legenda e crédito (mantida)
-            caption_text, credit_text = "", ""
-            cap_tag = next((figure.select_one(sel) or figure.find_next_sibling(sel) for sel in CAPTION_SELECTORS if figure.select_one(sel) or figure.find_next_sibling(sel)), None)
-            if cap_tag:
-                caption_text = cap_tag.get_text(" ", strip=True)
+            caption_text = ""
+            # 1. Tenta figcaption
+            if fig_cap := figure.find("figcaption"):
+                caption_text = re.sub(r"\s+", " ", fig_cap.get_text(" ", strip=True))
+            
+            # 2. Tenta alt/aria-label da imagem
+            if not caption_text and img:
+                caption_text = (img.get("alt") or img.get("aria-label") or "").strip()
 
-            if not caption_text and (nxt := figure.find_next(string=True)):
-                txt = str(nxt).strip()
-                if "Foto:" in txt or "Crédito:" in txt or "— Foto:" in txt:
-                    caption_text = txt
-
+            # 3. Tenta irmão com classe/texto de legenda/crédito
             if not caption_text:
-                caption_text = (img.get("alt") or "").strip()
+                sib_check_node = figure or container
+                if sib := sib_check_node.find_next_sibling(["p", "span"]):
+                    stext = " ".join(sib.get("class", [])).lower() + " " + sib.get_text(" ", strip=True).lower()
+                    if "legenda" in stext or "crédito" in stext or "credito" in stext:
+                        caption_text = re.sub(r"\s+", " ", sib.get_text(" ", strip=True))
+                        sib.decompose() # Remove o irmão, pois a legenda foi absorvida
 
-            credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I)
+            # 4. Fallback obrigatório
+            if not caption_text:
+                caption_text = "Foto: Lance!"
+
+            credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I) # Separa crédito
             if credit_match:
                 caption_text = credit_match.group(1).strip()
                 credit_text = credit_match.group(2).strip()
@@ -415,12 +453,15 @@ def normalize_images_with_captions(html: str) -> str:
                     credit_text = credit_match.group(1).strip()
                     caption_text = caption_text.replace(credit_text, "").strip()
 
-            if caption_text or credit_text:
-                for old_cap in figure.find_all("figcaption"): old_cap.decompose()
-                figcap = soup.new_tag("figcaption")
-                full_caption = f"{caption_text} {credit_text}".strip()
-                figcap.string = full_caption
-                figure.append(figcap)
+            # Garante que a tag img tenha o alt text preenchido
+            if img:
+                img['alt'] = caption_text.strip()
+
+            # Reconstrói o figcaption para garantir padronização
+            for old_cap in figure.find_all("figcaption"): old_cap.decompose()
+            figcap = soup.new_tag("figcaption")
+            figcap.string = caption_text.strip()
+            figure.append(figcap)
 
         except Exception as e:
             logger.warning(f"Error normalizing an image container: {e}. Skipping.", exc_info=False)
