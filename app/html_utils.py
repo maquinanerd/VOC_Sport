@@ -376,6 +376,7 @@ def normalize_images_with_captions(html: str) -> str:
         ".media-caption", ".credits", ".credito", ".legenda"
     ]
 
+    seen_images = set()
     # Itera sobre potenciais contêineres de imagem para ser mais robusto
     for container in soup.select('figure, picture, img'):
         try:
@@ -386,6 +387,17 @@ def normalize_images_with_captions(html: str) -> str:
             if not src: # Fallback para <picture> sem <img> ou background-image
                 source_tag = container.find("source")
                 src = _best_img_src(source_tag)
+
+            # Deduplicação de imagens (ignora transformações de CDN)
+            if src:
+                key = src
+                if '/uploads/' in src:
+                    key = src.split('/uploads/', 1)[-1]
+                
+                if key in seen_images:
+                    container.decompose()
+                    continue
+                seen_images.add(key)
             
             # Filtros anti-lixo (logos, ícones, etc.)
             bad_parts = ("Ultimas-noticias.png", "/icons/", "/favicon", "/sprites", "/ads/")

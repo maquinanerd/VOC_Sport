@@ -178,23 +178,43 @@ _BAD_SECTION_RX = re.compile(
     re.I
 )
 
+RELATED_CLASS_RE = re.compile(r'(relacionad|mais[- ]noticia|card|carousel)', re.I)
+
 def _clean_lance_dom(soup: BeautifulSoup) -> Tag:
     """
     Isola o corpo do artigo em páginas do Lance.com.br, removendo lixo
-    global mas preservando embeds de redes sociais.
+    global mas preservando embeds de redes sociais DENTRO do corpo do artigo.
     """
-    # 1) Remover lixo global (mas NÃO remover embeds do Twitter)
+    # 1) Remover lixo global (cabeçalho, rodapé, carrosséis, etc.)
     for sel in [
+        # Do patch do usuário:
+        'aside#more-news',
+        '[aria-label*=newsletter i]',
+        'div[class*="newsletter" i]',
+        'section[class*="newsletter" i]',
+        'div[id^="taboola-"], div[id*="taboola"]',
+        # Da implementação original:
         "header", "footer", "nav", "template", "script", "style", "svg",
-        '[id="taboola-slot"]',                         # anúncios
         'a[data-ga4-param-title="Ver mais notícias"]', # carrossel
         'a[href*="/mais-noticias"]',
-        ".newsletter", ".share", ".breadcrumbs"
+        ".share", ".breadcrumbs"
     ]:
         for el in soup.select(sel):
             el.decompose()
 
-    # 2) Achar um container que de fato é o artigo
+    # 2) Remover blocos "Relacionadas" / "Mais notícias"
+    for h in soup.find_all(['h2', 'h3'], string=re.compile(r'(Relacionad|Mais notícias)', re.I)):
+        container = h.find_parent(['section', 'aside', 'div'])
+        if container:
+            container.decompose()
+
+    # 3) Remover placeholders de publicidade
+    for t in soup.find_all(string=re.compile(r'continua\s+após\s+a\s+publicidade', re.I)):
+        parent = t.find_parent()
+        if parent:
+            parent.decompose()
+
+    # 4) Achar um container que de fato é o artigo
     h1 = soup.find("h1")
     body_root = None
     candidates = []
@@ -213,7 +233,7 @@ def _clean_lance_dom(soup: BeautifulSoup) -> Tag:
     pools = sorted(set(pools), key=lambda n: len(n.find_all("p")), reverse=True)
     body_root = pools[0] if pools else soup
 
-    # 3) Remover blocos de "continua após a publicidade" ou similares
+    # 5) Remover linhas de crédito soltas dentro do corpo do artigo
     for el in body_root.find_all(string=re.compile(r"continua.*publicidade|texto:|fonte:|crédito:|credito:", re.I)):
         if isinstance(el, str) and el.parent and len(el.parent.get_text(strip=True)) < 50:
             el.parent.decompose()
@@ -241,6 +261,32 @@ def _parse_srcset(srcset: str):
             best = url
     return best
 
+def _is_valid_image_tag(img_tag: Tag) -> bool:
+    """
+    Verifica se uma tag <img> é uma imagem de conteúdo válida,
+    excluindo ícones, logos e imagens de blocos não-relacionados.
+    """
+    # Descarta imagens que estejam em contêineres de navegação/rodapé
+    if img_tag.find_parent(['aside', 'nav', 'footer', 'header']):
+        return False
+
+    # Descarta se estiver dentro de um carrossel ou bloco de "relacionados"
+    for ancestor in img_tag.find_parents(['section', 'div', 'ul', 'li']):
+        cls = ' '.join(ancestor.get('class', []))
+        if RELATED_CLASS_RE.search(cls):
+            return False
+        if ancestor.get('id') == 'more-news':
+            return False
+
+    # Tenta evitar thumbnails muito pequenas baseadas nos atributos
+    try:
+        w = int(img_tag.get('width', '0'))
+        h = int(img_tag.get('height', '0'))
+        if (w and w < 180) or (h and h < 120):
+            return False
+    except (ValueError, TypeError):
+        pass
+    return True
 
 def _has_bad_keyword(url: str) -> bool:
     u = url.lower()
@@ -370,6 +416,9 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
 
     # 1) <img> tags
     for img in root.select("img:not([aria-hidden='true'])"):
+        if not _is_valid_image_tag(img):
+            continue
+
         cand = None
         for attr in ("src", "data-src", "data-original", "data-lazy-src", "data-image", "data-img-url"):
             if img.get(attr):
@@ -381,7 +430,10 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
 
     # 2) <picture><source>
     for source in root.select("picture source[srcset]"):
-        _push(_parse_srcset(source.get("srcset", "")))
+        # Garante que a imagem dentro da picture seja válida
+        img_in_picture = source.find_parent('picture').find('img')
+        if not img_in_picture or _is_valid_image_tag(img_in_picture):
+            _push(_parse_srcset(source.get("srcset", "")))
 
     # 2.5) <noscript> com <img> (fallback de lazy-load)
     for ns in root.find_all("noscript"):
@@ -390,6 +442,7 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
         except Exception:
             continue
         for img in inner.find_all("img"):
+            # Não podemos validar o DOM aqui, mas podemos aplicar a lógica de URL
             _push(img.get("src") or img.get("data-src") or img.get("data-original"))
 
     # 3) nós com data-* comuns
