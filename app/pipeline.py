@@ -51,6 +51,22 @@ def _get_article_url(article_data: Dict[str, Any]) -> Optional[str]:
         return None
     return None
 
+DOMAIN_DENYLIST = (
+    "uol.com.br",
+    "imguol.com.br",
+    "conteudo.imguol.com.br",
+)
+
+def is_blocked_url(url: str) -> bool:
+    if not url:
+        return False
+    try:
+        host = urlparse(url).netloc.lower()
+        return any(d in host for d in DOMAIN_DENYLIST)
+    except Exception:
+        return False
+
+
 BAD_HOSTS = {"sb.scorecardresearch.com", "securepubads.g.doubleclick.net"}
 IMG_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
 
@@ -172,6 +188,11 @@ def run_pipeline_cycle():
                             db.update_article_status(article_db_id, 'FAILED', reason="Missing/invalid URL")
                             continue
 
+                        if is_blocked_url(article_url_to_process):
+                            logger.info(f"Skipping blocked domain: {article_url_to_process}")
+                            db.update_article_status(article_db_id, 'SKIPPED', reason="Blocked domain")
+                            continue
+
                         if not is_allowed_by_source_rules(source_id, article_url_to_process):
                             logger.info(f"Skipping URL by source rules: {article_url_to_process}")
                             db.update_article_status(article_db_id, 'SKIPPED', reason="Filtered by source rules")
@@ -235,6 +256,11 @@ def run_pipeline_cycle():
                         
                         # 3.3: Upload ONLY the featured image if it's valid
                         featured_image_url = extracted_data.get('featured_image_url')
+
+                        # Block images from denied domains
+                        if featured_image_url and is_blocked_url(featured_image_url):
+                            logger.info(f"Featured image from blocked domain '{featured_image_url}'; dropping it.")
+                            featured_image_url = None
 
                         # If the primary featured image is invalid, search for a fallback.
                         if not (featured_image_url and is_valid_upload_candidate(featured_image_url)):

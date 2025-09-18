@@ -106,5 +106,14 @@
       "slug": "serie-b",
       "parent": 32
     }
+  },
+  "palmeiras": {
+    "timestamp": "2025-09-17T21:47:37.285877",
+    "data": {
+      "id": 90,
+      "name": "Palmeiras",
+      "slug": "palmeiras",
+      "parent": 34
+    }
   }
 }
