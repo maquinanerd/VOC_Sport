@@ -101,8 +101,8 @@ VIDEO_HOSTS = (
 
 IMAGE_BLACKLIST_PATTERNS = (
     "sprite", "icon", "favicon", "logo", "placehold", "placeholder",
-    "tracker", "pixel", "adsystem", "badge", "play-button", "og-image", "share",
-    "opengraph", "/ads/", "/advert", "feedburner"
+    "tracker", "pixel", "adsystem", "badge", "play-button", "share",
+    "/ads/", "/advert", "feedburner"
 )
 
 

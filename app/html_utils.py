@@ -548,6 +548,10 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
             else:
                 credit_match = re.search(r"((?:Foto|Crédito):.*)", caption_text, flags=re.I)
                 if credit_match:
+                    # Defensive check: credit_match is a Match object, but we ensure it's not None
+                    # before trying to access its groups, although the `if` handles this.
+                    if credit_match.group(1) is None: continue
+
                     credit_text = credit_match.group(1).strip()
                     caption_text = caption_text.replace(credit_text, "").strip()
 

@@ -252,53 +252,44 @@ def run_pipeline_cycle():
                             extracted_data.get('images', [])
                         )
                         
-                        # 3.3: Upload ONLY the featured image if it's valid
+                        # 3.3: Consolidate, filter, and upload all images
                         featured_image_url = extracted_data.get('featured_image_url')
+                        body_images = extracted_data.get('images', [])
 
-                        # Block images from denied domains
-                        if featured_image_url and is_blocked_url(featured_image_url):
-                            logger.info(f"Featured image from blocked domain '{featured_image_url}'; dropping it.")
-                            featured_image_url = None
+                        # Create a unique, ordered list of all images to process.
+                        # The featured image is first, giving it priority.
+                        all_image_urls = list(dict.fromkeys(
+                            ([featured_image_url] if featured_image_url else []) + body_images
+                        ))
 
-                        # If the primary featured image is invalid, search for a fallback.
-                        if not (featured_image_url and is_valid_upload_candidate(featured_image_url)):
-                            logger.warning(f"Initial featured image '{featured_image_url}' is not valid. Searching for a fallback.")
-                            found_fallback = False
-                            for img_url in extracted_data.get('images', []):
-                                if is_valid_upload_candidate(img_url):
-                                    featured_image_url = img_url  # Found a valid fallback
-                                    logger.info(f"Found a valid fallback featured image: {featured_image_url}")
-                                    found_fallback = True
-                                    break
-                            if not found_fallback:
-                                featured_image_url = None # Ensure it's None if no valid image is found
+                        # Filter out invalid candidates before attempting upload
+                        urls_to_upload = [
+                            url for url in all_image_urls if url and not is_blocked_url(url) and is_valid_upload_candidate(url)
+                        ]
 
-                        urls_to_upload = [featured_image_url] if featured_image_url else []
+                        # If the original featured image was filtered out, the new one will be the first valid one.
+                        if featured_image_url not in urls_to_upload:
+                            new_featured = urls_to_upload[0] if urls_to_upload else None
+                            if new_featured:
+                                logger.info(f"Original featured image '{featured_image_url}' was invalid. Using '{new_featured}' as fallback.")
+                            featured_image_url = new_featured
 
                         uploaded_src_map = {}
                         uploaded_id_map = {}
-                        logger.info(f"Attempting to upload {len(urls_to_upload)} image(s).")
-                        for url in urls_to_upload:
-                            media = wp_client.upload_media_from_url(url, title)
-                            if media and media.get("source_url") and media.get("id"):
-                                # Normalize URL to handle potential trailing slashes as keys
-                                k = url.rstrip('/')
-                                uploaded_src_map[k] = media["source_url"]
-                                uploaded_id_map[k] = media["id"]
+                        if urls_to_upload:
+                            logger.info(f"Attempting to upload {len(urls_to_upload)} image(s).")
+                            for url in urls_to_upload:
+                                media = wp_client.upload_media_from_url(url, title)
+                                if media and media.get("source_url") and media.get("id"):
+                                    k = url.rstrip('/')
+                                    uploaded_src_map[k] = media["source_url"]
+                                    uploaded_id_map[k] = media["id"]
                         
                         # 3.4: Rewrite image `src` to point to WordPress
                         content_html = rewrite_img_srcs_with_wp(content_html, uploaded_src_map)
 
                         # 3.5: Add credits to figures (currently disabled)
                         # content_html = add_credit_to_figures(content_html, extracted_data['source_url'])
-
-                        # Só player do YouTube (oEmbed) e sem “Crédito: …”
-                        content_html = strip_credits_and_normalize_youtube(content_html)
-                        
-                        # Adicionar crédito da fonte no final do post
-                        source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_url_to_process).netloc)
-                        credit_line = f'<p><strong>Fonte:</strong> <a href="{article_url_to_process}" target="_blank" rel="noopener noreferrer">{source_name}</a></p>'
-                        content_html += f"\n{credit_line}"
 
                         # Step 4: Prepare payload for WordPress
                         # 4.1: AI-driven category and tag assignment
@@ -318,14 +309,17 @@ def run_pipeline_cycle():
 
                         # 4.2: Determine featured media ID
                         featured_media_id = None
-                        if featured_url := extracted_data.get('featured_image_url'):
-                            k = featured_url.rstrip('/')
+                        if featured_image_url:
+                            k = featured_image_url.rstrip('/')
                             featured_media_id = uploaded_id_map.get(k)
-                        else:
-                            logger.info("No suitable featured image found after filtering; proceeding without one.")
-                        if not featured_media_id and uploaded_id_map:
-                            featured_media_id = next(iter(uploaded_id_map.values()), None)
+                        
+                        if not featured_media_id:
+                             logger.info("No suitable featured image found after uploading; proceeding without one.")
 
+                        # Adicionar crédito da fonte no final do post
+                        source_name = RSS_FEEDS.get(source_id, {}).get('source_name', urlparse(article_url_to_process).netloc)
+                        credit_line = f'<p><strong>Fonte:</strong> <a href="{article_url_to_process}" target="_blank" rel="noopener noreferrer">{source_name}</a></p>'
+                        content_html += f"\n{credit_line}"
                         # 4.3: Set alt text for uploaded images
                         focus_kw = rewritten_data.get("__yoast_focus_kw", "")
                         alt_map = rewritten_data.get("image_alt_texts", {})
