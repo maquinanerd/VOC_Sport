@@ -1,6 +1,5 @@
 import argparse
 import logging
-import os
 import sys
 from datetime import datetime, timezone
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -8,20 +7,7 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from app.pipeline import run_pipeline_cycle
 from app.store import Database
 from app.config import SCHEDULE_CONFIG
-
-# Garante que o diretório de logs exista
-os.makedirs("logs", exist_ok=True)
-
-# Configura o logging para exibir informações no terminal e salvar em um arquivo
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(module)s - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[
-        logging.StreamHandler(sys.stdout),
-        logging.FileHandler("logs/app.log", mode='a', encoding='utf-8')
-    ]
-)
+from app.logging_conf import setup_logging
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +25,9 @@ def initialize_database():
 
 def main():
     """Função principal para executar o pipeline de conteúdo."""
+    # Configura o logging centralizado como o primeiro passo.
+    setup_logging()
+
     parser = argparse.ArgumentParser(description="Executa o pipeline de conteúdo VocMoney.")
     parser.add_argument(
         '--once',
