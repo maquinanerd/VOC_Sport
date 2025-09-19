@@ -2,7 +2,7 @@
 import re
 import logging
 from typing import List, Dict, Optional
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, Tag, NavigableString
 from urllib.parse import urlparse, parse_qs
 
 logger = logging.getLogger(__name__)
@@ -156,31 +156,26 @@ def hard_filter_forbidden_html(html: str) -> str:
 # Imagens: merge e rewrite
 # =========================
 
+def wp_image_block(url: str, media_id: Optional[int] = None, alt: str = "", caption: Optional[str] = None, size: str = "full") -> str:
+    """Gera um bloco de imagem Gutenberg completo."""
+    import html
+    
+    # Constrói os atributos JSON para o comentário do bloco
+    attrs_dict = {"sizeSlug": size, "linkDestination": "none"}
+    if media_id:
+        attrs_dict["id"] = media_id
+    attrs = json.dumps(attrs_dict)
+
+    figcap_html = f'\n  <figcaption class="wp-element-caption">{html.escape(caption.strip())}</figcaption>' if caption and caption.strip() else ""
+    img_class = f' class="wp-image-{media_id}"' if media_id else ""
+    
+    return f'<!-- wp:image {attrs} -->\n<figure class="wp-block-image size-{size}"><img src="{url}" alt="{html.escape(alt or "")}"{img_class}/>{figcap_html}</figure>\n<!-- /wp:image -->'
+
 def _norm_key(u: str) -> str:
     """Normaliza URL para comparação/chave de dicionário."""
     if not u:
         return ""
     return (u.strip().rstrip("/")).lower()
-
-
-def _replace_in_srcset(srcset: str, mapping: Dict[str, str]) -> str:
-    """
-    Substitui URLs dentro de um atributo srcset usando o mapping (url_original -> nova_url).
-    Mantém os sufixos (ex.: '320w').
-    """
-    if not srcset:
-        return srcset
-    parts = []
-    for chunk in srcset.split(","):
-        item = chunk.strip()
-        if not item:
-            continue
-        tokens = item.split()
-        url = tokens[0]
-        rest = " ".join(tokens[1:]) if len(tokens) > 1 else ""
-        new_url = mapping.get(_norm_key(url), url)
-        parts.append((new_url + (" " + rest if rest else "")).strip())
-    return ", ".join(parts)
 
 
 # --- New Lance-specific helpers ---
@@ -234,7 +229,7 @@ def strip_lance_cdn(url: str) -> str:
         url
     )
 
-def merge_images_into_content(content_html: str, image_urls: List[str], max_images: int = 6) -> str:
+def merge_images_into_content(content_html: str, images_to_inject: List[Dict[str, Any]], uploaded_media_data: Dict[str, Dict[str, Any]], max_images: int = 6) -> str:
     """
     Garante imagens no corpo:
       - mantém as que já existem
@@ -259,12 +254,18 @@ def merge_images_into_content(content_html: str, image_urls: List[str], max_imag
                 if u:
                     present.add(_norm_key(u))
 
+    # Filtra as imagens a adicionar que ainda não estão no conteúdo
     to_add: List[str] = []
-    for u in (image_urls or []):
-        key = _norm_key(u)
+    for img_data in (images_to_inject or []):
+        src = img_data.get('src')
+        if not src:
+            continue
+        key = _norm_key(src)
         if not key or key in present:
             continue
-        to_add.append(u)
+        
+        # Adiciona o dicionário completo da imagem, não apenas a URL
+        to_add.append(img_data)
         if len(to_add) >= max_images:
             break
 
@@ -273,15 +274,19 @@ def merge_images_into_content(content_html: str, image_urls: List[str], max_imag
         insertion_point = soup.find("p")
         parent = insertion_point.parent if insertion_point and insertion_point.parent else (soup.body or soup)
 
-        for u in to_add:
-            fig = soup.new_tag("figure")
-            img = soup.new_tag("img", src=u)
-            fig.append(img)
+        for img_data in to_add:
+            original_src = img_data['src']
+            media_info = uploaded_media_data.get(_norm_key(original_src))
+            
+            # Gera o bloco Gutenberg completo
+            block_html = wp_image_block(url=media_info['source_url'], media_id=media_info['id'], alt=img_data.get('alt', ''), caption=img_data.get('caption'))
+            block_soup = BeautifulSoup(block_html, 'html.parser')
+
             if insertion_point:
-                insertion_point.insert_after(fig)
-                insertion_point = fig  # próximo entra depois do que inserimos
+                insertion_point.insert_after(block_soup)
+                insertion_point = block_soup.find('figure') or insertion_point # Próximo entra depois do que inserimos
             else:
-                parent.append(fig)
+                parent.append(block_soup)
 
     return soup.body.decode_contents() if soup.body else str(soup)
 
@@ -289,32 +294,33 @@ def merge_images_into_content(content_html: str, image_urls: List[str], max_imag
 def rewrite_img_srcs_with_wp(content_html: str, uploaded_src_map: Dict[str, str]) -> str:
     """
     Reaponta <img> e srcset para as URLs do WordPress já enviadas.
-    - uploaded_src_map: {url_original (normalizada) -> new_source_url_no_wp}
+    Esta função agora gera blocos Gutenberg completos para cada imagem.
+    - uploaded_src_map: {url_original (normalizada) -> {id, source_url, alt, caption}}
     """
     if not content_html or not uploaded_src_map:
         return content_html
 
-    # normalizar chaves do mapping
-    norm_map: Dict[str, str] = {_norm_key(k): v for k, v in uploaded_src_map.items() if k and v}
-
     soup = BeautifulSoup(content_html, "lxml")
-    for img in soup.find_all("img"):
-        # src
-        src = (img.get("src") or "").strip()
-        key = _norm_key(src)
-        if key in norm_map:
-            img["src"] = norm_map[key]
+    
+    # Itera sobre as imagens no conteúdo e as substitui por blocos Gutenberg
+    for img_tag in soup.find_all("img"):
+        original_src = _best_img_src(img_tag)
+        norm_src_key = _norm_key(original_src)
 
-        # srcset
-        if img.get("srcset"):
-            img["srcset"] = _replace_in_srcset(img["srcset"], norm_map)
-
-        # data-* (evita rehydration quebrado)
-        for a in ("data-src", "data-original", "data-lazy-src", "data-image", "data-img-url"):
-            if img.has_attr(a):
-                k2 = _norm_key(img.get(a) or "")
-                if k2 in norm_map:
-                    img[a] = norm_map[k2]
+        if norm_src_key in uploaded_src_map:
+            media_data = uploaded_src_map[norm_src_key]
+            
+            # Gera o bloco Gutenberg
+            gutenberg_block_html = wp_image_block(
+                url=media_data['source_url'],
+                media_id=media_data.get('id'),
+                alt=media_data.get('alt', ''),
+                caption=media_data.get('caption')
+            )
+            
+            # Substitui o contêiner da imagem (figure, p, ou a própria img) pelo bloco
+            container_to_replace = img_tag.find_parent('figure') or img_tag.find_parent('p') or img_tag
+            container_to_replace.replace_with(BeautifulSoup(gutenberg_block_html, 'html.parser'))
 
     return soup.body.decode_contents() if soup.body else str(soup)
 
@@ -411,6 +417,28 @@ def convert_twitter_embeds_to_oembed(root: BeautifulSoup):
             if parent:
                 bq.replace_with(new_p)
 
+def _remove_related_content_blocks(soup: BeautifulSoup):
+    """Remove blocos de 'Relacionadas', 'Leia mais', carrosséis, etc."""
+    unwanted_text_re = re.compile(r'^(Relacionadas|Fique por dentro|Mais notícias|Leia mais|Veja também)$', re.I)
+
+    # Remove seções por seletores CSS explícitos
+    selectors_to_remove = [
+        '[data-testid*="related" i]', '[aria-label*="Relacionadas" i]',
+        '.related', '.relacionadas', '.related-content', '.read-more',
+        'section.related', 'aside', '.cards', '.carousel', '.swiper-container'
+    ]
+    for sel in selectors_to_remove:
+        for node in soup.select(sel):
+            node.decompose()
+
+    # Remove seções ancestrais de cabeçalhos como "Relacionadas"
+    for h_tag in soup.find_all(['h2', 'h3', 'h4', 'p', 'span']):
+        # Usamos list() para iterar sobre uma cópia, pois a árvore é modificada
+        if unwanted_text_re.match(h_tag.get_text(strip=True) or ''):
+            # Encontra um contêiner razoável para remover
+            section_to_remove = h_tag.find_parent(['section', 'div', 'aside']) or h_tag
+            section_to_remove.decompose()
+
 
 def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
     """
@@ -423,14 +451,10 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
 
     is_lance_source = _is_lance(source_url)
     if is_lance_source:
-        remove_lance_widgets(soup)
+        remove_lance_widgets(soup) # Mantém a limpeza específica do Lance
 
-    BAD_HOSTS = ("video.glbimg.com", "s01.video.glbimg.com", "s02.video.glbimg.com", "s01.video.globo.com")
-    CAPTION_SELECTORS = [
-        "figcaption",
-        ".content-media__legend", ".content-media__caption", ".foto__legenda", ".foto-legenda",
-        ".media-caption", ".credits", ".credito", ".legenda"
-    ]
+    # Aplica a nova limpeza de blocos relacionados para todas as fontes
+    _remove_related_content_blocks(soup)
 
     seen_images = set()
     # Itera sobre potenciais contêineres de imagem para ser mais robusto
@@ -449,6 +473,13 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
 
             # Lógica robusta para extrair o src da imagem
             img = container if container.name == 'img' else container.find("img")
+            if not img or not isinstance(img, Tag):
+                # Se for um <picture> sem <img>, pode ter <source>
+                if container.name == 'picture' and (source := container.find('source')):
+                     img = source # Trata <source> como se fosse <img> para extrair src
+                else:
+                    continue
+
             if not img or not isinstance(img, Tag):
                 continue
 
@@ -502,7 +533,7 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
                 logger.debug("Skipping image container without a valid src/srcset.")
                 continue
 
-            if any(h in src for h in BAD_HOSTS):
+            if any(h in src for h in ("video.glbimg.com", "s01.video.glbimg.com")):
                 container.decompose()
                 continue
 
@@ -517,55 +548,6 @@ def normalize_images_with_captions(html: str, *, source_url: str = "") -> str:
                 figure = soup.new_tag("figure")
                 container.replace_with(figure)
                 figure.append(container)
-
-            # Lógica de extração de legenda e crédito (mantida)
-            caption_text = ""
-            # 1. Tenta figcaption
-            if fig_cap := figure.find("figcaption"):
-                caption_text = re.sub(r"\s+", " ", fig_cap.get_text(" ", strip=True))
-            
-            # 2. Tenta alt/aria-label da imagem
-            if not caption_text and img:
-                caption_text = (img.get("alt") or img.get("aria-label") or "").strip()
-
-            # 3. Tenta irmão com classe/texto de legenda/crédito
-            if not caption_text:
-                sib_check_node = figure or container
-                if sib := sib_check_node.find_next_sibling(["p", "span"]):
-                    stext = " ".join(sib.get("class", [])).lower() + " " + sib.get_text(" ", strip=True).lower()
-                    if "legenda" in stext or "crédito" in stext or "credito" in stext:
-                        caption_text = re.sub(r"\s+", " ", sib.get_text(" ", strip=True))
-                        sib.decompose() # Remove o irmão, pois a legenda foi absorvida
-            
-            # 4. Fallback for Lance only
-            if not caption_text and is_lance_source:
-                caption_text = "Foto: Lance!"
-
-            credit_match = re.search(r"(.*?)(—\s*(?:Foto|Crédito):.*)", caption_text, flags=re.I)  # Separa crédito
-            if credit_match:
-                caption_text = credit_match.group(1).strip()
-                credit_text = credit_match.group(2).strip()
-            else:
-                credit_match = re.search(r"((?:Foto|Crédito):.*)", caption_text, flags=re.I)
-                if credit_match:
-                    # Defensive check: credit_match is a Match object, but we ensure it's not None
-                    # before trying to access its groups, although the `if` handles this.
-                    if credit_match.group(1) is None: continue
-
-                    credit_text = credit_match.group(1).strip()
-                    caption_text = caption_text.replace(credit_text, "").strip()
-
-            # Garante que a tag img tenha o alt text preenchido
-            if img and caption_text:
-                img['alt'] = caption_text.strip()
-
-            # Reconstrói o figcaption para garantir padronização
-            for old_cap in figure.find_all("figcaption"):
-                old_cap.decompose()
-            if caption_text.strip():
-                figcap = soup.new_tag("figcaption")
-                figcap.string = caption_text.strip()
-                figure.append(figcap)
 
         except Exception as e:
             logger.warning(f"Error normalizing an image container: {e}. Skipping.", exc_info=False)

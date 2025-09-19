@@ -173,19 +173,28 @@ class WordPressClient:
         logger.error(f"Final failure to upload image '{image_url}' after {attempt} attempt(s): {last_err}")
         return None
 
-    def set_media_alt_text(self, media_id: int, alt_text: str) -> bool:
-        """Sets the alt text for a media item in WordPress."""
-        if not alt_text:
+    def update_media_details(self, media_id: int, alt_text: Optional[str] = None, caption: Optional[str] = None, description: Optional[str] = None) -> bool:
+        """Sets metadata (alt text, caption, description) for a media item in WordPress."""
+        payload = {}
+        if alt_text:
+            payload["alt_text"] = alt_text
+        if caption:
+            # A legenda é armazenada no campo 'caption' do post de anexo
+            payload["caption"] = {"raw": caption}
+        if description:
+            payload["description"] = {"raw": description}
+
+        if not payload:
             return False
+            
         try:
             endpoint = f"{self.api_url}/media/{media_id}"
-            payload = {"alt_text": alt_text}
             r = self.session.post(endpoint, json=payload, timeout=20)
             r.raise_for_status()
-            logger.info(f"Successfully set alt text for media ID {media_id}.")
+            logger.info(f"Successfully updated details for media ID {media_id}.")
             return True
         except requests.RequestException as e:
-            logger.warning(f"Failed to set alt_text on media {media_id}: {e}")
+            logger.warning(f"Failed to update details on media {media_id}: {e}")
             if e.response is not None:
                 logger.warning(f"Response body: {e.response.text}")
             return False

@@ -13,7 +13,7 @@ import time
 from urllib.parse import urljoin, urlparse, parse_qs
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from .html_utils import normalize_images_with_captions, convert_twitter_embeds_to_oembed, remove_lance_widgets
+from .html_utils import normalize_images_with_captions, convert_twitter_embeds_to_oembed, remove_lance_widgets, _remove_related_content_blocks
 from .config import USER_AGENT
 from trafilatura.metadata import extract_metadata as trafilatura_extract_metadata # New import
 
@@ -412,22 +412,39 @@ def _find_article_body(soup: BeautifulSoup) -> BeautifulSoup:
             best, best_score = c, score
     return best or soup
 
+LEGEND_SELECTORS = [
+    'figcaption',
+    '.content-media__description', '.content-media__legend', '.content-media__caption',
+    '.foto-legenda', '.foto__legenda', '.media-caption',
+    '[itemprop="caption"]', '[itemprop="description"]'
+]
 
-def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]:
+def _find_caption_for_image(img_tag: Tag) -> Optional[str]:
+    """Tenta encontrar a legenda para uma tag de imagem."""
+    # 1. Dentro da <figure> ancestral
+    fig = img_tag.find_parent('figure')
+    if fig:
+        cap = fig.find('figcaption')
+        if cap: return cap.get_text(" ", strip=True)
+
+    # 2. Em seletores de legenda próximos, dentro de um contêiner maior
+    parent_container = img_tag.find_parent(['div', 'section', 'figure', 'article'])
+    if parent_container:
+        for sel in LEGEND_SELECTORS:
+            cap_node = parent_container.select_one(sel)
+            if cap_node:
+                return cap_node.get_text(" ", strip=True)
+    return None
+
+def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> List[Dict[str, str]]:
     """
     Coleta URLs de imagens relevantes SOMENTE DO CORPO DO ARTIGO.
-    Fontes consideradas:
-      - <img> (src, data-*, srcset)
-      - <picture><source srcset="...">
-      - nós com atributos data-*
-      - estilos inline: background-image
-      - <figure> contendo <img>
-    Aplica filtros de junk/thumb e prioriza CDNs conhecidas.
+    Retorna uma lista de dicionários, cada um com 'src', 'alt' e 'caption'.
     """
     root = _find_article_body(soup)
-    urls: list[str] = []
+    images_data: list[Dict[str, str]] = []
 
-    def _push(candidate: Optional[str]) -> None:
+    def _push(candidate: Optional[str], alt: str = "", caption: str = "") -> None:
         if not candidate:
             return
         abs_u = _abs(candidate, base_url)
@@ -435,7 +452,11 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
             return
         if not is_valid_article_image(abs_u):
             return
-        urls.append(abs_u.rstrip("/"))
+        images_data.append({
+            "src": abs_u.rstrip("/"),
+            "alt": alt,
+            "caption": caption
+        })
 
     # 1) <img> tags
     for img in root.select("img:not([aria-hidden='true'])"):
@@ -449,29 +470,37 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> list[str]
                 break
         if not cand and img.get("srcset"):
             cand = _parse_srcset(img.get("srcset"))
-        _push(cand)
+        
+        alt_text = img.get('alt', '').strip()
+        caption_text = _find_caption_for_image(img) or ""
+        _push(cand, alt=alt_text, caption=caption_text)
 
     # 2) <picture><source>
     for source in root.select("picture source[srcset]"):
-        # Garante que a imagem dentro da picture seja válida
         img_in_picture = source.find_parent('picture').find('img')
-        if not img_in_picture or _is_valid_image_tag(img_in_picture):
-            _push(_parse_srcset(source.get("srcset", "")))
+        if img_in_picture and _is_valid_image_tag(img_in_picture):
+            cand = _parse_srcset(source.get("srcset", ""))
+            alt_text = img_in_picture.get('alt', '').strip()
+            caption_text = _find_caption_for_image(img_in_picture) or ""
+            _push(cand, alt=alt_text, caption=caption_text)
 
     # 2.5) <noscript> com <img> (fallback de lazy-load)
     for ns in root.find_all("noscript"):
         try:
             inner = BeautifulSoup(ns.string or "", "html.parser")
+            for img in inner.find_all("img"):
+                cand = img.get("src") or img.get("data-src") or img.get("data-original")
+                alt_text = img.get('alt', '').strip()
+                # Não é possível buscar legenda aqui de forma confiável, então deixamos em branco
+                _push(cand, alt=alt_text, caption="")
         except Exception:
             continue
-        for img in inner.find_all("img"):
-            # Não podemos validar o DOM aqui, mas podemos aplicar a lógica de URL
-            _push(img.get("src") or img.get("data-src") or img.get("data-original"))
 
     # 3) nós com data-* comuns
     for node in root.select('[data-img-url], [data-image], [data-src], [data-original]'):
         cand = node.get("data-img-url") or node.get("data-image") or node.get("data-src") or node.get("data-original")
-        _push(cand)
+        alt_text = node.get('alt', '') or node.get_text(strip=True)
+        _push(cand, alt=alt_text)
 
     # 4) estilos inline background-image
     for node in root.select('[style*="background-image"]'):
@@ -892,6 +921,9 @@ class ContentExtractor:
             # The cleaner can modify the soup in-place and optionally return a
             # pre-identified content_root.
             content_root = None
+            # Remove blocos de "relacionadas" antes de qualquer outra coisa
+            _remove_related_content_blocks(soup)
+
             for cleaner_domain, cleaner_func in CLEANER_REGISTRY.items():
                 if cleaner_domain in domain:
                     content_root = cleaner_func(soup)
@@ -915,7 +947,7 @@ class ContentExtractor:
             videos = self._extract_youtube_videos(soup)
             
             # Extract images from the identified content root
-            body_images = collect_images_from_article(content_root, base_url=url)
+            body_images_data = collect_images_from_article(content_root, base_url=url)
 
             # Prioritize JSON-LD for title/excerpt, with fallback to meta tags
             title = 'No Title Found'
@@ -952,9 +984,10 @@ class ContentExtractor:
             self._remove_forbidden_blocks(article_soup)
 
             # 8. Select final body images (excluding the featured one)
-            other_valid_images = [u for u in body_images if u != featured_image_url]
-
-            logger.info(f"Selected featured image: {featured_image_url}. Found {len(other_valid_images)} other valid images.")
+            other_valid_images_data = [
+                img_data for img_data in body_images_data if img_data['src'] != featured_image_url
+            ]
+            logger.info(f"Selected featured image: {featured_image_url}. Found {len(other_valid_images_data)} other valid images.")
 
             # Conteúdo final: só o conteúdo interno do <body>, se existir
             if article_soup.body:
@@ -966,7 +999,7 @@ class ContentExtractor:
                 "content": final_content_html,
                 "excerpt": (excerpt or "").strip(),
                 "featured_image_url": featured_image_url,
-                "images": other_valid_images,
+                "images": other_valid_images_data, # Agora é uma lista de dicts
                 "videos": videos,
                 "source_url": url,
                 "schema_original": news_article_schema # Passa o schema extraído adiante

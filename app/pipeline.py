@@ -25,7 +25,7 @@ from .store import Database # Ensure Database is imported
 from .html_utils import (
     merge_images_into_content,
     add_credit_to_figures,
-    rewrite_img_srcs_with_wp,
+    rewrite_img_srcs_with_wp, # Será usado para gerar blocos Gutenberg
     strip_credits_and_normalize_youtube,
     remove_broken_image_placeholders,
     strip_naked_internal_links,
@@ -247,46 +247,57 @@ def run_pipeline_cycle():
                         content_html = collapse_h2_headings(content_html, keep_first=1)
 
                         # 3.2: Ensure images from original article exist in content, injecting if AI removed them
+                        # A lista de imagens agora contém dicts com src, alt, caption
+                        all_images_data = extracted_data.get('images', [])
                         content_html = merge_images_into_content(
                             content_html,
-                            extracted_data.get('images', [])
+                            all_images_data,
+                            {}, # O mapa de upload ainda não existe, será preenchido depois
                         )
                         
                         # 3.3: Consolidate, filter, and upload all images
                         featured_image_url = extracted_data.get('featured_image_url')
-                        body_images = extracted_data.get('images', [])
+                        body_images_data = extracted_data.get('images', [])
 
                         # Create a unique, ordered list of all images to process.
-                        # The featured image is first, giving it priority.
-                        all_image_urls = list(dict.fromkeys(
-                            ([featured_image_url] if featured_image_url else []) + body_images
-                        ))
+                        # A imagem de destaque é a primeira, dando-lhe prioridade.
+                        # Usamos um dict para deduplicar pela URL, mantendo o dict completo.
+                        all_images_to_process_map = OrderedDict()
+                        if featured_image_url:
+                            # Encontra os dados da imagem de destaque na lista de imagens do corpo
+                            featured_data = next((img for img in body_images_data if img.get('src') == featured_image_url), None)
+                            if featured_data:
+                                all_images_to_process_map[featured_image_url] = featured_data
+                            else: # Se não estiver lá, cria uma entrada básica
+                                all_images_to_process_map[featured_image_url] = {'src': featured_image_url, 'alt': '', 'caption': ''}
+                        
+                        for img_data in body_images_data:
+                            if img_data.get('src') and img_data['src'] not in all_images_to_process_map:
+                                all_images_to_process_map[img_data['src']] = img_data
 
                         # Filter out invalid candidates before attempting upload
-                        urls_to_upload = [
-                            url for url in all_image_urls if url and not is_blocked_url(url) and is_valid_upload_candidate(url)
+                        images_to_upload = [
+                            img_data for img_data in all_images_to_process_map.values() 
+                            if img_data.get('src') and not is_blocked_url(img_data['src']) and is_valid_upload_candidate(img_data['src'])
                         ]
 
-                        # If the original featured image was filtered out, the new one will be the first valid one.
-                        if featured_image_url not in urls_to_upload:
-                            new_featured = urls_to_upload[0] if urls_to_upload else None
-                            if new_featured:
-                                logger.info(f"Original featured image '{featured_image_url}' was invalid. Using '{new_featured}' as fallback.")
-                            featured_image_url = new_featured
-
-                        uploaded_src_map = {}
-                        uploaded_id_map = {}
-                        if urls_to_upload:
-                            logger.info(f"Attempting to upload {len(urls_to_upload)} image(s).")
-                            for url in urls_to_upload:
-                                media = wp_client.upload_media_from_url(url, title)
+                        uploaded_media_data = {}
+                        if images_to_upload:
+                            logger.info(f"Attempting to upload {len(images_to_upload)} image(s).")
+                            for img_data in images_to_upload:
+                                original_url = img_data['src']
+                                media = wp_client.upload_media_from_url(original_url, title)
                                 if media and media.get("source_url") and media.get("id"):
-                                    k = url.rstrip('/')
-                                    uploaded_src_map[k] = media["source_url"]
-                                    uploaded_id_map[k] = media["id"]
+                                    media_id = media["id"]
+                                    # Atualiza alt, caption e description no WordPress
+                                    wp_client.update_media_details(media_id, alt_text=img_data.get('alt'), caption=img_data.get('caption'), description=img_data.get('caption'))
+                                    
+                                    # Armazena todos os dados para a reescrita do bloco Gutenberg
+                                    k = original_url.rstrip('/')
+                                    uploaded_media_data[k] = {**img_data, 'id': media_id, 'source_url': media["source_url"]}
                         
-                        # 3.4: Rewrite image `src` to point to WordPress
-                        content_html = rewrite_img_srcs_with_wp(content_html, uploaded_src_map)
+                        # 3.4: Rewrite image tags into Gutenberg blocks
+                        content_html = rewrite_img_srcs_with_wp(content_html, uploaded_media_data)
 
                         # 3.5: Add credits to figures (currently disabled)
                         # content_html = add_credit_to_figures(content_html, extracted_data['source_url'])
@@ -310,8 +321,12 @@ def run_pipeline_cycle():
                         # 4.2: Determine featured media ID
                         featured_media_id = None
                         if featured_image_url:
-                            k = featured_image_url.rstrip('/')
-                            featured_media_id = uploaded_id_map.get(k)
+                            # Encontra a imagem de destaque nos dados já enviados
+                            norm_key = featured_image_url.rstrip('/')
+                            if norm_key in uploaded_media_data:
+                                featured_media_id = uploaded_media_data[norm_key].get('id')
+                            else: # Fallback para a primeira imagem enviada, se a de destaque falhou
+                                featured_media_id = next((data['id'] for data in uploaded_media_data.values() if data.get('id')), None)
                         
                         if not featured_media_id:
                              logger.info("No suitable featured image found after uploading; proceeding without one.")
@@ -323,20 +338,19 @@ def run_pipeline_cycle():
                         # 4.3: Set alt text for uploaded images
                         focus_kw = rewritten_data.get("__yoast_focus_kw", "")
                         alt_map = rewritten_data.get("image_alt_texts", {})
-
-                        if uploaded_id_map and (alt_map or focus_kw or tags_to_assign):
+                        
+                        # A definição de alt/caption agora é feita logo após o upload.
+                        # Esta seção pode ser removida ou mantida como um fallback extra.
+                        if uploaded_media_data and (alt_map or focus_kw or tags_to_assign):
                             logger.info("Setting alt text for uploaded images.")
-                            for original_url, media_id in uploaded_id_map.items():
-                                # Extract filename from the original URL to match keys in alt_map
-                                filename = urlparse(original_url).path.split('/')[-1]
+                            for original_url, media_data in uploaded_media_data.items():
+                                filename = urlparse(original_url).path.split('/')[-1] # Chave para o mapa de alt_texts da IA
 
                                 # Try to get specific alt text from AI, fallback to a generic one
-                                alt_text = alt_map.get(filename)
-                                if not alt_text and focus_kw:
-                                    alt_text = f"{focus_kw} - {tags_to_assign[0] if tags_to_assign else 'foto ilustrativa'}"
-
-                                if alt_text:
-                                    wp_client.set_media_alt_text(media_id, alt_text)
+                                alt_text = alt_map.get(filename) or media_data.get('alt')
+                                if not alt_text and focus_kw: alt_text = f"{focus_kw} - {tags_final[0] if tags_final else 'foto ilustrativa'}"
+                                if alt_text: # Apenas atualiza se tivermos um novo alt_text
+                                    wp_client.update_media_details(media_data['id'], alt_text=alt_text)
 
                         # Prepare post meta, including canonical URL to original source
                         yoast_meta = {}
