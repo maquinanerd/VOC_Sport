@@ -1,5 +1,6 @@
 import argparse
 import logging
+import os
 import sys
 from datetime import datetime, timezone
 from apscheduler.schedulers.blocking import BlockingScheduler
@@ -7,6 +8,9 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 from app.pipeline import run_pipeline_cycle
 from app.store import Database
 from app.config import SCHEDULE_CONFIG
+
+# Garante que o diretório de logs exista
+os.makedirs("logs", exist_ok=True)
 
 # Configura o logging para exibir informações no terminal e salvar em um arquivo
 logging.basicConfig(
