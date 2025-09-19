@@ -1,11 +1,2 @@
-python-dotenv
-requests
-httpx
-beautifulsoup4
-feedparser
-python-dateutil
-lxml
-pytz
+apscheduler
 python-slugify
-google-generativeai
-APScheduler
