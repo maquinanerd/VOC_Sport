@@ -24,6 +24,7 @@ from .wordpress import WordPressClient
 from .store import Database # Ensure Database is imported
 from .html_utils import (
     merge_images_into_content,
+    _norm_key,
     add_credit_to_figures,
     rewrite_img_srcs_with_wp, # Será usado para gerar blocos Gutenberg
     strip_credits_and_normalize_youtube,
@@ -245,16 +246,7 @@ def run_pipeline_cycle():
                         content_html = remove_broken_image_placeholders(content_html)
                         content_html = strip_naked_internal_links(content_html)
                         content_html = collapse_h2_headings(content_html, keep_first=1)
-
-                        # 3.2: Ensure images from original article exist in content, injecting if AI removed them
-                        # A lista de imagens agora contém dicts com src, alt, caption
-                        all_images_data = extracted_data.get('images', [])
-                        content_html = merge_images_into_content(
-                            content_html,
-                            all_images_data,
-                            {}, # O mapa de upload ainda não existe, será preenchido depois
-                        )
-                        
+                       
                         # 3.3: Consolidate, filter, and upload all images
                         featured_image_url = extracted_data.get('featured_image_url')
                         body_images_data = extracted_data.get('images', [])
@@ -293,13 +285,22 @@ def run_pipeline_cycle():
                                     wp_client.update_media_details(media_id, alt_text=img_data.get('alt'), caption=img_data.get('caption'), description=img_data.get('caption'))
                                     
                                     # Armazena todos os dados para a reescrita do bloco Gutenberg
-                                    k = original_url.rstrip('/')
+                                    k = _norm_key(original_url)
                                     uploaded_media_data[k] = {**img_data, 'id': media_id, 'source_url': media["source_url"]}
                         
                         # 3.4: Rewrite image tags into Gutenberg blocks
                         content_html = rewrite_img_srcs_with_wp(content_html, uploaded_media_data)
 
-                        # 3.5: Add credits to figures (currently disabled)
+                        # 3.5: Ensure images from original article exist in content, injecting if AI removed them
+                        # A lista de imagens agora contém dicts com src, alt, caption
+                        all_images_data = extracted_data.get('images', [])
+                        content_html = merge_images_into_content(
+                            content_html,
+                            all_images_data,
+                            uploaded_media_data, # Agora o mapa está preenchido
+                        )
+
+                        # 3.6: Add credits to figures (currently disabled)
                         # content_html = add_credit_to_figures(content_html, extracted_data['source_url'])
 
                         # Step 4: Prepare payload for WordPress

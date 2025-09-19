@@ -4,8 +4,8 @@ import html
 import re
 import logging
 from typing import List, Dict, Optional, Any
-from bs4 import BeautifulSoup, Tag, NavigableString
-from urllib.parse import urlparse, parse_qs
+from bs4 import BeautifulSoup, Tag, NavigableString, ResultSet
+from urllib.parse import urlparse, parse_qs, urlsplit, urlunsplit
 
 logger = logging.getLogger(__name__)
 
@@ -172,11 +172,28 @@ def wp_image_block(url: str, media_id: Optional[int] = None, alt: str = "", capt
     return f'<!-- wp:image {attrs} -->\n<figure class="wp-block-image size-{size}"><img src="{url}" alt="{html.escape(alt or "")}"{img_class}/>{figcap_html}</figure>\n<!-- /wp:image -->'
 
 def _norm_key(u: str) -> str:
-    """Normaliza URL para comparação/chave de dicionário."""
+    """Normaliza URL para comparação/chave de dicionário, removendo query/fragment e CDN params."""
     if not u:
         return ""
-    return (u.strip().rstrip("/")).lower()
+    
+    u = u.strip()
+    
+    # Specific CDN stripping for Lance
+    if 'lncimg.lance.com.br' in u:
+        u = strip_lance_cdn(u)
 
+    try:
+        # urlsplit is more robust than urlparse for this
+        parts = urlsplit(u)
+        # Remove query string and fragment, lowercase scheme and netloc
+        path = parts.path.rstrip('/')
+        
+        # Rebuild the URL without query and fragment
+        return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, '', '')).rstrip('/')
+    except Exception as e:
+        logger.warning(f"Could not parse URL '{u}' for normalization, falling back to simple strip: {e}")
+        # Fallback to simple normalization on parse error
+        return u.split('?')[0].split('#')[0].rstrip('/').lower()
 
 # --- New Lance-specific helpers ---
 LANCE_KILL_TEXTS = [
@@ -275,16 +292,28 @@ def merge_images_into_content(content_html: str, images_to_inject: List[Dict[str
         parent = insertion_point.parent if insertion_point and insertion_point.parent else (soup.body or soup)
 
         for img_data in to_add:
-            original_src = img_data['src']
+            original_src = img_data.get('src')
+            if not original_src:
+                continue
+
             media_info = uploaded_media_data.get(_norm_key(original_src))
             
+            if not media_info:
+                logger.warning(f"Could not find uploaded media data for '{original_src}' during merge. Skipping injection.")
+                continue
+            
+            uploaded_url = media_info.get('source_url')
+            if not uploaded_url:
+                logger.warning(f"Uploaded media data for '{original_src}' is missing 'source_url'. Skipping injection.")
+                continue
+
             # Gera o bloco Gutenberg completo
-            block_html = wp_image_block(url=media_info['source_url'], media_id=media_info['id'], alt=img_data.get('alt', ''), caption=img_data.get('caption'))
+            block_html = wp_image_block(url=uploaded_url, media_id=media_info.get('id'), alt=img_data.get('alt', ''), caption=img_data.get('caption'))
             block_soup = BeautifulSoup(block_html, 'html.parser')
 
             if insertion_point:
                 insertion_point.insert_after(block_soup)
-                insertion_point = block_soup.find('figure') or insertion_point # Próximo entra depois do que inserimos
+                insertion_point = next(iter(block_soup.find_all('figure', limit=1)), insertion_point) # Próximo entra depois do que inserimos
             else:
                 parent.append(block_soup)
 
