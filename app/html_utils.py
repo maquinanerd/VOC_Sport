@@ -1,7 +1,9 @@
 # app/html_utils.py
+import json
+import html
 import re
 import logging
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 from bs4 import BeautifulSoup, Tag, NavigableString
 from urllib.parse import urlparse, parse_qs
 
@@ -158,8 +160,6 @@ def hard_filter_forbidden_html(html: str) -> str:
 
 def wp_image_block(url: str, media_id: Optional[int] = None, alt: str = "", caption: Optional[str] = None, size: str = "full") -> str:
     """Gera um bloco de imagem Gutenberg completo."""
-    import html
-    
     # Constrói os atributos JSON para o comentário do bloco
     attrs_dict = {"sizeSlug": size, "linkDestination": "none"}
     if media_id:

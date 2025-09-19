@@ -510,20 +510,27 @@ def collect_images_from_article(soup: BeautifulSoup, base_url: str) -> List[Dict
     for fig in root.find_all("figure"):
         img = fig.find("img")
         if img:
-            if img.get("src"):
-                _push(img.get("src"))
-            elif img.get("srcset"):
-                _push(_parse_srcset(img.get("srcset", "")))
+            cand = img.get("src") or _parse_srcset(img.get("srcset", ""))
+            if cand:
+                alt_text = img.get('alt', '').strip()
+                caption_text = _find_caption_for_image(img) or ""
+                _push(cand, alt=alt_text, caption=caption_text)
 
-    # de-dup preservando preferência das CDNs
-    dedup: dict[str, int] = {}
-    for u in urls:
-        host = urlparse(u).netloc
-        pref = 0 if host in PRIORITY_CDN_DOMAINS else 1
-        dedup[u] = min(dedup.get(u, pref), pref)
-    ordered = sorted(dedup.items(), key=lambda kv: (kv[1], kv[0]))
-    return [u for u, _ in ordered]
+    # De-duplicação baseada na URL da imagem, preservando a ordem.
+    final_list: list[Dict[str, str]] = []
+    seen_urls = set()
+    for img_data in images_data:
+        url = img_data.get('src')
+        if url and url not in seen_urls:
+            final_list.append(img_data)
+            seen_urls.add(url)
 
+    # Ordenar por preferência de CDN no final
+    def get_pref(img_data):
+        host = urlparse(img_data['src']).netloc
+        return 0 if host in PRIORITY_CDN_DOMAINS else 1
+    
+    return sorted(final_list, key=get_pref)
 # --- New helper functions from user prompt ---
 def _get(url, timeout=25, tries=2):
     last_err = None
