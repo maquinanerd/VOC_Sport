@@ -108,12 +108,16 @@ SCHEDULE_CONFIG = {
 }
 
 def _get_domain_from_wp_url(wp_url: str) -> str:
-    """Extrai o domínio (ex: cornetafc.com.br) da URL do WordPress."""
+    """Extrai o domínio base (ex: thesport.news/br) da URL do WordPress."""
     if not wp_url:
         return "example.com"  # Fallback
     try:
-        # Ex: https://cornetafc.com.br/wp-json/wp/v2 -> cornetafc.com.br
-        return urlparse(wp_url).netloc
+        # Ex: https://thesport.news/br/wp-json/wp/v2/ -> thesport.news/br
+        p = urlparse(wp_url)
+        # Pega o netloc (ex: thesport.news) e a parte do path antes de /wp-json/ (ex: /br)
+        base_path = p.path.split('/wp-json/')[0]
+        domain = p.netloc + base_path.rstrip('/')
+        return domain
     except Exception:
         return "example.com"
 
@@ -121,9 +125,9 @@ PIPELINE_CONFIG = {
     'domain': _get_domain_from_wp_url(os.getenv('WORDPRESS_URL')),
     'images_mode': os.getenv('IMAGES_MODE', 'hotlink'),  # 'hotlink' ou 'download_upload'
     'attribution_policy': 'Fonte: {domain}',
-    'publisher_name': 'Corneta FC',
+    'publisher_name': 'The Sport',
     'publisher_logo_url': os.getenv(
         'PUBLISHER_LOGO_URL',
-        'https://cornetafc.com.br/wp-content/uploads/2024/05/logo-corneta-fc-512.png'
+        'https://thesport.news/br/wp-content/uploads/2024/05/logo-corneta-fc-512.png' # TODO: Verificar se este caminho de logo é válido
     ),
 }
