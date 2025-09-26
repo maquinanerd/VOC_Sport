@@ -195,7 +195,7 @@ class AIProcessor:
         last_error = "No available keys."
         
         while True:
-            key_info = self.key_manager.get_next_available_key()
+            key_info = self.key_manager.get_next_available_key(category)
 
             if not key_info:
                 logger.critical("All API keys are on cooldown or have hit their quota. Cannot proceed.")
@@ -216,7 +216,7 @@ class AIProcessor:
                 response = model.generate_content(prompt)
                 
                 # --- Success ---
-                self.key_manager.report_success(key_index)
+                self.key_manager.report_success(category, key_index)
 
                 parsed_data = self._parse_response(response.text)
 
@@ -258,25 +258,25 @@ class AIProcessor:
             except google_exceptions.ResourceExhausted as e:
                 last_error = str(e)
                 logger.warning(f"Quota exceeded for key index {key_index} (429). Applying cooldown. Error: {last_error}")
-                self.key_manager.report_failure(key_index)
+                self.key_manager.report_failure(category, key_index)
                 # Loop continues to the next key
 
             except Exception as e:
                 last_error = str(e)
                 if "API key not valid" in last_error:
                     logger.error(f"API key at index {key_index} is invalid. Discarding.")
-                    self.key_manager.report_failure(key_index, is_permanent=True) # Assumes KeyManager can handle permanent failure
+                    self.key_manager.report_failure(category, key_index, is_permanent=True)
                 elif "Publisher Model `projects/" in last_error:
                     logger.critical(f"Vertex AI path detected for key index {key_index}. This is a critical configuration error. Error: {last_error}")
                     # This is a fatal config error, maybe we should stop or at least mark key as bad
-                    self.key_manager.report_failure(key_index)
+                    self.key_manager.report_failure(category, key_index)
                 elif "quota" in last_error.lower() or "429" in last_error:
                     logger.warning(f"Quota exceeded for key index {key_index}. Applying cooldown. Error: {last_error}")
-                    self.key_manager.report_failure(key_index)
+                    self.key_manager.report_failure(category, key_index)
                 else:
                     logger.error(f"AI content generation failed for key index {key_index}: {last_error}")
                     # Report a generic failure for other errors
-                    self.key_manager.report_failure(key_index)
+                    self.key_manager.report_failure(category, key_index)
                 # Loop continues to the next key
         
         final_reason = f"Failed to rewrite content after trying available keys. Last error: {last_error}"
