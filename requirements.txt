@@ -1,2 +1,8 @@
 apscheduler
 python-slugify
+python-dotenv
+httpx
+beautifulsoup4
+lxml
+pillow
+feedparser

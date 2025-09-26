@@ -8488,3 +8488,134 @@ Please retry in 49.126394814s. [violations {
 2025-09-26 08:53:29 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
 2025-09-26 08:53:29 - app.store - INFO - Database connection closed.
 2025-09-26 08:53:29 - apscheduler.executors.default - INFO - Job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:58:27 UTC)" executed successfully
+2025-09-26 08:59:56 - root - INFO - ============================================================
+2025-09-26 08:59:56 - root - INFO - RSS to WordPress Automation System Started
+2025-09-26 08:59:56 - root - INFO - Log level: INFO
+2025-09-26 08:59:56 - root - INFO - Log directory: logs
+2025-09-26 08:59:56 - root - INFO - ============================================================
+2025-09-26 08:59:56 - __main__ - INFO - Verificando o esquema do banco de dados...
+2025-09-26 08:59:56 - app.store - INFO - Initializing database tables if they don't exist...
+2025-09-26 08:59:56 - app.store - INFO - Database initialized successfully.
+2025-09-26 08:59:56 - app.store - INFO - Database connection closed.
+2025-09-26 08:59:56 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-09-26 08:59:56 - __main__ - INFO - Agendador iniciado. O pipeline será executado a cada 5 minutos.
+2025-09-26 08:59:56 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-09-26 08:59:56 - __main__ - INFO - Pressione Ctrl+C para sair.
+2025-09-26 08:59:56 - apscheduler.scheduler - INFO - Added job "run_pipeline_cycle" to job store "default"
+2025-09-26 08:59:56 - apscheduler.scheduler - INFO - Scheduler started
+2025-09-26 08:59:56 - apscheduler.executors.default - INFO - Running job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 12:04:56 UTC)" (scheduled at 2025-09-26 11:59:56.799122+00:00)
+2025-09-26 08:59:56 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-09-26 08:59:56 - app.ai_processor - INFO - AI Processor initialized with 7 API key(s).
+2025-09-26 08:59:56 - app.ai_processor - INFO - Configured AI model with API key index 0.
+2025-09-26 08:59:56 - app.pipeline - INFO - Processing feed: lance_futebol (Category: futebol)
+2025-09-26 08:59:56 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/lance/futebol/rss for source 'lance_futebol'
+2025-09-26 08:59:58 - app.feeds - INFO - Found 30 total unique items for lance_futebol.
+2025-09-26 08:59:58 - app.pipeline - INFO - Found 1 new articles for lance_futebol
+2025-09-26 08:59:58 - app.pipeline - INFO - Processing article: Quanto o Flamengo lucrou com a classificação na Libertadores? (DB ID: 4221) from lance_futebol
+2025-09-26 08:59:59 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/54811476927_7b8a5d2d13_o-scaled-aspect-ratio-512-320-1.jpg. Found 1 other valid images.
+2025-09-26 08:59:59 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/lancebiz/quanto-o-flamengo-lucrou-com-a-classificacao-as-semifinais-da-libertadores.html. Title: Quanto o Flamengo lucrou com a classificação na Li...
+2025-09-26 08:59:59 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-09-26 08:59:59 - app.ai_processor - ERROR - AI content generation failed with key index 0: 400 API key not valid. Please pass a valid API key. [reason: "API_KEY_INVALID"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "generativelanguage.googleapis.com"
+}
+, locale: "en-US"
+message: "API key not valid. Please pass a valid API key."
+]
+2025-09-26 08:59:59 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:59:59 - app.ai_processor - INFO - Configured AI model with API key index 1.
+2025-09-26 08:59:59 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 1)...
+2025-09-26 09:00:00 - app.ai_processor - ERROR - AI content generation failed with key index 1: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 09:00:00 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:00 - app.ai_processor - INFO - Configured AI model with API key index 2.
+2025-09-26 09:00:00 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 2)...
+2025-09-26 09:00:01 - app.ai_processor - ERROR - AI content generation failed with key index 2: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 09:00:01 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:01 - app.ai_processor - INFO - Configured AI model with API key index 3.
+2025-09-26 09:00:01 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 3)...
+2025-09-26 09:00:02 - app.ai_processor - ERROR - AI content generation failed with key index 3: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 09:00:02 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:02 - app.ai_processor - INFO - Configured AI model with API key index 4.
+2025-09-26 09:00:02 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 4)...
+2025-09-26 09:00:02 - app.ai_processor - ERROR - AI content generation failed with key index 4: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 09:00:02 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:02 - app.ai_processor - INFO - Configured AI model with API key index 5.
+2025-09-26 09:00:02 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 5)...
+2025-09-26 09:00:03 - app.ai_processor - ERROR - AI content generation failed with key index 5: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 09:00:03 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:03 - app.ai_processor - INFO - Configured AI model with API key index 6.
+2025-09-26 09:00:03 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 6)...
+2025-09-26 09:00:03 - app.ai_processor - ERROR - AI content generation failed with key index 6: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 55.923045595s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+]
+2025-09-26 09:00:03 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 09:00:03 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 09:00:03 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 55.923045595s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+]
+2025-09-26 09:00:03 - app.pipeline - WARNING - Article 'Quanto o Flamengo lucrou com a classificação na Libertadores?' marked as FAILED (Reason: All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 55.923045595s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 55
+}
+]). Continuing to next article.
+2025-09-26 09:00:03 - app.pipeline - INFO - Finished feed 'lance_futebol'. Sleeping for 15s before next feed: globo_futebol
