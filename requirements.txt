@@ -1,9 +1,11 @@
 apscheduler
-python-slugify
-python-dotenv
-httpx
 beautifulsoup4
-lxml
-pillow
 feedparser
 google-generativeai
+lxml
+Pillow
+python-dateutil
+python-dotenv
+python-slugify
+requests
+trafilatura
