@@ -7899,3 +7899,592 @@ Please retry in 1.235657953s. [violations {
 2025-09-19 19:10:15 - app.pipeline - INFO - Pipeline cycle completed. Processed 3 articles.
 2025-09-19 19:10:15 - app.store - INFO - Database connection closed.
 2025-09-19 19:10:15 - apscheduler.executors.default - INFO - Job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-19 22:11:51 UTC)" executed successfully
+2025-09-26 08:43:27 - root - INFO - ============================================================
+2025-09-26 08:43:27 - root - INFO - RSS to WordPress Automation System Started
+2025-09-26 08:43:27 - root - INFO - Log level: INFO
+2025-09-26 08:43:27 - root - INFO - Log directory: logs
+2025-09-26 08:43:27 - root - INFO - ============================================================
+2025-09-26 08:43:27 - __main__ - INFO - Verificando o esquema do banco de dados...
+2025-09-26 08:43:27 - app.store - INFO - Initializing database tables if they don't exist...
+2025-09-26 08:43:27 - app.store - INFO - Database initialized successfully.
+2025-09-26 08:43:27 - app.store - INFO - Database connection closed.
+2025-09-26 08:43:27 - __main__ - INFO - Verificação do banco de dados concluída com sucesso.
+2025-09-26 08:43:27 - __main__ - INFO - Agendador iniciado. O pipeline será executado a cada 5 minutos.
+2025-09-26 08:43:27 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-09-26 08:43:27 - __main__ - INFO - Pressione Ctrl+C para sair.
+2025-09-26 08:43:27 - apscheduler.scheduler - INFO - Added job "run_pipeline_cycle" to job store "default"
+2025-09-26 08:43:27 - apscheduler.scheduler - INFO - Scheduler started
+2025-09-26 08:43:27 - apscheduler.executors.default - INFO - Running job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:48:27 UTC)" (scheduled at 2025-09-26 11:43:27.276627+00:00)
+2025-09-26 08:43:27 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-09-26 08:43:27 - app.ai_processor - INFO - AI Processor initialized with 6 API key(s).
+2025-09-26 08:43:27 - app.ai_processor - INFO - Configured AI model with API key index 0.
+2025-09-26 08:43:27 - app.pipeline - INFO - Processing feed: lance_futebol (Category: futebol)
+2025-09-26 08:43:27 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/lance/futebol/rss for source 'lance_futebol'
+2025-09-26 08:43:28 - app.feeds - INFO - Found 30 total unique items for lance_futebol.
+2025-09-26 08:43:29 - app.pipeline - INFO - Found 30 new articles for lance_futebol
+2025-09-26 08:43:29 - app.pipeline - INFO - Processing article: Saúl celebra classificação do Flamengo na Libertadores: 'Tem que dar valor' (DB ID: 4137) from lance_futebol
+2025-09-26 08:43:29 - app.extractor - INFO - Found 1 unique YouTube videos.
+2025-09-26 08:43:30 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/54811476927_7b8a5d2d13_o-scaled-aspect-ratio-512-320.jpg. Found 0 other valid images.
+2025-09-26 08:43:30 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/flamengo/saul-celebra-classificacao-do-flamengo-na-libertadores-tem-que-dar-valor.html. Title: Saúl celebra classificação do Flamengo na Libertad...
+2025-09-26 08:43:30 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 0)...
+2025-09-26 08:43:31 - app.ai_processor - ERROR - AI content generation failed with key index 0: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:31 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:31 - app.ai_processor - INFO - Configured AI model with API key index 1.
+2025-09-26 08:43:31 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 1)...
+2025-09-26 08:43:31 - app.ai_processor - ERROR - AI content generation failed with key index 1: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:31 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:31 - app.ai_processor - INFO - Configured AI model with API key index 2.
+2025-09-26 08:43:31 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 2)...
+2025-09-26 08:43:33 - app.ai_processor - ERROR - AI content generation failed with key index 2: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:33 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Configured AI model with API key index 3.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 3)...
+2025-09-26 08:43:33 - app.ai_processor - ERROR - AI content generation failed with key index 3: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:33 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Configured AI model with API key index 4.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 4)...
+2025-09-26 08:43:33 - app.ai_processor - ERROR - AI content generation failed with key index 4: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:33 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Configured AI model with API key index 5.
+2025-09-26 08:43:33 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 5)...
+2025-09-26 08:43:34 - app.ai_processor - ERROR - AI content generation failed with key index 5: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:34 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:34 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:34 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:34 - app.pipeline - WARNING - Article 'Saúl celebra classificação do Flamengo na Libertadores: 'Tem que dar valor'' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:34 - app.pipeline - INFO - Processing article: Alex embala no Operário-PR e chega a sete jogos de invencibilidade na Série B (DB ID: 4138) from lance_futebol
+2025-09-26 08:43:34 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/Alex-Operario-PR-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:34 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/futebol-nacional/alex-embala-no-operario-pr-e-chega-a-sete-jogos-de-invencibilidade-na-serie-b.html. Title: Alex embala no Operário-PR e chega a sete jogos de...
+2025-09-26 08:43:34 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 6)...
+2025-09-26 08:43:35 - app.ai_processor - ERROR - AI content generation failed with key index 6: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:35 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:35 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:35 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:35 - app.pipeline - WARNING - Article 'Alex embala no Operário-PR e chega a sete jogos de invencibilidade na Série B' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:35 - app.pipeline - INFO - Processing article: Atlético-MG campeão? Confira as semifinais da Sul-Americana (DB ID: 4139) from lance_futebol
+2025-09-26 08:43:35 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/sul-americana-scaled-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:35 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/futebol-internacional/atletico-mg-campeao-confira-as-semifinais-da-sul-americana-de-2025.html. Title: Atlético-MG campeão? Confira as semifinais da Sul-...
+2025-09-26 08:43:35 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 7)...
+2025-09-26 08:43:35 - app.ai_processor - ERROR - AI content generation failed with key index 7: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:35 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:35 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:35 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:35 - app.pipeline - WARNING - Article 'Atlético-MG campeão? Confira as semifinais da Sul-Americana' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:36 - app.pipeline - INFO - Processing article: Lance! quer saber, o torcedor gostou de Ramón Díaz no Inter? (DB ID: 4140) from lance_futebol
+2025-09-26 08:43:36 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/OSDIAZ2-scaled-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:36 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/internacional/torcedor-respondeu-ao-lance-ramon-diaz-no-internacional-aprovado.html. Title: Lance! quer saber, o torcedor gostou de Ramón Díaz...
+2025-09-26 08:43:36 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 8)...
+2025-09-26 08:43:36 - app.ai_processor - ERROR - AI content generation failed with key index 8: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:36 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:36 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:36 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:36 - app.pipeline - WARNING - Article 'Lance! quer saber, o torcedor gostou de Ramón Díaz no Inter?' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:36 - app.pipeline - INFO - Processing article: Basílio, do Botafogo, revela motivação especial e 'seriedade total' no Carioca Feminino (DB ID: 4141) from lance_futebol
+2025-09-26 08:43:37 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/Duda-Basilio-Botafogo-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:37 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/futebol-feminino/basilio-do-botafogo-revela-motivacao-especial-e-seriedade-total-no-carioca-feminino.html. Title: Basílio, do Botafogo, revela motivação especial e ...
+2025-09-26 08:43:37 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 9)...
+2025-09-26 08:43:37 - app.ai_processor - ERROR - AI content generation failed with key index 9: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:37 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:37 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:37 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:37 - app.pipeline - WARNING - Article 'Basílio, do Botafogo, revela motivação especial e 'seriedade total' no Carioca Feminino' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:37 - app.pipeline - INFO - Processing article: Yuri Alberto tenta encerrar maior seca de gols de 2025; veja números (DB ID: 4142) from lance_futebol
+2025-09-26 08:43:38 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/AGIF25072620291559-scaled-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:38 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/corinthians/maior-seca-de-gols-no-ano-desafia-yuri-alberto-a-reagir-no-corinthians.html. Title: Yuri Alberto tenta encerrar maior seca de gols de ...
+2025-09-26 08:43:38 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 10)...
+2025-09-26 08:43:38 - app.ai_processor - ERROR - AI content generation failed with key index 10: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:38 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:38 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:38 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:38 - app.pipeline - WARNING - Article 'Yuri Alberto tenta encerrar maior seca de gols de 2025; veja números' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:38 - app.pipeline - INFO - Processing article: Fim de uma era: Sergio Busquets anuncia aposentadoria do futebol (DB ID: 4143) from lance_futebol
+2025-09-26 08:43:38 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/sergio-busquets-scaled-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:38 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/futebol-internacional/fim-de-uma-era-sergio-busquets-de-37-anos-anuncia-aposentadoria-do-futebol.html. Title: Fim de uma era: Sergio Busquets anuncia aposentado...
+2025-09-26 08:43:38 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 11)...
+2025-09-26 08:43:39 - app.ai_processor - ERROR - AI content generation failed with key index 11: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:39 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:39 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:39 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:39 - app.pipeline - WARNING - Article 'Fim de uma era: Sergio Busquets anuncia aposentadoria do futebol' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:39 - app.pipeline - INFO - Processing article: Neymar abre processo contra jornalista brasileiro por 'Fake News' (DB ID: 4144) from lance_futebol
+2025-09-26 08:43:39 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/AGIF25091415381022-scaled-aspect-ratio-512-320-3.jpg. Found 1 other valid images.
+2025-09-26 08:43:39 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/fora-de-campo/neymar-abre-processo-contra-jornalista-brasileiro-por-fake-news.html. Title: Neymar abre processo contra jornalista brasileiro ...
+2025-09-26 08:43:39 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 12)...
+2025-09-26 08:43:40 - app.ai_processor - ERROR - AI content generation failed with key index 12: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:40 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:40 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:40 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:40 - app.pipeline - WARNING - Article 'Neymar abre processo contra jornalista brasileiro por 'Fake News'' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:40 - app.pipeline - INFO - Processing article: Luciano lidera estatísticas em eliminação do São Paulo, mas vive jejum de gols (DB ID: 4145) from lance_futebol
+2025-09-26 08:43:40 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/AGIF25092520392966-1-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:40 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/sao-paulo/luciano-lidera-estatisticas-em-eliminacao-do-sao-paulo-mas-vive-jejum-de-gols.html. Title: Luciano lidera estatísticas em eliminação do São P...
+2025-09-26 08:43:40 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 13)...
+2025-09-26 08:43:40 - app.ai_processor - ERROR - AI content generation failed with key index 13: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:40 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:40 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:40 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:40 - app.pipeline - WARNING - Article 'Luciano lidera estatísticas em eliminação do São Paulo, mas vive jejum de gols' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:41 - app.pipeline - INFO - Processing article: Técnico com mais jogos na história do Botafogo (DB ID: 4146) from lance_futebol
+2025-09-26 08:43:41 - app.extractor - INFO - Selected featured image: https://lncimg.lance.com.br/cdn-cgi/image/width=1280,height=720,quality=75,fit=cover,format=webp/uploads/2025/09/Zagallo-jogador-Botafogo-aspect-ratio-512-320.jpg. Found 1 other valid images.
+2025-09-26 08:43:41 - app.extractor - INFO - Successfully extracted and cleaned content from https://www.lance.com.br/lancepedia/tecnico-com-mais-jogos-na-historia-do-botafogo.html. Title: Técnico com mais jogos na história do Botafogo...
+2025-09-26 08:43:41 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 14)...
+2025-09-26 08:43:41 - app.ai_processor - ERROR - AI content generation failed with key index 14: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:41 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:41 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:41 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:41 - app.pipeline - WARNING - Article 'Técnico com mais jogos na história do Botafogo' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:41 - app.pipeline - INFO - Finished feed 'lance_futebol'. Sleeping for 15s before next feed: globo_futebol
+2025-09-26 08:43:56 - app.pipeline - INFO - Processing feed: globo_futebol (Category: futebol)
+2025-09-26 08:43:56 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/futebol/rss for source 'globo_futebol'
+2025-09-26 08:43:57 - app.feeds - INFO - Found 30 total unique items for globo_futebol.
+2025-09-26 08:43:57 - app.pipeline - INFO - Found 30 new articles for globo_futebol
+2025-09-26 08:43:57 - app.pipeline - INFO - Processing article: Clube amador reúne ex-Corinthians André Santos e Cristian Baroni (DB ID: 4167) from globo_futebol
+2025-09-26 08:43:58 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:43:58 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/3il-_tEB4vejBemgdUYGA-OxDNc=/1236x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/1/C/0pGH51TEmFMGY9KBTJFA/whatsapp-image-2025-09-25-at-14.39.21.jpeg. Found 0 other valid images.
+2025-09-26 08:43:58 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/sc/futebol/noticia/2025/09/26/clube-amador-de-sc-reune-dupla-ex-corinthians-com-andre-santos-e-cristian-baroni.ghtml. Title: Clube amador reúne ex-Corinthians André Santos e C...
+2025-09-26 08:43:58 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 15)...
+2025-09-26 08:43:59 - app.ai_processor - ERROR - AI content generation failed with key index 15: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:59 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:43:59 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:43:59 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:43:59 - app.pipeline - WARNING - Article 'Clube amador reúne ex-Corinthians André Santos e Cristian Baroni' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:43:59 - app.pipeline - INFO - Processing article: Destaque de classificação, Saúl se encanta com Libertadores pelo Flamengo: "Precioso de jogar" (DB ID: 4168) from globo_futebol
+2025-09-26 08:43:59 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:00 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/xF324_dM31Fp6BcB-uYROKLh-Ns=/2047x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/9/q/c2MrdXSFmSoRD9kZMJrg/54812573603-6238042316-k.jpg. Found 0 other valid images.
+2025-09-26 08:44:00 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/flamengo/noticia/2025/09/26/destaque-de-classificacao-saul-se-encanta-com-libertadores-pelo-flamengo-precioso-de-jogar.ghtml. Title: Destaque de classificação, Saúl se encanta com Lib...
+2025-09-26 08:44:00 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 16)...
+2025-09-26 08:44:00 - app.ai_processor - ERROR - AI content generation failed with key index 16: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:00 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:00 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:00 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:00 - app.pipeline - WARNING - Article 'Destaque de classificação, Saúl se encanta com Libertadores pelo Flamengo: "Precioso de jogar"' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:00 - app.pipeline - INFO - Processing article: Marquinhos sobre vitória como técnico do Avaí: "Eu nasci pra trabalhar nesse clube" (DB ID: 4169) from globo_futebol
+2025-09-26 08:44:00 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:01 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/KOBIKwBJLuv_Q9d5lE4JvZZ-Tts=/1280x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/S/g/7YG342QxqmPN0jYZTEcA/whatsapp-image-2025-09-26-at-00.33.22.jpeg. Found 0 other valid images.
+2025-09-26 08:44:01 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/sc/futebol/times/avai/noticia/2025/09/26/marquinhos-sobre-vitoria-como-tecnico-do-avai-eu-nasci-pra-trabalhar-nesse-clube.ghtml. Title: Marquinhos sobre vitória como técnico do Avaí: "Eu...
+2025-09-26 08:44:01 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 17)...
+2025-09-26 08:44:01 - app.ai_processor - ERROR - AI content generation failed with key index 17: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:01 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:01 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:01 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:01 - app.pipeline - WARNING - Article 'Marquinhos sobre vitória como técnico do Avaí: "Eu nasci pra trabalhar nesse clube"' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:01 - app.pipeline - INFO - Processing article: São Paulo cai em mais uma Copa e deixa de ganhar R$ 13 milhões na Libertadores (DB ID: 4170) from globo_futebol
+2025-09-26 08:44:01 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:02 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/VAvC_6poi7T1Xitfcu0Zw5-tzCE=/4000x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/v/H/lwQOwcRjeJvkg8dFipSQ/agif25082418211435.jpg. Found 0 other valid images.
+2025-09-26 08:44:02 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/sao-paulo/noticia/2025/09/26/sao-paulo-cai-em-mais-uma-copa-e-deixa-de-ganhar-r-13-milhoes-na-libertadores.ghtml. Title: São Paulo cai em mais uma Copa e deixa de ganhar R...
+2025-09-26 08:44:02 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 18)...
+2025-09-26 08:44:02 - app.ai_processor - ERROR - AI content generation failed with key index 18: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:02 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:02 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:02 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:02 - app.pipeline - WARNING - Article 'São Paulo cai em mais uma Copa e deixa de ganhar R$ 13 milhões na Libertadores' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:02 - app.pipeline - INFO - Processing article: Dupla Flaco-Roque participou de 83% dos gols do Palmeiras desde mudança tática de Abel (DB ID: 4171) from globo_futebol
+2025-09-26 08:44:03 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:03 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/UyAiXGAwEKHOF443UbZxkMmzEU8=/7030x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/Z/2/FsfNfARACJo0Ue9vhf4w/agif25092423414292.jpg. Found 0 other valid images.
+2025-09-26 08:44:03 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/palmeiras/noticia/2025/09/26/dupla-flaco-roque-participou-de-83percent-dos-gols-do-palmeiras-desde-mudanca-tatica-de-abel.ghtml. Title: Dupla Flaco-Roque participou de 83% dos gols do Pa...
+2025-09-26 08:44:03 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 19)...
+2025-09-26 08:44:03 - app.ai_processor - ERROR - AI content generation failed with key index 19: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:03 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:03 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:03 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:03 - app.pipeline - WARNING - Article 'Dupla Flaco-Roque participou de 83% dos gols do Palmeiras desde mudança tática de Abel' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:03 - app.pipeline - INFO - Processing article: Jogo da Série B termina com confusão, PM e spray de pimenta (DB ID: 4172) from globo_futebol
+2025-09-26 08:44:04 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:04 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/QjXRF6GotqcfeWNEuDCTTjEJP0w=/1285x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/i/M/7grBj7QmKiVpj0ZckVbA/atletico-go-america.jpg. Found 0 other valid images.
+2025-09-26 08:44:04 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/mg/zona-da-mata-centro-oeste/futebol/brasileirao-serie-b/noticia/2025/09/26/atletico-go-x-america-mg-termina-com-confusao-pm-no-gramado-e-spray-de-pimenta-na-serie-b.ghtml. Title: Jogo da Série B termina com confusão, PM e spray d...
+2025-09-26 08:44:04 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 20)...
+2025-09-26 08:44:05 - app.ai_processor - ERROR - AI content generation failed with key index 20: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:05 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:05 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:05 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:05 - app.pipeline - WARNING - Article 'Jogo da Série B termina com confusão, PM e spray de pimenta' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:05 - app.pipeline - INFO - Processing article: Atlético-MG versão 2025 x 2020: Sampaoli aponta diferenças (DB ID: 4173) from globo_futebol
+2025-09-26 08:44:05 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:06 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/jIBRAXGisGK-MwBnwM5ZfEJgdkc=/2048x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/o/X/ne9KTdTSezeUD2jB1qRg/54781365755-aff7cc785c-k.jpg. Found 1 other valid images.
+2025-09-26 08:44:06 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/atletico-mg/noticia/2025/09/26/atletico-mg-versao-2025-x-2020-sampaoli-aponta-diferencas-no-ataque-e-adaptacoes.ghtml. Title: Atlético-MG versão 2025 x 2020: Sampaoli aponta di...
+2025-09-26 08:44:06 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 21)...
+2025-09-26 08:44:06 - app.ai_processor - ERROR - AI content generation failed with key index 21: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 53.010681485s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]
+2025-09-26 08:44:06 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:06 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:06 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 53.010681485s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]
+2025-09-26 08:44:06 - app.pipeline - WARNING - Article 'Atlético-MG versão 2025 x 2020: Sampaoli aponta diferenças' marked as FAILED (Reason: All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 53.010681485s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 53
+}
+]). Continuing to next article.
+2025-09-26 08:44:06 - app.pipeline - INFO - Processing article: Cruzeiro completa cinco meses sem perder como visitante (DB ID: 4174) from globo_futebol
+2025-09-26 08:44:07 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:07 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/whhVDeG25cN76jC6q-_fL79TDJ8=/5000x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/g/t/iWmSVgSlSNOuQ3Lh0OoQ/agif25091600175458.jpg. Found 1 other valid images.
+2025-09-26 08:44:07 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/cruzeiro/noticia/2025/09/26/cruzeiro-completa-cinco-meses-sem-perder-como-visitante-e-tem-terceiro-melhor-aproveitamento-no-brasileirao.ghtml. Title: Cruzeiro completa cinco meses sem perder como visi...
+2025-09-26 08:44:07 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 22)...
+2025-09-26 08:44:08 - app.ai_processor - ERROR - AI content generation failed with key index 22: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:08 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:08 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:08 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:08 - app.pipeline - WARNING - Article 'Cruzeiro completa cinco meses sem perder como visitante' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:08 - app.pipeline - INFO - Processing article: Jornal destaca coragem de Filipe Luís em momento decisivo contra o Estudiantes: "Mostrou personalidade" (DB ID: 4175) from globo_futebol
+2025-09-26 08:44:08 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:09 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/1OQhEk5ZfVGTEmXzbdDTY2DXJXI=/5664x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/P/f/8qfyFQQsKB9m05WsI6fA/afp-20250926-76tu6bh-v1-highres-fbllibertadoresestudiantesflamengo.jpg. Found 0 other valid images.
+2025-09-26 08:44:09 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/flamengo/noticia/2025/09/26/jornal-destaca-coragem-de-filipe-luis-em-momento-decisivo-contra-o-estudiantes-mostrou-personalidade.ghtml. Title: Jornal destaca coragem de Filipe Luís em momento d...
+2025-09-26 08:44:09 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 23)...
+2025-09-26 08:44:09 - app.ai_processor - ERROR - AI content generation failed with key index 23: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 50.295220939s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 50
+}
+]
+2025-09-26 08:44:09 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:09 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:09 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 50.295220939s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 50
+}
+]
+2025-09-26 08:44:09 - app.pipeline - WARNING - Article 'Jornal destaca coragem de Filipe Luís em momento decisivo contra o Estudiantes: "Mostrou personalidade"' marked as FAILED (Reason: All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 50.295220939s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 50
+}
+]). Continuing to next article.
+2025-09-26 08:44:09 - app.pipeline - INFO - Processing article: Último técnico estrangeiro do Fluminense foi demitido com 20 dias por ser amigo de Renato Gaúcho; entenda (DB ID: 4176) from globo_futebol
+2025-09-26 08:44:09 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:10 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/qZurSQychIJ6MTcIcAMOPLgqj7k=/3379x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2020/1/e/A8OtXkQ4AZfhxixG1RCQ/ondino.jpg. Found 0 other valid images.
+2025-09-26 08:44:10 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/times/fluminense/noticia/2025/09/26/ultimo-tecnico-estrangeiro-do-fluminense-foi-demitido-com-20-dias-por-ser-amigo-de-renato-gaucho-entenda.ghtml. Title: Último técnico estrangeiro do Fluminense foi demit...
+2025-09-26 08:44:10 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 24)...
+2025-09-26 08:44:10 - app.ai_processor - ERROR - AI content generation failed with key index 24: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 49.126394814s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 49
+}
+]
+2025-09-26 08:44:10 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:10 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:10 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 49.126394814s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 49
+}
+]
+2025-09-26 08:44:10 - app.pipeline - WARNING - Article 'Último técnico estrangeiro do Fluminense foi demitido com 20 dias por ser amigo de Renato Gaúcho; entenda' marked as FAILED (Reason: All available API keys failed. Last error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15
+Please retry in 49.126394814s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-1.5-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 15
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 49
+}
+]). Continuing to next article.
+2025-09-26 08:44:10 - app.pipeline - INFO - Finished feed 'globo_futebol'. Sleeping for 15s before next feed: globo_futebol_internacional
+2025-09-26 08:44:25 - app.pipeline - INFO - Processing feed: globo_futebol_internacional (Category: futebol)
+2025-09-26 08:44:25 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/internacional/rss for source 'globo_futebol_internacional'
+2025-09-26 08:44:26 - app.feeds - INFO - Found 24 total unique items for globo_futebol_internacional.
+2025-09-26 08:44:26 - app.pipeline - INFO - Found 24 new articles for globo_futebol_internacional
+2025-09-26 08:44:26 - app.pipeline - INFO - Processing article: Marcos Leonardo estreia no Saudita com gols e celebra desfecho com o Al-Hilal: "Alma lavada" (DB ID: 4197) from globo_futebol_internacional
+2025-09-26 08:44:26 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:26 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/Fe_Ox86sj4Se5h_IfoWtEDPTNMI=/3629x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/y/w/q3iCnmTvGn93E74IpGjQ/2025-09-25t201101z-315678554-up1el9p1ju0b9-rtrmadp-3-soccer-saudi-hil-akh.jpg. Found 0 other valid images.
+2025-09-26 08:44:26 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/futebol-saudita/noticia/2025/09/26/marcos-leonardo-estreia-no-saudita-com-gols-e-celebra-desfecho-com-o-al-hilal-alma-lavada.ghtml. Title: Marcos Leonardo estreia no Saudita com gols e cele...
+2025-09-26 08:44:26 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 25)...
+2025-09-26 08:44:27 - app.ai_processor - ERROR - AI content generation failed with key index 25: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:27 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:27 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:27 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:27 - app.pipeline - WARNING - Article 'Marcos Leonardo estreia no Saudita com gols e celebra desfecho com o Al-Hilal: "Alma lavada"' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:27 - app.pipeline - INFO - Processing article: Filhos de ex-Liverpool estreiam juntos no time profissional do Manchester City (DB ID: 4198) from globo_futebol_internacional
+2025-09-26 08:44:28 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:28 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/futebol-ingles/noticia/2025/09/26/filhos-de-ex-liverpool-estreiam-juntos-no-time-profissional-do-manchester-city.ghtml
+2025-09-26 08:44:28 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:28 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/futebol-ingles/noticia/2025/09/26/filhos-de-ex-liverpool-estreiam-juntos-no-time-profissional-do-manchester-city.ghtml. Title: Filhos de ex-Liverpool estreiam juntos no time pro...
+2025-09-26 08:44:28 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 26)...
+2025-09-26 08:44:28 - app.ai_processor - ERROR - AI content generation failed with key index 26: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:28 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:28 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:28 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:28 - app.pipeline - WARNING - Article 'Filhos de ex-Liverpool estreiam juntos no time profissional do Manchester City' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:28 - app.pipeline - INFO - Processing article: Após eliminar São Paulo e Botafogo, jornal espanhol define LDU como "matador de gigantes" da Libertadores (DB ID: 4199) from globo_futebol_internacional
+2025-09-26 08:44:29 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:29 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/K4oUtNTFvN30tIF15V53Xmxw-vs=/1600x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/A/n/7FcBjrQRuRjuFluKW54w/54812058756-4a15f8857e-o.jpg. Found 0 other valid images.
+2025-09-26 08:44:29 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/apos-eliminar-sao-paulo-e-botafogo-jornal-espanhol-define-ldu-como-mata-gigantes-da-libertadores.ghtml. Title: Após eliminar São Paulo e Botafogo, jornal espanho...
+2025-09-26 08:44:29 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 27)...
+2025-09-26 08:44:29 - app.ai_processor - ERROR - AI content generation failed with key index 27: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:29 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:29 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:29 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:29 - app.pipeline - WARNING - Article 'Após eliminar São Paulo e Botafogo, jornal espanhol define LDU como "matador de gigantes" da Libertadores' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:29 - app.pipeline - INFO - Processing article: Clube do Japão vai construir estádio de futebol todo de madeira; veja imagens (DB ID: 4200) from globo_futebol_internacional
+2025-09-26 08:44:30 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:30 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/clube-do-japao-vai-construir-estadio-de-futebol-todo-de-madeira-veja-imagens.ghtml
+2025-09-26 08:44:30 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:30 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/clube-do-japao-vai-construir-estadio-de-futebol-todo-de-madeira-veja-imagens.ghtml. Title: Clube do Japão vai construir estádio de futebol to...
+2025-09-26 08:44:30 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 28)...
+2025-09-26 08:44:30 - app.ai_processor - ERROR - AI content generation failed with key index 28: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:30 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:30 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:30 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:30 - app.pipeline - WARNING - Article 'Clube do Japão vai construir estádio de futebol todo de madeira; veja imagens' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:31 - app.pipeline - INFO - Processing article: Clube tradicional da França corre risco de desaparecer por disputa judicial com atacante; entenda (DB ID: 4201) from globo_futebol_internacional
+2025-09-26 08:44:31 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:31 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/clube-tradicional-da-franca-corre-risco-de-desaparecer-por-disputa-judicial-com-atacante-entenda.ghtml
+2025-09-26 08:44:31 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:31 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/clube-tradicional-da-franca-corre-risco-de-desaparecer-por-disputa-judicial-com-atacante-entenda.ghtml. Title: Clube tradicional da França corre risco de desapar...
+2025-09-26 08:44:31 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 29)...
+2025-09-26 08:44:32 - app.ai_processor - ERROR - AI content generation failed with key index 29: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:32 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:32 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:32 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:32 - app.pipeline - WARNING - Article 'Clube tradicional da França corre risco de desaparecer por disputa judicial com atacante; entenda' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:32 - app.pipeline - INFO - Processing article: Campeão do mundo e ícone do Barcelona, Busquets se aposenta aos 37 anos (DB ID: 4202) from globo_futebol_internacional
+2025-09-26 08:44:32 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:32 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/JVc5GcbB8cug261OttsanXP_1tY=/4976x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2023/w/o/ngfbcuSwuTQBSpdBrOcw/2023-10-08t010522z-515196738-mt1usatoday21599209-rtrmadp-3-mls-fc-cincinnati-at-inter-miami-cf.jpg. Found 0 other valid images.
+2025-09-26 08:44:32 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/26/campeao-do-mundo-e-icone-do-barca-busquets-se-aposenta-aos-37-anos.ghtml. Title: Campeão do mundo e ícone do Barcelona, Busquets se...
+2025-09-26 08:44:32 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 30)...
+2025-09-26 08:44:33 - app.ai_processor - ERROR - AI content generation failed with key index 30: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:33 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:33 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:33 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:33 - app.pipeline - WARNING - Article 'Campeão do mundo e ícone do Barcelona, Busquets se aposenta aos 37 anos' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:33 - app.pipeline - INFO - Processing article: Ex-São Paulo garante vitória do Porto na Liga Europa com gol nos acréscimos (DB ID: 4203) from globo_futebol_internacional
+2025-09-26 08:44:33 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:34 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/liga-europa/noticia/2025/09/25/ex-sao-paulo-garante-vitoria-do-porto-na-liga-europa-com-gol-nos-acrescimos.ghtml
+2025-09-26 08:44:34 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:34 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/liga-europa/noticia/2025/09/25/ex-sao-paulo-garante-vitoria-do-porto-na-liga-europa-com-gol-nos-acrescimos.ghtml. Title: Ex-São Paulo garante vitória do Porto na Liga Euro...
+2025-09-26 08:44:34 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 31)...
+2025-09-26 08:44:34 - app.ai_processor - ERROR - AI content generation failed with key index 31: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:34 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:34 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:34 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:34 - app.pipeline - WARNING - Article 'Ex-São Paulo garante vitória do Porto na Liga Europa com gol nos acréscimos' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:34 - app.pipeline - INFO - Processing article: Ex-Arsenal morre após grave lesão cerebral durante partida (DB ID: 4204) from globo_futebol_internacional
+2025-09-26 08:44:35 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:35 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/futebol-ingles/noticia/2025/09/25/ex-arsenal-morre-apos-grave-lesao-cerebral-durante-partida.ghtml
+2025-09-26 08:44:35 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:35 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/futebol-ingles/noticia/2025/09/25/ex-arsenal-morre-apos-grave-lesao-cerebral-durante-partida.ghtml. Title: Ex-Arsenal morre após grave lesão cerebral durante...
+2025-09-26 08:44:35 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 32)...
+2025-09-26 08:44:35 - app.ai_processor - ERROR - AI content generation failed with key index 32: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:35 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:35 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:35 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:35 - app.pipeline - WARNING - Article 'Ex-Arsenal morre após grave lesão cerebral durante partida' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:35 - app.pipeline - INFO - Processing article: Fifa divulga mascotes da Copa do Mundo 2026; confira (DB ID: 4205) from globo_futebol_internacional
+2025-09-26 08:44:36 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:37 - app.extractor - WARNING - Could not find a valid featured image for https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/25/fifa-divulga-mascotes-da-copa-do-mundo-2026-confira.ghtml
+2025-09-26 08:44:37 - app.extractor - INFO - Selected featured image: None. Found 0 other valid images.
+2025-09-26 08:44:37 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/25/fifa-divulga-mascotes-da-copa-do-mundo-2026-confira.ghtml. Title: Fifa divulga mascotes da Copa do Mundo 2026; confi...
+2025-09-26 08:44:37 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 33)...
+2025-09-26 08:44:37 - app.ai_processor - ERROR - AI content generation failed with key index 33: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:37 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:37 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:37 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:37 - app.pipeline - WARNING - Article 'Fifa divulga mascotes da Copa do Mundo 2026; confira' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:37 - app.pipeline - INFO - Processing article: Ex-árbitro revela que atirou chuteira contra Mourinho nos tempos de Chelsea e diz: "Perdeu o charme" (DB ID: 4206) from globo_futebol_internacional
+2025-09-26 08:44:38 - app.extractor - INFO - Applying GE-specific DOM cleaning.
+2025-09-26 08:44:38 - app.extractor - INFO - Selected featured image: https://s2-ge.glbimg.com/PljmLB1PSqiDVHmzuDIiOfJgRUw=/1385x0/filters:format(jpeg)/https://i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2025/B/T/muEZloTPOu774COSpIIA/gettyimages-525924400.jpg. Found 0 other valid images.
+2025-09-26 08:44:38 - app.extractor - INFO - Successfully extracted and cleaned content from https://ge.globo.com/futebol/futebol-internacional/noticia/2025/09/25/ex-arbitro-revela-que-atirou-chuteira-contra-mourinho-nos-tempos-de-chelsea-e-diz-perdeu-o-charme.ghtml. Title: Ex-árbitro revela que atirou chuteira contra Mouri...
+2025-09-26 08:44:38 - app.ai_processor - INFO - Sending content to AI for rewriting (Key index: 34)...
+2025-09-26 08:44:38 - app.ai_processor - ERROR - AI content generation failed with key index 34: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:38 - app.ai_processor - WARNING - Failing over to next API key.
+2025-09-26 08:44:38 - app.ai_processor - CRITICAL - All API keys have failed.
+2025-09-26 08:44:38 - app.ai_processor - CRITICAL - Failed to rewrite content. All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions
+2025-09-26 08:44:38 - app.pipeline - WARNING - Article 'Ex-árbitro revela que atirou chuteira contra Mourinho nos tempos de Chelsea e diz: "Perdeu o charme"' marked as FAILED (Reason: All available API keys failed. Last error: 404 Publisher Model `projects/generativelanguage-ga/locations/us-central1/publishers/google/models/gemini-1.5-flash-002` was not found or your project does not have access to it. Please ensure you are using a valid model version. For more information, see: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions). Continuing to next article.
+2025-09-26 08:44:38 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
+2025-09-26 08:44:38 - app.store - INFO - Database connection closed.
+2025-09-26 08:44:38 - apscheduler.executors.default - INFO - Job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:48:27 UTC)" executed successfully
+2025-09-26 08:48:27 - apscheduler.executors.default - INFO - Running job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:53:27 UTC)" (scheduled at 2025-09-26 11:48:27.276627+00:00)
+2025-09-26 08:48:27 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-09-26 08:48:27 - app.ai_processor - INFO - AI Processor initialized with 6 API key(s).
+2025-09-26 08:48:27 - app.ai_processor - INFO - Configured AI model with API key index 0.
+2025-09-26 08:48:27 - app.pipeline - INFO - Processing feed: lance_futebol (Category: futebol)
+2025-09-26 08:48:27 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/lance/futebol/rss for source 'lance_futebol'
+2025-09-26 08:48:28 - app.feeds - INFO - Found 30 total unique items for lance_futebol.
+2025-09-26 08:48:28 - app.pipeline - INFO - No new articles found for lance_futebol.
+2025-09-26 08:48:28 - app.pipeline - INFO - Processing feed: globo_futebol (Category: futebol)
+2025-09-26 08:48:28 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/futebol/rss for source 'globo_futebol'
+2025-09-26 08:48:28 - app.feeds - INFO - Found 30 total unique items for globo_futebol.
+2025-09-26 08:48:28 - app.pipeline - INFO - No new articles found for globo_futebol.
+2025-09-26 08:48:28 - app.pipeline - INFO - Processing feed: globo_futebol_internacional (Category: futebol)
+2025-09-26 08:48:28 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/internacional/rss for source 'globo_futebol_internacional'
+2025-09-26 08:48:29 - app.feeds - INFO - Found 24 total unique items for globo_futebol_internacional.
+2025-09-26 08:48:29 - app.pipeline - INFO - No new articles found for globo_futebol_internacional.
+2025-09-26 08:48:29 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
+2025-09-26 08:48:29 - app.store - INFO - Database connection closed.
+2025-09-26 08:48:29 - apscheduler.executors.default - INFO - Job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:53:27 UTC)" executed successfully
+2025-09-26 08:53:27 - apscheduler.executors.default - INFO - Running job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:58:27 UTC)" (scheduled at 2025-09-26 11:53:27.276627+00:00)
+2025-09-26 08:53:27 - app.pipeline - INFO - Starting new pipeline cycle.
+2025-09-26 08:53:27 - app.ai_processor - INFO - AI Processor initialized with 6 API key(s).
+2025-09-26 08:53:27 - app.ai_processor - INFO - Configured AI model with API key index 0.
+2025-09-26 08:53:27 - app.pipeline - INFO - Processing feed: lance_futebol (Category: futebol)
+2025-09-26 08:53:27 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/lance/futebol/rss for source 'lance_futebol'
+2025-09-26 08:53:28 - app.feeds - INFO - Found 30 total unique items for lance_futebol.
+2025-09-26 08:53:28 - app.pipeline - INFO - No new articles found for lance_futebol.
+2025-09-26 08:53:28 - app.pipeline - INFO - Processing feed: globo_futebol (Category: futebol)
+2025-09-26 08:53:28 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/futebol/rss for source 'globo_futebol'
+2025-09-26 08:53:28 - app.feeds - INFO - Found 30 total unique items for globo_futebol.
+2025-09-26 08:53:28 - app.pipeline - INFO - No new articles found for globo_futebol.
+2025-09-26 08:53:28 - app.pipeline - INFO - Processing feed: globo_futebol_internacional (Category: futebol)
+2025-09-26 08:53:28 - app.feeds - INFO - Reading rss feed from https://aprenderpoker.site/feeds/globo/internacional/rss for source 'globo_futebol_internacional'
+2025-09-26 08:53:29 - app.feeds - INFO - Found 24 total unique items for globo_futebol_internacional.
+2025-09-26 08:53:29 - app.pipeline - INFO - No new articles found for globo_futebol_internacional.
+2025-09-26 08:53:29 - app.pipeline - INFO - Pipeline cycle completed. Processed 0 articles.
+2025-09-26 08:53:29 - app.store - INFO - Database connection closed.
+2025-09-26 08:53:29 - apscheduler.executors.default - INFO - Job "run_pipeline_cycle (trigger: interval[0:05:00], next run at: 2025-09-26 11:58:27 UTC)" executed successfully

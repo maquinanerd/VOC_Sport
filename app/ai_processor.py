@@ -11,7 +11,7 @@ import time
 from pathlib import Path 
 from typing import Any, Dict, List, Optional, Tuple, ClassVar
 
-from .config import AI_API_KEYS, SCHEDULE_CONFIG, AI_GENERATION_CONFIG
+from .config import AI_API_KEYS, SCHEDULE_CONFIG, AI_GENERATION_CONFIG, GEMINI_MODEL_ID
 from .exceptions import AIProcessorError, AllKeysFailedError
 from .taxonomy.intelligence import robust_json_parser
 
@@ -134,7 +134,7 @@ class AIProcessor:
                 **AI_GENERATION_CONFIG,
             )
             self.model = genai.GenerativeModel(
-                'gemini-1.5-flash-latest',
+                GEMINI_MODEL_ID,
                 generation_config=generation_config
             )
             logger.info(f"Configured AI model with API key index {self.current_key_index}.")

@@ -73,10 +73,8 @@ PROMPT_FILE_PATH = os.path.join(
     'universal_prompt.txt'
 )
 
-AI_MODELS = {
-    'primary': os.getenv('AI_PRIMARY_MODEL', 'gemini-1.5-flash-latest'),
-    'fallback': os.getenv('AI_FALLBACK_MODEL', 'gemini-1.5-flash-latest'),
-}
+AI_PROVIDER = os.getenv("AI_PROVIDER", "gemini")
+GEMINI_MODEL_ID = os.getenv("GEMINI_MODEL_ID", "gemini-1.5-flash")
 
 AI_GENERATION_CONFIG = {
     'temperature': 0.7,
