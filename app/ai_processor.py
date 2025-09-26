@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """
-Handles content rewriting using a Generative AI model with API key failover.
+Handles content rewriting using a Generative AI model with intelligent key rotation.
 """
 import json
-import google.generativeai as genai
 import logging
-from urllib.parse import urlparse
 import re
 import time
-from pathlib import Path 
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, ClassVar
 
-from .config import AI_API_KEYS, SCHEDULE_CONFIG, AI_GENERATION_CONFIG, GEMINI_MODEL_ID
-from .exceptions import AIProcessorError, AllKeysFailedError
+import google.generativeai as genai
+from google.api_core import exceptions as google_exceptions
+
+from .ai_client import make_model
+from .config import AI_GENERATION_CONFIG, SCHEDULE_CONFIG
+from .exceptions import AIProcessorError
+from .key_manager import KeyManager
 from .taxonomy.intelligence import robust_json_parser
 
 logger = logging.getLogger(__name__)
@@ -93,70 +96,28 @@ Se algum desses itens aparecer no texto de origem, exclua-os do resultado.
 
 class AIProcessor:
     """
-    Handles content rewriting using a Generative AI model with API key failover.
+    Handles content rewriting using a Generative AI model with intelligent key rotation.
     """
     _prompt_template: ClassVar[Optional[str]] = None
 
     def __init__(self):
         """
-        Initializes the AI processor.
-        It uses a single pool of API keys and rotates through them on failure.
+        Initializes the AI processor with a stateful key manager.
         """
-        # Flatten the dictionary of keys from config into a single list.
-        # This allows the processor to cycle through all available keys regardless of category.
-        all_keys = []
-        if isinstance(AI_API_KEYS, dict):
-            for key_list in AI_API_KEYS.values():
-                if isinstance(key_list, list):
-                    all_keys.extend(key for key in key_list if key)
-
-        self.api_keys: List[str] = all_keys
-        if not self.api_keys:
-            raise AIProcessorError("No valid GEMINI_ API keys found in the environment. Please set at least one GEMINI_... key.")
-
-        logger.info(f"AI Processor initialized with {len(self.api_keys)} API key(s).")
-
-        self.current_key_index = 0
-        self.model = None
-        self._configure_model()
-
-    def _configure_model(self):
-        """Configures the generative AI model with the current API key."""
-        if self.current_key_index >= len(self.api_keys):
-            raise AllKeysFailedError(f"All {len(self.api_keys)} API keys have failed.")
-
-        api_key = self.api_keys[self.current_key_index]
         try:
-            genai.configure(api_key=api_key)
-            # Enforce JSON output from the model for reliable parsing
-            generation_config = genai.types.GenerationConfig(
-                response_mime_type="application/json",
-                **AI_GENERATION_CONFIG,
-            )
-            self.model = genai.GenerativeModel(
-                GEMINI_MODEL_ID,
-                generation_config=generation_config
-            )
-            logger.info(f"Configured AI model with API key index {self.current_key_index}.")
-        except Exception as e:
-            logger.error(f"Failed to configure Gemini with API key index {self.current_key_index}: {e}")
-            self._failover_to_next_key()
-            self._configure_model()  # Retry configuration with the new key
+            self.key_manager = KeyManager()
+        except ValueError as e:
+            raise AIProcessorError(f"Failed to initialize KeyManager: {e}")
 
-    def _failover_to_next_key(self):
-        """Switches to the next available API key."""
-        self.current_key_index += 1
-        logger.warning("Failing over to next API key.")
+        logger.info("AI Processor initialized with KeyManager.")
 
     @classmethod
     def _load_prompt_template(cls) -> str:
         """Loads the universal prompt from 'universal_prompt.txt'."""
         if cls._prompt_template is None:
             try:
-                # Assuming the script is run from the project root
                 prompt_path = Path('universal_prompt.txt')
                 if not prompt_path.exists():
-                    # Fallback for when run as a module
                     prompt_path = Path(__file__).resolve().parent.parent / 'universal_prompt.txt'
 
                 with open(prompt_path, 'r', encoding='utf-8') as f:
@@ -170,10 +131,7 @@ class AIProcessor:
     @staticmethod
     def _safe_format_prompt(template: str, fields: Dict[str, Any]) -> str:
         """
-        Safely formats a string template that may contain literal curly braces
-        by escaping all braces and then un-escaping only the valid placeholders.
-        This prevents `ValueError: Invalid format specifier` when the prompt
-        contains examples of JSON objects.
+        Safely formats a string template that may contain literal curly braces.
         """
         class _SafeDict(dict):
             def __missing__(self, key: str) -> str:
@@ -199,39 +157,22 @@ class AIProcessor:
         **kwargs: Any,
     ) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
         """
-        Rewrites the given article content using the AI model.
-        This method is designed to be robust and backward-compatible.
-
-        Args:
-            title: The original title of the article.
-            content_html: The full HTML content of the article.
-            source_url: The original URL of the article.
-            category: The content category (e.g., 'movies'). Overrides instance category.
-            videos: A list of dictionaries of extracted YouTube videos.
-            images: A list of extracted image URLs.
-            tags: A list of extracted tags.
-            fonte_nome: The name of the source (e.g., 'ScreenRant').
-            source_name: Alternative name for the source.
-            **kwargs: Catches extra arguments like 'domain' for backward compatibility.
-
-        Returns:
-            A tuple containing a dictionary with the rewritten text and a failure
-            reason (or None if successful).
+        Rewrites content using the AI, with intelligent key rotation and error handling.
         """
         prompt_template = self._load_prompt_template()
 
-        # Handle defaults and backward compatibility
+        # Prepare prompt fields (unchanged)
         videos = videos or []
         images = images or []
         tags = tags or []
         
-        # Determine source name, falling back to URL if necessary
+        from urllib.parse import urlparse
         fonte = fonte_nome or source_name or ""
         if not fonte and source_url:
             try:
                 fonte = urlparse(source_url).netloc.replace("www.", "")
             except Exception:
-                fonte = ""  # Fallback in case of URL parsing error
+                fonte = ""
 
         final_category = category or ""
         domain = kwargs.get("domain", "")
@@ -248,31 +189,45 @@ class AIProcessor:
             "tags": (", ".join(tags) if tags else final_category),
             "videos_list": "\n".join([v.get("embed_url", "") for v in videos if isinstance(v, dict) and v.get("embed_url")]) or "Nenhum",
             "imagens_list": "\n".join([img.get('src', '') for img in images if isinstance(img, dict)]) if images else "Nenhuma",
-            "titulo_final": "",
-            "meta_description": "",
-            "focus_keyword": "",
         }
-
         prompt = self._safe_format_prompt(prompt_template, fields)
 
-        last_error = "Unknown error"
-        for _ in range(len(self.api_keys)):
+        last_error = "No available keys."
+        
+        while True:
+            key_info = self.key_manager.get_next_available_key()
+
+            if not key_info:
+                logger.critical("All API keys are on cooldown or have hit their quota. Cannot proceed.")
+                return None, "All API keys are currently unavailable."
+
+            key_index, api_key = key_info
+            
             try:
-                logger.info(f"Sending content to AI for rewriting (Key index: {self.current_key_index})...")
-                response = self.model.generate_content(prompt)
+                # Use the new model factory
+                model = make_model(api_key, use_fallback=False)
+                generation_config = genai.types.GenerationConfig(
+                    response_mime_type="application/json",
+                    **AI_GENERATION_CONFIG,
+                )
+                model.generation_config = generation_config
+
+                logger.info(f"Sending content to AI for rewriting (Key index: {key_index})...")
+                response = model.generate_content(prompt)
+                
+                # --- Success ---
+                self.key_manager.report_success(key_index)
 
                 parsed_data = self._parse_response(response.text)
 
                 if not parsed_data:
-                    raise AIProcessorError("Failed to parse or validate AI response. See logs for details.")
+                    raise AIProcessorError("Failed to parse or validate AI response.")
 
-                # If the AI returned a specific rejection error, handle it as a failure.
                 if "erro" in parsed_data:
                     return None, parsed_data["erro"]
 
-                # --- BEGIN: APPLY CATEGORY/SEO FROM AI (do not duplicate) ---
+                # --- Post-processing steps (unchanged) ---
                 from .intelligence import AI_DRIVEN_CATEGORIES, validate_ai_categories
-                
                 if AI_DRIVEN_CATEGORIES:
                     ai_cats = parsed_data.get("categorias") or []
                     slug_nome_grupo = validate_ai_categories(
@@ -282,49 +237,50 @@ class AIProcessor:
                     )
                     parsed_data["__slug_nome_grupo"] = slug_nome_grupo
 
-                # YOAST / Focus keyphrase
                 focus_kw = (parsed_data.get("focus_keyphrase") or "").strip()
-                related_kws = parsed_data.get("related_keyphrases") or []
-                meta_desc = (parsed_data.get("meta_description") or "").strip()
-
-                # guard-rails: não deixar vazio se a IA não mandar
                 if not focus_kw:
-                    # fallback simples = título truncado
                     focus_kw = (parsed_data.get("titulo_final") or "")[:60].strip()
-
-                # estes três valores serão enviados ao WP após criar o post
+                
                 parsed_data["__yoast_focus_kw"] = focus_kw
-                parsed_data["__yoast_related_kws"] = related_kws
-                parsed_data["__yoast_metadesc"] = meta_desc
-                # --- END: APPLY CATEGORY/SEO FROM AI ---
+                parsed_data["__yoast_related_kws"] = parsed_data.get("related_keyphrases") or []
+                parsed_data["__yoast_metadesc"] = (parsed_data.get("meta_description") or "").strip()
 
-                # --- BEGIN: APPLY SANITIZATION (do not duplicate) ---
                 if "conteudo_final" in parsed_data:
                     parsed_data["conteudo_final"] = sanitize_content(parsed_data["conteudo_final"])
-                    # opcional: validação dura; se preferir só logar, troque por logger.warning
                     try:
                         assert_no_seo_leak(parsed_data["conteudo_final"])
                     except Exception as e:
-                        logger.warning("Sanitization caught SEO leak and cleaned it: %s", e)
-                # --- END: APPLY SANITIZATION ---
-
-                # Success: Add a delay between calls to respect rate limits
-                time.sleep(SCHEDULE_CONFIG.get('api_call_delay', 30))
-
+                        logger.warning("Sanitization caught SEO leak: %s", e)
+                
+                time.sleep(SCHEDULE_CONFIG.get('api_call_delay', 10)) # Shorter delay as we are rotating keys
                 return parsed_data, None
+
+            except google_exceptions.ResourceExhausted as e:
+                last_error = str(e)
+                logger.warning(f"Quota exceeded for key index {key_index} (429). Applying cooldown. Error: {last_error}")
+                self.key_manager.report_failure(key_index)
+                # Loop continues to the next key
 
             except Exception as e:
                 last_error = str(e)
-                logger.error(f"AI content generation failed with key index {self.current_key_index}: {last_error}")
-                self._failover_to_next_key()
-                if self.current_key_index < len(self.api_keys):
-                    self._configure_model()
+                if "API key not valid" in last_error:
+                    logger.error(f"API key at index {key_index} is invalid. Discarding.")
+                    self.key_manager.report_failure(key_index, is_permanent=True) # Assumes KeyManager can handle permanent failure
+                elif "Publisher Model `projects/" in last_error:
+                    logger.critical(f"Vertex AI path detected for key index {key_index}. This is a critical configuration error. Error: {last_error}")
+                    # This is a fatal config error, maybe we should stop or at least mark key as bad
+                    self.key_manager.report_failure(key_index)
+                elif "quota" in last_error.lower() or "429" in last_error:
+                    logger.warning(f"Quota exceeded for key index {key_index}. Applying cooldown. Error: {last_error}")
+                    self.key_manager.report_failure(key_index)
                 else:
-                    logger.critical("All API keys have failed.")
-                    break  # Exit loop if all keys are exhausted
+                    logger.error(f"AI content generation failed for key index {key_index}: {last_error}")
+                    # Report a generic failure for other errors
+                    self.key_manager.report_failure(key_index)
+                # Loop continues to the next key
         
-        final_reason = f"All available API keys failed. Last error: {last_error}"
-        logger.critical(f"Failed to rewrite content. {final_reason}")
+        final_reason = f"Failed to rewrite content after trying available keys. Last error: {last_error}"
+        logger.critical(final_reason)
         return None, final_reason
 
     @staticmethod
@@ -333,26 +289,20 @@ class AIProcessor:
         Parses the JSON response from the AI using a robust parser and validates its structure.
         """
         try:
-            # Use the robust parser to handle potential malformations from the AI
             data = robust_json_parser(text)
 
             if data is None:
-                # robust_json_parser already logs the specific JSON error
                 return None
             
             if not isinstance(data, dict):
                 logger.error(f"AI response is not a dictionary. Received type: {type(data)}")
                 return None
 
-            # Check for a structured error response from the AI (e.g., content rejected)
             if "erro" in data:
                 logger.warning(f"AI returned a rejection error: {data['erro']}")
-                return data  # Return the error dict to be handled by the caller
+                return data
 
-            # Validate the presence of all required keys for a successful rewrite
-            required_keys = [
-                "titulo_final", "conteudo_final", "meta_description"
-            ]
+            required_keys = ["titulo_final", "conteudo_final", "meta_description"]
             missing_keys = [key for key in required_keys if key not in data]
 
             if missing_keys:
